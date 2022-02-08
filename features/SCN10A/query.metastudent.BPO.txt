@@ -1,0 +1,142 @@
+query	GO:0044699	0.53	single-organism process
+query	GO:0006811	0.46	ion transport
+query	GO:0044765	0.46	single-organism transport
+query	GO:0006810	0.33	transport
+query	GO:0051234	0.33	establishment of localization
+query	GO:0051179	0.33	localization
+query	GO:0006812	0.27	cation transport
+query	GO:0006814	0.27	sodium ion transport
+query	GO:0015672	0.27	monovalent inorganic cation transport
+query	GO:0030001	0.27	metal ion transport
+query	GO:0050794	0.26	regulation of cellular process
+query	GO:0050789	0.26	regulation of biological process
+query	GO:0065007	0.26	biological regulation
+query	GO:0009987	0.26	cellular process
+query	GO:0003013	0.21	circulatory system process
+query	GO:0003015	0.21	heart process
+query	GO:0003008	0.21	system process
+query	GO:0044707	0.21	single-multicellular organism process
+query	GO:0065008	0.21	regulation of biological quality
+query	GO:0008015	0.21	blood circulation
+query	GO:0060047	0.21	heart contraction
+query	GO:0032501	0.21	multicellular organismal process
+query	GO:0051049	0.19	regulation of transport
+query	GO:0032844	0.19	regulation of homeostatic process
+query	GO:0051899	0.19	membrane depolarization
+query	GO:0034765	0.19	regulation of ion transmembrane transport
+query	GO:0034762	0.19	regulation of transmembrane transport
+query	GO:0048878	0.19	chemical homeostasis
+query	GO:0042391	0.19	regulation of membrane potential
+query	GO:0050801	0.19	ion homeostasis
+query	GO:0032879	0.19	regulation of localization
+query	GO:0055085	0.19	transmembrane transport
+query	GO:0003254	0.19	regulation of membrane depolarization
+query	GO:0042592	0.19	homeostatic process
+query	GO:0043269	0.19	regulation of ion transport
+query	GO:0044763	0.19	single-organism cellular process
+query	GO:2000021	0.19	regulation of ion homeostasis
+query	GO:0048513	0.18	organ development
+query	GO:0006936	0.18	muscle contraction
+query	GO:0006941	0.18	striated muscle contraction
+query	GO:0060048	0.18	cardiac muscle contraction
+query	GO:0048731	0.18	system development
+query	GO:0007275	0.18	multicellular organismal development
+query	GO:0044767	0.18	single-organism developmental process
+query	GO:0034220	0.18	ion transmembrane transport
+query	GO:0003012	0.18	muscle system process
+query	GO:0048856	0.18	anatomical structure development
+query	GO:0032502	0.18	developmental process
+query	GO:0021537	0.17	telencephalon development
+query	GO:0007420	0.17	brain development
+query	GO:0007417	0.17	central nervous system development
+query	GO:0035725	0.17	sodium ion transmembrane transport
+query	GO:0007399	0.17	nervous system development
+query	GO:0030900	0.17	forebrain development
+query	GO:0050896	0.16	response to stimulus
+query	GO:0051592	0.15	response to calcium ion
+query	GO:0010038	0.15	response to metal ion
+query	GO:0010035	0.15	response to inorganic substance
+query	GO:0051716	0.15	cellular response to stimulus
+query	GO:0071277	0.15	cellular response to calcium ion
+query	GO:0071248	0.15	cellular response to metal ion
+query	GO:0071241	0.15	cellular response to inorganic substance
+query	GO:0070887	0.15	cellular response to chemical stimulus
+query	GO:0042221	0.15	response to chemical
+query	GO:0008016	0.14	regulation of heart contraction
+query	GO:0051239	0.14	regulation of multicellular organismal process
+query	GO:0044057	0.14	regulation of system process
+query	GO:0007600	0.13	sensory perception
+query	GO:0019233	0.13	sensory perception of pain
+query	GO:0002027	0.13	regulation of heart rate
+query	GO:0050877	0.13	neurological system process
+query	GO:0048518	0.12	positive regulation of biological process
+query	GO:0010460	0.12	positive regulation of heart rate
+query	GO:0044700	0.12	single organism signaling
+query	GO:0045823	0.12	positive regulation of heart contraction
+query	GO:0060371	0.12	regulation of atrial cardiac muscle cell membrane depolarization
+query	GO:0035637	0.12	multicellular organismal signaling
+query	GO:0023052	0.12	signaling
+query	GO:0051240	0.12	positive regulation of multicellular organismal process
+query	GO:0086069	0.12	bundle of His cell to Purkinje myocyte communication
+query	GO:0086067	0.12	AV node cell to bundle of His cell communication
+query	GO:0086065	0.12	cell communication involved in cardiac conduction
+query	GO:0061337	0.12	cardiac conduction
+query	GO:0007154	0.12	cell communication
+query	GO:0001508	0.11	action potential
+query	GO:0098900	0.11	regulation of action potential
+query	GO:0042127	0.11	regulation of cell proliferation
+query	GO:0006937	0.11	regulation of muscle contraction
+query	GO:0055117	0.11	regulation of cardiac muscle contraction
+query	GO:0006942	0.11	regulation of striated muscle contraction
+query	GO:0009887	0.11	organ morphogenesis
+query	GO:0009653	0.11	anatomical structure morphogenesis
+query	GO:0008284	0.11	positive regulation of cell proliferation
+query	GO:0008283	0.11	cell proliferation
+query	GO:0050679	0.11	positive regulation of epithelial cell proliferation
+query	GO:0042476	0.11	odontogenesis
+query	GO:0050673	0.11	epithelial cell proliferation
+query	GO:0003360	0.11	brainstem development
+query	GO:0045760	0.11	positive regulation of action potential
+query	GO:0090257	0.11	regulation of muscle system process
+query	GO:0042475	0.11	odontogenesis of dentin-containing tooth
+query	GO:0050678	0.11	regulation of epithelial cell proliferation
+query	GO:0048522	0.11	positive regulation of cellular process
+query	GO:0048583	0.09	regulation of response to stimulus
+query	GO:0014870	0.09	response to muscle inactivity
+query	GO:0022037	0.09	metencephalon development
+query	GO:0014894	0.09	response to denervation involved in regulation of muscle adaptation
+query	GO:0014877	0.09	response to muscle inactivity involved in regulation of muscle adaptation
+query	GO:0014874	0.09	response to stimulus involved in regulation of muscle adaptation
+query	GO:0014854	0.09	response to inactivity
+query	GO:0021549	0.09	cerebellum development
+query	GO:0043502	0.09	regulation of muscle adaptation
+query	GO:0043500	0.09	muscle adaptation
+query	GO:0030902	0.09	hindbrain development
+query	GO:0070838	0.08	divalent metal ion transport
+query	GO:0072511	0.08	divalent inorganic cation transport
+query	GO:0006816	0.08	calcium ion transport
+query	GO:0048870	0.04	cell motility
+query	GO:0006928	0.04	cellular component movement
+query	GO:0051674	0.04	localization of cell
+query	GO:0001539	0.04	ciliary or bacterial-type flagellar motility
+query	GO:0040011	0.04	locomotion
+query	GO:0044710	0.03	single-organism metabolic process
+query	GO:0055114	0.03	oxidation-reduction process
+query	GO:0006112	0.03	energy reserve metabolic process
+query	GO:0007204	0.03	positive regulation of cytosolic calcium ion concentration
+query	GO:0055074	0.03	calcium ion homeostasis
+query	GO:0008152	0.03	metabolic process
+query	GO:0072507	0.03	divalent inorganic cation homeostasis
+query	GO:0072503	0.03	cellular divalent inorganic cation homeostasis
+query	GO:0006875	0.03	cellular metal ion homeostasis
+query	GO:0006873	0.03	cellular ion homeostasis
+query	GO:0030003	0.03	cellular cation homeostasis
+query	GO:0055080	0.03	cation homeostasis
+query	GO:0055082	0.03	cellular chemical homeostasis
+query	GO:0015980	0.03	energy derivation by oxidation of organic compounds
+query	GO:0019725	0.03	cellular homeostasis
+query	GO:0006091	0.03	generation of precursor metabolites and energy
+query	GO:0006874	0.03	cellular calcium ion homeostasis
+query	GO:0055065	0.03	metal ion homeostasis
+query	GO:0051480	0.03	cytosolic calcium ion homeostasis
+query	GO:0044237	0.03	cellular metabolic process

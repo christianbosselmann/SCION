@@ -1,0 +1,187 @@
+hmmpfam - search one or more sequences against HMM database
+HMMER 2.3.2 (Oct 2003)
+Copyright (C) 1992-2003 HHMI/Washington University School of Medicine
+Freely distributed under the GNU General Public License (GPL)
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+HMM file:                 /mnt/ppcache/rost_db/data/pfam_legacy/Pfam_ls
+Sequence file:            query.fasta
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Query sequence: query
+Accession:      [none]
+Description:    [none]
+
+Scores for sequence family classification (score includes all domains):
+Model          Description                              Score    E-value  N 
+--------       -----------                              -----    ------- ---
+PF00520.23     Ion transport protein                    954.7   4.2e-284   4
+PF06512.5      Sodium ion transport-associated          411.4   1.5e-120   1
+PF00612.19     IQ calmodulin-binding motif               19.1      0.018   1
+
+Parsed for domains:
+Model          Domain  seq-f seq-t    hmm-f hmm-t      score  E-value
+--------       ------- ----- -----    ----- -----      -----  -------
+PF00520.23       1/4     157   423 ..     1   222 []   256.1  8.6e-74
+PF00520.23       2/4     795   983 ..     1   222 []   219.9  6.7e-63
+PF06512.5        1/1     996  1216 ..     1   278 []   411.4 1.5e-120
+PF00520.23       3/4    1243  1467 ..     1   222 []   253.4  5.2e-73
+PF00520.23       4/4    1561  1770 ..     1   222 []   225.3  1.5e-64
+PF00612.19       1/1    1901  1921 ..     1    21 []    19.1    0.018
+
+Alignments of top-scoring domains:
+PF00520.23: domain 1 of 4, from 157 to 423: score 256.1, E = 8.6e-74
+                CS    XXXXXXXXXXXXXXXXXXXXXXX......XXXXXXXXXXXXXXXXXX
+                   *->ldyvftviFtlEmllkiialgfklhsriafkYlrspwNilDflvvlp
+                      ++y ft+i+t+E l+ki+a+gf+l+    f++lr+pwN+lDf v+++
+       query   157    VEYTFTGIYTFESLIKILARGFCLE---DFTFLRDPWNWLDFSVIVM 200  
+
+                CS XXXXXXXXXXXXXXXXXXXX....XXXXXXXXXXXXXXXXXXXXX...XX
+                   slislilsllgggsekdlrvreskfstpegspgllsvlrllRllRvLRll
+                   ++++ ++sl                       g++s+lr++R+lR    l
+       query   201 AYVTEFVSL-----------------------GNVSALRTFRVLR---AL 224  
+
+                CS XXXXXXX......-TCC..CCCCCHHHHHHHC--XXXXXXXXXXXXXXXX
+                   rlirrapglfTWrlrtlWelnslgrslksllnvllllllllfifaiigvq
+                   ++i+++pg     l+t+  +++l++s+k+l +v++l++++l++fa+ig+q
+       query   225 KTISVIPG-----LKTI--VGALIQSVKKLSDVMILTVFCLSVFALIGLQ 267  
+
+                CS XXXXSXSXXT                                        
+                   lFggklnkcc........................................
+                   lF+g+l+ +c  ++++++  ++++++  +++ +++++  + + ++ ++++
+       query   268 LFMGNLRNKClqwppsdsafetnttsyfngtmdsngtfvnvtmstfnwkd 317  
+
+                CS                                         ...S.HHHHH
+                   ........................................npingntnFd
+                     +++++    ++ +++  ++++++ + ++++  + + + np++g+t+Fd
+       query   318 yigddshfyvldgqkdpllcgngsdagqcpegyicvkagrNPNYGYTSFD 367  
+
+                CS HXXXXXXXXXXXXXXXXXXXXXXX.. ..XXXXXXXX.XXXXXXXXXXXX
+                   sfgnaflwlFqtmTteGwgdvmpdtl.agtvlgyiyfvsfiilgsflllN
+                   +f +afl+lF++mT+++w+++++ tl+a +  ++i+fv++i+lgsf+l+N
+       query   368 TFSWAFLSLFRLMTQDYWENLYQLTLrAAGKTYMIFFVLVIFLGSFYLVN 417  
+
+                CS XXXXXX   
+                   Lfiavi<-*
+                   L++av+   
+       query   418 LILAVV    423  
+
+PF00520.23: domain 2 of 4, from 795 to 983: score 219.9, E = 6.7e-63
+                CS    XXXXXXXXXXXXXXXXXXXXXXX......XXXXXXXXXXXXXXXXXX
+                   *->ldyvftviFtlEmllkiialgfklhsriafkYlrspwNilDflvvlp
+                       ++vft+iFt+Em+lkiia+ +       ++Y++ +wNi+D ++v +
+       query   795    GNLVFTGIFTAEMVLKIIAMDP-------YYYFQEGWNIFDGIIVSL 834  
+
+                CS XXXXXXXXXXXXXXXXXXXX....XXXXXXXXXXXXXXXXXXXXX...XX
+                   slislilsllgggsekdlrvreskfstpegspgllsvlrllRllRvLRll
+                   sl++l ls ++g                      lsvlr++RllR   ++
+       query   835 SLMELGLSNVEG----------------------LSVLRSFRLLR---VF 859  
+
+                CS XXXXXXX......-TCC..CCCCCHHHHHHHC--XXXXXXXXXXXXXXXX
+                   rlirrapglfTWrlrtlWelnslgrslksllnvllllllllfifaiigvq
+                   +l++ +p+     l++l  ++++g+s+++l+n++l+l++++fifa++g+q
+       query   860 KLAKSWPT-----LNML--IKIIGNSVGALGNLTLVLAIIVFIFAVVGMQ 902  
+
+                CS XXXXSXSXXT     ...S.HHHHHHXXXXXXXXXXXXXXXXXXXXXXX.
+                   lFggklnkcc.....npingntnFdsfgnaflwlFqtmTteGwgdvmpdt
+                   lFg+ +++c+++ ++++  +++++++f+++fl +F+++++e w++ m+d+
+       query   903 LFGKSYKECVckindDCTLPRWHMNDFFHSFLIVFRVLCGE-WIETMWDC 951  
+
+                CS .  ..XXXXXXXX.XXXXXXXXXXXXXXXXXX   
+                   l..agtvlgyiyfvsfiilgsflllNLfiavi<-*
+                   ++ ag + + i+f++++++g++++lNLf+a++   
+       query   952 MevAGQTMCLIVFMLVMVIGNLVVLNLFLALL    983  
+
+PF06512.5: domain 1 of 1, from 996 to 1216: score 411.4, E = 1.5e-120
+                   *->DGEmekNNLQIAvaRIkrGIafVkshKrtlrefickkFlrrknepkp
+                      D+++e+NNLQIAv+R+++GI++V   K++ re+++k+ ++rk  pk 
+       query   996    DDDNEMNNLQIAVGRMQKGIDYV---KNKMRECFQKA-FFRK--PKV 1036 
+
+                   keateskk.lscagnnkde.itpelrklplarKenpgdkttsgiggqvgv
+                   +e+ e++k +sc++nn++++i +el++l     +  g++ttsg g++++v
+       query  1037 IEIHEGNKiDSCMSNNTGIeISKELNYL----RD--GNGTTSGVGTGSSV 1080 
+
+                   pktlGvrddetvLvPiaeeeDdmefigndsslgtsqespVGesqfedlpt
+                   +            +++++e+D+m+fi n++sl+++++++VGes+fe+l+t
+       query  1081 E------------KYVIDENDYMSFI-NNPSLTVTVPIAVGESDFENLNT 1117 
+
+                   enkretssdaesvetevfSeedlelsiqdskkklDatSsAPGCGETPEDS
+                   e              e++Se++le    +sk+kl+atS            
+       query  1118 E--------------EFSSESELE----ESKEKLNATS------------ 1137 
+
+                   sSEGSTvDyllkpedpeEeeqVEtvEpkE.ldPEaCFTEGCVrRFPCCqV
+                   sSEGSTvD  +    p E+eq  + Ep+E+l PEaCFTEGC+++FP+CqV
+       query  1138 SSEGSTVD--VVL--PREGEQ-AETEPEEdLKPEACFTEGCIKKFPFCQV 1182 
+
+                   diteGpGKiWWnLRKTCYrIVEHsWFETFIIFMI<-*
+                   +++eG+GKiWWnLRKTCY IVEH+WFETFI+FMI   
+       query  1183 STEEGKGKIWWNLRKTCYSIVEHNWFETFIVFMI    1216 
+
+PF00520.23: domain 3 of 4, from 1243 to 1467: score 253.4, E = 5.2e-73
+                CS    XXXXXXXXXXXXXXXXXXXXXXX......XXXXXXXXXXXXXXXXXX
+                   *->ldyvftviFtlEmllkiialgfklhsriafkYlrspwNilDflvvlp
+                      +d vft iF+lEmllk++a+gf       ++Y++++w++lDfl+v +
+       query  1243    ADKVFTYIFILEMLLKWVAYGF-------QTYFTNAWCWLDFLIVDV 1282 
+
+                CS XXXXXXXXXXXXXXXXXXXX....XXXXXXXXXXXXXXXXXXXXX...XX
+                   slislilsllgggsekdlrvreskfstpegspgllsvlrllRllRvLRll
+                   sl+sl+   lg                     + l+++++lR+lR+LR+l
+       query  1283 SLVSLVANALGY--------------------SELGAIKSLRTLRALRPL 1312 
+
+                CS XXXXXXX......-TCC..CCCCCHHHHHHHC--XXXXXXXXXXXXXXXX
+                   rlirrapglfTWrlrtlWelnslgrslksllnvllllllllfifaiigvq
+                   r+++r++g     +r++  +n+l+ +++s++nvll++l++++if+i+gv+
+       query  1313 RALSRFEG-----MRVV--VNALVGAIPSIMNVLLVCLIFWLIFSIMGVN 1355 
+
+                CS XXXXSXSXXT                          ...S.HHHHHHXXX
+                   lFggklnkcc..........................npingntnFdsfgn
+                   lF gk+++c++ ++++  + ++ ++ +++   ++  ++ n + nFd++g 
+       query  1356 LFAGKFYHCVnmttgnmfdisdvnnlsdcqalgkqaRWKNVKVNFDNVGA 1405 
+
+                CS XXXXXXXXXXXXXXXXXXXX..           ..XXXXXXXX.XXXXXX
+                   aflwlFqtmTteGwgdvmpdtl...........agtvlgyiyfvsfiilg
+                   ++l+l+q++T+ Gw+d+m++++++++ + ++  + + ++y+yfv+fii+g
+       query  1406 GYLALLQVATFKGWMDIMYAAVdsrdvklqpvyEENLYMYLYFVIFIIFG 1455 
+
+                CS XXXXXXXXXXXX   
+                   sflllNLfiavi<-*
+                   sf++lNLfi+vi   
+       query  1456 SFFTLNLFIGVI    1467 
+
+PF00520.23: domain 4 of 4, from 1561 to 1770: score 225.3, E = 1.5e-64
+                CS    XXXXXXXXXXXXXXXXXXXXXXX......XXXXXXXXXXXXXXXXXX
+                   *->ldyvftviFtlEmllkiialgfklhsriafkYlrspwNilDflvvlp
+                      +++vf+v+Ft E++lk+++l+        ++Y++ +wNi+Df+vv++
+       query  1561    INLVFIVLFTGEFVLKLVSLR--------HYYFTIGWNIFDFVVVIL 1599 
+
+                CS XXXXXXXXXXXXXXXXXXXX....XXXXX XXXXXXXXXXXXXXXX...X
+                   slislilsllgggsekdlrvreskfstpe.gspgllsvlrllRllRvLRl
+                   s+++++l ++ +               ++ +sp+l++v+rl R+ R   +
+       query  1600 SIVGMFLAEMIE---------------KYfVSPTLFRVIRLARIGR---I 1631 
+
+                CS XXXXXXXX......-TCC..CCCCCHHHHHHHC--XXXXXXXXXXXXXXX
+                   lrlirrapglfTWrlrtlWelnslgrslksllnvllllllllfifaiigv
+                   lrli++a+g     +rtl  l++l++sl++l+n++lll+l++fi+ai+g+
+       query  1632 LRLIKGAKG-----IRTL--LFALMMSLPALFNIGLLLFLVMFIYAIFGM 1674 
+
+                CS XXXXXSXSXXT...S.HHHHHHXXXXXXXXXXXXXXXXXXXXXXX..   
+                   qlFggklnkccnpingntnFdsfgnaflwlFqtmTteGwgdvmpdtl...
+                     F +++++   +i++ +nF++fgn++++lFq+ T+ Gw ++++ +l++ 
+       query  1675 SNFAYVKKEA--GIDDMFNFETFGNSMICLFQITTSAGWDGLLAPILnsa 1722 
+
+                CS                    ..XXXXXXXX.XXXXXXXXXXXXXXXXXX  
+                   ...................agtvlgyiyfvsfiilgsflllNLfiavi<-
+                   +++ ++++ +++++ +++ ++  +g+++fvs+ii++ ++++N++iavi  
+       query  1723 ppdcdpdtihpgssvkgdcGNPSVGIFFFVSYIIISFLVVVNMYIAVI   1770 
+
+                CS  
+                   *
+                    
+       query     -   -    
+
+PF00612.19: domain 1 of 1, from 1901 to 1921: score 19.1, E = 0.018
+                CS    HHHCHHHHHHHHHHHHHHHHH   
+                   *->rraaikIQaawRGylaRkryk<-*
+                      + +a +IQ+ +R+yl ++r+k   
+       query  1901    EVSAAIIQRNFRCYLLKQRLK    1921 
+
+//

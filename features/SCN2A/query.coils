@@ -1,0 +1,333 @@
+>query
+
+
+               .    :    .    :    .    :    .    :    .    5
+seq        MAQSVLVPPGPDSFRFFTRESLAAIEQRIAEEKAKRPKQERKDEDDENGP
+frame-14   abcdefabcabaaaabcdabcabcdefgabcdefgabcdefgcdefgggf
+frame-21   abcdefabcaaaaaabcdefgabcdefgabcdefgabcdefgcdefgfgg
+frame-28   abcdefaabcdeaaabcdefgabcdefgabcdefgabcdefgabcdefgc
+prob-14    ---------------------88888888888888---------------
+prob-21    ---------------------888888888888888888888--------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    10
+seq        KPNSDLEAGKSLPFIYGDIPPEMVSVPLEDLDPYYINKKTFIVLNKGKAI
+frame-14   gdefgfgcdefgbcdefggbcdeabcdabcabcdaaabcdefabcdefga
+frame-21   cdefgabcdefgbcdefgabcdeabcdabcabcdeabcdefgabcdefga
+frame-28   defggfgcdefgbcdefggbcdeaabcdefgabcdabcdefgabcdefga
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    15
+seq        SRFSATPALYILTPFNPIRKLAIKILVHSLFNMLIMCTILTNCVFMTMSN
+frame-14   bcdefgefgdefgdaabababcdefgabcdefgefgdefgefgabcdefg
+frame-21   bcdefgabcdefgbcabababcabcdefgabcdefgabcdefgabcdefg
+frame-28   bcdefgabcdefgbcabcdefgabcdefgabcdefgabcdefgabcdefg
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    20
+seq        PPDWTKNVEYTFTGIYTFESLIKILARGFCLEDFTFLRDPWNWLDFTVIT
+frame-14   abcdabcabcdefgabcdefgabcdefgefggfgefgabcdefgbcdefa
+frame-21   abcdabaabcdefgabcabcdefgabcdefgabcdefgggabaababcde
+frame-28   abcdabcdefgabcdefgabcdefgabcdefgfgdefgfgabcabcdabc
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    25
+seq        FAYVTEFVDLGNVSALRTFRVLRALKTISVIPGLKTIVGALIQSVKKLSD
+frame-14   bcabcdefgababcdefgabcdefgefgggabcabcdabcdefgabcdef
+frame-21   fgababcdefgabcdefgabcdefgefgfgabcdefgabcdefgabcdef
+frame-28   abcdefgabcdefgabcdefabcabcdefgabcdefgabcdefgabcdef
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    30
+seq        VMILTVFCLSVFALIGLQLFMGNLRNKCLQWPPDNSSFEINITSFFNNSL
+frame-14   gdefgefgeabcdabcdefgabcdefgefgdefgabcdefgabcdefgcd
+frame-21   gefggefgeabcdefgabcdefgabcdefgdefgabcdefgabcdeabcd
+frame-28   gefgabcdefgdeabcdefgabcdefgabcdefgabcdefgabcdefgcd
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    35
+seq        DGNGTTFNRTVSIFNWDEYIEDKSHFYFLEGQNDALLCGNSSDAGQCPEG
+frame-14   efgabcdefgcdabcdababcdefgabcabcdefgabcdefgdefggefg
+frame-21   efgabcdefgabcdefgfabcdefgabcdefgabcdefgabcdefgefgd
+frame-28   efgabcdefgabcdefgaabcdefgabcdefgabcdefgabcdefgabcd
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    40
+seq        YICVKAGRNPNYGYTSFDTFSWAFLSLFRLMTQDFWENLYQLTLRAAGKT
+frame-14   abcdefgefgabcabcabcaabcdabcdabcaabcdefgabcdefgdefg
+frame-21   efgabcdefgbcaabcabcdefgaabcdefgaabcdefgabcdefgabcd
+frame-28   efgabcdefgbcdabcabcdeabcabcdefgabcdefgabcdefgabcde
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    45
+seq        YMIFFVLVIFLGSFYLINLILAVVAMAYEEQNQATLEEAEQKEAEFQQML
+frame-14   fgcdefgggdaabcdaabcdabcaabcdabcdefgabcdefgabcabcda
+frame-21   efgdefgfgaabcabaaabcdabaabcdefgabcdabcdefgabcdefga
+frame-28   fgcdefabcaabcdaaaabcdefgabcdabcabcdabcdefgabcdefga
+prob-14    ------------------------33337777777888888888888889
+prob-21    ------------------------99999999999999999999999999
+prob-28    -----------------111111199999999999999999999999999
+               .    :    .    :    .    :    .    :    .    50
+seq        EQLKKQQEEAQAAAAAASAESRDFSGAGGIGVFSESSSVASKLSSKSEKE
+frame-14   bcdefgabcdefgefgdefgfggdefgefabcabcabcaabcdabababc
+frame-21   bcdefgefgdefgabcdefgefgdefgefabcabcdabaabcdabcdabc
+frame-28   bcdefgabcdefgefgdefgabcdefgefgbcabcdabcabcdabcdefg
+prob-14    99999999999995551111---------------------------666
+prob-21    99999999999999999999333--------------------2222666
+prob-28    999999999999999999998888888------------11114444444
+               .    :    .    :    .    :    .    :    .    55
+seq        LKNRRKKKKQKEQSGEEEKNDRVRKSESEDSIRRKGFRFSLEGSRLTYEK
+frame-14   defgabcdefggfgbabcdefgabcdefgbcdefgefabcdefgabcdef
+frame-21   defgabcdefgabcdefgefgcdefgefgbcdefggfgdefgefgdefgc
+frame-28   abcdefgabcdefgabcdefgcdefgefgbcdefgefgdefgcdefgfgf
+prob-14    66666666666111111111111111111---------------------
+prob-21    66666666666666666611111111------------------------
+prob-28    44444444444444444444433333------------------------
+               .    :    .    :    .    :    .    :    .    60
+seq        RFSSPHQSLLSIRGSLFSPRRNSRASLFSFRGRAKDIGSENDFADDEHST
+frame-14   gefgdefgabcdefgabcdabcdefgabcdefgabcdefgabcdefgabc
+frame-21   defgdefgabcdefgdefgabcdefgabcdefgabcdefgabcdefgabc
+frame-28   gefgdefgabcdabcdefgabcdefgabcdefgabcdefgabcdefgabc
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    65
+seq        FEDNDSRRDSLFVPHRHGERRHSNVSQASRASRVLPILPMNGKMHSAVDC
+frame-14   defgefgefggefgabcdefgabcdefgefggfggefgeabcdefgabcd
+frame-21   defgabcdefgefgabcdefgabcdefgabcdefgbcdefgabcdefgfg
+frame-28   defgabcdefgefgabcdefgabcdefgabcdefgbcdefgabcdefgef
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    70
+seq        NGVVSLVGGPSTLTSAGQLLPEGTTTETEIRKRRSSSYHVSMDLLEDPTS
+frame-14   efgefggcdefgabcdefgabcabcdefgabcdefgfgfgaabcdefgab
+frame-21   abcdefgcdefgabcdefgabcdefgabcdefgabcdefgabcdefgbca
+frame-28   gfgababcdefgabcdefgabcdefgabcdefgabcdefgabcabcdefg
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    75
+seq        RQRAMSIASILTNTMEELEESRQKCPPCWYKFANMCLIWDCCKPWLKVKH
+frame-14   abcdefgabcabcdefgabcdefgggfgeabcdefgabcdeabcabcdef
+frame-21   abcdefgabcdefgabcdefgefggefgefgdefgefgbcdefgaabcde
+frame-28   abcdefgabcdefgabcdefgefgdefgefgabcdefgdefabcdaabcd
+prob-14    -------66666666666666666--------------------------
+prob-21    333333333333333333333-----------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    80
+seq        LVNLVVMDPFVDLAITICIVLNTLFMAMEHYPMTEQFSSVLSVGNLVFTG
+frame-14   gabcdefgbcabcdefgabcdefgabcdefgefgcdefgabcdefggabc
+frame-21   fgabcdabcaabcdefgabcdefgabcdefgefgabcdefgbcdefgabc
+frame-28   efgabcdefabcdabcdefgabcdefgabcdefabcdefgabcdefgabc
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    85
+seq        IFTAEMFLKIIAMDPYYYFQEGWNIFDGFIVSLSLMELGLANVEGLSVLR
+frame-14   abcdefgabcdefgfgcdabcdabcabcdaababcdefgabcdefgefgb
+frame-21   defgfgabcdefggaabaabcdeababcdefgabcdefgabcdefgfgab
+frame-28   defgabcdefgefggabcabcdefgabcdefgababcdefgabcdefgab
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    90
+seq        SFRLLRVFKLAKSWPTLNMLIKIIGNSVGALGNLTLVLAIIVFIFAVVGM
+frame-14   cdefgabcdefggabcabcdabcdefgabcdefgefgabcdefgefabca
+frame-21   cdefggabcdefgabcabcdefgabcdefgabcdefgefggefgabcdea
+frame-28   cdefgabcdefggabcabcdefgabcdefgabcdefgabcdefgefgfga
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    95
+seq        QLFGKSYKECVCKISNDCELPRWHMHDFFHSFLIVFRVLCGEWIETMWDC
+frame-14   bcdefgabcdefgabcdefgbcdefgcdabcdabcdefgabcdefgabcd
+frame-21   bcdefgabcdefgabcdefgabcdeabcdefgabcdefgabcdefgabcd
+frame-28   bcdefgabcdefgabcdefgabcdeabcabcdabcdefgabcdefgabcd
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    100
+seq        MEVAGQTMCLTVFMMVMVIGNLVVLNLFLALLLSSFSSDNLAATDDDNEM
+frame-14   efgdefgefgefgeabcdabcabcdabcdefgabcdefgaababcdefga
+frame-21   efgabcdefgbcdeabcdabcdefgabcdefgabcdefgabcabcdefga
+frame-28   efgabcdefgaabcabcdabcdefgabcabcdefgabcdefgabcdefga
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    -------------------------------------------------2
+               .    :    .    :    .    :    .    :    .    105
+seq        NNLQIAVGRMQKGIDFVKRKIREFIQKAFVRKQKALDEIKPLEDLNNKKD
+frame-14   bcdefgabcdefgabcdefgabcdefgdefgabcdefgabcabcdefgab
+frame-21   bcdefgabcdefgabcdefgabcdabcdefgabcdefgabcdefgefgab
+frame-28   bcdefgabcdefgabcdefgabcdefgdefgabcdefgabcdefgabcde
+prob-14    -------------11111111111111--------------222222222
+prob-21    --------------------------------------------------
+prob-28    222222222222222222222222222-----------------------
+               .    :    .    :    .    :    .    :    .    110
+seq        SCISNHTTIEIGKDLNYLKDGNGTTSGIGSSVEKYVVDESDYMSFINNPS
+frame-14   cdefgefggefgfgabcdefgefgabcabcdefgabcdefgabcdefgbc
+frame-21   cdefgabcdefgefgfgabcdefgabcabcdefgabcdefgabcdefgba
+frame-28   fgabcdefgefgabcdefgefgfgefgabcdefgabcdefgabcdefabc
+prob-14    22222---------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    115
+seq        LTVTVPIAVGESDFENLNTEEFSSESDMEESKEKLNATSSSEGSTVDIGA
+frame-14   defgababcdefgabcdefgcdefabcdefgabcdefgefggefgfgggb
+frame-21   bcdeababcdeababcdefgabcdefgabcdefgdefgefgdefgefgge
+frame-28   defgababcdefgabcdefgabcdefgabcdefgabcdefgdefgefgab
+prob-14    ------------------------11111111111111------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    120
+seq        PAEGEQPEVEPEESLEPEACFTEDCVRKFKCCQISIEEGKGKLWWNLRKT
+frame-14   cabcdefgabcdefgbcabcdabcdeababcdefgabcdefgabcdefgb
+frame-21   fgefggfgabcabcabcabcdabcdefgabcdefgabcdefgabcdefgb
+frame-28   cdefggbcdefabcabcdefgabcdefgabcdefgabcdefgabcdefgd
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    125
+seq        CYKIVEHNWFETFIVFMILLSSGALAFEDIYIEQRKTIKTMLEYADKVFT
+frame-14   cdefgabcdefgefgaabcabcdabcdefgabcabcdefgabcdefggef
+frame-21   cdefgabcdefgaabaabcdefgabcabcdefgabcdefgabcdefggef
+frame-28   efgcdabcdabcdabcabcabcdefgabcdefgabcdefgabcdefgdef
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    130
+seq        YIFILEMLLKWVAYGFQVYFTNAWCWLDFLIVDVSLVSLTANALGYSELG
+frame-14   gabcdefgbcdefgefggdefgdefgabcdefgababcdefgabcdefgc
+frame-21   gabcdefgefgefggabcdefgbcdeabcdefgababcdefgabcdefga
+frame-28   gabcdefgefgdefgabcdefabcdeabcdefgabcdefgabcdefgabc
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    135
+seq        AIKSLRTLRALRPLRALSRFEGMRVVVNALLGAIPSIMNVLLVCLIFWLI
+frame-14   defgabcdefgbcdefabcdefgabcdefgefgabcdefgefggabcdab
+frame-21   bcdefgcdefgefgabcdeabcdefgabcdefgabcdefgabcdefgcda
+frame-28   defgabcdefgcdefgabcdefgefgabcdefgabcdefgabcdefgabc
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    140
+seq        FSIMGVNLFAGKFYHCINYTTGEMFDVSVVNNYSECKALIESNQTARWKN
+frame-14   cdefgabcdabcdefgabcdefgababcaabcdefabcdefgabcdefgc
+frame-21   bcabcdefgabcdefaabcdeabcdabcabcdefgabcdefgabcdefga
+frame-28   deabcdefgabcdefaabcdeabcdefgabcdefgabcdefgabcdefga
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    145
+seq        VKVNFDNVGLGYLSLLQVATFKGWMDIMYAAVDSRNVELQPKYEDNLYMY
+frame-14   defgdefgefgabcdefgbcabcdabcdefgabcdefgfgfgefggefgd
+frame-21   bcdefgfgefgabcdefgbcdefgabcdefgabcdefgabcdefgdefgg
+frame-28   bcdefgfgcdefgcdefgdefgfgabcdefgabcdefgabcdefgdefge
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    150
+seq        LYFVIFIIFGSFFTLNLFIGVIIDNFNQQKKKFGGQDIFMTEEQKKYYNA
+frame-14   efgdefgabcaabcaabcabcdabcdefgabcdefggababcdefgabcd
+frame-21   fgfgabcaabcabcdabcdefgabcdefgabcdefgabcdefgabcdefg
+frame-28   fgdeabcdabcdefgabcabcdabcdefgabcdefgabcdefgabcdefg
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    155
+seq        MKKLGSKKPQKPIPRPANKFQGMVFDFVTKQVFDISIMILICLNMVTMMV
+frame-14   efgdefggefgeabcdabcdefgabcdefggabcdefgaababcabcdab
+frame-21   abcdefggfggefgabaabcdefgabcdefgabcabcabcdabcdefgab
+frame-28   abcdefggfgdefgabaabcdefgabcdefgabcabcdefgabcdefgab
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    160
+seq        ETDDQSQEMTNILYWINLVFIVLFTGECVLKLISLRYYYFTIGWNIFDFV
+frame-14   cdefgabcdefggcdefggeababcdefgabcdefgfgcdefgfgabcaa
+frame-21   cdefgabcdefgabcdefgefgabcdefgabcdefgcdefgfgabaabcd
+frame-28   cdefgabcdefgabcdefgefgdefgefgabcdefgabcdefgabcdefg
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    165
+seq        VVILSIVGMFLAELIEKYFVSPTLFRVIRLARIGRILRLIKGAKGIRTLL
+frame-14   abcabcdefgabcdefgdefgefgbaabcabcdefgabcdefgefgefga
+frame-21   abcdefgabcdefgabcdefgefgaabcdefgabcdefgabcdefgabcd
+frame-28   abcabcabcdabcdefgabcdefgaabcdefgabcabcdefgabcdefga
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    170
+seq        FALMMSLPALFNIGLLLFLVMFIYAIFGMSNFAYVKREVGIDDMFNFETF
+frame-14   bcdefgabcdefgbcdefgabcdaabcdabcdefgabcdefgggefabcd
+frame-21   efgefgabcdefgabcdefgdeaabcdefabcdefgabcdefgabcdefg
+frame-28   bcdefgabcdefgdefgefgbcabcdefgabcdefgabcdefgabcdefg
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    175
+seq        GNSMICLFQITTSAGWDGLLAPILNSGPPDCDPDKDHPGSSVKGDCGNPS
+frame-14   efgabcdefgdefgcdefgabcdefggefgaabcabcdefgabcdefgde
+frame-21   abcdefgabcdefgefgfgabcdefggbcdeababcdeabcdefgabcde
+frame-28   abcdefgabcdefgefgdefgefgfggabcdefgabcdabcdefgaabca
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    180
+seq        VGIFFFVSYIIISFLVVVNMYIAVILENFSVATEESAEPLSEDDFEMFYE
+frame-14   fgaaaaabcaabcdabcdefgabcdefgabcdefggabcdefggdefgab
+frame-21   fgaabcabcdaabcabcdefgabcdefgabcdefggabcdefggabcdef
+frame-28   abaaabaabcabcdabcdefgabcdefgabcdefgabcdefggabcdefg
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    185
+seq        VWEKFDPDATQFIEFAKLSDFADALDPPLLIAKPNKVQLIAMDLPMVSGD
+frame-14   cdefgabcdefabcdefgabcdefgggdabcdefgaabcdefgabcdefg
+frame-21   gdefgabcdefgabcdefgbcdefgefgaabcdefgabcdefgabcdefg
+frame-28   cdefgabcdefgabcdefgabcdefgfgaabcdefgabcdefgabcdefg
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    190
+seq        RIHCLDILFAFTKRVLGESGEMDALRIQMEERFMASNPSKVSYEPITTTL
+frame-14   aabcdefgabcdefabcdefgabcdefgabcdefgfgfgabcabcdefga
+frame-21   aabcdefabcdefgabcdefgabcdefgdefgefgfgcdefgabcdefga
+frame-28   abcdabcabcdefgabcdefgabcdefgabcdefgabcdefgabcabcda
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    195
+seq        KRKQEEVSAIIIQRAYRRYLLKQKVKKVSSIYKKDKGKECDGTPIKEDTL
+frame-14   bcdefgabcdefggdefgababcdefgabcdefggefgefgcaababcde
+frame-21   babcdefgabcdefgabcdefgfgabcdefgabcdefgefggdefgabcd
+frame-28   bcdefgabcdefgabcdefgabcdefgfgefgabcdefgfgabcdefgga
+prob-14    --------------------------------------------------
+prob-21    --------------------------------------------------
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    200
+seq        IDKLNENSTPEKTDMTPSTTSPPSYDSVTKPEKEKFEKDKSEKEDKGKDI
+frame-14   abcdefgabcdefgfgfggfgbcaaabaabababcdefgabcdefgabcd
+frame-21   efgdefgabcdefgabcdefgabaaabcdefgabcdefgabcdefgabcd
+frame-28   bcdefgdefgdefgabcdefgabaaabcdefgabcdefgabcdefgabcd
+prob-14    --------------------------------66666666666666----
+prob-21    --------------------------------222222222222222222
+prob-28    --------------------------------------------------
+               .    :    .    :    .    :    .    :    .    205
+seq        RESKK
+frame-14   efggg
+frame-21   efggg
+frame-28   efgfg
+prob-14    -----
+prob-21    222--
+prob-28    -----
+// End
+

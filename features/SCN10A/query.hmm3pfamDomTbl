@@ -1,0 +1,19 @@
+#                                                                            --- full sequence --- -------------- this domain -------------   hmm coord   ali coord   env coord
+# target name        accession   tlen query name           accession   qlen   E-value  score  bias   #  of  c-Evalue  i-Evalue  score  bias  from    to  from    to  from    to  acc description of target
+#------------------- ---------- ----- -------------------- ---------- ----- --------- ------ ----- --- --- --------- --------- ------ ----- ----- ----- ----- ----- ----- ----- ---- ---------------------
+Ion_trans            PF00520.31   245 query                -           1956  1.7e-251  829.8  93.9   1   4   8.6e-81   5.2e-77  258.4   8.8     1   244   129   407   129   408 0.94 Ion transport protein
+Ion_trans            PF00520.31   245 query                -           1956  1.7e-251  829.8  93.9   2   4   1.5e-58     9e-55  185.6  18.5     3   238   666   894   664   899 0.94 Ion transport protein
+Ion_trans            PF00520.31   245 query                -           1956  1.7e-251  829.8  93.9   3   4   8.9e-68   5.3e-64  215.8  22.2     1   243  1151  1427  1151  1429 0.91 Ion transport protein
+Ion_trans            PF00520.31   245 query                -           1956  1.7e-251  829.8  93.9   4   4   1.4e-59   8.2e-56  189.0  20.5     2   244  1476  1732  1475  1733 0.96 Ion transport protein
+Na_trans_assoc       PF06512.13   203 query                -           1956   3.3e-60  203.9   0.3   1   1   5.5e-64   3.3e-60  203.9   0.3     1   203   904  1147   904  1147 0.84 Sodium ion transport-associated
+PKD_channel          PF08016.12   426 query                -           1956   4.4e-14   52.0  83.4   1   1   3.4e-10     2e-06   26.7   1.0   311   424  1582  1726  1568  1728 0.88 Polycystin cation channel
+#
+# Program:         hmmscan
+# Version:         3.1b1 (May 2013)
+# Pipeline mode:   SCAN
+# Query file:      query.fasta
+# Target file:     /mnt/ppcache/rost_db/data/pfam/Pfam-A.hmm
+# Option settings: hmmscan -o query.hmm3pfam --tblout query.hmm3pfamTbl --domtblout query.hmm3pfamDomTbl --acc --notextw --cut_ga --cpu 1 /mnt/ppcache/rost_db/data/pfam/Pfam-A.hmm query.fasta 
+# Current dir:     /tmp/jzAheMydHb
+# Date:            Thu Jan 20 11:50:22 2022
+# [ok]

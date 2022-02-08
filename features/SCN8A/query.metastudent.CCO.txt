@@ -1,0 +1,78 @@
+query	GO:0016020	0.55	membrane
+query	GO:0005886	0.31	plasma membrane
+query	GO:0044464	0.31	cell part
+query	GO:0005623	0.31	cell
+query	GO:0071944	0.31	cell periphery
+query	GO:0034706	0.21	sodium channel complex
+query	GO:0034702	0.21	ion channel complex
+query	GO:0034703	0.21	cation channel complex
+query	GO:1902495	0.21	transmembrane transporter complex
+query	GO:0016021	0.21	integral component of membrane
+query	GO:0044425	0.21	membrane part
+query	GO:0031224	0.21	intrinsic component of membrane
+query	GO:0001518	0.21	voltage-gated sodium channel complex
+query	GO:0043234	0.21	protein complex
+query	GO:0032991	0.21	macromolecular complex
+query	GO:0044459	0.21	plasma membrane part
+query	GO:0005887	0.16	integral component of plasma membrane
+query	GO:0031226	0.16	intrinsic component of plasma membrane
+query	GO:0030424	0.15	axon
+query	GO:0044304	0.15	main axon
+query	GO:0097458	0.15	neuron part
+query	GO:0043005	0.15	neuron projection
+query	GO:0033267	0.15	axon part
+query	GO:0042995	0.15	cell projection
+query	GO:0044463	0.15	cell projection part
+query	GO:0033268	0.15	node of Ranvier
+query	GO:0030425	0.14	dendrite
+query	GO:0033270	0.14	paranode region of axon
+query	GO:0043194	0.14	axon initial segment
+query	GO:0043025	0.13	neuronal cell body
+query	GO:0042383	0.13	sarcolemma
+query	GO:0030315	0.13	T-tubule
+query	GO:0044297	0.13	cell body
+query	GO:0034704	0.12	calcium channel complex
+query	GO:0005891	0.12	voltage-gated calcium channel complex
+query	GO:0043231	0.11	intracellular membrane-bounded organelle
+query	GO:0044424	0.11	intracellular part
+query	GO:0030017	0.11	sarcomere
+query	GO:0043228	0.11	non-membrane-bounded organelle
+query	GO:0043227	0.11	membrane-bounded organelle
+query	GO:0043226	0.11	organelle
+query	GO:0030018	0.11	Z disc
+query	GO:0005737	0.11	cytoplasm
+query	GO:0031674	0.11	I band
+query	GO:0030016	0.11	myofibril
+query	GO:0005622	0.11	intracellular
+query	GO:0043292	0.11	contractile fiber
+query	GO:0043232	0.11	intracellular non-membrane-bounded organelle
+query	GO:0043229	0.11	intracellular organelle
+query	GO:0044444	0.11	cytoplasmic part
+query	GO:0044422	0.11	organelle part
+query	GO:0044449	0.11	contractile fiber part
+query	GO:0031988	0.10	membrane-bounded vesicle
+query	GO:0031982	0.10	vesicle
+query	GO:0016023	0.10	cytoplasmic membrane-bounded vesicle
+query	GO:0044291	0.10	cell-cell contact zone
+query	GO:0008076	0.10	voltage-gated potassium channel complex
+query	GO:0005911	0.10	cell-cell junction
+query	GO:0014704	0.10	intercalated disc
+query	GO:0030054	0.10	cell junction
+query	GO:0034705	0.10	potassium channel complex
+query	GO:0031410	0.10	cytoplasmic vesicle
+query	GO:0000323	0.07	lytic vacuole
+query	GO:0005783	0.07	endoplasmic reticulum
+query	GO:0005929	0.07	cilium
+query	GO:0005773	0.07	vacuole
+query	GO:0005774	0.07	vacuolar membrane
+query	GO:0044437	0.07	vacuolar part
+query	GO:0009986	0.07	cell surface
+query	GO:0044446	0.07	intracellular organelle part
+query	GO:0005794	0.07	Golgi apparatus
+query	GO:0030141	0.07	secretory granule
+query	GO:0012505	0.07	endomembrane system
+query	GO:0097223	0.07	sperm part
+query	GO:0005764	0.07	lysosome
+query	GO:0005765	0.07	lysosomal membrane
+query	GO:0031090	0.07	organelle membrane
+query	GO:0001669	0.07	acrosomal vesicle

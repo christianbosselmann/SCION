@@ -1,0 +1,11 @@
+# Localization Prediction using LocTree3
+# Domain: arch
+#
+# NOTATION Protein Id: Fasta sequences Id truncated by whitespace
+# NOTATION Score: Reliability score on a 0-100 scale (0=unreliable & 100=most reliable)
+# NOTATION Localization: Predicted sub-cellular localization class
+# NOTATION Gene Ontology Terms: Gene Ontology (GO) term/s of the corresponding localization. GO terms predicted by PSI-BLAST are supported by evidence codes (see http://www.geneontology.org/GO.evidence.shtml)
+#
+# LocTree2 annotation - de novo prediction.
+#Protein Id	Score	Localization	Gene Ontology Terms
+query	99	plasma membrane	plasma membrane GO:0005886; integral to membrane GO:0016021;

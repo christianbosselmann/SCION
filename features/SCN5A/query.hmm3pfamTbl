@@ -1,0 +1,17 @@
+#                                                               --- full sequence ---- --- best 1 domain ---- --- domain number estimation ----
+# target name        accession  query name           accession    E-value  score  bias   E-value  score  bias   exp reg clu  ov env dom rep inc description of target
+#------------------- ---------- -------------------- ---------- --------- ------ ----- --------- ------ -----   --- --- --- --- --- --- --- --- ---------------------
+Ion_trans            PF00520.31 query                -           8.5e-254  837.3  96.9   8.3e-83  277.4  10.7   4.1   4   0   0   4   4   4   4 Ion transport protein
+Na_trans_assoc       PF06512.13 query                -            3.4e-60  203.8   4.5   3.4e-60  203.8   4.5   1.9   2   0   0   2   2   1   1 Sodium ion transport-associated
+Na_trans_cytopl      PF11933.8  query                -            9.3e-53  179.2   0.7   2.4e-52  177.9   0.7   1.7   1   0   0   1   1   1   1 Cytoplasmic domain of voltage-gated Na+ ion channel
+PKD_channel          PF08016.12 query                -            2.4e-14   52.8  81.5   8.9e-06   24.6   2.5  10.0   7   3   3  10  10   2   2 Polycystin cation channel
+#
+# Program:         hmmscan
+# Version:         3.1b1 (May 2013)
+# Pipeline mode:   SCAN
+# Query file:      query.fasta
+# Target file:     /mnt/ppcache/rost_db/data/pfam/Pfam-A.hmm
+# Option settings: hmmscan -o query.hmm3pfam --tblout query.hmm3pfamTbl --domtblout query.hmm3pfamDomTbl --acc --notextw --cut_ga --cpu 1 /mnt/ppcache/rost_db/data/pfam/Pfam-A.hmm query.fasta 
+# Current dir:     /tmp/gYg0o_LkjK
+# Date:            Thu Jan 20 10:01:48 2022
+# [ok]

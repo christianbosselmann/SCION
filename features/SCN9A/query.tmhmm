@@ -1,0 +1,48 @@
+# query Length: 1988
+# query Number of predicted TMHs:  21
+# query Exp number of AAs in TMHs: 488.53072
+# query Exp number, first 60 AAs:  0.00295
+# query Total prob of N-in:        0.56813
+query	TMHMM2.0	inside	     1   122
+query	TMHMM2.0	TMhelix	   123   145
+query	TMHMM2.0	outside	   146   187
+query	TMHMM2.0	TMhelix	   188   210
+query	TMHMM2.0	inside	   211   216
+query	TMHMM2.0	TMhelix	   217   239
+query	TMHMM2.0	outside	   240   248
+query	TMHMM2.0	TMhelix	   249   271
+query	TMHMM2.0	inside	   272   338
+query	TMHMM2.0	TMhelix	   339   358
+query	TMHMM2.0	outside	   359   377
+query	TMHMM2.0	TMhelix	   378   400
+query	TMHMM2.0	inside	   401   737
+query	TMHMM2.0	TMhelix	   738   760
+query	TMHMM2.0	outside	   761   774
+query	TMHMM2.0	TMhelix	   775   797
+query	TMHMM2.0	inside	   798   803
+query	TMHMM2.0	TMhelix	   804   826
+query	TMHMM2.0	outside	   827   861
+query	TMHMM2.0	TMhelix	   862   884
+query	TMHMM2.0	inside	   885   944
+query	TMHMM2.0	TMhelix	   945   967
+query	TMHMM2.0	outside	   968  1191
+query	TMHMM2.0	TMhelix	  1192  1211
+query	TMHMM2.0	inside	  1212  1231
+query	TMHMM2.0	TMhelix	  1232  1254
+query	TMHMM2.0	outside	  1255  1320
+query	TMHMM2.0	TMhelix	  1321  1343
+query	TMHMM2.0	inside	  1344  1391
+query	TMHMM2.0	TMhelix	  1392  1414
+query	TMHMM2.0	outside	  1415  1433
+query	TMHMM2.0	TMhelix	  1434  1456
+query	TMHMM2.0	inside	  1457  1510
+query	TMHMM2.0	TMhelix	  1511  1533
+query	TMHMM2.0	outside	  1534  1547
+query	TMHMM2.0	TMhelix	  1548  1567
+query	TMHMM2.0	inside	  1568  1573
+query	TMHMM2.0	TMhelix	  1574  1596
+query	TMHMM2.0	outside	  1597  1646
+query	TMHMM2.0	TMhelix	  1647  1669
+query	TMHMM2.0	inside	  1670  1736
+query	TMHMM2.0	TMhelix	  1737  1759
+query	TMHMM2.0	outside	  1760  1988

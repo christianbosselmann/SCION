@@ -1,0 +1,2064 @@
+# Perl-RDB
+# 
+# PHDhtm_top: prediction of topology for helical transmembrane proteins
+# 
+# PDBID         : query
+# LENGTH        :  2005
+# NHTM_BEST     :     20     (number of helices for best model)
+# NHTM_2ND_BEST :     19     (number of helices for second best model)
+# REL_BEST      :  1.151     (reliability of best model =zscore)
+# REL_BEST_DIFF :  0.001     (reliability of best model =1st-2nd)
+# REL_BEST_DPROJ:      0     (reliability of best model projection of (1st-2nd)
+#
+# MODEL         : iteratively adding transmembrane helices (HTM's)
+# MODEL         : N HTM      , Total Score  , Best HTM   ,    C -     N
+# MODEL_DAT     : 1          , 0.7908       , 0.9203     ,  962 -   979
+# MODEL_DAT     : 2          , 0.7983       , 0.9214     , 1755 -  1772
+# MODEL_DAT     : 3          , 0.8082       , 0.9108     , 1333 -  1356
+# MODEL_DAT     : 4          , 0.8180       , 0.9104     , 1654 -  1677
+# MODEL_DAT     : 5          , 0.8266       , 0.9114     ,  402 -   422
+# MODEL_DAT     : 6          , 0.8348       , 0.9116     , 1451 -  1470
+# MODEL_DAT     : 7          , 0.8425       , 0.9033     ,  881 -   899
+# MODEL_DAT     : 8          , 0.8491       , 0.8704     ,  125 -   142
+# MODEL_DAT     : 9          , 0.8558       , 0.8737     ,  252 -   269
+# MODEL_DAT     : 10         , 0.8621       , 0.8530     , 1595 -  1612
+# MODEL_DAT     : 11         , 0.8683       , 0.8405     , 1274 -  1291
+# MODEL_DAT     : 12         , 0.8742       , 0.8301     , 1566 -  1583
+# MODEL_DAT     : 13         , 0.8797       , 0.8089     ,  759 -   776
+# MODEL_DAT     : 14         , 0.8845       , 0.7649     , 1209 -  1226
+# MODEL_DAT     : 15         , 0.8892       , 0.7615     , 1531 -  1548
+# MODEL_DAT     : 16         , 0.8938       , 0.7553     , 1247 -  1264
+# MODEL_DAT     : 17         , 0.8967       , 0.6655     ,  796 -   813
+# MODEL_DAT     : 18         , 0.8984       , 0.5909     ,  228 -   245
+# MODEL_DAT     : 19         , 0.8991       , 0.5407     ,  825 -   842
+# MODEL_DAT     : 20         , 0.8997       , 0.5335     ,  194 -   211
+#
+# HTMTOP_OBS    :  unk       (first loop region)
+# HTMTOP_PRD    :  out       (first loop region, mode=top_fin)
+# HTMTOP_MODPRD :  out       (first loop region, mode=PRHL)
+# HTMTOP_RID    :  0.396     (difference num(K+R), even-odd)
+# HTMTOP_RIP    :      0     (reliability index =int(min{9,2*sqrt((DC)^2)}) )
+# 
+# NOTATION No   : residue number 
+# NOTATION AA   : amino acid one letter code
+# NOTATION PHL  : predicted transmembrane helices
+# NOTATION PHL  :    H=helical membrane, L=no helical transmembrane
+# NOTATION RI_S : reliability of secondary structure prediction , 0-9
+# NOTATION pH   : probability of predicting helix, 0-9
+# NOTATION pL   : probability of predicting loop
+# NOTATION OtH  : network output for helix, 0-100
+# NOTATION OtL  : network output for loop
+# NOTATION PRHL : refined prediction (maximum score model)
+# NOTATION PR2HL: refined prediction (second best maximum score model)
+# NOTATION PTHLA: predicted model for maximal charge difference (all)
+# NOTATION PTHLS: predicted model for maximal charge difference (sep)
+# NOTATION PiTo : predicted topology of transmembrane regions
+# NOTATION PiTo :    i=loop inside, T=transmembrane, o=loop outside
+# 
+No	AA	PHL	RI_H	pH	pL	OtH	OtL	PRHL	PR2HL	PiTo
+4N	1S	1S	1N	1N	1N	3N	3N	1S	1S	1S
+   1	M	L	9	0	9	  3	 96	L	L	o
+   2	A	L	9	0	9	  2	 97	L	L	o
+   3	Q	L	9	0	9	  1	 98	L	L	o
+   4	S	L	9	0	9	  1	 98	L	L	o
+   5	V	L	9	0	9	  1	 98	L	L	o
+   6	L	L	9	0	9	  1	 98	L	L	o
+   7	V	L	9	0	9	  1	 98	L	L	o
+   8	P	L	9	0	9	  1	 98	L	L	o
+   9	P	L	9	0	9	  1	 98	L	L	o
+  10	G	L	9	0	9	  1	 98	L	L	o
+  11	P	L	9	0	9	  1	 98	L	L	o
+  12	D	L	9	0	9	  1	 98	L	L	o
+  13	S	L	9	0	9	  1	 98	L	L	o
+  14	F	L	9	0	9	  1	 98	L	L	o
+  15	R	L	9	0	9	  1	 98	L	L	o
+  16	F	L	9	0	9	  1	 98	L	L	o
+  17	F	L	9	0	9	  1	 98	L	L	o
+  18	T	L	9	0	9	  1	 98	L	L	o
+  19	R	L	9	0	9	  1	 98	L	L	o
+  20	E	L	9	0	9	  1	 98	L	L	o
+  21	S	L	9	0	9	  1	 98	L	L	o
+  22	L	L	9	0	9	  1	 98	L	L	o
+  23	A	L	9	0	9	  1	 98	L	L	o
+  24	A	L	9	0	9	  1	 98	L	L	o
+  25	I	L	9	0	9	  1	 98	L	L	o
+  26	E	L	9	0	9	  1	 98	L	L	o
+  27	Q	L	9	0	9	  1	 98	L	L	o
+  28	R	L	9	0	9	  1	 98	L	L	o
+  29	I	L	9	0	9	  1	 98	L	L	o
+  30	A	L	9	0	9	  1	 98	L	L	o
+  31	E	L	9	0	9	  1	 98	L	L	o
+  32	E	L	9	0	9	  1	 98	L	L	o
+  33	K	L	9	0	9	  1	 98	L	L	o
+  34	A	L	9	0	9	  1	 98	L	L	o
+  35	K	L	9	0	9	  1	 98	L	L	o
+  36	R	L	9	0	9	  1	 98	L	L	o
+  37	P	L	9	0	9	  1	 98	L	L	o
+  38	K	L	9	0	9	  1	 98	L	L	o
+  39	Q	L	9	0	9	  1	 98	L	L	o
+  40	E	L	9	0	9	  1	 98	L	L	o
+  41	R	L	9	0	9	  1	 98	L	L	o
+  42	K	L	9	0	9	  1	 98	L	L	o
+  43	D	L	9	0	9	  1	 98	L	L	o
+  44	E	L	9	0	9	  1	 98	L	L	o
+  45	D	L	9	0	9	  1	 98	L	L	o
+  46	D	L	9	0	9	  1	 98	L	L	o
+  47	E	L	9	0	9	  1	 98	L	L	o
+  48	N	L	9	0	9	  1	 98	L	L	o
+  49	G	L	9	0	9	  1	 98	L	L	o
+  50	P	L	9	0	9	  1	 98	L	L	o
+  51	K	L	9	0	9	  1	 98	L	L	o
+  52	P	L	9	0	9	  1	 98	L	L	o
+  53	N	L	9	0	9	  1	 98	L	L	o
+  54	S	L	9	0	9	  1	 98	L	L	o
+  55	D	L	9	0	9	  1	 98	L	L	o
+  56	L	L	9	0	9	  1	 98	L	L	o
+  57	E	L	9	0	9	  1	 98	L	L	o
+  58	A	L	9	0	9	  1	 98	L	L	o
+  59	G	L	9	0	9	  1	 98	L	L	o
+  60	K	L	9	0	9	  1	 98	L	L	o
+  61	S	L	9	0	9	  1	 98	L	L	o
+  62	L	L	9	0	9	  1	 98	L	L	o
+  63	P	L	9	0	9	  1	 98	L	L	o
+  64	F	L	9	0	9	  1	 98	L	L	o
+  65	I	L	9	0	9	  1	 98	L	L	o
+  66	Y	L	9	0	9	  1	 98	L	L	o
+  67	G	L	9	0	9	  1	 98	L	L	o
+  68	D	L	9	0	9	  1	 98	L	L	o
+  69	I	L	9	0	9	  1	 98	L	L	o
+  70	P	L	9	0	9	  1	 98	L	L	o
+  71	P	L	9	0	9	  1	 98	L	L	o
+  72	E	L	9	0	9	  1	 98	L	L	o
+  73	M	L	9	0	9	  1	 98	L	L	o
+  74	V	L	9	0	9	  1	 98	L	L	o
+  75	S	L	9	0	9	  1	 98	L	L	o
+  76	V	L	9	0	9	  1	 98	L	L	o
+  77	P	L	9	0	9	  1	 98	L	L	o
+  78	L	L	9	0	9	  1	 98	L	L	o
+  79	E	L	9	0	9	  1	 98	L	L	o
+  80	D	L	9	0	9	  1	 98	L	L	o
+  81	L	L	9	0	9	  1	 98	L	L	o
+  82	D	L	9	0	9	  1	 98	L	L	o
+  83	P	L	9	0	9	  1	 98	L	L	o
+  84	Y	L	9	0	9	  1	 98	L	L	o
+  85	Y	L	9	0	9	  1	 98	L	L	o
+  86	I	L	9	0	9	  1	 98	L	L	o
+  87	N	L	9	0	9	  1	 98	L	L	o
+  88	K	L	9	0	9	  1	 98	L	L	o
+  89	K	L	9	0	9	  1	 98	L	L	o
+  90	T	L	9	0	9	  1	 98	L	L	o
+  91	F	L	9	0	9	  1	 98	L	L	o
+  92	I	L	9	0	9	  1	 98	L	L	o
+  93	V	L	9	0	9	  1	 98	L	L	o
+  94	L	L	9	0	9	  1	 98	L	L	o
+  95	N	L	9	0	9	  1	 98	L	L	o
+  96	K	L	9	0	9	  1	 98	L	L	o
+  97	G	L	9	0	9	  1	 98	L	L	o
+  98	K	L	9	0	9	  1	 98	L	L	o
+  99	A	L	9	0	9	  1	 98	L	L	o
+ 100	I	L	9	0	9	  2	 97	L	L	o
+ 101	S	L	9	0	9	  3	 96	L	L	o
+ 102	R	L	9	0	9	  3	 96	L	L	o
+ 103	F	L	8	0	9	  5	 94	L	L	o
+ 104	S	L	8	0	9	  5	 94	L	L	o
+ 105	A	L	8	0	9	  6	 93	L	L	o
+ 106	T	L	8	0	9	  7	 92	L	L	o
+ 107	P	L	7	1	8	 12	 87	L	L	o
+ 108	A	L	5	2	7	 23	 76	L	L	o
+ 109	L	L	4	2	7	 27	 72	L	L	o
+ 110	Y	L	3	3	6	 33	 66	L	L	o
+ 111	I	L	3	3	6	 31	 68	L	L	o
+ 112	L	L	2	3	6	 36	 63	L	L	o
+ 113	T	L	2	3	6	 35	 64	L	L	o
+ 114	P	L	3	3	6	 30	 69	L	L	o
+ 115	F	L	1	4	5	 43	 56	L	L	o
+ 116	N	H	0	5	4	 50	 49	L	L	o
+ 117	P	H	0	5	4	 53	 46	L	L	o
+ 118	I	L	0	4	5	 49	 50	L	L	o
+ 119	R	L	2	3	6	 36	 63	L	L	o
+ 120	K	L	2	3	6	 36	 63	L	L	o
+ 121	L	L	0	4	5	 49	 50	L	L	o
+ 122	A	H	1	5	4	 55	 44	L	L	o
+ 123	I	H	1	5	4	 55	 44	L	L	o
+ 124	K	H	2	6	3	 61	 38	L	L	o
+ 125	I	H	4	7	2	 72	 27	H	H	T
+ 126	L	H	5	7	2	 78	 21	H	H	T
+ 127	V	H	6	8	1	 81	 18	H	H	T
+ 128	H	H	6	8	1	 82	 17	H	H	T
+ 129	S	H	7	8	1	 85	 14	H	H	T
+ 130	L	H	7	8	1	 88	 11	H	H	T
+ 131	F	H	7	8	1	 89	 10	H	H	T
+ 132	N	H	8	9	0	 90	  9	H	H	T
+ 133	M	H	8	9	0	 90	  9	H	H	T
+ 134	L	H	8	9	0	 90	  9	H	H	T
+ 135	I	H	8	9	0	 91	  8	H	H	T
+ 136	M	H	8	9	0	 91	  8	H	H	T
+ 137	C	H	8	9	0	 91	  8	H	H	T
+ 138	T	H	8	9	0	 91	  8	H	H	T
+ 139	I	H	8	9	0	 91	  8	H	H	T
+ 140	L	H	7	8	1	 89	 10	H	H	T
+ 141	T	H	7	8	1	 85	 14	H	H	T
+ 142	N	H	5	7	2	 77	 22	H	H	T
+ 143	C	H	4	7	2	 70	 29	L	L	i
+ 144	V	H	2	6	3	 61	 38	L	L	i
+ 145	F	L	0	4	5	 47	 52	L	L	i
+ 146	M	L	3	3	6	 31	 68	L	L	i
+ 147	T	L	6	1	8	 18	 81	L	L	i
+ 148	M	L	7	1	8	 11	 88	L	L	i
+ 149	S	L	8	0	9	  6	 92	L	L	i
+ 150	N	L	9	0	9	  4	 95	L	L	i
+ 151	P	L	9	0	9	  2	 97	L	L	i
+ 152	P	L	9	0	9	  2	 97	L	L	i
+ 153	D	L	9	0	9	  2	 97	L	L	i
+ 154	W	L	9	0	9	  2	 97	L	L	i
+ 155	T	L	9	0	9	  2	 97	L	L	i
+ 156	K	L	9	0	9	  2	 97	L	L	i
+ 157	N	L	9	0	9	  2	 97	L	L	i
+ 158	V	L	9	0	9	  2	 97	L	L	i
+ 159	E	L	9	0	9	  2	 97	L	L	i
+ 160	Y	L	9	0	9	  2	 97	L	L	i
+ 161	T	L	8	0	9	  5	 94	L	L	i
+ 162	F	L	7	1	8	 12	 87	L	L	i
+ 163	T	L	5	2	7	 20	 79	L	L	i
+ 164	G	L	4	2	7	 28	 71	L	L	i
+ 165	I	L	2	3	6	 36	 63	L	L	i
+ 166	Y	L	2	3	6	 39	 61	L	L	i
+ 167	T	L	2	3	6	 38	 61	L	L	i
+ 168	F	L	2	3	6	 38	 61	L	L	i
+ 169	E	L	1	4	5	 42	 57	L	L	i
+ 170	S	H	0	5	4	 50	 49	L	L	i
+ 171	L	H	0	5	4	 54	 45	L	L	i
+ 172	I	L	0	4	5	 46	 52	L	L	i
+ 173	K	L	3	3	6	 31	 68	L	L	i
+ 174	I	L	2	3	6	 35	 64	L	L	i
+ 175	L	L	3	3	6	 34	 65	L	L	i
+ 176	A	L	6	1	8	 19	 80	L	L	i
+ 177	R	L	6	1	8	 16	 83	L	L	i
+ 178	G	L	6	1	8	 17	 82	L	L	i
+ 179	F	L	7	1	8	 10	 89	L	L	i
+ 180	C	L	8	0	9	  7	 92	L	L	i
+ 181	L	L	9	0	9	  4	 95	L	L	i
+ 182	E	L	9	0	9	  2	 97	L	L	i
+ 183	D	L	9	0	9	  2	 97	L	L	i
+ 184	F	L	9	0	9	  3	 96	L	L	i
+ 185	T	L	9	0	9	  2	 97	L	L	i
+ 186	F	L	9	0	9	  2	 97	L	L	i
+ 187	L	L	9	0	9	  3	 96	L	L	i
+ 188	R	L	9	0	9	  3	 96	L	L	i
+ 189	D	L	9	0	9	  3	 95	L	L	i
+ 190	P	L	8	0	9	  5	 94	L	L	i
+ 191	W	L	8	0	9	  6	 93	L	L	i
+ 192	N	L	8	0	9	  8	 91	L	L	i
+ 193	W	L	7	1	8	 13	 86	L	L	i
+ 194	L	L	5	2	7	 20	 79	H	L	T
+ 195	D	L	5	2	7	 24	 75	H	L	T
+ 196	F	L	3	3	6	 32	 68	H	L	T
+ 197	T	L	1	4	5	 43	 56	H	L	T
+ 198	V	H	1	5	4	 56	 43	H	L	T
+ 199	I	H	3	6	3	 66	 33	H	L	T
+ 200	T	H	4	7	2	 70	 29	H	L	T
+ 201	F	H	4	7	2	 73	 26	H	L	T
+ 202	A	H	5	7	2	 77	 22	H	L	T
+ 203	Y	H	6	8	1	 81	 18	H	L	T
+ 204	V	H	5	7	2	 78	 21	H	L	T
+ 205	T	H	4	7	2	 70	 29	H	L	T
+ 206	E	H	3	6	3	 65	 34	H	L	T
+ 207	F	H	0	5	4	 52	 47	H	L	T
+ 208	V	L	1	4	5	 43	 56	H	L	T
+ 209	D	L	1	4	5	 42	 57	H	L	T
+ 210	L	L	3	3	6	 33	 66	H	L	T
+ 211	G	L	4	2	7	 26	 73	H	L	T
+ 212	N	L	4	2	7	 25	 74	L	L	o
+ 213	V	L	5	2	7	 20	 79	L	L	o
+ 214	S	L	6	1	8	 19	 80	L	L	o
+ 215	A	L	5	2	7	 22	 77	L	L	o
+ 216	L	L	6	1	8	 16	 84	L	L	o
+ 217	R	L	8	0	9	  8	 91	L	L	o
+ 218	T	L	7	1	8	 14	 85	L	L	o
+ 219	F	L	7	1	8	 14	 85	L	L	o
+ 220	R	L	7	1	8	 10	 89	L	L	o
+ 221	V	L	7	1	8	 13	 86	L	L	o
+ 222	L	L	6	1	8	 16	 83	L	L	o
+ 223	R	L	6	1	8	 17	 82	L	L	o
+ 224	A	L	4	2	7	 29	 70	L	L	o
+ 225	L	L	4	2	7	 29	 70	L	L	o
+ 226	K	L	6	1	8	 18	 81	L	L	o
+ 227	T	L	5	2	7	 23	 76	L	L	o
+ 228	I	L	2	3	6	 39	 60	H	H	T
+ 229	S	L	1	4	5	 43	 56	H	H	T
+ 230	V	L	1	4	5	 44	 55	H	H	T
+ 231	I	H	1	5	4	 55	 44	H	H	T
+ 232	P	H	3	6	3	 69	 30	H	H	T
+ 233	G	H	5	7	2	 75	 24	H	H	T
+ 234	L	H	5	7	2	 77	 22	H	H	T
+ 235	K	H	4	7	2	 72	 27	H	H	T
+ 236	T	H	2	6	3	 63	 36	H	H	T
+ 237	I	H	4	7	2	 71	 28	H	H	T
+ 238	V	H	5	7	2	 76	 23	H	H	T
+ 239	G	H	4	7	2	 74	 25	H	H	T
+ 240	A	H	3	6	3	 69	 30	H	H	T
+ 241	L	H	2	6	3	 64	 35	H	H	T
+ 242	I	H	0	5	4	 53	 46	H	H	T
+ 243	Q	L	0	4	5	 46	 53	H	H	T
+ 244	S	L	2	3	6	 38	 61	H	H	T
+ 245	V	L	4	2	7	 25	 74	H	H	T
+ 246	K	L	5	2	7	 21	 78	L	L	i
+ 247	K	L	5	2	7	 23	 76	L	L	i
+ 248	L	L	3	3	6	 31	 68	L	L	i
+ 249	S	L	1	4	5	 41	 58	L	L	i
+ 250	D	H	0	5	4	 53	 46	L	L	i
+ 251	V	H	1	5	4	 57	 42	L	L	i
+ 252	M	H	3	6	3	 69	 30	H	H	T
+ 253	I	H	5	7	2	 79	 20	H	H	T
+ 254	L	H	7	8	1	 86	 13	H	H	T
+ 255	T	H	7	8	1	 89	 10	H	H	T
+ 256	V	H	8	9	0	 91	  8	H	H	T
+ 257	F	H	8	9	0	 91	  8	H	H	T
+ 258	C	H	8	9	0	 92	  7	H	H	T
+ 259	L	H	8	9	0	 92	  7	H	H	T
+ 260	S	H	8	9	0	 92	  7	H	H	T
+ 261	V	H	8	9	0	 92	  7	H	H	T
+ 262	F	H	8	9	0	 92	  7	H	H	T
+ 263	A	H	8	9	0	 92	  7	H	H	T
+ 264	L	H	8	9	0	 91	  8	H	H	T
+ 265	I	H	8	9	0	 90	  9	H	H	T
+ 266	G	H	7	8	1	 88	 10	H	H	T
+ 267	L	H	7	8	1	 85	 14	H	H	T
+ 268	Q	H	5	7	2	 77	 22	H	H	T
+ 269	L	H	3	6	3	 68	 31	H	H	T
+ 270	F	H	0	5	4	 54	 45	L	L	o
+ 271	M	L	2	3	6	 39	 60	L	L	o
+ 272	G	L	4	2	7	 28	 71	L	L	o
+ 273	N	L	6	1	8	 15	 84	L	L	o
+ 274	L	L	8	0	9	  9	 90	L	L	o
+ 275	R	L	8	0	9	  5	 94	L	L	o
+ 276	N	L	9	0	9	  3	 96	L	L	o
+ 277	K	L	9	0	9	  2	 97	L	L	o
+ 278	C	L	9	0	9	  1	 98	L	L	o
+ 279	L	L	9	0	9	  1	 98	L	L	o
+ 280	Q	L	9	0	9	  1	 98	L	L	o
+ 281	W	L	9	0	9	  1	 98	L	L	o
+ 282	P	L	9	0	9	  1	 98	L	L	o
+ 283	P	L	9	0	9	  1	 98	L	L	o
+ 284	D	L	9	0	9	  1	 98	L	L	o
+ 285	N	L	9	0	9	  1	 98	L	L	o
+ 286	S	L	9	0	9	  1	 98	L	L	o
+ 287	S	L	9	0	9	  1	 98	L	L	o
+ 288	F	L	9	0	9	  1	 98	L	L	o
+ 289	E	L	9	0	9	  1	 98	L	L	o
+ 290	I	L	9	0	9	  1	 98	L	L	o
+ 291	N	L	9	0	9	  1	 98	L	L	o
+ 292	I	L	9	0	9	  1	 98	L	L	o
+ 293	T	L	9	0	9	  1	 98	L	L	o
+ 294	S	L	9	0	9	  1	 98	L	L	o
+ 295	F	L	9	0	9	  1	 98	L	L	o
+ 296	F	L	9	0	9	  1	 98	L	L	o
+ 297	N	L	9	0	9	  1	 98	L	L	o
+ 298	N	L	9	0	9	  1	 98	L	L	o
+ 299	S	L	9	0	9	  1	 98	L	L	o
+ 300	L	L	9	0	9	  1	 98	L	L	o
+ 301	D	L	9	0	9	  1	 98	L	L	o
+ 302	G	L	9	0	9	  1	 98	L	L	o
+ 303	N	L	9	0	9	  1	 98	L	L	o
+ 304	G	L	9	0	9	  1	 98	L	L	o
+ 305	T	L	9	0	9	  1	 98	L	L	o
+ 306	T	L	9	0	9	  1	 98	L	L	o
+ 307	F	L	9	0	9	  1	 98	L	L	o
+ 308	N	L	9	0	9	  1	 98	L	L	o
+ 309	R	L	9	0	9	  1	 98	L	L	o
+ 310	T	L	9	0	9	  1	 98	L	L	o
+ 311	V	L	9	0	9	  1	 98	L	L	o
+ 312	S	L	9	0	9	  1	 98	L	L	o
+ 313	I	L	9	0	9	  1	 98	L	L	o
+ 314	F	L	9	0	9	  1	 98	L	L	o
+ 315	N	L	9	0	9	  1	 98	L	L	o
+ 316	W	L	9	0	9	  1	 98	L	L	o
+ 317	D	L	9	0	9	  1	 98	L	L	o
+ 318	E	L	9	0	9	  1	 98	L	L	o
+ 319	Y	L	9	0	9	  1	 98	L	L	o
+ 320	I	L	9	0	9	  1	 98	L	L	o
+ 321	E	L	9	0	9	  1	 98	L	L	o
+ 322	D	L	9	0	9	  1	 98	L	L	o
+ 323	K	L	9	0	9	  1	 98	L	L	o
+ 324	S	L	9	0	9	  1	 98	L	L	o
+ 325	H	L	9	0	9	  1	 98	L	L	o
+ 326	F	L	9	0	9	  1	 98	L	L	o
+ 327	Y	L	9	0	9	  1	 98	L	L	o
+ 328	F	L	9	0	9	  1	 98	L	L	o
+ 329	L	L	9	0	9	  1	 98	L	L	o
+ 330	E	L	9	0	9	  1	 98	L	L	o
+ 331	G	L	9	0	9	  1	 98	L	L	o
+ 332	Q	L	9	0	9	  1	 98	L	L	o
+ 333	N	L	9	0	9	  1	 98	L	L	o
+ 334	D	L	9	0	9	  1	 98	L	L	o
+ 335	A	L	9	0	9	  1	 98	L	L	o
+ 336	L	L	9	0	9	  1	 98	L	L	o
+ 337	L	L	9	0	9	  1	 98	L	L	o
+ 338	C	L	9	0	9	  1	 98	L	L	o
+ 339	G	L	9	0	9	  1	 98	L	L	o
+ 340	N	L	9	0	9	  1	 98	L	L	o
+ 341	S	L	9	0	9	  1	 98	L	L	o
+ 342	S	L	9	0	9	  1	 98	L	L	o
+ 343	D	L	9	0	9	  1	 98	L	L	o
+ 344	A	L	9	0	9	  1	 98	L	L	o
+ 345	G	L	9	0	9	  1	 98	L	L	o
+ 346	Q	L	9	0	9	  1	 98	L	L	o
+ 347	C	L	9	0	9	  1	 98	L	L	o
+ 348	P	L	9	0	9	  1	 98	L	L	o
+ 349	E	L	9	0	9	  1	 98	L	L	o
+ 350	G	L	9	0	9	  1	 98	L	L	o
+ 351	Y	L	9	0	9	  1	 98	L	L	o
+ 352	I	L	9	0	9	  1	 98	L	L	o
+ 353	C	L	9	0	9	  1	 98	L	L	o
+ 354	V	L	9	0	9	  1	 98	L	L	o
+ 355	K	L	9	0	9	  1	 98	L	L	o
+ 356	A	L	9	0	9	  1	 98	L	L	o
+ 357	G	L	9	0	9	  1	 98	L	L	o
+ 358	R	L	9	0	9	  1	 98	L	L	o
+ 359	N	L	9	0	9	  1	 98	L	L	o
+ 360	P	L	9	0	9	  1	 98	L	L	o
+ 361	N	L	9	0	9	  1	 98	L	L	o
+ 362	Y	L	9	0	9	  1	 98	L	L	o
+ 363	G	L	9	0	9	  1	 98	L	L	o
+ 364	Y	L	9	0	9	  1	 98	L	L	o
+ 365	T	L	9	0	9	  1	 98	L	L	o
+ 366	S	L	9	0	9	  1	 98	L	L	o
+ 367	F	L	9	0	9	  1	 98	L	L	o
+ 368	D	L	9	0	9	  1	 98	L	L	o
+ 369	T	L	9	0	9	  2	 97	L	L	o
+ 370	F	L	9	0	9	  4	 95	L	L	o
+ 371	S	L	8	0	9	  7	 92	L	L	o
+ 372	W	L	8	0	9	  9	 90	L	L	o
+ 373	A	L	7	1	8	 10	 89	L	L	o
+ 374	F	L	7	0	9	  9	 89	L	L	o
+ 375	L	L	7	1	8	 10	 89	L	L	o
+ 376	S	L	8	0	9	  7	 92	L	L	o
+ 377	L	L	8	0	9	  5	 94	L	L	o
+ 378	F	L	9	0	9	  4	 95	L	L	o
+ 379	R	L	9	0	9	  4	 95	L	L	o
+ 380	L	L	8	0	9	  6	 93	L	L	o
+ 381	M	L	8	0	9	  5	 94	L	L	o
+ 382	T	L	9	0	9	  2	 97	L	L	o
+ 383	Q	L	9	0	9	  1	 98	L	L	o
+ 384	D	L	9	0	9	  1	 98	L	L	o
+ 385	F	L	9	0	9	  1	 98	L	L	o
+ 386	W	L	9	0	9	  1	 98	L	L	o
+ 387	E	L	9	0	9	  1	 98	L	L	o
+ 388	N	L	9	0	9	  1	 98	L	L	o
+ 389	L	L	9	0	9	  1	 98	L	L	o
+ 390	Y	L	9	0	9	  1	 98	L	L	o
+ 391	Q	L	9	0	9	  1	 98	L	L	o
+ 392	L	L	9	0	9	  2	 97	L	L	o
+ 393	T	L	9	0	9	  2	 97	L	L	o
+ 394	L	L	9	0	9	  3	 96	L	L	o
+ 395	R	L	8	0	9	  5	 94	L	L	o
+ 396	A	L	8	0	9	  9	 90	L	L	o
+ 397	A	L	6	1	8	 16	 83	L	L	o
+ 398	G	L	4	2	7	 29	 70	L	L	o
+ 399	K	L	2	3	6	 36	 63	L	L	o
+ 400	T	H	1	5	4	 58	 41	L	L	o
+ 401	Y	H	5	7	2	 77	 22	L	L	o
+ 402	M	H	6	8	1	 84	 15	H	H	T
+ 403	I	H	7	8	1	 88	 11	H	H	T
+ 404	F	H	8	9	0	 90	  9	H	H	T
+ 405	F	H	8	9	0	 91	  8	H	H	T
+ 406	V	H	8	9	0	 92	  7	H	H	T
+ 407	L	H	8	9	0	 92	  7	H	H	T
+ 408	V	H	8	9	0	 92	  7	H	H	T
+ 409	I	H	8	9	0	 92	  7	H	H	T
+ 410	F	H	8	9	0	 91	  8	H	H	T
+ 411	L	H	8	9	0	 90	  9	H	H	T
+ 412	G	H	8	9	0	 91	  8	H	H	T
+ 413	S	H	8	9	0	 90	  9	H	H	T
+ 414	F	H	8	9	0	 90	  9	H	H	T
+ 415	Y	H	8	9	0	 91	  8	H	H	T
+ 416	L	H	8	9	0	 91	  8	H	H	T
+ 417	I	H	8	9	0	 92	  7	H	H	T
+ 418	N	H	8	9	0	 92	  7	H	H	T
+ 419	L	H	8	9	0	 91	  8	H	H	T
+ 420	I	H	8	9	0	 90	  9	H	H	T
+ 421	L	H	7	8	1	 88	 10	H	H	T
+ 422	A	H	7	8	1	 86	 13	H	H	T
+ 423	V	H	6	8	1	 81	 18	L	L	i
+ 424	V	H	4	7	2	 73	 25	L	L	i
+ 425	A	H	1	5	4	 58	 41	L	L	i
+ 426	M	L	1	4	5	 40	 59	L	L	i
+ 427	A	L	5	2	7	 23	 75	L	L	i
+ 428	Y	L	7	1	8	 14	 85	L	L	i
+ 429	E	L	8	0	9	  9	 90	L	L	i
+ 430	E	L	8	0	9	  6	 93	L	L	i
+ 431	Q	L	9	0	9	  4	 95	L	L	i
+ 432	N	L	9	0	9	  2	 97	L	L	i
+ 433	Q	L	9	0	9	  1	 98	L	L	i
+ 434	A	L	9	0	9	  1	 98	L	L	i
+ 435	T	L	9	0	9	  1	 98	L	L	i
+ 436	L	L	9	0	9	  1	 98	L	L	i
+ 437	E	L	9	0	9	  1	 98	L	L	i
+ 438	E	L	9	0	9	  1	 98	L	L	i
+ 439	A	L	9	0	9	  1	 98	L	L	i
+ 440	E	L	9	0	9	  1	 98	L	L	i
+ 441	Q	L	9	0	9	  1	 98	L	L	i
+ 442	K	L	9	0	9	  1	 98	L	L	i
+ 443	E	L	9	0	9	  1	 98	L	L	i
+ 444	A	L	9	0	9	  1	 98	L	L	i
+ 445	E	L	9	0	9	  1	 98	L	L	i
+ 446	F	L	9	0	9	  1	 98	L	L	i
+ 447	Q	L	9	0	9	  1	 98	L	L	i
+ 448	Q	L	9	0	9	  1	 98	L	L	i
+ 449	M	L	9	0	9	  1	 98	L	L	i
+ 450	L	L	9	0	9	  1	 98	L	L	i
+ 451	E	L	9	0	9	  1	 98	L	L	i
+ 452	Q	L	9	0	9	  1	 98	L	L	i
+ 453	L	L	9	0	9	  1	 98	L	L	i
+ 454	K	L	9	0	9	  1	 98	L	L	i
+ 455	K	L	9	0	9	  1	 98	L	L	i
+ 456	Q	L	9	0	9	  1	 98	L	L	i
+ 457	Q	L	9	0	9	  1	 98	L	L	i
+ 458	E	L	9	0	9	  1	 98	L	L	i
+ 459	E	L	9	0	9	  1	 98	L	L	i
+ 460	A	L	9	0	9	  1	 98	L	L	i
+ 461	Q	L	9	0	9	  1	 98	L	L	i
+ 462	A	L	9	0	9	  1	 98	L	L	i
+ 463	A	L	9	0	9	  1	 98	L	L	i
+ 464	A	L	9	0	9	  1	 98	L	L	i
+ 465	A	L	9	0	9	  1	 98	L	L	i
+ 466	A	L	9	0	9	  1	 98	L	L	i
+ 467	A	L	9	0	9	  1	 98	L	L	i
+ 468	S	L	9	0	9	  1	 98	L	L	i
+ 469	A	L	9	0	9	  1	 98	L	L	i
+ 470	E	L	9	0	9	  1	 98	L	L	i
+ 471	S	L	9	0	9	  1	 98	L	L	i
+ 472	R	L	9	0	9	  1	 98	L	L	i
+ 473	D	L	9	0	9	  1	 98	L	L	i
+ 474	F	L	9	0	9	  1	 98	L	L	i
+ 475	S	L	9	0	9	  1	 98	L	L	i
+ 476	G	L	9	0	9	  1	 98	L	L	i
+ 477	A	L	9	0	9	  1	 98	L	L	i
+ 478	G	L	9	0	9	  1	 98	L	L	i
+ 479	G	L	9	0	9	  1	 98	L	L	i
+ 480	I	L	9	0	9	  1	 98	L	L	i
+ 481	G	L	9	0	9	  1	 98	L	L	i
+ 482	V	L	9	0	9	  1	 98	L	L	i
+ 483	F	L	9	0	9	  1	 98	L	L	i
+ 484	S	L	9	0	9	  1	 98	L	L	i
+ 485	E	L	9	0	9	  1	 98	L	L	i
+ 486	S	L	9	0	9	  1	 98	L	L	i
+ 487	S	L	9	0	9	  1	 98	L	L	i
+ 488	S	L	9	0	9	  1	 98	L	L	i
+ 489	V	L	9	0	9	  1	 98	L	L	i
+ 490	A	L	9	0	9	  1	 98	L	L	i
+ 491	S	L	9	0	9	  1	 98	L	L	i
+ 492	K	L	9	0	9	  1	 98	L	L	i
+ 493	L	L	9	0	9	  1	 98	L	L	i
+ 494	S	L	9	0	9	  1	 98	L	L	i
+ 495	S	L	9	0	9	  1	 98	L	L	i
+ 496	K	L	9	0	9	  1	 98	L	L	i
+ 497	S	L	9	0	9	  1	 98	L	L	i
+ 498	E	L	9	0	9	  1	 98	L	L	i
+ 499	K	L	9	0	9	  1	 98	L	L	i
+ 500	E	L	9	0	9	  1	 98	L	L	i
+ 501	L	L	9	0	9	  1	 98	L	L	i
+ 502	K	L	9	0	9	  1	 98	L	L	i
+ 503	N	L	9	0	9	  1	 98	L	L	i
+ 504	R	L	9	0	9	  1	 98	L	L	i
+ 505	R	L	9	0	9	  1	 98	L	L	i
+ 506	K	L	9	0	9	  1	 98	L	L	i
+ 507	K	L	9	0	9	  1	 98	L	L	i
+ 508	K	L	9	0	9	  1	 98	L	L	i
+ 509	K	L	9	0	9	  1	 98	L	L	i
+ 510	Q	L	9	0	9	  1	 98	L	L	i
+ 511	K	L	9	0	9	  1	 98	L	L	i
+ 512	E	L	9	0	9	  1	 98	L	L	i
+ 513	Q	L	9	0	9	  1	 98	L	L	i
+ 514	S	L	9	0	9	  1	 98	L	L	i
+ 515	G	L	9	0	9	  1	 98	L	L	i
+ 516	E	L	9	0	9	  1	 98	L	L	i
+ 517	E	L	9	0	9	  1	 98	L	L	i
+ 518	E	L	9	0	9	  1	 98	L	L	i
+ 519	K	L	9	0	9	  1	 98	L	L	i
+ 520	N	L	9	0	9	  1	 98	L	L	i
+ 521	D	L	9	0	9	  1	 98	L	L	i
+ 522	R	L	9	0	9	  1	 98	L	L	i
+ 523	V	L	9	0	9	  1	 98	L	L	i
+ 524	R	L	9	0	9	  1	 98	L	L	i
+ 525	K	L	9	0	9	  1	 98	L	L	i
+ 526	S	L	9	0	9	  1	 98	L	L	i
+ 527	E	L	9	0	9	  1	 98	L	L	i
+ 528	S	L	9	0	9	  1	 98	L	L	i
+ 529	E	L	9	0	9	  1	 98	L	L	i
+ 530	D	L	9	0	9	  1	 98	L	L	i
+ 531	S	L	9	0	9	  1	 98	L	L	i
+ 532	I	L	9	0	9	  1	 98	L	L	i
+ 533	R	L	9	0	9	  1	 98	L	L	i
+ 534	R	L	9	0	9	  1	 98	L	L	i
+ 535	K	L	9	0	9	  1	 98	L	L	i
+ 536	G	L	9	0	9	  1	 98	L	L	i
+ 537	F	L	9	0	9	  1	 98	L	L	i
+ 538	R	L	9	0	9	  1	 98	L	L	i
+ 539	F	L	9	0	9	  1	 98	L	L	i
+ 540	S	L	9	0	9	  1	 98	L	L	i
+ 541	L	L	9	0	9	  1	 98	L	L	i
+ 542	E	L	9	0	9	  1	 98	L	L	i
+ 543	G	L	9	0	9	  1	 98	L	L	i
+ 544	S	L	9	0	9	  1	 98	L	L	i
+ 545	R	L	9	0	9	  1	 98	L	L	i
+ 546	L	L	9	0	9	  1	 98	L	L	i
+ 547	T	L	9	0	9	  1	 98	L	L	i
+ 548	Y	L	9	0	9	  1	 98	L	L	i
+ 549	E	L	9	0	9	  1	 98	L	L	i
+ 550	K	L	9	0	9	  1	 98	L	L	i
+ 551	R	L	9	0	9	  1	 98	L	L	i
+ 552	F	L	9	0	9	  1	 98	L	L	i
+ 553	S	L	9	0	9	  1	 98	L	L	i
+ 554	S	L	9	0	9	  1	 98	L	L	i
+ 555	P	L	9	0	9	  1	 98	L	L	i
+ 556	H	L	9	0	9	  1	 98	L	L	i
+ 557	Q	L	9	0	9	  1	 98	L	L	i
+ 558	S	L	9	0	9	  1	 98	L	L	i
+ 559	L	L	9	0	9	  1	 98	L	L	i
+ 560	L	L	9	0	9	  1	 98	L	L	i
+ 561	S	L	9	0	9	  1	 98	L	L	i
+ 562	I	L	9	0	9	  1	 98	L	L	i
+ 563	R	L	9	0	9	  1	 98	L	L	i
+ 564	G	L	9	0	9	  1	 98	L	L	i
+ 565	S	L	9	0	9	  1	 98	L	L	i
+ 566	L	L	9	0	9	  1	 98	L	L	i
+ 567	F	L	9	0	9	  1	 98	L	L	i
+ 568	S	L	9	0	9	  1	 98	L	L	i
+ 569	P	L	9	0	9	  1	 98	L	L	i
+ 570	R	L	9	0	9	  1	 98	L	L	i
+ 571	R	L	9	0	9	  1	 98	L	L	i
+ 572	N	L	9	0	9	  1	 98	L	L	i
+ 573	S	L	9	0	9	  1	 98	L	L	i
+ 574	R	L	9	0	9	  1	 98	L	L	i
+ 575	A	L	9	0	9	  1	 98	L	L	i
+ 576	S	L	9	0	9	  1	 98	L	L	i
+ 577	L	L	9	0	9	  1	 98	L	L	i
+ 578	F	L	9	0	9	  1	 98	L	L	i
+ 579	S	L	9	0	9	  1	 98	L	L	i
+ 580	F	L	9	0	9	  1	 98	L	L	i
+ 581	R	L	9	0	9	  1	 98	L	L	i
+ 582	G	L	9	0	9	  1	 98	L	L	i
+ 583	R	L	9	0	9	  1	 98	L	L	i
+ 584	A	L	9	0	9	  1	 98	L	L	i
+ 585	K	L	9	0	9	  1	 98	L	L	i
+ 586	D	L	9	0	9	  1	 98	L	L	i
+ 587	I	L	9	0	9	  1	 98	L	L	i
+ 588	G	L	9	0	9	  1	 98	L	L	i
+ 589	S	L	9	0	9	  1	 98	L	L	i
+ 590	E	L	9	0	9	  1	 98	L	L	i
+ 591	N	L	9	0	9	  1	 98	L	L	i
+ 592	D	L	9	0	9	  1	 98	L	L	i
+ 593	F	L	9	0	9	  1	 98	L	L	i
+ 594	A	L	9	0	9	  1	 98	L	L	i
+ 595	D	L	9	0	9	  1	 98	L	L	i
+ 596	D	L	9	0	9	  1	 98	L	L	i
+ 597	E	L	9	0	9	  1	 98	L	L	i
+ 598	H	L	9	0	9	  1	 98	L	L	i
+ 599	S	L	9	0	9	  1	 98	L	L	i
+ 600	T	L	9	0	9	  1	 98	L	L	i
+ 601	F	L	9	0	9	  1	 98	L	L	i
+ 602	E	L	9	0	9	  1	 98	L	L	i
+ 603	D	L	9	0	9	  1	 98	L	L	i
+ 604	N	L	9	0	9	  1	 98	L	L	i
+ 605	D	L	9	0	9	  1	 98	L	L	i
+ 606	S	L	9	0	9	  1	 98	L	L	i
+ 607	R	L	9	0	9	  1	 98	L	L	i
+ 608	R	L	9	0	9	  1	 98	L	L	i
+ 609	D	L	9	0	9	  1	 98	L	L	i
+ 610	S	L	9	0	9	  1	 98	L	L	i
+ 611	L	L	9	0	9	  1	 98	L	L	i
+ 612	F	L	9	0	9	  1	 98	L	L	i
+ 613	V	L	9	0	9	  1	 98	L	L	i
+ 614	P	L	9	0	9	  1	 98	L	L	i
+ 615	H	L	9	0	9	  1	 98	L	L	i
+ 616	R	L	9	0	9	  1	 98	L	L	i
+ 617	H	L	9	0	9	  1	 98	L	L	i
+ 618	G	L	9	0	9	  1	 98	L	L	i
+ 619	E	L	9	0	9	  1	 98	L	L	i
+ 620	R	L	9	0	9	  1	 98	L	L	i
+ 621	R	L	9	0	9	  1	 98	L	L	i
+ 622	H	L	9	0	9	  1	 98	L	L	i
+ 623	S	L	9	0	9	  1	 98	L	L	i
+ 624	N	L	9	0	9	  1	 98	L	L	i
+ 625	V	L	9	0	9	  1	 98	L	L	i
+ 626	S	L	9	0	9	  1	 98	L	L	i
+ 627	Q	L	9	0	9	  1	 98	L	L	i
+ 628	A	L	9	0	9	  1	 98	L	L	i
+ 629	S	L	9	0	9	  1	 98	L	L	i
+ 630	R	L	9	0	9	  1	 98	L	L	i
+ 631	A	L	9	0	9	  1	 98	L	L	i
+ 632	S	L	9	0	9	  1	 98	L	L	i
+ 633	R	L	9	0	9	  1	 98	L	L	i
+ 634	V	L	9	0	9	  1	 98	L	L	i
+ 635	L	L	9	0	9	  1	 98	L	L	i
+ 636	P	L	9	0	9	  1	 98	L	L	i
+ 637	I	L	9	0	9	  1	 98	L	L	i
+ 638	L	L	9	0	9	  1	 98	L	L	i
+ 639	P	L	9	0	9	  1	 98	L	L	i
+ 640	M	L	9	0	9	  1	 98	L	L	i
+ 641	N	L	9	0	9	  1	 98	L	L	i
+ 642	G	L	9	0	9	  1	 98	L	L	i
+ 643	K	L	9	0	9	  1	 98	L	L	i
+ 644	M	L	9	0	9	  1	 98	L	L	i
+ 645	H	L	9	0	9	  1	 98	L	L	i
+ 646	S	L	9	0	9	  1	 98	L	L	i
+ 647	A	L	9	0	9	  1	 98	L	L	i
+ 648	V	L	9	0	9	  1	 98	L	L	i
+ 649	D	L	9	0	9	  1	 98	L	L	i
+ 650	C	L	9	0	9	  1	 98	L	L	i
+ 651	N	L	9	0	9	  1	 98	L	L	i
+ 652	G	L	9	0	9	  1	 98	L	L	i
+ 653	V	L	9	0	9	  1	 98	L	L	i
+ 654	V	L	9	0	9	  1	 98	L	L	i
+ 655	S	L	9	0	9	  1	 98	L	L	i
+ 656	L	L	9	0	9	  1	 98	L	L	i
+ 657	V	L	9	0	9	  1	 98	L	L	i
+ 658	G	L	9	0	9	  1	 98	L	L	i
+ 659	G	L	9	0	9	  1	 98	L	L	i
+ 660	P	L	9	0	9	  1	 98	L	L	i
+ 661	S	L	9	0	9	  1	 98	L	L	i
+ 662	T	L	9	0	9	  1	 98	L	L	i
+ 663	L	L	9	0	9	  1	 98	L	L	i
+ 664	T	L	9	0	9	  1	 98	L	L	i
+ 665	S	L	9	0	9	  1	 98	L	L	i
+ 666	A	L	9	0	9	  1	 98	L	L	i
+ 667	G	L	9	0	9	  1	 98	L	L	i
+ 668	Q	L	9	0	9	  1	 98	L	L	i
+ 669	L	L	9	0	9	  1	 98	L	L	i
+ 670	L	L	9	0	9	  1	 98	L	L	i
+ 671	P	L	9	0	9	  1	 98	L	L	i
+ 672	E	L	9	0	9	  1	 98	L	L	i
+ 673	G	L	9	0	9	  1	 98	L	L	i
+ 674	T	L	9	0	9	  1	 98	L	L	i
+ 675	T	L	9	0	9	  1	 98	L	L	i
+ 676	T	L	9	0	9	  1	 98	L	L	i
+ 677	E	L	9	0	9	  1	 98	L	L	i
+ 678	T	L	9	0	9	  1	 98	L	L	i
+ 679	E	L	9	0	9	  1	 98	L	L	i
+ 680	I	L	9	0	9	  1	 98	L	L	i
+ 681	R	L	9	0	9	  1	 98	L	L	i
+ 682	K	L	9	0	9	  1	 98	L	L	i
+ 683	R	L	9	0	9	  1	 98	L	L	i
+ 684	R	L	9	0	9	  1	 98	L	L	i
+ 685	S	L	9	0	9	  1	 98	L	L	i
+ 686	S	L	9	0	9	  1	 98	L	L	i
+ 687	S	L	9	0	9	  1	 98	L	L	i
+ 688	Y	L	9	0	9	  1	 98	L	L	i
+ 689	H	L	9	0	9	  1	 98	L	L	i
+ 690	V	L	9	0	9	  1	 98	L	L	i
+ 691	S	L	9	0	9	  1	 98	L	L	i
+ 692	M	L	9	0	9	  1	 98	L	L	i
+ 693	D	L	9	0	9	  1	 98	L	L	i
+ 694	L	L	9	0	9	  1	 98	L	L	i
+ 695	L	L	9	0	9	  1	 98	L	L	i
+ 696	E	L	9	0	9	  1	 98	L	L	i
+ 697	D	L	9	0	9	  1	 98	L	L	i
+ 698	P	L	9	0	9	  1	 98	L	L	i
+ 699	T	L	9	0	9	  1	 98	L	L	i
+ 700	S	L	9	0	9	  1	 98	L	L	i
+ 701	R	L	9	0	9	  1	 98	L	L	i
+ 702	Q	L	9	0	9	  1	 98	L	L	i
+ 703	R	L	9	0	9	  1	 98	L	L	i
+ 704	A	L	9	0	9	  1	 98	L	L	i
+ 705	M	L	9	0	9	  1	 98	L	L	i
+ 706	S	L	9	0	9	  1	 98	L	L	i
+ 707	I	L	9	0	9	  1	 98	L	L	i
+ 708	A	L	9	0	9	  1	 98	L	L	i
+ 709	S	L	9	0	9	  1	 98	L	L	i
+ 710	I	L	9	0	9	  1	 98	L	L	i
+ 711	L	L	9	0	9	  1	 98	L	L	i
+ 712	T	L	9	0	9	  1	 98	L	L	i
+ 713	N	L	9	0	9	  1	 98	L	L	i
+ 714	T	L	9	0	9	  1	 98	L	L	i
+ 715	M	L	9	0	9	  1	 98	L	L	i
+ 716	E	L	9	0	9	  1	 98	L	L	i
+ 717	E	L	9	0	9	  1	 98	L	L	i
+ 718	L	L	9	0	9	  1	 98	L	L	i
+ 719	E	L	9	0	9	  1	 98	L	L	i
+ 720	E	L	9	0	9	  1	 98	L	L	i
+ 721	S	L	9	0	9	  1	 98	L	L	i
+ 722	R	L	9	0	9	  1	 98	L	L	i
+ 723	Q	L	9	0	9	  1	 98	L	L	i
+ 724	K	L	9	0	9	  1	 98	L	L	i
+ 725	C	L	9	0	9	  1	 98	L	L	i
+ 726	P	L	9	0	9	  1	 98	L	L	i
+ 727	P	L	9	0	9	  1	 98	L	L	i
+ 728	C	L	9	0	9	  1	 98	L	L	i
+ 729	W	L	9	0	9	  1	 98	L	L	i
+ 730	Y	L	9	0	9	  1	 98	L	L	i
+ 731	K	L	9	0	9	  1	 98	L	L	i
+ 732	F	L	9	0	9	  2	 97	L	L	i
+ 733	A	L	9	0	9	  2	 97	L	L	i
+ 734	N	L	9	0	9	  3	 96	L	L	i
+ 735	M	L	8	0	9	  5	 94	L	L	i
+ 736	C	L	8	0	9	  8	 91	L	L	i
+ 737	L	L	7	1	8	 14	 85	L	L	i
+ 738	I	L	6	1	8	 17	 82	L	L	i
+ 739	W	L	7	1	8	 12	 87	L	L	i
+ 740	D	L	8	0	9	  7	 92	L	L	i
+ 741	C	L	8	0	9	  9	 90	L	L	i
+ 742	C	L	7	1	8	 14	 85	L	L	i
+ 743	K	L	7	1	8	 12	 87	L	L	i
+ 744	P	L	7	1	8	 13	 86	L	L	i
+ 745	W	L	5	2	7	 24	 75	L	L	i
+ 746	L	L	3	3	6	 32	 67	L	L	i
+ 747	K	L	3	3	6	 32	 67	L	L	i
+ 748	V	L	4	2	7	 28	 71	L	L	i
+ 749	K	L	7	1	8	 14	 85	L	L	i
+ 750	H	L	7	1	8	 12	 87	L	L	i
+ 751	L	L	5	2	7	 22	 77	L	L	i
+ 752	V	L	6	1	8	 19	 79	L	L	i
+ 753	N	L	5	2	7	 21	 78	L	L	i
+ 754	L	L	5	2	7	 24	 75	L	L	i
+ 755	V	L	3	3	6	 34	 65	L	L	i
+ 756	V	L	3	3	6	 30	 69	L	L	i
+ 757	M	L	3	3	6	 31	 68	L	L	i
+ 758	D	L	2	3	6	 36	 63	L	L	i
+ 759	P	L	0	4	5	 50	 50	H	H	T
+ 760	F	H	3	6	3	 65	 34	H	H	T
+ 761	V	H	4	7	2	 73	 26	H	H	T
+ 762	D	H	5	7	2	 78	 21	H	H	T
+ 763	L	H	6	8	1	 80	 19	H	H	T
+ 764	A	H	7	8	1	 86	 13	H	H	T
+ 765	I	H	7	8	1	 89	 10	H	H	T
+ 766	T	H	8	9	0	 90	  9	H	H	T
+ 767	I	H	8	9	0	 91	  8	H	H	T
+ 768	C	H	8	9	0	 91	  8	H	H	T
+ 769	I	H	8	9	0	 91	  8	H	H	T
+ 770	V	H	8	9	0	 90	  8	H	H	T
+ 771	L	H	7	8	1	 89	 10	H	H	T
+ 772	N	H	7	8	1	 86	 13	H	H	T
+ 773	T	H	6	8	1	 84	 15	H	H	T
+ 774	L	H	6	8	1	 81	 18	H	H	T
+ 775	F	H	4	7	2	 71	 28	H	H	T
+ 776	M	H	1	5	4	 56	 43	H	H	T
+ 777	A	L	2	3	6	 37	 61	L	L	o
+ 778	M	L	5	2	7	 20	 79	L	L	o
+ 779	E	L	7	1	8	 13	 86	L	L	o
+ 780	H	L	8	0	9	  9	 90	L	L	o
+ 781	Y	L	8	0	9	  6	 93	L	L	o
+ 782	P	L	9	0	9	  4	 95	L	L	o
+ 783	M	L	9	0	9	  3	 96	L	L	o
+ 784	T	L	9	0	9	  2	 97	L	L	o
+ 785	E	L	9	0	9	  1	 98	L	L	o
+ 786	Q	L	9	0	9	  1	 98	L	L	o
+ 787	F	L	9	0	9	  1	 98	L	L	o
+ 788	S	L	9	0	9	  1	 98	L	L	o
+ 789	S	L	9	0	9	  1	 98	L	L	o
+ 790	V	L	9	0	9	  2	 97	L	L	o
+ 791	L	L	9	0	9	  3	 96	L	L	o
+ 792	S	L	9	0	9	  4	 95	L	L	o
+ 793	V	L	8	0	9	  6	 93	L	L	o
+ 794	G	L	7	1	8	 11	 88	L	L	o
+ 795	N	L	7	1	8	 13	 86	L	L	o
+ 796	L	L	4	2	7	 27	 72	H	H	T
+ 797	V	L	0	4	5	 47	 52	H	H	T
+ 798	F	H	2	6	3	 60	 39	H	H	T
+ 799	T	H	3	6	3	 66	 33	H	H	T
+ 800	G	H	5	7	2	 75	 24	H	H	T
+ 801	I	H	6	8	1	 83	 16	H	H	T
+ 802	F	H	7	8	1	 86	 13	H	H	T
+ 803	T	H	7	8	1	 86	 13	H	H	T
+ 804	A	H	6	8	1	 84	 15	H	H	T
+ 805	E	H	6	8	1	 82	 17	H	H	T
+ 806	M	H	6	8	1	 82	 17	H	H	T
+ 807	F	H	5	7	2	 78	 21	H	H	T
+ 808	L	H	3	6	3	 69	 30	H	H	T
+ 809	K	H	1	5	4	 59	 40	H	H	T
+ 810	I	H	2	6	3	 61	 38	H	H	T
+ 811	I	H	2	6	3	 61	 38	H	H	T
+ 812	A	H	0	5	4	 50	 49	H	H	T
+ 813	M	L	3	3	6	 30	 69	H	H	T
+ 814	D	L	7	1	8	 14	 84	L	L	i
+ 815	P	L	7	1	8	 12	 86	L	L	i
+ 816	Y	L	7	1	8	 13	 86	L	L	i
+ 817	Y	L	7	1	8	 12	 87	L	L	i
+ 818	Y	L	7	1	8	 12	 87	L	L	i
+ 819	F	L	7	1	8	 13	 86	L	L	i
+ 820	Q	L	6	1	8	 16	 83	L	L	i
+ 821	E	L	7	1	8	 14	 85	L	L	i
+ 822	G	L	7	1	8	 11	 88	L	L	i
+ 823	W	L	7	1	8	 10	 89	L	L	i
+ 824	N	L	7	1	8	 12	 87	L	L	i
+ 825	I	L	5	2	7	 22	 77	H	H	T
+ 826	F	L	3	3	6	 32	 67	H	H	T
+ 827	D	L	3	3	6	 34	 65	H	H	T
+ 828	G	H	0	5	4	 50	 49	H	H	T
+ 829	F	H	3	6	3	 67	 32	H	H	T
+ 830	I	H	4	7	2	 73	 27	H	H	T
+ 831	V	H	4	7	2	 72	 27	H	H	T
+ 832	S	H	3	6	3	 69	 30	H	H	T
+ 833	L	H	4	7	2	 73	 26	H	H	T
+ 834	S	H	5	7	2	 77	 22	H	H	T
+ 835	L	H	5	7	2	 77	 22	H	H	T
+ 836	M	H	3	6	3	 68	 31	H	H	T
+ 837	E	H	0	5	4	 54	 45	H	H	T
+ 838	L	H	1	5	4	 56	 43	H	H	T
+ 839	G	H	0	5	4	 52	 47	H	H	T
+ 840	L	L	1	4	5	 40	 59	H	H	T
+ 841	A	L	4	2	7	 27	 72	H	H	T
+ 842	N	L	5	2	7	 21	 77	H	H	T
+ 843	V	L	6	1	8	 18	 81	L	L	o
+ 844	E	L	6	1	8	 16	 83	L	L	o
+ 845	G	L	7	1	8	 14	 84	L	L	o
+ 846	L	L	7	1	8	 10	 89	L	L	o
+ 847	S	L	8	0	9	  9	 90	L	L	o
+ 848	V	L	7	1	8	 13	 87	L	L	o
+ 849	L	L	8	0	9	  9	 90	L	L	o
+ 850	R	L	8	0	9	  7	 92	L	L	o
+ 851	S	L	8	0	9	  9	 90	L	L	o
+ 852	F	L	8	0	9	  8	 91	L	L	o
+ 853	R	L	8	0	9	  6	 93	L	L	o
+ 854	L	L	8	0	9	  5	 94	L	L	o
+ 855	L	L	9	0	9	  4	 95	L	L	o
+ 856	R	L	9	0	9	  3	 96	L	L	o
+ 857	V	L	9	0	9	  4	 95	L	L	o
+ 858	F	L	9	0	9	  3	 96	L	L	o
+ 859	K	L	9	0	9	  2	 97	L	L	o
+ 860	L	L	9	0	9	  3	 96	L	L	o
+ 861	A	L	8	0	9	  5	 94	L	L	o
+ 862	K	L	9	0	9	  4	 95	L	L	o
+ 863	S	L	9	0	9	  4	 95	L	L	o
+ 864	W	L	8	0	9	  5	 94	L	L	o
+ 865	P	L	9	0	9	  4	 95	L	L	o
+ 866	T	L	9	0	9	  4	 95	L	L	o
+ 867	L	L	8	0	9	  6	 93	L	L	o
+ 868	N	L	8	0	9	  9	 90	L	L	o
+ 869	M	L	6	1	8	 17	 82	L	L	o
+ 870	L	L	3	3	6	 34	 65	L	L	o
+ 871	I	L	0	4	5	 45	 54	L	L	o
+ 872	K	L	0	4	5	 45	 54	L	L	o
+ 873	I	H	0	5	4	 53	 46	L	L	o
+ 874	I	H	1	5	4	 55	 44	L	L	o
+ 875	G	L	0	4	5	 46	 53	L	L	o
+ 876	N	L	0	4	5	 49	 51	L	L	o
+ 877	S	H	1	5	4	 56	 43	L	L	o
+ 878	V	H	3	6	3	 65	 34	L	L	o
+ 879	G	H	4	7	2	 71	 28	L	L	o
+ 880	A	H	5	7	2	 76	 23	L	L	o
+ 881	L	H	6	8	1	 81	 18	H	H	T
+ 882	G	H	6	8	1	 85	 15	H	H	T
+ 883	N	H	7	8	1	 87	 12	H	H	T
+ 884	L	H	8	9	0	 90	  9	H	H	T
+ 885	T	H	8	9	0	 91	  8	H	H	T
+ 886	L	H	8	9	0	 91	  8	H	H	T
+ 887	V	H	8	9	0	 91	  8	H	H	T
+ 888	L	H	8	9	0	 91	  8	H	H	T
+ 889	A	H	8	9	0	 91	  8	H	H	T
+ 890	I	H	8	9	0	 91	  8	H	H	T
+ 891	I	H	8	9	0	 91	  8	H	H	T
+ 892	V	H	8	9	0	 91	  8	H	H	T
+ 893	F	H	8	9	0	 91	  8	H	H	T
+ 894	I	H	8	9	0	 92	  7	H	H	T
+ 895	F	H	8	9	0	 92	  7	H	H	T
+ 896	A	H	8	9	0	 91	  8	H	H	T
+ 897	V	H	8	9	0	 90	  9	H	H	T
+ 898	V	H	7	8	1	 88	 10	H	H	T
+ 899	G	H	6	8	1	 84	 15	H	H	T
+ 900	M	H	5	7	2	 77	 22	L	L	i
+ 901	Q	H	2	6	3	 64	 35	L	L	i
+ 902	L	H	0	5	4	 50	 49	L	L	i
+ 903	F	L	2	3	6	 37	 62	L	L	i
+ 904	G	L	5	2	7	 21	 77	L	L	i
+ 905	K	L	7	1	8	 12	 87	L	L	i
+ 906	S	L	8	0	9	  8	 91	L	L	i
+ 907	Y	L	8	0	9	  5	 94	L	L	i
+ 908	K	L	9	0	9	  3	 96	L	L	i
+ 909	E	L	9	0	9	  2	 97	L	L	i
+ 910	C	L	9	0	9	  1	 98	L	L	i
+ 911	V	L	9	0	9	  1	 98	L	L	i
+ 912	C	L	9	0	9	  1	 98	L	L	i
+ 913	K	L	9	0	9	  1	 98	L	L	i
+ 914	I	L	9	0	9	  1	 98	L	L	i
+ 915	S	L	9	0	9	  1	 98	L	L	i
+ 916	N	L	9	0	9	  1	 98	L	L	i
+ 917	D	L	9	0	9	  1	 98	L	L	i
+ 918	C	L	9	0	9	  1	 98	L	L	i
+ 919	E	L	9	0	9	  1	 98	L	L	i
+ 920	L	L	9	0	9	  1	 98	L	L	i
+ 921	P	L	9	0	9	  1	 98	L	L	i
+ 922	R	L	9	0	9	  1	 98	L	L	i
+ 923	W	L	9	0	9	  1	 98	L	L	i
+ 924	H	L	9	0	9	  2	 97	L	L	i
+ 925	M	L	9	0	9	  3	 96	L	L	i
+ 926	H	L	9	0	9	  4	 95	L	L	i
+ 927	D	L	8	0	9	  6	 93	L	L	i
+ 928	F	L	7	1	8	 13	 86	L	L	i
+ 929	F	L	5	2	7	 23	 76	L	L	i
+ 930	H	L	2	3	6	 35	 64	L	L	i
+ 931	S	L	1	4	5	 40	 59	L	L	i
+ 932	F	L	1	4	5	 42	 57	L	L	i
+ 933	L	L	0	4	5	 45	 54	L	L	i
+ 934	I	L	0	4	5	 49	 50	L	L	i
+ 935	V	L	0	4	5	 49	 50	L	L	i
+ 936	F	L	0	4	5	 49	 50	L	L	i
+ 937	R	H	0	5	4	 50	 49	L	L	i
+ 938	V	H	0	5	4	 52	 47	L	L	i
+ 939	L	L	1	4	5	 40	 59	L	L	i
+ 940	C	L	4	2	7	 25	 73	L	L	i
+ 941	G	L	6	1	8	 16	 82	L	L	i
+ 942	E	L	7	1	8	 10	 89	L	L	i
+ 943	W	L	8	0	9	  9	 90	L	L	i
+ 944	I	L	8	0	9	  8	 91	L	L	i
+ 945	E	L	9	0	9	  4	 95	L	L	i
+ 946	T	L	9	0	9	  4	 95	L	L	i
+ 947	M	L	8	0	9	  5	 94	L	L	i
+ 948	W	L	8	0	9	  5	 94	L	L	i
+ 949	D	L	9	0	9	  4	 95	L	L	i
+ 950	C	L	9	0	9	  4	 95	L	L	i
+ 951	M	L	9	0	9	  4	 95	L	L	i
+ 952	E	L	8	0	9	  5	 94	L	L	i
+ 953	V	L	8	0	9	  8	 91	L	L	i
+ 954	A	L	7	1	8	 10	 89	L	L	i
+ 955	G	L	6	1	8	 15	 84	L	L	i
+ 956	Q	L	2	3	6	 37	 62	L	L	i
+ 957	T	H	1	5	4	 58	 41	L	L	i
+ 958	M	H	4	7	2	 71	 28	L	L	i
+ 959	C	H	5	7	2	 76	 23	L	L	i
+ 960	L	H	6	8	1	 84	 15	L	L	i
+ 961	T	H	7	8	1	 88	 11	L	L	i
+ 962	V	H	8	9	0	 91	  8	H	H	T
+ 963	F	H	8	9	0	 92	  7	H	H	T
+ 964	M	H	8	9	0	 92	  7	H	H	T
+ 965	M	H	8	9	0	 92	  7	H	H	T
+ 966	V	H	8	9	0	 91	  8	H	H	T
+ 967	M	H	8	9	0	 91	  8	H	H	T
+ 968	V	H	8	9	0	 91	  8	H	H	T
+ 969	I	H	8	9	0	 91	  8	H	H	T
+ 970	G	H	8	9	0	 91	  8	H	H	T
+ 971	N	H	8	9	0	 91	  8	H	H	T
+ 972	L	H	8	9	0	 91	  8	H	H	T
+ 973	V	H	8	9	0	 91	  8	H	H	T
+ 974	V	H	8	9	0	 91	  8	H	H	T
+ 975	L	H	8	9	0	 91	  8	H	H	T
+ 976	N	H	8	9	0	 91	  8	H	H	T
+ 977	L	H	8	9	0	 91	  8	H	H	T
+ 978	F	H	8	9	0	 91	  8	H	H	T
+ 979	L	H	8	9	0	 90	  9	H	H	T
+ 980	A	H	7	8	1	 87	 11	L	L	o
+ 981	L	H	6	8	1	 84	 15	L	L	o
+ 982	L	H	5	7	2	 78	 21	L	L	o
+ 983	L	H	3	6	3	 66	 33	L	L	o
+ 984	S	L	0	4	5	 49	 50	L	L	o
+ 985	S	L	3	3	6	 33	 66	L	L	o
+ 986	F	L	5	2	7	 22	 77	L	L	o
+ 987	S	L	7	1	8	 14	 85	L	L	o
+ 988	S	L	8	0	9	  9	 90	L	L	o
+ 989	D	L	8	0	9	  5	 94	L	L	o
+ 990	N	L	9	0	9	  3	 96	L	L	o
+ 991	L	L	9	0	9	  2	 97	L	L	o
+ 992	A	L	9	0	9	  1	 98	L	L	o
+ 993	A	L	9	0	9	  1	 98	L	L	o
+ 994	T	L	9	0	9	  1	 98	L	L	o
+ 995	D	L	9	0	9	  1	 98	L	L	o
+ 996	D	L	9	0	9	  1	 98	L	L	o
+ 997	D	L	9	0	9	  1	 98	L	L	o
+ 998	N	L	9	0	9	  1	 98	L	L	o
+ 999	E	L	9	0	9	  1	 98	L	L	o
+1000	M	L	9	0	9	  1	 98	L	L	o
+1001	N	L	9	0	9	  1	 98	L	L	o
+1002	N	L	9	0	9	  1	 98	L	L	o
+1003	L	L	9	0	9	  1	 98	L	L	o
+1004	Q	L	9	0	9	  1	 98	L	L	o
+1005	I	L	9	0	9	  1	 98	L	L	o
+1006	A	L	9	0	9	  1	 98	L	L	o
+1007	V	L	9	0	9	  1	 98	L	L	o
+1008	G	L	9	0	9	  1	 98	L	L	o
+1009	R	L	9	0	9	  1	 98	L	L	o
+1010	M	L	9	0	9	  1	 98	L	L	o
+1011	Q	L	9	0	9	  1	 98	L	L	o
+1012	K	L	9	0	9	  1	 98	L	L	o
+1013	G	L	9	0	9	  1	 98	L	L	o
+1014	I	L	9	0	9	  1	 98	L	L	o
+1015	D	L	9	0	9	  2	 97	L	L	o
+1016	F	L	9	0	9	  1	 98	L	L	o
+1017	V	L	9	0	9	  1	 98	L	L	o
+1018	K	L	9	0	9	  1	 98	L	L	o
+1019	R	L	9	0	9	  1	 98	L	L	o
+1020	K	L	9	0	9	  1	 98	L	L	o
+1021	I	L	9	0	9	  1	 98	L	L	o
+1022	R	L	9	0	9	  1	 98	L	L	o
+1023	E	L	9	0	9	  1	 98	L	L	o
+1024	F	L	9	0	9	  1	 98	L	L	o
+1025	I	L	9	0	9	  1	 98	L	L	o
+1026	Q	L	9	0	9	  1	 98	L	L	o
+1027	K	L	9	0	9	  1	 98	L	L	o
+1028	A	L	9	0	9	  1	 98	L	L	o
+1029	F	L	9	0	9	  1	 98	L	L	o
+1030	V	L	9	0	9	  1	 98	L	L	o
+1031	R	L	9	0	9	  1	 98	L	L	o
+1032	K	L	9	0	9	  1	 98	L	L	o
+1033	Q	L	9	0	9	  1	 98	L	L	o
+1034	K	L	9	0	9	  1	 98	L	L	o
+1035	A	L	9	0	9	  1	 98	L	L	o
+1036	L	L	9	0	9	  1	 98	L	L	o
+1037	D	L	9	0	9	  1	 98	L	L	o
+1038	E	L	9	0	9	  1	 98	L	L	o
+1039	I	L	9	0	9	  1	 98	L	L	o
+1040	K	L	9	0	9	  1	 98	L	L	o
+1041	P	L	9	0	9	  1	 98	L	L	o
+1042	L	L	9	0	9	  1	 98	L	L	o
+1043	E	L	9	0	9	  1	 98	L	L	o
+1044	D	L	9	0	9	  1	 98	L	L	o
+1045	L	L	9	0	9	  1	 98	L	L	o
+1046	N	L	9	0	9	  1	 98	L	L	o
+1047	N	L	9	0	9	  1	 98	L	L	o
+1048	K	L	9	0	9	  1	 98	L	L	o
+1049	K	L	9	0	9	  1	 98	L	L	o
+1050	D	L	9	0	9	  1	 98	L	L	o
+1051	S	L	9	0	9	  1	 98	L	L	o
+1052	C	L	9	0	9	  1	 98	L	L	o
+1053	I	L	9	0	9	  1	 98	L	L	o
+1054	S	L	9	0	9	  1	 98	L	L	o
+1055	N	L	9	0	9	  1	 98	L	L	o
+1056	H	L	9	0	9	  1	 98	L	L	o
+1057	T	L	9	0	9	  1	 98	L	L	o
+1058	T	L	9	0	9	  1	 98	L	L	o
+1059	I	L	9	0	9	  1	 98	L	L	o
+1060	E	L	9	0	9	  1	 98	L	L	o
+1061	I	L	9	0	9	  1	 98	L	L	o
+1062	G	L	9	0	9	  1	 98	L	L	o
+1063	K	L	9	0	9	  1	 98	L	L	o
+1064	D	L	9	0	9	  1	 98	L	L	o
+1065	L	L	9	0	9	  1	 98	L	L	o
+1066	N	L	9	0	9	  1	 98	L	L	o
+1067	Y	L	9	0	9	  1	 98	L	L	o
+1068	L	L	9	0	9	  1	 98	L	L	o
+1069	K	L	9	0	9	  1	 98	L	L	o
+1070	D	L	9	0	9	  1	 98	L	L	o
+1071	G	L	9	0	9	  1	 98	L	L	o
+1072	N	L	9	0	9	  1	 98	L	L	o
+1073	G	L	9	0	9	  1	 98	L	L	o
+1074	T	L	9	0	9	  1	 98	L	L	o
+1075	T	L	9	0	9	  1	 98	L	L	o
+1076	S	L	9	0	9	  1	 98	L	L	o
+1077	G	L	9	0	9	  1	 98	L	L	o
+1078	I	L	9	0	9	  1	 98	L	L	o
+1079	G	L	9	0	9	  1	 98	L	L	o
+1080	S	L	9	0	9	  1	 98	L	L	o
+1081	S	L	9	0	9	  1	 98	L	L	o
+1082	V	L	9	0	9	  1	 98	L	L	o
+1083	E	L	9	0	9	  1	 98	L	L	o
+1084	K	L	9	0	9	  1	 98	L	L	o
+1085	Y	L	9	0	9	  1	 98	L	L	o
+1086	V	L	9	0	9	  1	 98	L	L	o
+1087	V	L	9	0	9	  1	 98	L	L	o
+1088	D	L	9	0	9	  1	 98	L	L	o
+1089	E	L	9	0	9	  1	 98	L	L	o
+1090	S	L	9	0	9	  1	 98	L	L	o
+1091	D	L	9	0	9	  1	 98	L	L	o
+1092	Y	L	9	0	9	  1	 98	L	L	o
+1093	M	L	9	0	9	  1	 98	L	L	o
+1094	S	L	9	0	9	  1	 98	L	L	o
+1095	F	L	9	0	9	  1	 98	L	L	o
+1096	I	L	9	0	9	  1	 98	L	L	o
+1097	N	L	9	0	9	  1	 98	L	L	o
+1098	N	L	9	0	9	  1	 98	L	L	o
+1099	P	L	9	0	9	  1	 98	L	L	o
+1100	S	L	9	0	9	  1	 98	L	L	o
+1101	L	L	9	0	9	  1	 98	L	L	o
+1102	T	L	9	0	9	  1	 98	L	L	o
+1103	V	L	9	0	9	  1	 98	L	L	o
+1104	T	L	9	0	9	  1	 98	L	L	o
+1105	V	L	9	0	9	  1	 98	L	L	o
+1106	P	L	9	0	9	  1	 98	L	L	o
+1107	I	L	9	0	9	  1	 98	L	L	o
+1108	A	L	9	0	9	  1	 98	L	L	o
+1109	V	L	9	0	9	  1	 98	L	L	o
+1110	G	L	9	0	9	  1	 98	L	L	o
+1111	E	L	9	0	9	  1	 98	L	L	o
+1112	S	L	9	0	9	  1	 98	L	L	o
+1113	D	L	9	0	9	  1	 98	L	L	o
+1114	F	L	9	0	9	  1	 98	L	L	o
+1115	E	L	9	0	9	  1	 98	L	L	o
+1116	N	L	9	0	9	  1	 98	L	L	o
+1117	L	L	9	0	9	  1	 98	L	L	o
+1118	N	L	9	0	9	  1	 98	L	L	o
+1119	T	L	9	0	9	  1	 98	L	L	o
+1120	E	L	9	0	9	  1	 98	L	L	o
+1121	E	L	9	0	9	  1	 98	L	L	o
+1122	F	L	9	0	9	  1	 98	L	L	o
+1123	S	L	9	0	9	  1	 98	L	L	o
+1124	S	L	9	0	9	  1	 98	L	L	o
+1125	E	L	9	0	9	  1	 98	L	L	o
+1126	S	L	9	0	9	  1	 98	L	L	o
+1127	D	L	9	0	9	  1	 98	L	L	o
+1128	M	L	9	0	9	  1	 98	L	L	o
+1129	E	L	9	0	9	  1	 98	L	L	o
+1130	E	L	9	0	9	  1	 98	L	L	o
+1131	S	L	9	0	9	  1	 98	L	L	o
+1132	K	L	9	0	9	  1	 98	L	L	o
+1133	E	L	9	0	9	  1	 98	L	L	o
+1134	K	L	9	0	9	  1	 98	L	L	o
+1135	L	L	9	0	9	  1	 98	L	L	o
+1136	N	L	9	0	9	  1	 98	L	L	o
+1137	A	L	9	0	9	  1	 98	L	L	o
+1138	T	L	9	0	9	  1	 98	L	L	o
+1139	S	L	9	0	9	  1	 98	L	L	o
+1140	S	L	9	0	9	  1	 98	L	L	o
+1141	S	L	9	0	9	  1	 98	L	L	o
+1142	E	L	9	0	9	  1	 98	L	L	o
+1143	G	L	9	0	9	  1	 98	L	L	o
+1144	S	L	9	0	9	  1	 98	L	L	o
+1145	T	L	9	0	9	  1	 98	L	L	o
+1146	V	L	9	0	9	  1	 98	L	L	o
+1147	D	L	9	0	9	  1	 98	L	L	o
+1148	I	L	9	0	9	  1	 98	L	L	o
+1149	G	L	9	0	9	  1	 98	L	L	o
+1150	A	L	9	0	9	  1	 98	L	L	o
+1151	P	L	9	0	9	  1	 98	L	L	o
+1152	A	L	9	0	9	  1	 98	L	L	o
+1153	E	L	9	0	9	  1	 98	L	L	o
+1154	G	L	9	0	9	  1	 98	L	L	o
+1155	E	L	9	0	9	  1	 98	L	L	o
+1156	Q	L	9	0	9	  1	 98	L	L	o
+1157	P	L	9	0	9	  1	 98	L	L	o
+1158	E	L	9	0	9	  1	 98	L	L	o
+1159	V	L	9	0	9	  1	 98	L	L	o
+1160	E	L	9	0	9	  1	 98	L	L	o
+1161	P	L	9	0	9	  1	 98	L	L	o
+1162	E	L	9	0	9	  1	 98	L	L	o
+1163	E	L	9	0	9	  1	 98	L	L	o
+1164	S	L	9	0	9	  1	 98	L	L	o
+1165	L	L	9	0	9	  1	 98	L	L	o
+1166	E	L	9	0	9	  1	 98	L	L	o
+1167	P	L	9	0	9	  1	 98	L	L	o
+1168	E	L	9	0	9	  1	 98	L	L	o
+1169	A	L	9	0	9	  1	 98	L	L	o
+1170	C	L	9	0	9	  1	 98	L	L	o
+1171	F	L	9	0	9	  1	 98	L	L	o
+1172	T	L	9	0	9	  1	 98	L	L	o
+1173	E	L	9	0	9	  1	 98	L	L	o
+1174	D	L	9	0	9	  1	 98	L	L	o
+1175	C	L	9	0	9	  1	 98	L	L	o
+1176	V	L	9	0	9	  1	 98	L	L	o
+1177	R	L	9	0	9	  1	 98	L	L	o
+1178	K	L	9	0	9	  1	 98	L	L	o
+1179	F	L	9	0	9	  1	 98	L	L	o
+1180	K	L	9	0	9	  1	 98	L	L	o
+1181	C	L	9	0	9	  1	 98	L	L	o
+1182	C	L	9	0	9	  1	 98	L	L	o
+1183	Q	L	9	0	9	  1	 98	L	L	o
+1184	I	L	9	0	9	  1	 98	L	L	o
+1185	S	L	9	0	9	  1	 98	L	L	o
+1186	I	L	9	0	9	  1	 98	L	L	o
+1187	E	L	9	0	9	  1	 98	L	L	o
+1188	E	L	9	0	9	  1	 98	L	L	o
+1189	G	L	9	0	9	  1	 98	L	L	o
+1190	K	L	9	0	9	  1	 98	L	L	o
+1191	G	L	9	0	9	  1	 98	L	L	o
+1192	K	L	9	0	9	  1	 98	L	L	o
+1193	L	L	9	0	9	  1	 98	L	L	o
+1194	W	L	9	0	9	  1	 98	L	L	o
+1195	W	L	9	0	9	  1	 98	L	L	o
+1196	N	L	9	0	9	  1	 98	L	L	o
+1197	L	L	9	0	9	  1	 98	L	L	o
+1198	R	L	9	0	9	  1	 98	L	L	o
+1199	K	L	9	0	9	  1	 98	L	L	o
+1200	T	L	9	0	9	  1	 98	L	L	o
+1201	C	L	9	0	9	  1	 98	L	L	o
+1202	Y	L	9	0	9	  1	 98	L	L	o
+1203	K	L	9	0	9	  2	 97	L	L	o
+1204	I	L	8	0	9	  5	 94	L	L	o
+1205	V	L	8	0	9	  6	 93	L	L	o
+1206	E	L	8	0	9	  7	 92	L	L	o
+1207	H	L	7	1	8	 10	 89	L	L	o
+1208	N	L	6	1	8	 18	 81	L	L	o
+1209	W	L	1	4	5	 43	 56	H	H	T
+1210	F	H	2	6	3	 63	 36	H	H	T
+1211	E	H	4	7	2	 73	 26	H	H	T
+1212	T	H	5	7	2	 79	 20	H	H	T
+1213	F	H	7	8	1	 85	 14	H	H	T
+1214	I	H	7	8	1	 88	 11	H	H	T
+1215	V	H	7	8	1	 89	 10	H	H	T
+1216	F	H	8	9	0	 90	  9	H	H	T
+1217	M	H	8	9	0	 90	  9	H	H	T
+1218	I	H	8	9	0	 91	  8	H	H	T
+1219	L	H	8	9	0	 90	  9	H	H	T
+1220	L	H	7	8	1	 89	 10	H	H	T
+1221	S	H	7	8	1	 87	 12	H	H	T
+1222	S	H	6	8	1	 84	 15	H	H	T
+1223	G	H	5	7	2	 78	 21	H	H	T
+1224	A	H	3	6	3	 65	 34	H	H	T
+1225	L	L	0	4	5	 48	 51	H	H	T
+1226	A	L	3	3	6	 31	 68	H	H	T
+1227	F	L	5	2	7	 20	 79	L	L	i
+1228	E	L	7	1	8	 14	 85	L	L	i
+1229	D	L	8	0	9	  9	 90	L	L	i
+1230	I	L	8	0	9	  6	 93	L	L	i
+1231	Y	L	9	0	9	  4	 95	L	L	i
+1232	I	L	9	0	9	  3	 96	L	L	i
+1233	E	L	9	0	9	  1	 98	L	L	i
+1234	Q	L	9	0	9	  1	 98	L	L	i
+1235	R	L	9	0	9	  1	 98	L	L	i
+1236	K	L	9	0	9	  1	 98	L	L	i
+1237	T	L	9	0	9	  1	 98	L	L	i
+1238	I	L	9	0	9	  1	 98	L	L	i
+1239	K	L	9	0	9	  1	 98	L	L	i
+1240	T	L	9	0	9	  2	 97	L	L	i
+1241	M	L	9	0	9	  2	 97	L	L	i
+1242	L	L	9	0	9	  4	 95	L	L	i
+1243	E	L	8	0	9	  5	 94	L	L	i
+1244	Y	L	7	1	8	 11	 88	L	L	i
+1245	A	L	6	1	8	 19	 80	L	L	i
+1246	D	L	5	2	7	 22	 77	L	L	i
+1247	K	L	3	3	6	 34	 65	H	H	T
+1248	V	H	0	5	4	 54	 45	H	H	T
+1249	F	H	3	6	3	 69	 30	H	H	T
+1250	T	H	5	7	2	 77	 22	H	H	T
+1251	Y	H	6	8	1	 83	 16	H	H	T
+1252	I	H	7	8	1	 87	 12	H	H	T
+1253	F	H	7	8	1	 89	 10	H	H	T
+1254	I	H	8	9	0	 90	  9	H	H	T
+1255	L	H	7	8	1	 89	 10	H	H	T
+1256	E	H	7	8	1	 89	 10	H	H	T
+1257	M	H	8	9	0	 90	  9	H	H	T
+1258	L	H	7	8	1	 88	 11	H	H	T
+1259	L	H	7	8	1	 85	 14	H	H	T
+1260	K	H	6	8	1	 80	 19	H	H	T
+1261	W	H	5	7	2	 76	 23	H	H	T
+1262	V	H	3	6	3	 69	 30	H	H	T
+1263	A	H	1	5	4	 56	 43	H	H	T
+1264	Y	L	1	4	5	 41	 58	H	H	T
+1265	G	L	4	2	7	 29	 70	L	L	o
+1266	F	L	4	2	7	 27	 72	L	L	o
+1267	Q	L	4	2	7	 25	 74	L	L	o
+1268	V	L	4	2	7	 25	 73	L	L	o
+1269	Y	L	3	3	6	 31	 68	L	L	o
+1270	F	L	1	4	5	 42	 57	L	L	o
+1271	T	H	0	5	4	 52	 47	L	L	o
+1272	N	H	1	5	4	 56	 43	L	L	o
+1273	A	H	1	5	4	 59	 40	L	L	o
+1274	W	H	3	6	3	 67	 32	H	H	T
+1275	C	H	5	7	2	 76	 23	H	H	T
+1276	W	H	6	8	1	 81	 18	H	H	T
+1277	L	H	6	8	1	 83	 16	H	H	T
+1278	D	H	6	8	1	 84	 15	H	H	T
+1279	F	H	7	8	1	 85	 14	H	H	T
+1280	L	H	7	8	1	 88	 11	H	H	T
+1281	I	H	8	9	0	 90	  9	H	H	T
+1282	V	H	8	9	0	 90	  9	H	H	T
+1283	D	H	8	9	0	 91	  8	H	H	T
+1284	V	H	8	9	0	 91	  8	H	H	T
+1285	S	H	8	9	0	 91	  8	H	H	T
+1286	L	H	8	9	0	 90	  9	H	H	T
+1287	V	H	7	8	1	 88	 11	H	H	T
+1288	S	H	7	8	1	 85	 14	H	H	T
+1289	L	H	6	8	1	 82	 17	H	H	T
+1290	T	H	4	7	2	 73	 25	H	H	T
+1291	A	H	2	6	3	 62	 37	H	H	T
+1292	N	L	0	4	5	 47	 52	L	L	i
+1293	A	L	2	3	6	 35	 64	L	L	i
+1294	L	L	3	3	6	 30	 68	L	L	i
+1295	G	L	5	2	7	 23	 76	L	L	i
+1296	Y	L	7	1	8	 14	 85	L	L	i
+1297	S	L	8	0	9	  7	 92	L	L	i
+1298	E	L	8	0	9	  5	 94	L	L	i
+1299	L	L	9	0	9	  3	 96	L	L	i
+1300	G	L	9	0	9	  2	 97	L	L	i
+1301	A	L	9	0	9	  2	 97	L	L	i
+1302	I	L	9	0	9	  1	 98	L	L	i
+1303	K	L	9	0	9	  1	 98	L	L	i
+1304	S	L	9	0	9	  1	 98	L	L	i
+1305	L	L	9	0	9	  1	 98	L	L	i
+1306	R	L	9	0	9	  1	 98	L	L	i
+1307	T	L	9	0	9	  1	 98	L	L	i
+1308	L	L	9	0	9	  1	 98	L	L	i
+1309	R	L	9	0	9	  1	 98	L	L	i
+1310	A	L	9	0	9	  1	 98	L	L	i
+1311	L	L	9	0	9	  1	 98	L	L	i
+1312	R	L	9	0	9	  1	 98	L	L	i
+1313	P	L	9	0	9	  1	 98	L	L	i
+1314	L	L	9	0	9	  1	 98	L	L	i
+1315	R	L	9	0	9	  1	 98	L	L	i
+1316	A	L	9	0	9	  1	 98	L	L	i
+1317	L	L	9	0	9	  1	 98	L	L	i
+1318	S	L	9	0	9	  1	 98	L	L	i
+1319	R	L	9	0	9	  1	 98	L	L	i
+1320	F	L	9	0	9	  2	 97	L	L	i
+1321	E	L	9	0	9	  2	 97	L	L	i
+1322	G	L	9	0	9	  3	 96	L	L	i
+1323	M	L	9	0	9	  4	 95	L	L	i
+1324	R	L	8	0	9	  6	 93	L	L	i
+1325	V	L	7	1	8	 11	 88	L	L	i
+1326	V	L	5	2	7	 22	 77	L	L	i
+1327	V	L	3	3	6	 30	 69	L	L	i
+1328	N	L	1	4	5	 40	 59	L	L	i
+1329	A	H	1	5	4	 57	 42	L	L	i
+1330	L	H	4	7	2	 72	 27	L	L	i
+1331	L	H	5	7	2	 77	 22	L	L	i
+1332	G	H	6	8	1	 82	 17	L	L	i
+1333	A	H	7	8	1	 85	 14	H	H	T
+1334	I	H	7	8	1	 87	 12	H	H	T
+1335	P	H	7	8	1	 89	 10	H	H	T
+1336	S	H	8	9	0	 90	  9	H	H	T
+1337	I	H	8	9	0	 91	  8	H	H	T
+1338	M	H	8	9	0	 91	  8	H	H	T
+1339	N	H	8	9	0	 91	  8	H	H	T
+1340	V	H	8	9	0	 91	  8	H	H	T
+1341	L	H	8	9	0	 91	  8	H	H	T
+1342	L	H	8	9	0	 91	  8	H	H	T
+1343	V	H	8	9	0	 91	  8	H	H	T
+1344	C	H	8	9	0	 91	  8	H	H	T
+1345	L	H	8	9	0	 90	  9	H	H	T
+1346	I	H	8	9	0	 90	  9	H	H	T
+1347	F	H	8	9	0	 90	  9	H	H	T
+1348	W	H	8	9	0	 90	  9	H	H	T
+1349	L	H	8	9	0	 90	  9	H	H	T
+1350	I	H	8	9	0	 91	  8	H	H	T
+1351	F	H	8	9	0	 92	  7	H	H	T
+1352	S	H	8	9	0	 92	  7	H	H	T
+1353	I	H	8	9	0	 92	  7	H	H	T
+1354	M	H	8	9	0	 91	  8	H	H	T
+1355	G	H	8	9	0	 90	  9	H	H	T
+1356	V	H	7	8	1	 87	 12	H	H	T
+1357	N	H	6	8	1	 83	 16	L	L	o
+1358	L	H	5	7	2	 76	 23	L	L	o
+1359	F	H	2	6	3	 63	 36	L	L	o
+1360	A	L	0	4	5	 45	 53	L	L	o
+1361	G	L	4	2	7	 26	 73	L	L	o
+1362	K	L	7	1	8	 14	 85	L	L	o
+1363	F	L	7	1	8	 10	 89	L	L	o
+1364	Y	L	8	0	9	  7	 92	L	L	o
+1365	H	L	9	0	9	  4	 95	L	L	o
+1366	C	L	9	0	9	  2	 97	L	L	o
+1367	I	L	9	0	9	  1	 98	L	L	o
+1368	N	L	9	0	9	  1	 98	L	L	o
+1369	Y	L	9	0	9	  1	 98	L	L	o
+1370	T	L	9	0	9	  1	 98	L	L	o
+1371	T	L	9	0	9	  1	 98	L	L	o
+1372	G	L	9	0	9	  1	 98	L	L	o
+1373	E	L	9	0	9	  1	 98	L	L	o
+1374	M	L	9	0	9	  1	 98	L	L	o
+1375	F	L	9	0	9	  1	 98	L	L	o
+1376	D	L	9	0	9	  1	 98	L	L	o
+1377	V	L	9	0	9	  1	 98	L	L	o
+1378	S	L	9	0	9	  1	 98	L	L	o
+1379	V	L	9	0	9	  1	 98	L	L	o
+1380	V	L	9	0	9	  1	 98	L	L	o
+1381	N	L	9	0	9	  1	 98	L	L	o
+1382	N	L	9	0	9	  1	 98	L	L	o
+1383	Y	L	9	0	9	  1	 98	L	L	o
+1384	S	L	9	0	9	  1	 98	L	L	o
+1385	E	L	9	0	9	  1	 98	L	L	o
+1386	C	L	9	0	9	  1	 98	L	L	o
+1387	K	L	9	0	9	  1	 98	L	L	o
+1388	A	L	9	0	9	  1	 98	L	L	o
+1389	L	L	9	0	9	  1	 98	L	L	o
+1390	I	L	9	0	9	  1	 98	L	L	o
+1391	E	L	9	0	9	  1	 98	L	L	o
+1392	S	L	9	0	9	  1	 98	L	L	o
+1393	N	L	9	0	9	  1	 98	L	L	o
+1394	Q	L	9	0	9	  1	 98	L	L	o
+1395	T	L	9	0	9	  1	 98	L	L	o
+1396	A	L	9	0	9	  1	 98	L	L	o
+1397	R	L	9	0	9	  1	 98	L	L	o
+1398	W	L	9	0	9	  1	 98	L	L	o
+1399	K	L	9	0	9	  1	 98	L	L	o
+1400	N	L	9	0	9	  1	 98	L	L	o
+1401	V	L	9	0	9	  1	 98	L	L	o
+1402	K	L	9	0	9	  1	 98	L	L	o
+1403	V	L	9	0	9	  1	 98	L	L	o
+1404	N	L	9	0	9	  1	 98	L	L	o
+1405	F	L	9	0	9	  1	 98	L	L	o
+1406	D	L	9	0	9	  1	 98	L	L	o
+1407	N	L	9	0	9	  2	 97	L	L	o
+1408	V	L	9	0	9	  3	 96	L	L	o
+1409	G	L	9	0	9	  4	 95	L	L	o
+1410	L	L	8	0	9	  6	 93	L	L	o
+1411	G	L	8	0	9	  9	 90	L	L	o
+1412	Y	L	7	1	8	 14	 85	L	L	o
+1413	L	L	6	1	8	 19	 80	L	L	o
+1414	S	L	6	1	8	 18	 81	L	L	o
+1415	L	L	7	1	8	 13	 86	L	L	o
+1416	L	L	8	0	9	  9	 90	L	L	o
+1417	Q	L	8	0	9	  9	 90	L	L	o
+1418	V	L	7	1	8	 10	 89	L	L	o
+1419	A	L	8	0	9	  9	 90	L	L	o
+1420	T	L	8	0	9	  7	 92	L	L	o
+1421	F	L	8	0	9	  5	 94	L	L	o
+1422	K	L	9	0	9	  4	 95	L	L	o
+1423	G	L	9	0	9	  4	 95	L	L	o
+1424	W	L	8	0	9	  5	 94	L	L	o
+1425	M	L	9	0	9	  2	 97	L	L	o
+1426	D	L	9	0	9	  2	 97	L	L	o
+1427	I	L	9	0	9	  1	 98	L	L	o
+1428	M	L	9	0	9	  1	 98	L	L	o
+1429	Y	L	9	0	9	  1	 98	L	L	o
+1430	A	L	9	0	9	  1	 98	L	L	o
+1431	A	L	9	0	9	  1	 98	L	L	o
+1432	V	L	9	0	9	  1	 98	L	L	o
+1433	D	L	9	0	9	  1	 98	L	L	o
+1434	S	L	9	0	9	  1	 98	L	L	o
+1435	R	L	9	0	9	  1	 98	L	L	o
+1436	N	L	9	0	9	  1	 98	L	L	o
+1437	V	L	9	0	9	  1	 98	L	L	o
+1438	E	L	9	0	9	  1	 98	L	L	o
+1439	L	L	9	0	9	  1	 98	L	L	o
+1440	Q	L	9	0	9	  1	 98	L	L	o
+1441	P	L	9	0	9	  1	 98	L	L	o
+1442	K	L	9	0	9	  2	 97	L	L	o
+1443	Y	L	9	0	9	  3	 96	L	L	o
+1444	E	L	9	0	9	  4	 95	L	L	o
+1445	D	L	8	0	9	  6	 93	L	L	o
+1446	N	L	8	0	9	  9	 90	L	L	o
+1447	L	L	5	2	7	 22	 77	L	L	o
+1448	Y	L	0	4	5	 46	 53	L	L	o
+1449	M	H	3	6	3	 67	 32	L	L	o
+1450	Y	H	5	7	2	 78	 21	L	L	o
+1451	L	H	6	8	1	 84	 15	H	H	T
+1452	Y	H	7	8	1	 88	 11	H	H	T
+1453	F	H	8	9	0	 91	  8	H	H	T
+1454	V	H	8	9	0	 92	  7	H	H	T
+1455	I	H	8	9	0	 93	  6	H	H	T
+1456	F	H	8	9	0	 93	  6	H	H	T
+1457	I	H	8	9	0	 92	  7	H	H	T
+1458	I	H	8	9	0	 91	  8	H	H	T
+1459	F	H	8	9	0	 91	  8	H	H	T
+1460	G	H	8	9	0	 91	  8	H	H	T
+1461	S	H	8	9	0	 90	  9	H	H	T
+1462	F	H	8	9	0	 90	  9	H	H	T
+1463	F	H	8	9	0	 91	  8	H	H	T
+1464	T	H	8	9	0	 92	  7	H	H	T
+1465	L	H	8	9	0	 92	  7	H	H	T
+1466	N	H	8	9	0	 91	  8	H	H	T
+1467	L	H	8	9	0	 91	  8	H	H	T
+1468	F	H	8	9	0	 90	  9	H	H	T
+1469	I	H	7	8	1	 87	 11	H	H	T
+1470	G	H	6	8	1	 84	 15	H	H	T
+1471	V	H	5	7	2	 79	 20	L	L	i
+1472	I	H	3	6	3	 67	 32	L	L	i
+1473	I	L	0	4	5	 47	 52	L	L	i
+1474	D	L	4	2	7	 26	 73	L	L	i
+1475	N	L	6	1	8	 16	 83	L	L	i
+1476	F	L	7	1	8	 11	 88	L	L	i
+1477	N	L	8	0	9	  7	 91	L	L	i
+1478	Q	L	8	0	9	  5	 94	L	L	i
+1479	Q	L	9	0	9	  3	 96	L	L	i
+1480	K	L	9	0	9	  1	 98	L	L	i
+1481	K	L	9	0	9	  1	 98	L	L	i
+1482	K	L	9	0	9	  1	 98	L	L	i
+1483	F	L	9	0	9	  1	 98	L	L	i
+1484	G	L	9	0	9	  1	 98	L	L	i
+1485	G	L	9	0	9	  1	 98	L	L	i
+1486	Q	L	9	0	9	  1	 98	L	L	i
+1487	D	L	9	0	9	  1	 98	L	L	i
+1488	I	L	9	0	9	  1	 98	L	L	i
+1489	F	L	9	0	9	  1	 98	L	L	i
+1490	M	L	9	0	9	  1	 98	L	L	i
+1491	T	L	9	0	9	  1	 98	L	L	i
+1492	E	L	9	0	9	  1	 98	L	L	i
+1493	E	L	9	0	9	  1	 98	L	L	i
+1494	Q	L	9	0	9	  1	 98	L	L	i
+1495	K	L	9	0	9	  1	 98	L	L	i
+1496	K	L	9	0	9	  1	 98	L	L	i
+1497	Y	L	9	0	9	  1	 98	L	L	i
+1498	Y	L	9	0	9	  1	 98	L	L	i
+1499	N	L	9	0	9	  1	 98	L	L	i
+1500	A	L	9	0	9	  1	 98	L	L	i
+1501	M	L	9	0	9	  1	 98	L	L	i
+1502	K	L	9	0	9	  1	 98	L	L	i
+1503	K	L	9	0	9	  1	 98	L	L	i
+1504	L	L	9	0	9	  1	 98	L	L	i
+1505	G	L	9	0	9	  1	 98	L	L	i
+1506	S	L	9	0	9	  1	 98	L	L	i
+1507	K	L	9	0	9	  1	 98	L	L	i
+1508	K	L	9	0	9	  1	 98	L	L	i
+1509	P	L	9	0	9	  1	 98	L	L	i
+1510	Q	L	9	0	9	  1	 98	L	L	i
+1511	K	L	9	0	9	  1	 98	L	L	i
+1512	P	L	9	0	9	  1	 98	L	L	i
+1513	I	L	9	0	9	  1	 98	L	L	i
+1514	P	L	9	0	9	  1	 98	L	L	i
+1515	R	L	9	0	9	  1	 98	L	L	i
+1516	P	L	9	0	9	  1	 98	L	L	i
+1517	A	L	9	0	9	  1	 98	L	L	i
+1518	N	L	9	0	9	  1	 98	L	L	i
+1519	K	L	9	0	9	  1	 98	L	L	i
+1520	F	L	9	0	9	  1	 98	L	L	i
+1521	Q	L	9	0	9	  1	 98	L	L	i
+1522	G	L	9	0	9	  1	 98	L	L	i
+1523	M	L	9	0	9	  1	 98	L	L	i
+1524	V	L	9	0	9	  2	 97	L	L	i
+1525	F	L	9	0	9	  2	 97	L	L	i
+1526	D	L	9	0	9	  4	 95	L	L	i
+1527	F	L	7	1	8	 10	 89	L	L	i
+1528	V	L	6	1	8	 17	 82	L	L	i
+1529	T	L	5	2	7	 20	 79	L	L	i
+1530	K	L	4	2	7	 25	 75	L	L	i
+1531	Q	L	2	3	6	 38	 61	H	H	T
+1532	V	H	2	6	3	 62	 37	H	H	T
+1533	F	H	5	7	2	 76	 23	H	H	T
+1534	D	H	6	8	1	 80	 19	H	H	T
+1535	I	H	6	8	1	 83	 16	H	H	T
+1536	S	H	7	8	1	 87	 12	H	H	T
+1537	I	H	8	9	0	 90	  9	H	H	T
+1538	M	H	8	9	0	 90	  9	H	H	T
+1539	I	H	8	9	0	 90	  9	H	H	T
+1540	L	H	8	9	0	 91	  8	H	H	T
+1541	I	H	8	9	0	 90	  9	H	H	T
+1542	C	H	7	8	1	 89	 10	H	H	T
+1543	L	H	7	8	1	 87	 12	H	H	T
+1544	N	H	6	8	1	 83	 16	H	H	T
+1545	M	H	5	7	2	 78	 21	H	H	T
+1546	V	H	3	6	3	 67	 32	H	H	T
+1547	T	L	0	4	5	 47	 52	H	H	T
+1548	M	L	4	2	7	 29	 70	H	H	T
+1549	M	L	5	2	7	 20	 79	L	L	o
+1550	V	L	7	1	8	 12	 86	L	L	o
+1551	E	L	8	0	9	  8	 91	L	L	o
+1552	T	L	8	0	9	  5	 93	L	L	o
+1553	D	L	9	0	9	  3	 95	L	L	o
+1554	D	L	9	0	9	  3	 96	L	L	o
+1555	Q	L	9	0	9	  3	 96	L	L	o
+1556	S	L	9	0	9	  2	 97	L	L	o
+1557	Q	L	9	0	9	  2	 97	L	L	o
+1558	E	L	9	0	9	  2	 97	L	L	o
+1559	M	L	9	0	9	  2	 97	L	L	o
+1560	T	L	9	0	9	  3	 96	L	L	o
+1561	N	L	9	0	9	  4	 95	L	L	o
+1562	I	L	8	0	9	  6	 93	L	L	o
+1563	L	L	7	1	8	 11	 88	L	L	o
+1564	Y	L	5	2	7	 22	 77	L	L	o
+1565	W	L	1	4	5	 41	 58	L	L	o
+1566	I	H	2	6	3	 61	 38	H	H	T
+1567	N	H	3	6	3	 67	 32	H	H	T
+1568	L	H	5	7	2	 78	 22	H	H	T
+1569	V	H	7	8	1	 85	 14	H	H	T
+1570	F	H	7	8	1	 89	 10	H	H	T
+1571	I	H	8	9	0	 90	  9	H	H	T
+1572	V	H	8	9	0	 91	  8	H	H	T
+1573	L	H	8	9	0	 92	  7	H	H	T
+1574	F	H	8	9	0	 92	  7	H	H	T
+1575	T	H	8	9	0	 91	  8	H	H	T
+1576	G	H	8	9	0	 90	  9	H	H	T
+1577	E	H	8	9	0	 90	  9	H	H	T
+1578	C	H	7	8	1	 88	 11	H	H	T
+1579	V	H	7	8	1	 86	 13	H	H	T
+1580	L	H	6	8	1	 81	 18	H	H	T
+1581	K	H	4	7	2	 74	 25	H	H	T
+1582	L	H	4	7	2	 70	 29	H	H	T
+1583	I	H	3	6	3	 65	 34	H	H	T
+1584	S	H	0	5	4	 53	 46	L	L	i
+1585	L	L	3	3	6	 34	 65	L	L	i
+1586	R	L	4	2	7	 26	 73	L	L	i
+1587	Y	L	5	2	7	 24	 75	L	L	i
+1588	Y	L	4	2	7	 27	 72	L	L	i
+1589	Y	L	3	3	6	 30	 69	L	L	i
+1590	F	L	3	3	6	 30	 69	L	L	i
+1591	T	L	2	3	6	 36	 63	L	L	i
+1592	I	L	1	4	5	 43	 56	L	L	i
+1593	G	L	0	4	5	 48	 51	L	L	i
+1594	W	H	0	5	4	 53	 46	L	L	i
+1595	N	H	3	6	3	 66	 33	H	H	T
+1596	I	H	5	7	2	 75	 24	H	H	T
+1597	F	H	6	8	1	 80	 19	H	H	T
+1598	D	H	6	8	1	 83	 16	H	H	T
+1599	F	H	7	8	1	 86	 13	H	H	T
+1600	V	H	7	8	1	 89	 10	H	H	T
+1601	V	H	8	9	0	 90	  9	H	H	T
+1602	V	H	8	9	0	 91	  8	H	H	T
+1603	I	H	8	9	0	 91	  8	H	H	T
+1604	L	H	8	9	0	 92	  7	H	H	T
+1605	S	H	8	9	0	 92	  7	H	H	T
+1606	I	H	8	9	0	 91	  8	H	H	T
+1607	V	H	8	9	0	 91	  8	H	H	T
+1608	G	H	7	8	1	 89	 10	H	H	T
+1609	M	H	7	8	1	 88	 11	H	H	T
+1610	F	H	6	8	1	 84	 15	H	H	T
+1611	L	H	5	7	2	 78	 21	H	H	T
+1612	A	H	2	6	3	 64	 35	H	H	T
+1613	E	H	0	5	4	 53	 46	L	L	o
+1614	L	L	1	4	5	 43	 55	L	L	o
+1615	I	L	2	3	6	 36	 63	L	L	o
+1616	E	L	4	2	7	 27	 72	L	L	o
+1617	K	L	5	2	7	 24	 75	L	L	o
+1618	Y	L	4	2	7	 28	 70	L	L	o
+1619	F	L	3	3	6	 32	 67	L	L	o
+1620	V	L	2	3	6	 37	 62	L	L	o
+1621	S	L	3	3	6	 32	 67	L	L	o
+1622	P	L	3	3	6	 31	 68	L	L	o
+1623	T	L	2	3	6	 35	 64	L	L	o
+1624	L	L	0	4	5	 46	 53	L	L	o
+1625	F	L	1	4	5	 44	 55	L	L	o
+1626	R	L	2	3	6	 35	 64	L	L	o
+1627	V	L	0	4	5	 47	 52	L	L	o
+1628	I	H	0	5	4	 50	 49	L	L	o
+1629	R	L	0	4	5	 47	 52	L	L	o
+1630	L	L	0	4	5	 48	 51	L	L	o
+1631	A	L	1	4	5	 41	 58	L	L	o
+1632	R	L	3	3	6	 32	 67	L	L	o
+1633	I	L	2	3	6	 36	 63	L	L	o
+1634	G	L	4	2	7	 29	 70	L	L	o
+1635	R	L	7	1	8	 13	 86	L	L	o
+1636	I	L	6	1	8	 16	 83	L	L	o
+1637	L	L	6	1	8	 19	 80	L	L	o
+1638	R	L	7	1	8	 11	 88	L	L	o
+1639	L	L	7	1	8	 14	 85	L	L	o
+1640	I	L	7	1	8	 14	 85	L	L	o
+1641	K	L	7	1	8	 10	 89	L	L	o
+1642	G	L	7	1	8	 10	 88	L	L	o
+1643	A	L	7	1	8	 13	 86	L	L	o
+1644	K	L	7	1	8	 11	 88	L	L	o
+1645	G	L	6	1	8	 15	 84	L	L	o
+1646	I	L	5	2	7	 21	 78	L	L	o
+1647	R	L	5	2	7	 20	 79	L	L	o
+1648	T	L	4	2	7	 26	 73	L	L	o
+1649	L	L	0	4	5	 45	 54	L	L	o
+1650	L	H	2	6	3	 64	 35	L	L	o
+1651	F	H	5	7	2	 76	 23	L	L	o
+1652	A	H	6	8	1	 82	 17	L	L	o
+1653	L	H	7	8	1	 85	 14	L	L	o
+1654	M	H	7	8	1	 86	 13	H	H	T
+1655	M	H	7	8	1	 88	 11	H	H	T
+1656	S	H	7	8	1	 88	 11	H	H	T
+1657	L	H	7	8	1	 88	 11	H	H	T
+1658	P	H	8	9	0	 90	  9	H	H	T
+1659	A	H	8	9	0	 90	  9	H	H	T
+1660	L	H	8	9	0	 90	  9	H	H	T
+1661	F	H	8	9	0	 90	  9	H	H	T
+1662	N	H	8	9	0	 90	  9	H	H	T
+1663	I	H	8	9	0	 90	  9	H	H	T
+1664	G	H	8	9	0	 91	  8	H	H	T
+1665	L	H	8	9	0	 91	  8	H	H	T
+1666	L	H	8	9	0	 91	  8	H	H	T
+1667	L	H	8	9	0	 91	  8	H	H	T
+1668	F	H	8	9	0	 90	  9	H	H	T
+1669	L	H	8	9	0	 90	  9	H	H	T
+1670	V	H	8	9	0	 91	  8	H	H	T
+1671	M	H	8	9	0	 91	  8	H	H	T
+1672	F	H	8	9	0	 91	  8	H	H	T
+1673	I	H	8	9	0	 91	  8	H	H	T
+1674	Y	H	8	9	0	 92	  7	H	H	T
+1675	A	H	8	9	0	 92	  7	H	H	T
+1676	I	H	8	9	0	 91	  8	H	H	T
+1677	F	H	8	9	0	 90	  9	H	H	T
+1678	G	H	7	8	1	 87	 12	L	L	i
+1679	M	H	6	8	1	 82	 17	L	L	i
+1680	S	H	4	7	2	 72	 27	L	L	i
+1681	N	H	2	6	3	 60	 39	L	L	i
+1682	F	L	0	4	5	 46	 53	L	L	i
+1683	A	L	3	2	7	 29	 69	L	L	i
+1684	Y	L	6	1	8	 18	 81	L	L	i
+1685	V	L	7	1	8	 11	 88	L	L	i
+1686	K	L	8	0	9	  7	 92	L	L	i
+1687	R	L	9	0	9	  4	 95	L	L	i
+1688	E	L	9	0	9	  3	 96	L	L	i
+1689	V	L	9	0	9	  2	 97	L	L	i
+1690	G	L	9	0	9	  1	 98	L	L	i
+1691	I	L	9	0	9	  1	 98	L	L	i
+1692	D	L	9	0	9	  1	 98	L	L	i
+1693	D	L	9	0	9	  1	 98	L	L	i
+1694	M	L	9	0	9	  1	 98	L	L	i
+1695	F	L	9	0	9	  1	 98	L	L	i
+1696	N	L	9	0	9	  1	 98	L	L	i
+1697	F	L	9	0	9	  1	 98	L	L	i
+1698	E	L	9	0	9	  1	 98	L	L	i
+1699	T	L	9	0	9	  2	 97	L	L	i
+1700	F	L	9	0	9	  4	 95	L	L	i
+1701	G	L	9	0	9	  4	 95	L	L	i
+1702	N	L	9	0	9	  4	 95	L	L	i
+1703	S	L	8	0	9	  5	 94	L	L	i
+1704	M	L	8	0	9	  9	 90	L	L	i
+1705	I	L	7	1	8	 11	 88	L	L	i
+1706	C	L	7	1	8	 11	 88	L	L	i
+1707	L	L	7	1	8	 11	 88	L	L	i
+1708	F	L	7	1	8	 10	 89	L	L	i
+1709	Q	L	7	1	8	 12	 87	L	L	i
+1710	I	L	7	1	8	 12	 87	L	L	i
+1711	T	L	8	0	9	  7	 92	L	L	i
+1712	T	L	9	0	9	  4	 95	L	L	i
+1713	S	L	9	0	9	  4	 95	L	L	i
+1714	A	L	9	0	9	  4	 95	L	L	i
+1715	G	L	9	0	9	  3	 96	L	L	i
+1716	W	L	9	0	9	  2	 97	L	L	i
+1717	D	L	9	0	9	  1	 98	L	L	i
+1718	G	L	9	0	9	  1	 98	L	L	i
+1719	L	L	9	0	9	  1	 98	L	L	i
+1720	L	L	9	0	9	  1	 98	L	L	i
+1721	A	L	9	0	9	  1	 98	L	L	i
+1722	P	L	9	0	9	  1	 98	L	L	i
+1723	I	L	9	0	9	  1	 98	L	L	i
+1724	L	L	9	0	9	  1	 98	L	L	i
+1725	N	L	9	0	9	  1	 98	L	L	i
+1726	S	L	9	0	9	  1	 98	L	L	i
+1727	G	L	9	0	9	  1	 98	L	L	i
+1728	P	L	9	0	9	  1	 98	L	L	i
+1729	P	L	9	0	9	  1	 98	L	L	i
+1730	D	L	9	0	9	  1	 98	L	L	i
+1731	C	L	9	0	9	  1	 98	L	L	i
+1732	D	L	9	0	9	  1	 98	L	L	i
+1733	P	L	9	0	9	  1	 98	L	L	i
+1734	D	L	9	0	9	  1	 98	L	L	i
+1735	K	L	9	0	9	  1	 98	L	L	i
+1736	D	L	9	0	9	  1	 98	L	L	i
+1737	H	L	9	0	9	  1	 98	L	L	i
+1738	P	L	9	0	9	  1	 98	L	L	i
+1739	G	L	9	0	9	  1	 98	L	L	i
+1740	S	L	9	0	9	  1	 98	L	L	i
+1741	S	L	9	0	9	  1	 98	L	L	i
+1742	V	L	9	0	9	  1	 98	L	L	i
+1743	K	L	9	0	9	  1	 98	L	L	i
+1744	G	L	9	0	9	  2	 97	L	L	i
+1745	D	L	9	0	9	  2	 97	L	L	i
+1746	C	L	9	0	9	  4	 95	L	L	i
+1747	G	L	8	0	9	  5	 94	L	L	i
+1748	N	L	8	0	9	  8	 91	L	L	i
+1749	P	L	7	1	8	 12	 87	L	L	i
+1750	S	L	4	2	7	 28	 71	L	L	i
+1751	V	H	0	5	4	 53	 46	L	L	i
+1752	G	H	4	7	2	 73	 26	L	L	i
+1753	I	H	6	8	1	 81	 18	L	L	i
+1754	F	H	7	8	1	 86	 13	L	L	i
+1755	F	H	7	8	1	 89	 10	H	H	T
+1756	F	H	8	9	0	 91	  8	H	H	T
+1757	V	H	8	9	0	 92	  7	H	H	T
+1758	S	H	8	9	0	 93	  6	H	H	T
+1759	Y	H	8	9	0	 93	  6	H	H	T
+1760	I	H	8	9	0	 92	  7	H	H	T
+1761	I	H	8	9	0	 91	  8	H	H	T
+1762	I	H	8	9	0	 91	  8	H	H	T
+1763	S	H	8	9	0	 90	  9	H	H	T
+1764	F	H	8	9	0	 90	  9	H	H	T
+1765	L	H	8	9	0	 91	  8	H	H	T
+1766	V	H	8	9	0	 91	  8	H	H	T
+1767	V	H	8	9	0	 92	  7	H	H	T
+1768	V	H	8	9	0	 92	  7	H	H	T
+1769	N	H	8	9	0	 92	  7	H	H	T
+1770	M	H	8	9	0	 92	  7	H	H	T
+1771	Y	H	8	9	0	 91	  8	H	H	T
+1772	I	H	7	8	1	 89	 10	H	H	T
+1773	A	H	7	8	1	 86	 13	L	L	o
+1774	V	H	6	8	1	 80	 18	L	L	o
+1775	I	H	3	6	3	 67	 32	L	L	o
+1776	L	L	0	4	5	 47	 52	L	L	o
+1777	E	L	4	2	7	 25	 74	L	L	o
+1778	N	L	6	1	8	 16	 83	L	L	o
+1779	F	L	7	1	8	 12	 87	L	L	o
+1780	S	L	8	0	9	  8	 91	L	L	o
+1781	V	L	8	0	9	  5	 94	L	L	o
+1782	A	L	9	0	9	  3	 96	L	L	o
+1783	T	L	9	0	9	  1	 98	L	L	o
+1784	E	L	9	0	9	  1	 98	L	L	o
+1785	E	L	9	0	9	  1	 98	L	L	o
+1786	S	L	9	0	9	  1	 98	L	L	o
+1787	A	L	9	0	9	  1	 98	L	L	o
+1788	E	L	9	0	9	  1	 98	L	L	o
+1789	P	L	9	0	9	  1	 98	L	L	o
+1790	L	L	9	0	9	  1	 98	L	L	o
+1791	S	L	9	0	9	  1	 98	L	L	o
+1792	E	L	9	0	9	  1	 98	L	L	o
+1793	D	L	9	0	9	  1	 98	L	L	o
+1794	D	L	9	0	9	  1	 98	L	L	o
+1795	F	L	9	0	9	  1	 98	L	L	o
+1796	E	L	9	0	9	  1	 98	L	L	o
+1797	M	L	9	0	9	  1	 98	L	L	o
+1798	F	L	9	0	9	  1	 98	L	L	o
+1799	Y	L	9	0	9	  1	 98	L	L	o
+1800	E	L	9	0	9	  1	 98	L	L	o
+1801	V	L	9	0	9	  1	 98	L	L	o
+1802	W	L	9	0	9	  1	 98	L	L	o
+1803	E	L	9	0	9	  1	 98	L	L	o
+1804	K	L	9	0	9	  1	 98	L	L	o
+1805	F	L	9	0	9	  1	 98	L	L	o
+1806	D	L	9	0	9	  1	 98	L	L	o
+1807	P	L	9	0	9	  1	 98	L	L	o
+1808	D	L	9	0	9	  1	 98	L	L	o
+1809	A	L	9	0	9	  1	 98	L	L	o
+1810	T	L	9	0	9	  1	 98	L	L	o
+1811	Q	L	9	0	9	  1	 98	L	L	o
+1812	F	L	9	0	9	  1	 98	L	L	o
+1813	I	L	9	0	9	  1	 98	L	L	o
+1814	E	L	9	0	9	  1	 98	L	L	o
+1815	F	L	9	0	9	  1	 98	L	L	o
+1816	A	L	9	0	9	  1	 98	L	L	o
+1817	K	L	9	0	9	  1	 98	L	L	o
+1818	L	L	9	0	9	  1	 98	L	L	o
+1819	S	L	9	0	9	  1	 98	L	L	o
+1820	D	L	9	0	9	  1	 98	L	L	o
+1821	F	L	9	0	9	  1	 98	L	L	o
+1822	A	L	9	0	9	  1	 98	L	L	o
+1823	D	L	9	0	9	  1	 98	L	L	o
+1824	A	L	9	0	9	  1	 98	L	L	o
+1825	L	L	9	0	9	  1	 98	L	L	o
+1826	D	L	9	0	9	  1	 98	L	L	o
+1827	P	L	9	0	9	  1	 98	L	L	o
+1828	P	L	9	0	9	  1	 98	L	L	o
+1829	L	L	9	0	9	  1	 98	L	L	o
+1830	L	L	9	0	9	  1	 98	L	L	o
+1831	I	L	9	0	9	  1	 98	L	L	o
+1832	A	L	9	0	9	  1	 98	L	L	o
+1833	K	L	9	0	9	  1	 98	L	L	o
+1834	P	L	9	0	9	  1	 98	L	L	o
+1835	N	L	9	0	9	  1	 98	L	L	o
+1836	K	L	9	0	9	  1	 98	L	L	o
+1837	V	L	9	0	9	  1	 98	L	L	o
+1838	Q	L	9	0	9	  1	 98	L	L	o
+1839	L	L	9	0	9	  1	 98	L	L	o
+1840	I	L	9	0	9	  1	 98	L	L	o
+1841	A	L	9	0	9	  1	 98	L	L	o
+1842	M	L	9	0	9	  1	 98	L	L	o
+1843	D	L	9	0	9	  1	 98	L	L	o
+1844	L	L	9	0	9	  1	 98	L	L	o
+1845	P	L	9	0	9	  1	 98	L	L	o
+1846	M	L	9	0	9	  1	 98	L	L	o
+1847	V	L	9	0	9	  1	 98	L	L	o
+1848	S	L	9	0	9	  1	 98	L	L	o
+1849	G	L	9	0	9	  1	 98	L	L	o
+1850	D	L	9	0	9	  1	 98	L	L	o
+1851	R	L	9	0	9	  1	 98	L	L	o
+1852	I	L	9	0	9	  1	 98	L	L	o
+1853	H	L	9	0	9	  1	 98	L	L	o
+1854	C	L	9	0	9	  2	 97	L	L	o
+1855	L	L	9	0	9	  2	 97	L	L	o
+1856	D	L	9	0	9	  2	 97	L	L	o
+1857	I	L	9	0	9	  2	 97	L	L	o
+1858	L	L	9	0	9	  3	 96	L	L	o
+1859	F	L	9	0	9	  3	 96	L	L	o
+1860	A	L	9	0	9	  2	 97	L	L	o
+1861	F	L	9	0	9	  2	 97	L	L	o
+1862	T	L	9	0	9	  2	 98	L	L	o
+1863	K	L	9	0	9	  1	 98	L	L	o
+1864	R	L	9	0	9	  1	 98	L	L	o
+1865	V	L	9	0	9	  1	 98	L	L	o
+1866	L	L	9	0	9	  1	 98	L	L	o
+1867	G	L	9	0	9	  1	 98	L	L	o
+1868	E	L	9	0	9	  1	 98	L	L	o
+1869	S	L	9	0	9	  1	 98	L	L	o
+1870	G	L	9	0	9	  1	 98	L	L	o
+1871	E	L	9	0	9	  1	 98	L	L	o
+1872	M	L	9	0	9	  1	 98	L	L	o
+1873	D	L	9	0	9	  1	 98	L	L	o
+1874	A	L	9	0	9	  1	 98	L	L	o
+1875	L	L	9	0	9	  1	 98	L	L	o
+1876	R	L	9	0	9	  1	 98	L	L	o
+1877	I	L	9	0	9	  1	 98	L	L	o
+1878	Q	L	9	0	9	  1	 98	L	L	o
+1879	M	L	9	0	9	  1	 98	L	L	o
+1880	E	L	9	0	9	  1	 98	L	L	o
+1881	E	L	9	0	9	  1	 98	L	L	o
+1882	R	L	9	0	9	  1	 98	L	L	o
+1883	F	L	9	0	9	  1	 98	L	L	o
+1884	M	L	9	0	9	  1	 98	L	L	o
+1885	A	L	9	0	9	  1	 98	L	L	o
+1886	S	L	9	0	9	  1	 98	L	L	o
+1887	N	L	9	0	9	  1	 98	L	L	o
+1888	P	L	9	0	9	  1	 98	L	L	o
+1889	S	L	9	0	9	  1	 98	L	L	o
+1890	K	L	9	0	9	  1	 98	L	L	o
+1891	V	L	9	0	9	  1	 98	L	L	o
+1892	S	L	9	0	9	  1	 98	L	L	o
+1893	Y	L	9	0	9	  1	 98	L	L	o
+1894	E	L	9	0	9	  1	 98	L	L	o
+1895	P	L	9	0	9	  1	 98	L	L	o
+1896	I	L	9	0	9	  1	 98	L	L	o
+1897	T	L	9	0	9	  1	 98	L	L	o
+1898	T	L	9	0	9	  1	 98	L	L	o
+1899	T	L	9	0	9	  1	 98	L	L	o
+1900	L	L	9	0	9	  1	 98	L	L	o
+1901	K	L	9	0	9	  1	 98	L	L	o
+1902	R	L	9	0	9	  1	 98	L	L	o
+1903	K	L	9	0	9	  1	 98	L	L	o
+1904	Q	L	9	0	9	  1	 98	L	L	o
+1905	E	L	9	0	9	  1	 98	L	L	o
+1906	E	L	9	0	9	  1	 98	L	L	o
+1907	V	L	9	0	9	  1	 98	L	L	o
+1908	S	L	9	0	9	  1	 98	L	L	o
+1909	A	L	9	0	9	  1	 98	L	L	o
+1910	I	L	9	0	9	  1	 98	L	L	o
+1911	I	L	9	0	9	  1	 98	L	L	o
+1912	I	L	9	0	9	  1	 98	L	L	o
+1913	Q	L	9	0	9	  1	 98	L	L	o
+1914	R	L	9	0	9	  1	 98	L	L	o
+1915	A	L	9	0	9	  1	 98	L	L	o
+1916	Y	L	9	0	9	  1	 98	L	L	o
+1917	R	L	9	0	9	  1	 98	L	L	o
+1918	R	L	9	0	9	  1	 98	L	L	o
+1919	Y	L	9	0	9	  1	 98	L	L	o
+1920	L	L	9	0	9	  1	 98	L	L	o
+1921	L	L	9	0	9	  1	 98	L	L	o
+1922	K	L	9	0	9	  1	 98	L	L	o
+1923	Q	L	9	0	9	  1	 98	L	L	o
+1924	K	L	9	0	9	  1	 98	L	L	o
+1925	V	L	9	0	9	  1	 98	L	L	o
+1926	K	L	9	0	9	  1	 98	L	L	o
+1927	K	L	9	0	9	  1	 98	L	L	o
+1928	V	L	9	0	9	  1	 98	L	L	o
+1929	S	L	9	0	9	  1	 98	L	L	o
+1930	S	L	9	0	9	  1	 98	L	L	o
+1931	I	L	9	0	9	  1	 98	L	L	o
+1932	Y	L	9	0	9	  1	 98	L	L	o
+1933	K	L	9	0	9	  1	 98	L	L	o
+1934	K	L	9	0	9	  1	 98	L	L	o
+1935	D	L	9	0	9	  1	 98	L	L	o
+1936	K	L	9	0	9	  1	 98	L	L	o
+1937	G	L	9	0	9	  1	 98	L	L	o
+1938	K	L	9	0	9	  1	 98	L	L	o
+1939	E	L	9	0	9	  1	 98	L	L	o
+1940	C	L	9	0	9	  1	 98	L	L	o
+1941	D	L	9	0	9	  1	 98	L	L	o
+1942	G	L	9	0	9	  1	 98	L	L	o
+1943	T	L	9	0	9	  1	 98	L	L	o
+1944	P	L	9	0	9	  1	 98	L	L	o
+1945	I	L	9	0	9	  1	 98	L	L	o
+1946	K	L	9	0	9	  1	 98	L	L	o
+1947	E	L	9	0	9	  1	 98	L	L	o
+1948	D	L	9	0	9	  1	 98	L	L	o
+1949	T	L	9	0	9	  1	 98	L	L	o
+1950	L	L	9	0	9	  1	 98	L	L	o
+1951	I	L	9	0	9	  1	 98	L	L	o
+1952	D	L	9	0	9	  1	 98	L	L	o
+1953	K	L	9	0	9	  1	 98	L	L	o
+1954	L	L	9	0	9	  1	 98	L	L	o
+1955	N	L	9	0	9	  1	 98	L	L	o
+1956	E	L	9	0	9	  1	 98	L	L	o
+1957	N	L	9	0	9	  1	 98	L	L	o
+1958	S	L	9	0	9	  1	 98	L	L	o
+1959	T	L	9	0	9	  1	 98	L	L	o
+1960	P	L	9	0	9	  1	 98	L	L	o
+1961	E	L	9	0	9	  1	 98	L	L	o
+1962	K	L	9	0	9	  1	 98	L	L	o
+1963	T	L	9	0	9	  1	 98	L	L	o
+1964	D	L	9	0	9	  1	 98	L	L	o
+1965	M	L	9	0	9	  1	 98	L	L	o
+1966	T	L	9	0	9	  1	 98	L	L	o
+1967	P	L	9	0	9	  1	 98	L	L	o
+1968	S	L	9	0	9	  1	 98	L	L	o
+1969	T	L	9	0	9	  1	 98	L	L	o
+1970	T	L	9	0	9	  1	 98	L	L	o
+1971	S	L	9	0	9	  1	 98	L	L	o
+1972	P	L	9	0	9	  1	 98	L	L	o
+1973	P	L	9	0	9	  1	 98	L	L	o
+1974	S	L	9	0	9	  1	 98	L	L	o
+1975	Y	L	9	0	9	  1	 98	L	L	o
+1976	D	L	9	0	9	  1	 98	L	L	o
+1977	S	L	9	0	9	  1	 98	L	L	o
+1978	V	L	9	0	9	  1	 98	L	L	o
+1979	T	L	9	0	9	  1	 98	L	L	o
+1980	K	L	9	0	9	  1	 98	L	L	o
+1981	P	L	9	0	9	  1	 98	L	L	o
+1982	E	L	9	0	9	  1	 98	L	L	o
+1983	K	L	9	0	9	  1	 98	L	L	o
+1984	E	L	9	0	9	  1	 98	L	L	o
+1985	K	L	9	0	9	  1	 98	L	L	o
+1986	F	L	9	0	9	  1	 98	L	L	o
+1987	E	L	9	0	9	  1	 98	L	L	o
+1988	K	L	9	0	9	  1	 98	L	L	o
+1989	D	L	9	0	9	  1	 98	L	L	o
+1990	K	L	9	0	9	  1	 98	L	L	o
+1991	S	L	9	0	9	  1	 98	L	L	o
+1992	E	L	9	0	9	  1	 98	L	L	o
+1993	K	L	9	0	9	  1	 98	L	L	o
+1994	E	L	9	0	9	  1	 98	L	L	o
+1995	D	L	9	0	9	  1	 98	L	L	o
+1996	K	L	9	0	9	  1	 98	L	L	o
+1997	G	L	9	0	9	  1	 98	L	L	o
+1998	K	L	9	0	9	  1	 98	L	L	o
+1999	D	L	9	0	9	  1	 98	L	L	o
+2000	I	L	9	0	9	  1	 98	L	L	o
+2001	R	L	9	0	9	  1	 98	L	L	o
+2002	E	L	9	0	9	  1	 98	L	L	o
+2003	S	L	9	0	9	  1	 98	L	L	o
+2004	K	L	9	0	9	  1	 98	L	L	o
+2005	K	L	9	0	9	  2	 97	L	L	o

@@ -1,0 +1,132 @@
+# hmmscan :: search sequence(s) against a profile database
+# HMMER 3.1b1 (May 2013); http://hmmer.org/
+# Copyright (C) 2013 Howard Hughes Medical Institute.
+# Freely distributed under the GNU General Public License (GPLv3).
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# query sequence file:             query.fasta
+# target HMM database:             /mnt/ppcache/rost_db/data/pfam/Pfam-A.hmm
+# output directed to file:         query.hmm3pfam
+# per-seq hits tabular output:     query.hmm3pfamTbl
+# per-dom hits tabular output:     query.hmm3pfamDomTbl
+# prefer accessions over names:    yes
+# max ASCII text line length:      unlimited
+# model-specific thresholding:     GA cutoffs
+# number of worker threads:        1
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Query:       query  [L=1980]
+Scores for complete sequence (score includes all domains):
+   --- full sequence ---   --- best 1 domain ---    -#dom-
+    E-value  score  bias    E-value  score  bias    exp  N  Model      Description
+    ------- ------ -----    ------- ------ -----   ---- --  --------   -----------
+   1.7e-259  856.0 105.4      8e-82  274.1  17.2    4.2  4  PF00520.31  Ion transport protein
+    3.7e-68  229.5   3.1    3.7e-68  229.5   3.1    2.2  1  PF11933.8   Cytoplasmic domain of voltage-gated Na+ ion channel
+      1e-60  205.5   1.1      1e-60  205.5   1.1    2.9  1  PF06512.13  Sodium ion transport-associated
+    1.1e-07   30.9  86.3    0.00017   20.4   0.7    9.9  1  PF08016.12  Polycystin cation channel
+    0.00013   21.5   0.1    0.00033   20.2   0.1    1.8  1  PF00612.27  IQ calmodulin-binding motif
+
+
+Domain annotation for each model (and alignments):
+>> PF00520.31  Ion transport protein
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !  274.1  17.2   2.2e-85     8e-82       1     244 [.     131     421 ..     131     422 .. 0.94
+   2 !  188.5  19.7   3.2e-59   1.2e-55       3     238 ..     754     981 ..     752     987 .. 0.95
+   3 !  227.0  18.9   5.4e-71   1.9e-67       1     242 [.    1197    1472 ..    1197    1474 .. 0.93
+   4 !  185.2  25.7   3.1e-58   1.1e-54       2     244 ..    1522    1776 ..    1521    1777 .. 0.96
+
+  Alignments for each domain:
+  == domain 1  score: 274.1 bits;  conditional E-value: 2.2e-85
+                 SHHHHHHHHHHHHHHHHHHHCCCSSSSHHHHCHHHHHHHHHHHHHHHHHHHHHHHHHTH.HHHHHHCHSHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHGGGGGGHHHCHSHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHTTSCCCC.............................................CC...........SCCSTSSSTTTSSSSSSHHHHHHHHHHHHTTSSHHHHHHHHHHHSHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH CS
+  PF00520.31   1 ssvfelfilllillncvflaletyfpedelektileilelvftaiftlemllkilalgl.likkrYlrdpwnilDflvvlpsllslvlseesllllsvlrlfrvlrllklisrleglrtlvtalirsvkdllnvlllllvvlfifaligvqlfkgklrek.............................................ne...........caktwenpnngntnFdnfftallwlfrlmttegwgdilyatldekskvaliyfvifiilgsflllNlliaviadnfqeltere 244
+                 +svf+++i+++il+ncvf+++  ++p+     ++ + +e++ft+i+t+e l+ki+a+g+  + +++lrdpwn+lDf+v+++++++ +    +l+++s+lr+frvlr+lk+is ++gl+t+v ali+svk+l +v++l++++l++falig+qlf+g+lr+k                                             n+           c k+++npn+g+t+Fd+f++a+l+lfrlmt+++w+++++ tl++ +k+++i+fv++i++gsf+l+Nl++av+a++++e+++ +
+       query 131 HSVFSMIIMCTILTNCVFMTF--SNPP-----DWSKNVEYTFTGIYTFESLVKIIARGFcIDGFTFLRDPWNWLDFSVIMMAYITEFV---NLGNVSALRTFRVLRALKTISVIPGLKTIVGALIQSVKKLSDVMILTVFCLSVFALIGLQLFMGNLRNKcvvwpinfnesylengtkgfdweeyinnktnfytvpgmlepllcgNSsdagqcpegyqCMKAGRNPNYGYTSFDTFSWAFLALFRLMTQDYWENLYQLTLRAAGKTYMIFFVLVIFVGSFYLVNLILAVVAMAYEEQNQAT 421
+                 799******************..8999.....999************************9999*********************7755...59***********************************************************************************999999999998888888888877777761145556666788*******************************************************************************9975 PP
+
+  == domain 2  score: 188.5 bits;  conditional E-value: 3.2e-59
+                 HHHHHHHHHHHHHHHHHHCCCSSSSHHHHCHHHHHHHHHHHHHHHHHHHHHHHHHTHHHHHHHCHSHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHGGGGGGHHHCHSHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHTTSCCCCCCSCCSTSSSTTTSSSSSSHHHHHHHHHHHHTTSSHHHHHHHHHHHS.HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH CS
+  PF00520.31   3 vfelfilllillncvflaletyfpedelektileilelvftaiftlemllkilalgllikkrYlrdpwnilDflvvlpsllslvlseesllllsvlrlfrvlrllklisrleglrtlvtalirsvkdllnvlllllvvlfifaligvqlfkgklreknecaktwenpnngntnFdnfftallwlfrlmttegwgdilyatldek.skvaliyfvifiilgsflllNlliaviadnfq 238
+                 + +l i+++i+ln++f+a+e++++  ++e ++l + +lvft+ift em+lk++a+ +     Y+++ wni+D ++v++sl++l l    + +lsvlr fr+lr++kl +++++l +l++++++sv +l+n+ l+l++++fifa++g+qlf+++++e++   k  ++ + +++++++ff+++l +fr++++e w + +++++    + ++li+f++++++g++++lNl++a+  ++f+
+       query 754 FVDLAITICIVLNTLFMAMEHHPMTPQFE-HVLAVGNLVFTGIFTAEMFLKLIAMDP---YYYFQEGWNIFDGFIVSLSLMELSLA--DVEGLSVLRSFRLLRVFKLAKSWPTLNMLIKIIGNSVGALGNLTLVLAIIVFIFAVVGMQLFGKSYKECVC--KINQDCELPRWHMHDFFHSFLIVFRVLCGE-WIETMWDCMEVAgQAMCLIVFMMVMVIGNLVVLNLFLALLLSSFS 981
+                 67899********************9999.***************************...***********************774..499***********************************************************999997744..566777899*********************.************99*****************************98 PP
+
+  == domain 3  score: 227.0 bits;  conditional E-value: 5.4e-71
+                  SHHHHHHHHHHHHHHHHHHHCCCSSSSHHHHC.HHHHHHHHHHHHHHHHHHHHHHHHHTHHHHHHHCHSHHHHHHHHHHHHHHHHHHHHH...HHHHHHHHHHHHGGGGGGHHHCHSHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHTTSCCCC........................CCSCCSTSSSTTTSSSSSSHHHHHHHHHHHHTTSSHHHHHHHHHHHS..........HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH CS
+  PF00520.31    1 ssvfelfilllillncvflaletyfpedelek.tileilelvftaiftlemllkilalgllikkrYlrdpwnilDflvvlpsllslvlse...esllllsvlrlfrvlrllklisrleglrtlvtalirsvkdllnvlllllvvlfifaligvqlfkgklrek........................necaktwenpnngntnFdnfftallwlfrlmttegwgdilyatldek..........skvaliyfvifiilgsflllNlliaviadnfqelte 242 
+                  + +fe fi+++ill++ +la+e+   e++++  tile+++ vft+if+lemllk+ a+g+    +++++ w++lDfl+v +sl+sl+++    ++l++++ lr++r lr+l+++sr+eg+r++v+al++++++++nvll++l++++if+++gv+lf+gk++++                        +  ++t+   +n ++nFdn++  +l+l++++t++gw di+ya  d++          + +++iyfvifii+gsf++lNl+i+vi+dnf+++++
+       query 1197 HNWFETFIIFMILLSSGALAFEDIYIEQRKTIrTILEYADKVFTYIFILEMLLKWTAYGF---VKFFTNAWCWLDFLIVAVSLVSLIANAlgySELGAIKSLRTLRALRPLRALSRFEGMRVVVNALVGAIPSIMNVLLVCLIFWLIFSIMGVNLFAGKYHYCfnetseirfeiedvnnkteceklmE-GNNTEIRWKNVKINFDNVGAGYLALLQVATFKGWMDIMYAAVDSRkpdeqpkyedNIYMYIYFVIFIIFGSFFTLNLFIGVIIDNFNQQKK 1472
+                  78*************************88888****************************...***********************776677889*********************************************************************999999999888876655544430.4455555566699***************************************************************************997 PP
+
+  == domain 4  score: 185.2 bits;  conditional E-value: 3.1e-58
+                  HHHHHHHHHHHHHHHHHHHCCCSSSSHHHHCHHHHHHHHHHHHHHHHHHHHHHHHHTHHHHHHHCHSHHHHHHHHHHHHHHHHHHHHH......HHHHHHHHHHHHGGGGGGHHHCHSHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHTTSCCCCCCSCCSTSSSTTTSSSSSSHHHHHHHHHHHHTTSSHHHHHHHHHHHS....................HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH CS
+  PF00520.31    2 svfelfilllillncvflaletyfpedelektileilelvftaiftlemllkilalgllikkrYlrdpwnilDflvvlpsllslvlse......esllllsvlrlfrvlrllklisrleglrtlvtalirsvkdllnvlllllvvlfifaligvqlfkgklreknecaktwenpnngntnFdnfftallwlfrlmttegwgdilyatldek....................skvaliyfvifiilgsflllNlliaviadnfqeltere 244 
+                  + f+++i++li+ln+v++++et  +++++e +il +++lvf+++ft e++lk++al+      Y++  wni+Df+vv++s++ ++l +       s  l++v+rl+r+ r+l+li+  +g+rtl+ al++s+++l+n+ lll++v+fif+++g+  f          + + e  +++ +nF++f++++++lf++ t+ gw  +l + l++                     ++v++++fv++ii++ ++++N++ia+i +nf+  te++
+       query 1522 QAFDIVIMMLICLNMVTMMVETDTQSKQME-NILYWINLVFVIFFTCECVLKMFALRH----YYFTIGWNIFDFVVVILSIVGMFLADiiekyfVSPTLFRVIRLARIGRILRLIKGAKGIRTLLFALMMSLPALFNIGLLLFLVMFIFSIFGMSNF---------AYVKHEAGIDDMFNFETFGNSMICLFQITTSAGWDGLLLPILNRPpdcsldkehpgsgfkgdcgnPSVGIFFFVSYIIISFLIVVNMYIAIILENFSVATEES 1776
+                  68************************9999.************************999....**********************554455566788*************************************************************.........67788999*****************************************************************************************999875 PP
+
+>> PF11933.8  Cytoplasmic domain of voltage-gated Na+ ion channel
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !  229.5   3.1     1e-71   3.7e-68       1     213 []     499     702 ..     499     702 .. 0.98
+
+  Alignments for each domain:
+  == domain 1  score: 229.5 bits;  conditional E-value: 1e-71
+  PF11933.8   1 kkkkksereekgeeekvsksesedsirrkkfrlsvdrlatkvkvsaenqslLslpgspfnlRrnsrgSlFsfr..grgrdaqseldfADDensvteesesergslvvPvangsRrsSyt.....SqaSrlSytshpllpangkrnstvDCNGvvSLvggpsetspggqlLpevileklatgkkattkeselrkkrssskqqsmdfleepsqrqravsmas 213
+                k+k++se+eekg+ ekv ksesed++rrk+frl+++r+++  k+s++nqslLs+pgspf +R+ns++S+Fsfr  gr rd +se++fADDe+s++eese +r+sl++P++ ++RrsSy+     Sq Sr+S ++ p+l+++ krnstvDCNGvvSL+ggp++++ gg+lLpe            +t+e+e++kk  +s  +smd+l+++++++r++s++s
+      query 499 KQKELSEGEEKGDPEKVFKSESEDGMRRKAFRLPDNRIGR--KFSIMNQSLLSIPGSPFLSRHNSKSSIFSFRgpGRFRDPGSENEFADDEHSTVEESEGRRDSLFIPIRARERRSSYSgysgySQGSRSS-RIFPSLRRSVKRNSTVDCNGVVSLIGGPGSHI-GGRLLPE------------ATTEVEIKKKGPGSLLVSMDQLASYGRKDRINSIMS 702
+                79*********************************9**99..*******************************999999******************************99*******99999********.*****************************877.999**86............8********************************986 PP
+
+>> PF06512.13  Sodium ion transport-associated
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !  205.5   1.1   2.9e-64     1e-60       1     202 [.     991    1192 ..     991    1193 .. 0.87
+
+  Alignments for each domain:
+  == domain 1  score: 205.5 bits;  conditional E-value: 2.9e-64
+  PF06512.13    1 DgemnnLqiAiaRIqrgiawvkrnlldflqrkllkekqkekekkplselkalkakkenqianqtsaet.eelekake............eksee..deddeldfiknpnltvsVpIAegesdleneededessesseeekkkeeeqlekdessssegstvDlkdpeeeleeieeeaeeseePedCfpegcvrrfpccavdttkgpwkgwwnLRktcy 202 
+                  DgemnnLqi + RI++g+aw+k ++  f+q ++  ++++++e kpl+el    +kk n+ian+t+a++ ++ + +k+            e   +    +d+++fi+npnltv VpIA+gesd+en ++ed sses + e +k     + d++sssegst+D+k++ ee+    e +ee  +P++Cf+egcv+rf+cc+v++++g +k+ww LRktc+
+       query  991 DGEMNNLQISVIRIKKGVAWTKLKVHAFMQAHF--KQREADEVKPLDEL---YEKKANCIANHTGADIhRNGDFQKNgngttsgigssvE---KyiIDEDHMSFINNPNLTVRVPIAVGESDFENLNTEDVSSES-DPEGSK----DKLDDTSSSEGSTIDIKPEVEEVPV--EQPEEYLDPDACFTEGCVQRFKCCQVNIEEGLGKSWWILRKTCF 1192
+                  9****************************9999..44445555666555...589***********998888877778888877765433...145889***********************************7.777777....3689***********9999666654..557899*************************************9 PP
+
+>> PF08016.12  Polycystin cation channel
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   20.4   0.7   4.8e-08   0.00017     311     424 ..    1626    1770 ..    1614    1771 .. 0.87
+
+  Alignments for each domain:
+  == domain 1  score: 20.4 bits;  conditional E-value: 4.8e-08
+                  GGGGG------------------------HHHHHHHHHHHHHHHHHHSS........SS-STTSSHHHHHHHHHHHHTT---HH........................HHHHH-TTHHHHHHHHHHHHHHHHHHHHHHHHHHT-XX CS
+  PF08016.12  311 kllkvlrfnktlslltktlaralkdvlgfalvivilflayaqlgvllfG........tqasnfsnlvksiltlfrlilgdfqyt........................elesgnrvLGpllllalvflvifillnlflaiindsye 424 
+                  ++l++++ +k ++ l  +l+++l++++ + l+++++++ + ++g+  f           + nf+++ +s++ lf++   + ++                         + + gn   G+ ++++++++++ i++n+ +aii ++++
+       query 1626 RILRLIKGAKGIRTLLFALMMSLPALFNIGLLLFLVMFIFSIFGMSNFAyvkheagiDDMFNFETFGNSMICLFQI-TTSAGWDglllpilnrppdcsldkehpgsgfKGDCGNPSVGIFFFVSYIIISFLIVVNMYIAIILENFS 1770
+                  7899999999999999**************************99988873322222224569*********99876.5678999**********************8855669*****************************9986 PP
+
+>> PF00612.27  IQ calmodulin-binding motif
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   20.2   0.1   9.1e-08   0.00033       3      20 ..    1898    1915 ..    1896    1916 .. 0.91
+
+  Alignments for each domain:
+  == domain 1  score: 20.2 bits;  conditional E-value: 9.1e-08
+                  HHHHHHHHHHHHHHHHHH CS
+  PF00612.27    3 aaikIQaawRGylaRkry 20  
+                  +a+++Q+a+RG+laR+ +
+       query 1898 SAVVLQRAYRGHLARRGF 1915
+                  8**************976 PP
+
+
+
+Internal pipeline statistics summary:
+-------------------------------------
+Query sequence(s):                         1  (1980 residues searched)
+Target model(s):                       17929  (3037991 nodes)
+Passed MSV filter:                      2147  (0.11975); expected 358.6 (0.02)
+Passed bias filter:                      818  (0.0456244); expected 358.6 (0.02)
+Passed Vit filter:                       108  (0.00602376); expected 17.9 (0.001)
+Passed Fwd filter:                        24  (0.00133861); expected 0.2 (1e-05)
+Initial search space (Z):              17929  [actual number of targets]
+Domain search space  (domZ):               5  [number of targets reported over threshold]
+# CPU time: 0.93u 0.85s 00:00:01.78 Elapsed: 00:00:01.79
+# Mc/sec: 3360.46
+//
+[ok]

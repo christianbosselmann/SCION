@@ -1,0 +1,13 @@
+# Localization Prediction using LocTree3
+# Note: chloroplast and plastid classes are valid for plant proteins only.
+# Therefore, if the origin of a non-plant protein is known, please consider predictions of these classes as mitochondrial.
+# Domain: euka
+#
+# NOTATION Protein Id: Fasta sequences Id truncated by whitespace
+# NOTATION Score: Reliability score on a 0-100 scale (0=unreliable & 100=most reliable)
+# NOTATION Localization: Predicted sub-cellular localization class
+# NOTATION Gene Ontology Terms: Gene Ontology (GO) term/s of the corresponding localization. GO terms predicted by PSI-BLAST are supported by evidence codes (see http://www.geneontology.org/GO.evidence.shtml)
+#
+# PSI-BLAST annotation based on Swiss-Prot release 2013_11.
+# Protein Id	Score	Localization	Gene Ontology Terms
+query	11	vacuole membrane	Golgi apparatus GO:0005794(IDA); integral to membrane GO:0016021(IEA); plant-type vacuole GO:0000325(IDA); plasma membrane GO:0005886(TAS); vacuolar membrane GO:0005774(IDA);

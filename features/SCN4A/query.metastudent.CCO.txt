@@ -1,0 +1,57 @@
+query	GO:0016020	0.64	membrane
+query	GO:0005886	0.36	plasma membrane
+query	GO:0044464	0.36	cell part
+query	GO:0005623	0.36	cell
+query	GO:0071944	0.36	cell periphery
+query	GO:0016021	0.30	integral component of membrane
+query	GO:0031224	0.30	intrinsic component of membrane
+query	GO:0044425	0.30	membrane part
+query	GO:0034706	0.29	sodium channel complex
+query	GO:0034702	0.29	ion channel complex
+query	GO:0034703	0.29	cation channel complex
+query	GO:0044459	0.29	plasma membrane part
+query	GO:1902495	0.29	transmembrane transporter complex
+query	GO:0001518	0.29	voltage-gated sodium channel complex
+query	GO:0043234	0.29	protein complex
+query	GO:0032991	0.29	macromolecular complex
+query	GO:0005887	0.24	integral component of plasma membrane
+query	GO:0031226	0.24	intrinsic component of plasma membrane
+query	GO:0005891	0.11	voltage-gated calcium channel complex
+query	GO:0008076	0.11	voltage-gated potassium channel complex
+query	GO:0034705	0.11	potassium channel complex
+query	GO:0034704	0.11	calcium channel complex
+query	GO:0005737	0.09	cytoplasm
+query	GO:0005622	0.09	intracellular
+query	GO:0044424	0.09	intracellular part
+query	GO:0000323	0.07	lytic vacuole
+query	GO:0005783	0.07	endoplasmic reticulum
+query	GO:0043229	0.07	intracellular organelle
+query	GO:0005929	0.07	cilium
+query	GO:0031988	0.07	membrane-bounded vesicle
+query	GO:0043226	0.07	organelle
+query	GO:0030054	0.07	cell junction
+query	GO:0044446	0.07	intracellular organelle part
+query	GO:0031982	0.07	vesicle
+query	GO:0005773	0.07	vacuole
+query	GO:0043227	0.07	membrane-bounded organelle
+query	GO:0097223	0.07	sperm part
+query	GO:0005774	0.07	vacuolar membrane
+query	GO:0044437	0.07	vacuolar part
+query	GO:0009986	0.07	cell surface
+query	GO:0005794	0.07	Golgi apparatus
+query	GO:0016023	0.07	cytoplasmic membrane-bounded vesicle
+query	GO:0030141	0.07	secretory granule
+query	GO:0044291	0.07	cell-cell contact zone
+query	GO:0012505	0.07	endomembrane system
+query	GO:0005911	0.07	cell-cell junction
+query	GO:0042995	0.07	cell projection
+query	GO:0014704	0.07	intercalated disc
+query	GO:0043231	0.07	intracellular membrane-bounded organelle
+query	GO:0005764	0.07	lysosome
+query	GO:0005765	0.07	lysosomal membrane
+query	GO:0044444	0.07	cytoplasmic part
+query	GO:0031090	0.07	organelle membrane
+query	GO:0031410	0.07	cytoplasmic vesicle
+query	GO:0001669	0.07	acrosomal vesicle
+query	GO:0005634	0.07	nucleus
+query	GO:0044422	0.07	organelle part

@@ -1,0 +1,21 @@
+#                                                                            --- full sequence --- -------------- this domain -------------   hmm coord   ali coord   env coord
+# target name        accession   tlen query name           accession   qlen   E-value  score  bias   #  of  c-Evalue  i-Evalue  score  bias  from    to  from    to  from    to  acc description of target
+#------------------- ---------- ----- -------------------- ---------- ----- --------- ------ ----- --- --- --------- --------- ------ ----- ----- ----- ----- ----- ----- ----- ---- ---------------------
+Ion_trans            PF00520.31   245 query                -           1980  1.7e-259  856.0 105.4   1   4   2.2e-85     8e-82  274.1  17.2     1   244   131   421   131   422 0.94 Ion transport protein
+Ion_trans            PF00520.31   245 query                -           1980  1.7e-259  856.0 105.4   2   4   3.2e-59   1.2e-55  188.5  19.7     3   238   754   981   752   987 0.95 Ion transport protein
+Ion_trans            PF00520.31   245 query                -           1980  1.7e-259  856.0 105.4   3   4   5.4e-71   1.9e-67  227.0  18.9     1   242  1197  1472  1197  1474 0.93 Ion transport protein
+Ion_trans            PF00520.31   245 query                -           1980  1.7e-259  856.0 105.4   4   4   3.1e-58   1.1e-54  185.2  25.7     2   244  1522  1776  1521  1777 0.96 Ion transport protein
+Na_trans_cytopl      PF11933.8    213 query                -           1980   3.7e-68  229.5   3.1   1   1     1e-71   3.7e-68  229.5   3.1     1   213   499   702   499   702 0.98 Cytoplasmic domain of voltage-gated Na+ ion channel
+Na_trans_assoc       PF06512.13   203 query                -           1980     1e-60  205.5   1.1   1   1   2.9e-64     1e-60  205.5   1.1     1   202   991  1192   991  1193 0.87 Sodium ion transport-associated
+PKD_channel          PF08016.12   426 query                -           1980   1.1e-07   30.9  86.3   1   1   4.8e-08   0.00017   20.4   0.7   311   424  1626  1770  1614  1771 0.87 Polycystin cation channel
+IQ                   PF00612.27    21 query                -           1980   0.00013   21.5   0.1   1   1   9.1e-08   0.00033   20.2   0.1     3    20  1898  1915  1896  1916 0.91 IQ calmodulin-binding motif
+#
+# Program:         hmmscan
+# Version:         3.1b1 (May 2013)
+# Pipeline mode:   SCAN
+# Query file:      query.fasta
+# Target file:     /mnt/ppcache/rost_db/data/pfam/Pfam-A.hmm
+# Option settings: hmmscan -o query.hmm3pfam --tblout query.hmm3pfamTbl --domtblout query.hmm3pfamDomTbl --acc --notextw --cut_ga --cpu 1 /mnt/ppcache/rost_db/data/pfam/Pfam-A.hmm query.fasta 
+# Current dir:     /tmp/REDzybiH_8
+# Date:            Mon Nov  8 13:36:16 2021
+# [ok]

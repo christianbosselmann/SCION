@@ -1,0 +1,513 @@
+****************************************************************************
+*                                                                          *
+*    PHD: Profile fed neural network systems from HeiDelberg               *
+*    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~               *
+*                                                                          *
+*    Prediction of:			                                   *
+* 	secondary structure,   			   by PHDsec		   *
+* 	solvent accessibility, 			   by PHDacc		   *
+* 	and helical transmembrane regions, 	   by PHDhtm		   *
+*                                                                          *
+*    Author:             						   *
+*	Burkhard Rost							   *
+*       EMBL, 69012 Heidelberg, Germany					   *
+*       Internet: Rost@EMBL-Heidelberg.DE				   *
+*                                                                          *
+*    All rights reserved.                                                  *
+*                                                                          *
+****************************************************************************
+*                                                                          *
+*    The network systems are described in:   	                     	   *
+*                                                                          *
+*    PHDsec:    B Rost & C Sander: JMB, 1993, 232, 584-599.		   *
+*    		B Rost & C Sander: Proteins, 1994, 19, 55-72.		   *
+*    PHDacc:  	B Rost & C Sander: Proteins, 1994, 20, 216-226.		   *
+*    PHDhtm:  	B Rost et al.: 	   Prot. Science, 1995, 4, 521-533.	   *
+*                                                                          *
+****************************************************************************
+*                                                                          *
+*    Some statistics                                                       *
+*    ~~~~~~~~~~~~~~~                                                       *
+*                                                                          *
+*    Percentage of amino acids:                                            *
+*    +--------------+--------+--------+--------+--------+--------+         *
+*    | AA:          |    L   |    S   |    A   |    E   |    F   |         *
+*    | % of AA:     |   11.3 |    7.8 |    6.7 |    6.7 |    6.2 |         *
+*    +--------------+--------+--------+--------+--------+--------+         *
+*    | AA:          |    I   |    V   |    T   |    G   |    P   |         *
+*    | % of AA:     |    6.1 |    5.9 |    5.9 |    5.8 |    5.3 |         *
+*    +--------------+--------+--------+--------+--------+--------+         *
+*    | AA:          |    R   |    D   |    K   |    N   |    Q   |         *
+*    | % of AA:     |    5.2 |    4.7 |    4.1 |    3.8 |    3.5 |         *
+*    +--------------+--------+--------+--------+--------+--------+         *
+*    | AA:          |    M   |    Y   |    C   |    W   |    H   |         *
+*    | % of AA:     |    3.4 |    2.7 |    2.1 |    1.6 |    1.3 |         *
+*    +--------------+--------+--------+--------+--------+--------+         *
+*                                                                          *
+*    Percentage of helical trans-membrane predicted:                       *
+*    +--------------+--------+--------+                                    *
+*    | SecStr:      |    H   |    L   |                                    *
+*    | % Predicted: |   20.6 |   79.4 |                                    *
+*    +--------------+--------+--------+                                    *
+*                                                                          *
+****************************************************************************
+*                                                                          *
+*    PHD output for your protein                                           *
+*    ~~~~~~~~~~~~~~~~~~~~~~~~~~~                                           *
+*                                                                          *
+*    Jury on:        4    different architectures (version   8.94_69  ).   *
+*    Note: differently trained architectures, i.e., different versions can *
+*    result in different predictions.                                      *
+*                                                                          *
+****************************************************************************
+*                                                                          *
+*    About the protein                                                     *
+*    ~~~~~~~~~~~~~~~~~                                                     *
+*                                                                          *
+*    HEADER                                                                *
+*    COMPND                                                                *
+*    SOURCE                                                                *
+*    AUTHOR                                                                *
+*    SEQLENGTH  2016                                                       *
+*    NCHAIN        1 chain(s) in query data set                            *
+*    NALIGN      296                                                       *
+*    (=number of aligned sequences in HSSP file)                           *
+*                                                                          *
+*                                                                          *
+*    protein:       query          length     2016                         *
+*                                                                          *
+--- 
+--- ------------------------------------------------------------
+--- PhdTopology prediction of transmembrane helices and topology
+--- ------------------------------------------------------------
+--- 
+--- PhdTopology REFINEMENT AND TOPOLOGY HEADER: ABBREVIATIONS
+--- 
+--- NHTM_BEST    : number of transmembrane helices best model
+--- NHTM_2ND_BEST: number of transmembrane helices 2nd best model
+--- REL_BEST     : reliability of best model (0 is low, 9 high)
+--- HTMTOP_PRD   : topology predicted ('in': intra-cytoplasmic)
+--- HTMTOP_RID   : difference between positive charges
+--- HTMTOP_RIP   : reliability of topology prediction (0-9)
+--- MOD_NHTM     : number of transmembrane helices of model
+--- MOD_STOT     : score for all residues
+--- MOD_SHTM     : score for HTM added at current iteration step
+--- MOD_N-C      : N  -  C  term of HTM added at current step
+--- 
+--- ALGORITHM REF: The refinement is performed by a dynamic pro-
+--- ALGORITHM    : gramming-like procedure: iteratively the best
+--- ALGORITHM    : transmembrane helix (HTM) compatible with the
+--- ALGORITHM    : network output is added (starting from the  0
+--- ALGORITHM    : assumption, i.e.,  no HTM's  in the protein).
+--- ALGORITHM TOP: Topology is predicted by the  positive-inside
+--- ALGORITHM    : rule, i.e., the positive charges are compiled
+--- ALGORITHM    : separately  for all even and all odd  non-HTM
+--- ALGORITHM    : regions.  If the difference (charge even-odd)
+--- ALGORITHM    : is < 0, topology is predicted as 'in'.   That
+--- ALGORITHM    : means, the protein N-term starts on the intra
+--- ALGORITHM    : cytoplasmic side.
+--- 
+--- PhdTopology REFINEMENT HEADER: SUMMARY
+ MOD_NHTM MOD_STOT MOD_SHTM MOD_N-C 
+        1    0.798    0.911  1330 -  1353	
+        2    0.807    0.910  1652 -  1674	
+        3    0.816    0.911   390 -   410	
+        4    0.824    0.911   916 -   936	
+        5    0.833    0.911  1448 -  1467	
+        6    0.841    0.912  1749 -  1768	
+        7    0.848    0.901   838 -   856	
+        8    0.855    0.851   253 -   270	
+        9    0.861    0.849   127 -   144	
+       10    0.867    0.832  1592 -  1609	
+       11    0.873    0.822  1270 -  1287	
+       12    0.878    0.830  1563 -  1580	
+       13    0.883    0.785   717 -   734	
+       14    0.888    0.765  1244 -  1261	
+       15    0.893    0.743  1528 -  1545	
+       16    0.897    0.734  1206 -  1223	
+       17    0.900    0.683   754 -   771	
+       18    0.901    0.571   229 -   246	
+       19    0.902    0.570   782 -   799	
+       20    0.903    0.512   196 -   213
+--- 
+--- PhdTopology REFINEMENT AND TOPOLOGY HEADER: SUMMARY
+--- NHTM_BEST    : 20
+--- NHTM_2ND_BEST: 19
+--- REL_BEST     : 0
+--- HTMTOP_PRD   : out
+--- HTMTOP_RID   : 0.054
+--- HTMTOP_RIP   : 0
+--- 
+--- PhdTopology REFINEMENT AND TOPOLOGY PREDICTION: SYMBOLS
+--- AA           : amino acid in one-letter code
+--- PHD htm      : HTM's predicted by the PHD neural network
+---                system (H=HTM, ' '=not HTM)
+--- Rel htm      : Reliability index of prediction (0-9, 0 is low)
+--- detail       : Neural network output in detail
+--- prH htm      : 'Probability' for assigning a helical trans-
+---                membrane region (HTM)
+--- prL htm      : 'Probability' for assigning a non-HTM region
+---          note: 'Probabilites' are scaled to the interval
+---                0-9, e.g., prH=5 means, that the first 
+---                output node is 0.5-0.6
+--- subset       : Subset of more reliable predictions
+--- SUB htm      : All residues for which the expected average
+---                accuracy is > 82% (tables in header).
+---          note: for this subset the following symbols are used:
+---             L: is loop (for which above ' ' is used)
+---           '.': means that no prediction is made for this,
+---                residue as the reliability is:  Rel < 5
+--- other        : predictions derived based on PHDhtm
+--- PHDFhtm      : filtered prediction, i.e., too long HTM's are
+---                split, too short ones are deleted
+--- PHDRhtm      : refinement of neural network output 
+--- PHDThtm      : topology prediction based on refined model
+---                symbols used:
+---             i: intra-cytoplasmic
+---             T: transmembrane region
+---             o: extra-cytoplasmic
+--- 
+--- PhdTopology REFINEMENT AND TOPOLOGY PREDICTION
+                  ....,....1....,....2....,....3....,....4....,....5....,....6
+         AA      |MANFLLPRGTSSFRRFTRESLAAIEKRMAEKQARGSTTLQESREGLPEEEAPRPQLDLQA|
+         PHD htm |                                                            |
+         Rel htm |999999999999999999999999999999999999999999999999999999999999|
+ detail: 
+         prH htm |000000000000000000000000000000000000000000000000000000000000|
+         prL htm |999999999999999999999999999999999999999999999999999999999999|
+ subset: SUB htm |LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |                                                            |
+         PHDThtm |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+                  ....,....7....,....8....,....9....,....10...,....11...,....12
+         AA      |SKKLPDLYGNPPQELIGEPLEDLDPFYSTQKTFIVLNKGKTIFRFSATNALYVLSPFHPI|
+         PHD htm |                                                            |
+         Rel htm |999999999999999999999999999999999999999999998888865444452101|
+ detail: 
+         prH htm |000000000000000000000000000000000000000000000000012222223444|
+         prL htm |999999999999999999999999999999999999999999999999987777776555|
+ subset: SUB htm |LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL...........|
+         PHDRhtm |                                                            |
+         PHDThtm |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+                  ....,....13...,....14...,....15...,....16...,....17...,....18
+         AA      |RRAAVKILVHSLFNMLIMCTILTNCVFMAQHDPPPWTKYVEYTFTAIYTFESLVKILARG|
+         PHD htm |     HHHHHHHHHHHHHHHHHHHHH                         HH       |
+         Rel htm |331000345567778888888764211568899999999999865311110110333676|
+ detail: 
+         prH htm |334445677788889999999887654210000000000000012344444554333111|
+         prL htm |665554322211110000000112345789999999999999987655555445666888|
+ subset: SUB htm |...........HHHHHHHHHHH.......LLLLLLLLLLLLLL...............L.|
+         PHDRhtm |      HHHHHHHHHHHHHHHHHH                                    |
+         PHDThtm |ooooooTTTTTTTTTTTTTTTTTTiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii|
+                  ....,....19...,....20...,....21...,....22...,....23...,....24
+         AA      |FCLHAFTFLRDPWNWLDFSVIIMAYTTEFVDLGNVSALRTFRVLRALKTISVISGLKTIV|
+         PHD htm |                   HHHHHHHHHH                       HHHHHHHH|
+         Rel htm |889999999999887654102344553301134566678888777457632103453235|
+ detail: 
+         prH htm |000000000000001122456677776654432211110000111221133456776667|
+         prL htm |999999999999998877543322223345567788889999888778866543223332|
+ subset: SUB htm |LLLLLLLLLLLLLLL......................LLLLLLLL..L............|
+         PHDRhtm |               HHHHHHHHHHHHHHHHHH               HHHHHHHHHHHH|
+         PHDThtm |iiiiiiiiiiiiiiiTTTTTTTTTTTTTTTTTToooooooooooooooTTTTTTTTTTTT|
+                  ....,....25...,....26...,....27...,....28...,....29...,....30
+         AA      |GALIQSVKKLADVMVLTVFCLSVFALIGLQLFMGNLRHKCVRNFTALNGTNGSVEADGLV|
+         PHD htm |HHHH        HHHHHHHHHHHHHHHHHHH                             |
+         Rel htm |433002555420024678888888888764203578899999999999999999999999|
+ detail: 
+         prH htm |766543222234567889999999999887643210000000000000000000000000|
+         prL htm |233456777765432110000000000112356789999999999999999999999999|
+ subset: SUB htm |................HHHHHHHHHHHH......LLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |HHHHHH      HHHHHHHHHHHHHHHHHH                              |
+         PHDThtm |TTTTTTiiiiiiTTTTTTTTTTTTTTTTTToooooooooooooooooooooooooooooo|
+                  ....,....31...,....32...,....33...,....34...,....35...,....36
+         AA      |WESLDLYLSDPENYLLKNGTSDVLLCGNSSDAGTCPEGYRCLKAGENPDHGYTSFDSFAW|
+         PHD htm |                                                            |
+         Rel htm |999999999999999999999999999999999999999999999999999999999987|
+ detail: 
+         prH htm |000000000000000000000000000000000000000000000000000000000000|
+         prL htm |999999999999999999999999999999999999999999999999999999999999|
+ subset: SUB htm |LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |                                                            |
+         PHDThtm |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+                  ....,....37...,....38...,....39...,....40...,....41...,....42
+         AA      |AFLALFRLMTQDCWERLYQQTLRSAGKIYMIFFMLVIFLGSFYLVNLILAVVAMAYEEQN|
+         PHD htm |                           HHHHHHHHHHHHHHHHHHHHHHHHHH       |
+         Rel htm |777889989999999999999987631257788888888888888888776412578899|
+ detail: 
+         prH htm |111000000000000000000001134678899999999999999999888753210000|
+         prL htm |888999999999999999999998865321100000000000000000111246789999|
+ subset: SUB htm |LLLLLLLLLLLLLLLLLLLLLLLL.....HHHHHHHHHHHHHHHHHHHHH.....LLLLL|
+         PHDRhtm |                             HHHHHHHHHHHHHHHHHHHHH          |
+         PHDThtm |oooooooooooooooooooooooooooooTTTTTTTTTTTTTTTTTTTTTiiiiiiiiii|
+                  ....,....43...,....44...,....45...,....46...,....47...,....48
+         AA      |QATIAETEEKEKRFQEAMEMLKKEHEALTIRGVDTVSRSSLEMSPLAPVNSHERRSKRRK|
+         PHD htm |                                                            |
+         Rel htm |999999999999999999999999999999999999999999999999999999999999|
+ detail: 
+         prH htm |000000000000000000000000000000000000000000000000000000000000|
+         prL htm |999999999999999999999999999999999999999999999999999999999999|
+ subset: SUB htm |LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |                                                            |
+         PHDThtm |iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii|
+                  ....,....49...,....50...,....51...,....52...,....53...,....54
+         AA      |RMSSGTEECGEDRLPKSDSEDGPRAMNHLSLTRGLSRTSMKPRSSRGSIFTFRRRDLGSE|
+         PHD htm |                                                            |
+         Rel htm |999999999999999999999999999999999999999999999999999999999999|
+ detail: 
+         prH htm |000000000000000000000000000000000000000000000000000000000000|
+         prL htm |999999999999999999999999999999999999999999999999999999999999|
+ subset: SUB htm |LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |                                                            |
+         PHDThtm |iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii|
+                  ....,....55...,....56...,....57...,....58...,....59...,....60
+         AA      |ADFADDENSTAGESESHHTSLLVPWPLRRTSAQGQPSPGTSAPGHALHGKKNSTVDCNGV|
+         PHD htm |                                                            |
+         Rel htm |999999999999999999999999999999999999999999999999999999999999|
+ detail: 
+         prH htm |000000000000000000000000000000000000000000000000000000000000|
+         prL htm |999999999999999999999999999999999999999999999999999999999999|
+ subset: SUB htm |LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |                                                            |
+         PHDThtm |iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii|
+                  ....,....61...,....62...,....63...,....64...,....65...,....66
+         AA      |VSLLGAGDPEATSPGSHLLRPVMLEHPPDTTTPSEEPGGPQMLTSQAPCVDGFEEPGARQ|
+         PHD htm |                                                            |
+         Rel htm |999999999999999999999999999999999999999999999999999999999999|
+ detail: 
+         prH htm |000000000000000000000000000000000000000000000000000000000000|
+         prL htm |999999999999999999999999999999999999999999999999999999999999|
+ subset: SUB htm |LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |                                                            |
+         PHDThtm |iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii|
+                  ....,....67...,....68...,....69...,....70...,....71...,....72
+         AA      |RALSAVSVLTSALEELEESRHKCPPCWNRLAQRYLIWECCPLWMSIKQGVKLVVMDPFTD|
+         PHD htm |                                                         HHH|
+         Rel htm |999999999999999999999999999999999988999999876788887756652034|
+ detail: 
+         prH htm |000000000000000000000000000000000000000000011100001121123567|
+         prL htm |999999999999999999999999999999999999999999988899998878876432|
+ subset: SUB htm |LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL.LLLLLLL........|
+         PHDRhtm |                                                        HHHH|
+         PHDThtm |iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiTTTT|
+                  ....,....73...,....74...,....75...,....76...,....77...,....78
+         AA      |LTITMCIVLNTLFMALEHYNMTSEFEEMLQVGNLVFTGIFTAEMTFKIIALDPYYYFQQG|
+         PHD htm |HHHHHHHHHHHHHH                    HHHHHHHHHHHHHHH           |
+         Rel htm |577888887766412578899999999999877303457777666422204777777777|
+ detail: 
+         prH htm |788999998888753210000000000000011356778888888766642111111111|
+         prL htm |211000001111246789999999999999988643221111111233357888888888|
+ subset: SUB htm |.HHHHHHHHH......LLLLLLLLLLLLLLLLL.....HHHH.........LLLLLLLLL|
+         PHDRhtm |HHHHHHHHHHHHHH                   HHHHHHHHHHHHHHHHHH         |
+         PHDThtm |TTTTTTTTTTTTTToooooooooooooooooooTTTTTTTTTTTTTTTTTTiiiiiiiii|
+                  ....,....79...,....80...,....81...,....82...,....83...,....84
+         AA      |WNIFDSIIVILSLMELGLSRMSNLSVLRSFRLLRVFKLAKSWPTLNTLIKIIGNSVGALG|
+         PHD htm |     HHHHHHHHHHHH                               HHHHHHHHHHHH|
+         Rel htm |775321455455642211456667778878889999998988888752001200234567|
+ detail: 
+         prH htm |112335777777876654221111110010000000000000000123555655667788|
+         prL htm |887664222222123345778888889989999999999999999876444344332211|
+ subset: SUB htm |LL.....................LLLLLLLLLLLLLLLLLLLLLLL.............H|
+         PHDRhtm | HHHHHHHHHHHHHHHHHH                                      HHH|
+         PHDThtm |iTTTTTTTTTTTTTTTTTTooooooooooooooooooooooooooooooooooooooTTT|
+                  ....,....85...,....86...,....87...,....88...,....89...,....90
+         AA      |NLTLVLAIIVFIFAVVGMQLFGKNYSELRDSDSGLLPRWHMMDFFHAFLIIFRILCGEWI|
+         PHD htm |HHHHHHHHHHHHHHHHHHH                                 HH      |
+         Rel htm |788888888888888765103678999999999999999999875321000000146788|
+ detail: 
+         prH htm |899999999999999887543110000000000000000000012334444455421100|
+         prL htm |100000000000000112456889999999999999999999987665555544578899|
+ subset: SUB htm |HHHHHHHHHHHHHHHH......LLLLLLLLLLLLLLLLLLLLLL.............LLL|
+         PHDRhtm |HHHHHHHHHHHHHHHH                                            |
+         PHDThtm |TTTTTTTTTTTTTTTTiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii|
+                  ....,....91...,....92...,....93...,....94...,....95...,....96
+         AA      |ETMWDCMEVSGQSLCLLVFLLVMVIGNLVVLNLFLALLLSSFSADNLTAPDEDREMNNLQ|
+         PHD htm |            HHHHHHHHHHHHHHHHHHHHHHHHHHH                     |
+         Rel htm |999999998873034678888888888888888877652146788999999999999999|
+ detail: 
+         prH htm |000000000013567889999999999999999988876421100000000000000000|
+         prL htm |999999999986432110000000000000000011123578899999999999999999|
+ subset: SUB htm |LLLLLLLLLLL.....HHHHHHHHHHHHHHHHHHHH......LLLLLLLLLLLLLLLLLL|
+         PHDRhtm |               HHHHHHHHHHHHHHHHHHHHH                        |
+         PHDThtm |iiiiiiiiiiiiiiiTTTTTTTTTTTTTTTTTTTTToooooooooooooooooooooooo|
+                  ....,....97...,....98...,....99...,....100..,....101..,....102
+         AA      |LALARIQRGLRFVKRTTWDFCCGLLRQRPQKPAALAAQGQLPSCIATPYSPPPPETEKVP|
+         PHD htm |                                                            |
+         Rel htm |999999999999999999999999999999999999999999999999999999999999|
+ detail: 
+         prH htm |000000000000000000000000000000000000000000000000000000000000|
+         prL htm |999999999999999999999999999999999999999999999999999999999999|
+ subset: SUB htm |LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |                                                            |
+         PHDThtm |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+                  ....,....103..,....104..,....105..,....106..,....107..,....108
+         AA      |PTRKETRFEEGEQPGQGTPGDPEPVCVPIAVAESDTDDQEEDEENSLGTEEESSKQQESQ|
+         PHD htm |                                                            |
+         Rel htm |999999999999999999999999999999999999999999999999999999999999|
+ detail: 
+         prH htm |000000000000000000000000000000000000000000000000000000000000|
+         prL htm |999999999999999999999999999999999999999999999999999999999999|
+ subset: SUB htm |LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |                                                            |
+         PHDThtm |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+                  ....,....109..,....110..,....111..,....112..,....113..,....114
+         AA      |PVSGGPEAPPDSRTWSQVSATASSEAEASASQADWRQQWKAEPQAPGCGETPEDSCSEGS|
+         PHD htm |                                                            |
+         Rel htm |999999999999999999999999999999999999999999999999999999999999|
+ detail: 
+         prH htm |000000000000000000000000000000000000000000000000000000000000|
+         prL htm |999999999999999999999999999999999999999999999999999999999999|
+ subset: SUB htm |LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |                                                            |
+         PHDThtm |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+                  ....,....115..,....116..,....117..,....118..,....119..,....120
+         AA      |TADMTNTAELLEQIPDLGQDVKDPEDCFTEGCVRRCPCCAVDTTQAPGKVWWRLRKTCYH|
+         PHD htm |                                                            |
+         Rel htm |999999999999999999999999999999999999999999999999999999999999|
+ detail: 
+         prH htm |000000000000000000000000000000000000000000000000000000000000|
+         prL htm |999999999999999999999999999999999999999999999999999999999999|
+ subset: SUB htm |LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |                                                            |
+         PHDThtm |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+                  ....,....121..,....122..,....123..,....124..,....125..,....126
+         AA      |IVEHSWFETFIIFMILLSSGALAFEDIYLEERKTIKVLLEYADKMFTYVFVLEMLLKWVA|
+         PHD htm |      HHHHHHHHHHHHHHH                       HHHHHHHHHHHHHHHH|
+         Rel htm |988862145677777777651146788999999999998875412467778777765530|
+ detail: 
+         prH htm |000013577888888888875421100000000000000012246788889888887765|
+         prL htm |999986422111111111124578899999999999999987753211110111112234|
+ subset: SUB htm |LLLL......HHHHHHHH......LLLLLLLLLLLLLLLLL......HHHHHHHH.....|
+         PHDRhtm |     HHHHHHHHHHHHHHHHHH                    HHHHHHHHHHHHHHHHH|
+         PHDThtm |oooooTTTTTTTTTTTTTTTTTTiiiiiiiiiiiiiiiiiiiiTTTTTTTTTTTTTTTTT|
+                  ....,....127..,....128..,....129..,....130..,....131..,....132
+         AA      |YGFKKYFTNAWCWLDFLIVDVSLVSLVANTLGFAEMGPIKSLRTLRALRPLRALSRFEGM|
+         PHD htm |         HHHHHHHHHHHHHHHHHHH                                |
+         Rel htm |244554200024566678888887664113457899999999999999999999999999|
+ detail: 
+         prH htm |322222344567788889999998887543211000000000000000000000000000|
+         prL htm |677777655432211110000001112456788999999999999999999999999999|
+ subset: SUB htm |................HHHHHHHH........LLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |H        HHHHHHHHHHHHHHHHHH                                 |
+         PHDThtm |TooooooooTTTTTTTTTTTTTTTTTTiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii|
+                  ....,....133..,....134..,....135..,....136..,....137..,....138
+         AA      |RVVVNALVGAIPSIMNVLLVCLIFWLIFSIMGVNLFAGKFGRCINQTEGDLPLNYTIVNN|
+         PHD htm |     HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH                        |
+         Rel htm |875311456777888888888888888888887652147789999999999999999999|
+ detail: 
+         prH htm |012345778888999999999999999999998876421100000000000000000000|
+         prL htm |987654221111000000000000000000001123578899999999999999999999|
+ subset: SUB htm |LL.......HHHHHHHHHHHHHHHHHHHHHHHH.....LLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |         HHHHHHHHHHHHHHHHHHHHHHHH                           |
+         PHDThtm |iiiiiiiiiTTTTTTTTTTTTTTTTTTTTTTTTooooooooooooooooooooooooooo|
+                  ....,....139..,....140..,....141..,....142..,....143..,....144
+         AA      |KSQCESLNLTGELYWTKVKVNFDNVGAGYLALLQVATFKGWMDIMYAAVDSRGYEEQPQW|
+         PHD htm |                                                            |
+         Rel htm |999999999999999999999999988766678888899999999999999999999999|
+ detail: 
+         prH htm |000000000000000000000000000111110000000000000000000000000000|
+         prL htm |999999999999999999999999999888889999999999999999999999999999|
+ subset: SUB htm |LLLLLLLLLLLLLLLLLLLLLLLLLLLL...LLLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |                                                            |
+         PHDThtm |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+                  ....,....145..,....146..,....147..,....148..,....149..,....150
+         AA      |EYNLYMYIYFVIFIIFGSFFTLNLFIGVIIDNFNQQKKKLGGQDIFMTEEQKKYYNAMKK|
+         PHD htm |     HHHHHHHHHHHHHHHHHHHHHHHH                               |
+         Rel htm |988503567888888888888888877530467889999999999999999999999999|
+ detail: 
+         prH htm |000246788999999999999999988764211000000000000000000000000000|
+         prL htm |999753211000000000000000011235788999999999999999999999999999|
+ subset: SUB htm |LLL.....HHHHHHHHHHHHHHHHHHH.....LLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |       HHHHHHHHHHHHHHHHHHHH                                 |
+         PHDThtm |oooooooTTTTTTTTTTTTTTTTTTTTiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii|
+                  ....,....151..,....152..,....153..,....154..,....155..,....156
+         AA      |LGSKKPQKPIPRPLNKYQGFIFDIVTKQAFDVTIMFLICLNMVTMMVETDDQSPEKINIL|
+         PHD htm |                             HHHHHHHHHHHHHHH                |
+         Rel htm |999999999999999999999998776403456778887766402568889999999987|
+ detail: 
+         prH htm |000000000000000000000000111246778889998888753210000000000001|
+         prL htm |999999999999999999999999888753221110001111246789999999999998|
+ subset: SUB htm |LLLLLLLLLLLLLLLLLLLLLLLLLL.......HHHHHHH.......LLLLLLLLLLLLL|
+         PHDRhtm |                           HHHHHHHHHHHHHHHHHH               |
+         PHDThtm |iiiiiiiiiiiiiiiiiiiiiiiiiiiTTTTTTTTTTTTTTTTTTooooooooooooooo|
+                  ....,....157..,....158..,....159..,....160..,....161..,....162
+         AA      |AKINLLFVAIFTGECIVKLAALRHYYFTNSWNIFDFVVVILSIVGTVLSDIIQKYFFSPT|
+         PHD htm |  HHHHHHHHHHHHHHHHHHH          HHHHHHHHHHHHHHHHHHH         H|
+         Rel htm |512357788888887764320355555432202456788888888775310133210100|
+ detail: 
+         prH htm |246678899999998887665322222233356778899999999887654433344445|
+         prL htm |753321100000001112334677777766643221100000000112345566655554|
+ subset: SUB htm |.....HHHHHHHHHHH....................HHHHHHHHHHH.............|
+         PHDRhtm |  HHHHHHHHHHHHHHHHHH           HHHHHHHHHHHHHHHHHH           |
+         PHDThtm |ooTTTTTTTTTTTTTTTTTTiiiiiiiiiiiTTTTTTTTTTTTTTTTTTooooooooooo|
+                  ....,....163..,....164..,....165..,....166..,....167..,....168
+         AA      |LFRVIRLARIGRILRLIRGAKGIRTLLFALMMSLPALFNIGLLLFLVMFIYSIFGMANFA|
+         PHD htm |HH HHHH                   HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH  |
+         Rel htm |210111102237667778877766512466777778888888888888888888764114|
+ detail: 
+         prH htm |654555543331111110011111246788888889999999999999999999887542|
+         prL htm |345444456668888889988888753211111110000000000000000000112457|
+ subset: SUB htm |...........L..LLLLLLLL........HHHHHHHHHHHHHHHHHHHHHHHHH.....|
+         PHDRhtm |                               HHHHHHHHHHHHHHHHHHHHHHH      |
+         PHDThtm |oooooooooooooooooooooooooooooooTTTTTTTTTTTTTTTTTTTTTTTiiiiii|
+                  ....,....169..,....170..,....171..,....172..,....173..,....174
+         AA      |YVKWEAGIDDMFNFQTFANSMLCLFQITTSAGWDGLLSPILNTGPPYCDPTLPNSNGSRG|
+         PHD htm |                                                            |
+         Rel htm |678999999999999999988777878899999999999999999999999999999999|
+ detail: 
+         prH htm |110000000000000000000111010000000000000000000000000000000000|
+         prL htm |889999999999999999999888989999999999999999999999999999999999|
+ subset: SUB htm |.LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |                                                            |
+         PHDThtm |iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii|
+                  ....,....175..,....176..,....177..,....178..,....179..,....180
+         AA      |DCGSPAVGILFFTTYIIISFLIVVNMYIAIILENFSVATEESTEPLSEDDFDMFYEIWEK|
+         PHD htm |      HHHHHHHHHHHHHHHHHHHHHHHHH                             |
+         Rel htm |998874046778888888888888888776304678899999999999999999999999|
+ detail: 
+         prH htm |000012578889999999999999999888642110000000000000000000000000|
+         prL htm |999987421110000000000000000111357889999999999999999999999999|
+ subset: SUB htm |LLLLL....HHHHHHHHHHHHHHHHHHHH.....LLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |        HHHHHHHHHHHHHHHHHHHH                                |
+         PHDThtm |iiiiiiiiTTTTTTTTTTTTTTTTTTTToooooooooooooooooooooooooooooooo|
+                  ....,....181..,....182..,....183..,....184..,....185..,....186
+         AA      |FDPEATQFIEYSVLSDFADALSEPLRIAKPNQISLINMDLPMVSGDRIHCMDILFAFTKR|
+         PHD htm |                                                            |
+         Rel htm |999999999999999999999999999999999999999999999999999999999999|
+ detail: 
+         prH htm |000000000000000000000000000000000000000000000000000000000000|
+         prL htm |999999999999999999999999999999999999999999999999999999999999|
+ subset: SUB htm |LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |                                                            |
+         PHDThtm |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+                  ....,....187..,....188..,....189..,....190..,....191..,....192
+         AA      |VLGESGEMDALKIQMEEKFMAANPSKISYEPITTTLRRKHEEVSAMVIQRAFRRHLLQRS|
+         PHD htm |                                                            |
+         Rel htm |999999999999999999999999999999999999999999999999999999999999|
+ detail: 
+         prH htm |000000000000000000000000000000000000000000000000000000000000|
+         prL htm |999999999999999999999999999999999999999999999999999999999999|
+ subset: SUB htm |LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |                                                            |
+         PHDThtm |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+                  ....,....193..,....194..,....195..,....196..,....197..,....198
+         AA      |LKHASFLFRQQAGSGLSEEDAPEREGLIAYVMSENFSRPLGPPSSSSISSTSFPPSYDSV|
+         PHD htm |                                                            |
+         Rel htm |999999999999999999999999999999999999999999999999999999999999|
+ detail: 
+         prH htm |000000000000000000000000000000000000000000000000000000000000|
+         prL htm |999999999999999999999999999999999999999999999999999999999999|
+ subset: SUB htm |LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |                                                            |
+         PHDThtm |oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo|
+                  ....,....199..,....200..,....201..,....202..,....203..,....204
+         AA      |TRATSDNLQVRGSDYSHSEDLADFPPSPDRDRESIV|
+         PHD htm |                                    |
+         Rel htm |999999999999999999999999999999999999|
+ detail: 
+         prH htm |000000000000000000000000000000000000|
+         prL htm |999999999999999999999999999999999999|
+ subset: SUB htm |LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL|
+         PHDRhtm |                                    |
+         PHDThtm |oooooooooooooooooooooooooooooooooooo|
+--- 
+--- PhdTopology REFINEMENT AND TOPOLOGY PREDICTION END
+--- 

@@ -1,0 +1,3 @@
+#File contains Motif stat from db for NLS found in unk sequence
+#Motif_Name	No_Found	%oE	%oX	Protein List
+inputSequence	RKKRRxR	Potential	23	100	0	cx10_mouse,sp10_human,tat_hv112,tat_hv1a2,tat_hv1b1,tat_hv1b5,tat_hv1br,tat_hv1c4,tat_hv1el,tat_hv1h2,tat_hv1jr,tat_hv1ma,tat_hv1mn,tat_hv1nd,tat_hv1oy,tat_hv1pv,tat_hv1rh,tat_hv1s1,tat_hv1s3,tat_hv1sc,tat_hv1y2,tat_hv1z2,tat_hv1z6	nuc,nuc,nuc,nuc,nuc,nuc,nuc,nuc,nuc,nuc,nuc,nuc,nuc,nuc,nuc,nuc,nuc,nuc,nuc,nuc,nuc,nuc,nuc

@@ -1,0 +1,20 @@
+#                                                                            --- full sequence --- -------------- this domain -------------   hmm coord   ali coord   env coord
+# target name        accession   tlen query name           accession   qlen   E-value  score  bias   #  of  c-Evalue  i-Evalue  score  bias  from    to  from    to  from    to  acc description of target
+#------------------- ---------- ----- -------------------- ---------- ----- --------- ------ ----- --- --- --------- --------- ------ ----- ----- ----- ----- ----- ----- ----- ---- ---------------------
+Ion_trans            PF00520.31   245 query                -           2005  2.3e-257  849.0 106.9   1   4   2.5e-85   1.1e-81  273.7  16.9     1   244   128   435   128   436 0.95 Ion transport protein
+Ion_trans            PF00520.31   245 query                -           2005  2.3e-257  849.0 106.9   2   4   4.4e-59     2e-55  187.7  21.8     3   239   760   988   758   993 0.95 Ion transport protein
+Ion_trans            PF00520.31   245 query                -           2005  2.3e-257  849.0 106.9   3   4   1.6e-68   7.2e-65  218.6  22.9     1   242  1207  1481  1207  1483 0.92 Ion transport protein
+Ion_trans            PF00520.31   245 query                -           2005  2.3e-257  849.0 106.9   4   4   3.5e-59   1.6e-55  188.0  21.2     2   244  1531  1786  1530  1787 0.96 Ion transport protein
+Na_trans_cytopl      PF11933.8    213 query                -           2005   1.4e-79  266.8  13.5   1   1   7.1e-83   3.2e-79  265.7  13.5     2   213   508   709   505   709 0.95 Cytoplasmic domain of voltage-gated Na+ ion channel
+Na_trans_assoc       PF06512.13   203 query                -           2005   2.1e-65  220.8   3.8   1   1   4.7e-69   2.1e-65  220.8   3.8     1   203   997  1203   997  1203 0.92 Sodium ion transport-associated
+PKD_channel          PF08016.12   426 query                -           2005   9.1e-08   31.2  83.0   1   1   1.2e-08   5.6e-05   22.0   0.2   311   424  1635  1780  1627  1781 0.88 Polycystin cation channel
+#
+# Program:         hmmscan
+# Version:         3.1b1 (May 2013)
+# Pipeline mode:   SCAN
+# Query file:      query.fasta
+# Target file:     /mnt/ppcache/rost_db/data/pfam/Pfam-A.hmm
+# Option settings: hmmscan -o query.hmm3pfam --tblout query.hmm3pfamTbl --domtblout query.hmm3pfamDomTbl --acc --notextw --cut_ga --cpu 1 /mnt/ppcache/rost_db/data/pfam/Pfam-A.hmm query.fasta 
+# Current dir:     /tmp/kwZ1bGwqkY
+# Date:            Thu Jan 20 08:51:41 2022
+# [ok]

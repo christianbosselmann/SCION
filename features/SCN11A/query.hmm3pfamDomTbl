@@ -1,0 +1,18 @@
+#                                                                            --- full sequence --- -------------- this domain -------------   hmm coord   ali coord   env coord
+# target name        accession   tlen query name           accession   qlen   E-value  score  bias   #  of  c-Evalue  i-Evalue  score  bias  from    to  from    to  from    to  acc description of target
+#------------------- ---------- ----- -------------------- ---------- ----- --------- ------ ----- --- --- --------- --------- ------ ----- ----- ----- ----- ----- ----- ----- ---- ---------------------
+Ion_trans            PF00520.31   245 query                -           1791  3.7e-245  809.0  99.9   1   4   1.2e-74   7.4e-71  238.2  16.2     1   243   128   409   128   411 0.93 Ion transport protein
+Ion_trans            PF00520.31   245 query                -           1791  3.7e-245  809.0  99.9   2   4   1.3e-58   8.1e-55  185.7  16.3     3   242   578   819   576   822 0.94 Ion transport protein
+Ion_trans            PF00520.31   245 query                -           1791  3.7e-245  809.0  99.9   3   4     3e-67   1.8e-63  214.0  21.2     1   243  1055  1317  1055  1319 0.95 Ion transport protein
+Ion_trans            PF00520.31   245 query                -           1791  3.7e-245  809.0  99.9   4   4   5.3e-60   3.2e-56  190.3  22.3     2   244  1366  1614  1365  1615 0.96 Ion transport protein
+Na_trans_assoc       PF06512.13   203 query                -           1791   9.8e-41  140.3   3.7   1   1   1.6e-44   9.8e-41  140.3   3.7     4   203   829  1051   826  1051 0.84 Sodium ion transport-associated
+#
+# Program:         hmmscan
+# Version:         3.1b1 (May 2013)
+# Pipeline mode:   SCAN
+# Query file:      query.fasta
+# Target file:     /mnt/ppcache/rost_db/data/pfam/Pfam-A.hmm
+# Option settings: hmmscan -o query.hmm3pfam --tblout query.hmm3pfamTbl --domtblout query.hmm3pfamDomTbl --acc --notextw --cut_ga --cpu 1 /mnt/ppcache/rost_db/data/pfam/Pfam-A.hmm query.fasta 
+# Current dir:     /tmp/ZXCBHGEn8X
+# Date:            Thu Jan 20 11:26:33 2022
+# [ok]

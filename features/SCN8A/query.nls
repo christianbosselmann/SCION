@@ -1,0 +1,351 @@
+<html><head><title>Results for query.fasta</title></head>
+<BODY BGCOLOR='#FFFFFF'><H3><STRONG>Results of Nuclear Localization Signal Prediction(NLS):</STRONG></H3><LI><A HREF='https://rostlab.org/owiki/index.php/PredictNLS#Help' TARGET='blank'>Help </A> on interpretation of results.</LI><BR><BR><TABLE CELLPADDING=2 WIDTH='100%'>
+<TR VALIGN=TOP>
+<TD VALIGN=TOP BGCOLOR='#0000FF' WIDTH='15%'>
+<B><FONT COLOR='#FFFFFF'> Input Sequence (NLS's in Red)</FONT></B></TD>
+<TD VALIGN=TOP WIDTH='85%'>
+<PRE>MAARLLAPPGPDSFKPFTPESLANIERRIAESKLKKPPKADGSHREDDEDSKPKPNSDLE
+AGKSLPFIYGDIPQGLVAVPLEDFDPYYLTQKTFVVLNRGKTLFRFSATPALYILSPFNL
+IRRIAIKILIHSVFSMIIMCTILTNCVFMTFSNPPDWSKNVEYTFTGIYTFESLVKIIAR
+GFCIDGFTFLRDPWNWLDFSVIMMAYITEFVNLGNVSALRTFRVLRALKTISVIPGLKTI
+VGALIQSVKKLSDVMILTVFCLSVFALIGLQLFMGNLRNKCVVWPINFNESYLENGTKGF
+DWEEYINNKTNFYTVPGMLEPLLCGNSSDAGQCPEGYQCMKAGRNPNYGYTSFDTFSWAF
+LALFRLMTQDYWENLYQLTLRAAGKTYMIFFVLVIFVGSFYLVNLILAVVAMAYEEQNQA
+TLEEAEQKEAEFKAMLEQLKKQQEEAQAAAMATSAGTVSEDAIEEEGEEGGGSPRSSSEI
+SKLSSKSAKE<span style="font-weight:bold;color:red;">R</span><span style="font-weight:bold;color:red;">R</span><span style="font-weight:bold;color:red;">N</span><span style="font-weight:bold;color:red;">R</span><span style="font-weight:bold;color:red;">R</span><span style="font-weight:bold;color:red;">K</span><span style="font-weight:bold;color:red;">K</span><span style="font-weight:bold;color:red;">R</span><span style="font-weight:bold;color:red;">K</span>QKELSEGEEKGDPEKVFKSESEDGMRRKAFRLPDNRIGRKF
+SIMNQSLLSIPGSPFLSRHNSKSSIFSFRGPGRFRDPGSENEFADDEHSTVEESEGRRDS
+LFIPIRARERRSSYSGYSGYSQGSRSSRIFPSL<span style="font-weight:bold;color:red;">R</span><span style="font-weight:bold;color:red;">R</span><span style="font-weight:bold;color:red;">S</span><span style="font-weight:bold;color:red;">V</span><span style="font-weight:bold;color:red;">K</span><span style="font-weight:bold;color:red;">R</span><span style="font-weight:bold;color:red;">N</span>STVDCNGVVSLIGGPGSHIG
+GRLLPEATTEVEIKKKGPGSLLVSMDQLASYGRKDRINSIMSVVTNTLVEELEESQRKCP
+PCWYKFANTFLIWECHPYWIKLKEIVNLIVMDPFVDLAITICIVLNTLFMAMEHHPMTPQ
+FEHVLAVGNLVFTGIFTAEMFLKLIAMDPYYYFQEGWNIFDGFIVSLSLMELSLADVEGL
+SVLRSFRLLRVFKLAKSWPTLNMLIKIIGNSVGALGNLTLVLAIIVFIFAVVGMQLFGKS
+YKECVCKINQDCELPRWHMHDFFHSFLIVFRVLCGEWIETMWDCMEVAGQAMCLIVFMMV
+MVIGNLVVLNLFLALLLSSFSADNLAATDDDGEMNNLQISVIRIKKGVAWTKLKVHAFMQ
+AHFKQREADEVKPLDELYEKKANCIANHTGADIHRNGDFQKNGNGTTSGIGSSVEKYIID
+EDHMSFINNPNLTVRVPIAVGESDFENLNTEDVSSESDPEGSKDKLDDTSSSEGSTIDIK
+PEVEEVPVEQPEEYLDPDACFTEGCVQRFKCCQVNIEEGLGKSWWILRKTCFLIVEHNWF
+ETFIIFMILLSSGALAFEDIYIEQRKTIRTILEYADKVFTYIFILEMLLKWTAYGFVKFF
+TNAWCWLDFLIVAVSLVSLIANALGYSELGAIKSLRTLRALRPLRALSRFEGMRVVVNAL
+VGAIPSIMNVLLVCLIFWLIFSIMGVNLFAGKYHYCFNETSEIRFEIEDVNNKTECEKLM
+EGNNTEIRWKNVKINFDNVGAGYLALLQVATFKGWMDIMYAAVDSRKPDEQPKYEDNIYM
+YIYFVIFIIFGSFFTLNLFIGVIIDNFNQQKKKFGGQDIFMTEEQKKYYNAMKKLGSKKP
+QKPIPRPLNKIQGIVFDFVTQQAFDIVIMMLICLNMVTMMVETDTQSKQMENILYWINLV
+FVIFFTCECVLKMFALRHYYFTIGWNIFDFVVVILSIVGMFLADIIEKYFVSPTLFRVIR
+LARIGRILRLIKGAKGIRTLLFALMMSLPALFNIGLLLFLVMFIFSIFGMSNFAYVKHEA
+GIDDMFNFETFGNSMICLFQITTSAGWDGLLLPILNRPPDCSLDKEHPGSGFKGDCGNPS
+VGIFFFVSYIIISFLIVVNMYIAIILENFSVATEESADPLSEDDFETFYEIWEKFDPDAT
+QFIEYCKLADFADALEHPLRVPKPNTIELIAMDLPMVSGDRIHCLDILFAFTKRVLGDSG
+ELDILRQQMEERFVASNPSKVSYEPITTTLRRKQEEVSAVVLQRAYRGHLARRGFICKKT
+TSNKLENGGTHREKKESTPSTASLPSYDSVTKPEKEKQQRAEEGRRERAKRQKEVRESKC
+</PRE></TD></TR><TR VALIGN=TOP><TD VALIGN=TOP BGCOLOR='#0000FF' WIDTH='15%'><B><FONT COLOR='#FFFFFF'> Sequence Length</FONT></B></TD><TD VALIGN=TOP WIDTH='85%'><EM>1980</EM></TD></TR><TR VALIGN=TOP>
+<TD VALIGN=TOP BGCOLOR='#0000FF' WIDTH='15%'>
+<B><FONT COLOR='#FFFFFF'> NLS's found.<I> Number gives position of Motif </I></FONT></B></TD>
+<TD VALIGN=TOP WIDTH='85%'>
+<UL>
+<LI> <EM> RRNRRKKRK </EM><EM>491</EM> </LI>
+<LI> <EM> RRSVKRN </EM><EM>634</EM> </LI>
+<LI> <EM> RRSVKRN </EM><EM>634</EM> </LI>
+</UL></TD></TR></TABLE>
+<H3><B>Statistical data for Nuclear Localization Signals present in the Input Sequence</B></H3>
+<TABLE BORDER=2><TR><TD ALIGN=CENTER>
+<B><FONT >Generalized NLS<BR> ( <A HREF='#H_Res_NLS'> notation </A>)</FONT></B></TD>
+<TD COLSPAN=1>Type</TD><TD COLSPAN=1>No with NLS</TD><TD COLSPAN=1>%Nuc Proteins</TD><TD COLSPAN=1>%NonNuc Proteins</TD><TD COLSPAN=1>Protein Swiss Id</TD><TD COLSPAN=1>Protein Localizations(Swiss anno.)</TD></TR>
+<TR><TD ROWSPAN="54" VALIGN="TOP"><B><FONT><EM>[KR][KR]x[KR][KR][KR]x[KR][KR]</EM></FONT></B></TD>
+<TD COLSPAN=1 ROWSPAN='54'  VALIGN='TOP'>Potential </TD>
+<TD COLSPAN=1 ROWSPAN='54'  VALIGN='TOP'>54 </TD><TD COLSPAN=1 ROWSPAN='54'  VALIGN='TOP'>98.14 </TD><TD COLSPAN=1 ROWSPAN='54'  VALIGN='TOP'>1.85 </TD><td colspan="1" rowspan="1">h2b_agabi</td>
+<td colspan="1" rowspan="1">nuc</td></TR>
+<tr><td colspan="1" rowspan="1">h2b_anoga</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">prt_antgr</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">hsp1_bovin</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">hsp2_bovin</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">cdp_canfa</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">hsp1_caefu</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">brm_drome</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">hsp1_didma</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">hsp1_droau</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">t2d2_drome</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">twst_drome</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rms5_emeni</td>
+<TD COLSPAN=1 ROWSPAN=1>mit</TD></TR>
+<tr><td colspan="1" rowspan="1">aant_hdvam</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">aant_hdvd3</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">aant_hdvit</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">aant_hdvl1</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">aant_hdvm1</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">aant_hdvm2</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">aant_hdvna</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">aant_hdvwo</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">ell2_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">gcf_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">hsp1_horse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">pwp1_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rev_hv2be</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rev_hv2d1</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rev_hv2kr</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">sn22_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">h2b1_maize</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">h2b2_maize</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">h2b3_maize</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">h2b4_maize</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">h2b5_maize</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">hsp1_mouse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">u2r1_mouse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">hsp1_orcor</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">prt7_oncmy</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">prt9_oncmy</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">hsp1_phaci</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">hsp1_pig</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">hsp1_psecu</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rpb1_plafd</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">hsp1_rabit</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">hsp1_rat</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">hsp1_sagim</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">hsp1_sheep</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">prt1_sepof</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">prt2_sepof</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">prt3_scyca</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">hsp1_trivu</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">h2b1_wheat</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">pr08_yeast</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">sen1_yeast</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+</TR>
+<TR><TD ROWSPAN="35" VALIGN="TOP"><B><FONT><EM>RR[TS]x[QK][KR][KN]</EM></FONT></B></TD>
+<TD COLSPAN=1 ROWSPAN='35'  VALIGN='TOP'>Potential </TD>
+<TD COLSPAN=1 ROWSPAN='35'  VALIGN='TOP'>35 </TD><TD COLSPAN=1 ROWSPAN='35'  VALIGN='TOP'>100 </TD><TD COLSPAN=1 ROWSPAN='35'  VALIGN='TOP'>0 </TD><td colspan="1" rowspan="1">vdr_bovin</td>
+<td colspan="1" rowspan="1">nuc</td></TR>
+<tr><td colspan="1" rowspan="1">tha_chick</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">thb_chick</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">vdr_chick</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">vdr_cotja</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">dnl4_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rrb2_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rrg1_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rrg2_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">tha1_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">tha2_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">thb1_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">thb2_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">vdr_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rra_mouse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rrb_mouse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rrg1_mouse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rrg2_mouse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">tha1_mouse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">tha2_mouse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">vdr_mouse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rra_notvi</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rrb_notvi</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">tha2_rat</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">tha_ranca</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">thb_ranca</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">vdr_rat</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">tha1_sheep</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">thb1_sheep</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rra_xenla</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rrg1_xenla</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rrg2_xenla</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">thaa_xenla</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">thab_xenla</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">vdr_xenla</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+</TR>
+<TR><TD ROWSPAN="41" VALIGN="TOP"><B><FONT><EM>RR[TS]x[QK][KR][KNS]</EM></FONT></B></TD>
+<TD COLSPAN=1 ROWSPAN='41'  VALIGN='TOP'>Potential </TD>
+<TD COLSPAN=1 ROWSPAN='41'  VALIGN='TOP'>41 </TD><TD COLSPAN=1 ROWSPAN='41'  VALIGN='TOP'>100 </TD><TD COLSPAN=1 ROWSPAN='41'  VALIGN='TOP'>0 </TD><td colspan="1" rowspan="1">vdr_bovin</td>
+<td colspan="1" rowspan="1">nuc</td></TR>
+<tr><td colspan="1" rowspan="1">tha_chick</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">thb_chick</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">vdr_chick</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">vdr_cotja</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">dnl4_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rrb2_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rrg1_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rrg2_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">tha1_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">tha2_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">thb1_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">thb2_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">vdr_human</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">hmgt_mouse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rra_mouse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rrb_mouse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rrg1_mouse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rrg2_mouse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">tha1_mouse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">tha2_mouse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">thb1_mouse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">thb2_mouse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">vdr_mouse</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rra_notvi</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rrb_notvi</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">tha2_rat</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">tha_ranca</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">thb1_rat</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">thb2_rat</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">thb_ranca</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">vdr_rat</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">h1s_strpu</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">tha1_sheep</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">thb1_sheep</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rra_xenla</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rrg1_xenla</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">rrg2_xenla</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">thaa_xenla</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">thab_xenla</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+<tr><td colspan="1" rowspan="1">vdr_xenla</td>
+<TD COLSPAN=1 ROWSPAN=1>nuc</TD></TR>
+</TR>
+</TABLE><H3><B><I> This protein is predicted to bind to DNA.</I></B></H3>
+<TABLE COLS=5 CELLPADDING=2 WIDTH='100%'>
+<TR VALIGN=TOP><TD VALIGN=TOP BGCOLOR='#0000FF' WIDTH='25%'>
+<B><FONT COLOR='#FFFFFF'><EM>DNA Binding signals.</EM></FONT></B></TD>
+<TD VALIGN=TOP WIDTH='17%'>RR[TS]x[QK][KR][KN] </TD>
+</TR></TABLE>
+<H3> DNA binding statistics for the binding NLS signals.</H3>
+<TABLE COLS=6 CELLPADDING=2 WIDTH='100%'>
+<TR VALIGN=TOP><TD VALIGN=TOP BGCOLOR='#0000FF' WIDTH='15%'>
+<B><FONT COLOR='#FFFFFF'><EM>DnaBindNLS</EM></FONT></B></TD>
+<TD VALIGN=TOP WIDTH='15%'>No binding DNA</TD>
+<TD VALIGN=TOP WIDTH='15%'>%binding DNA</TD>
+<TD VALIGN=TOP WIDTH='15%'>No in binding Domain</TD>
+<TD VALIGN=TOP WIDTH='15%'>%in binding Domain</TD>
+<TD VALIGN=TOP WIDTH='25%'>% of associated DNA binding domains</TD></TR>
+<TR VALIGN=TOP><TD VALIGN=TOP BGCOLOR='#0000FF' WIDTH='15%'>
+<B><FONT COLOR='#FFFFFF'><EM>RR[TS]x[QK][KR][KN]</EM></FONT></B></TD>
+<TD VALIGN=TOP WIDTH='15%'>34</TD>
+<TD VALIGN=TOP WIDTH='15%'> 97.14</TD>
+<TD VALIGN=TOP WIDTH='15%'>34</TD>
+<TD VALIGN=TOP WIDTH='15%'>100</TD>
+<TD VALIGN=TOP WIDTH='25%'>ZINC FINGERS: 100</TD></TR></TABLE>
+<H3><A NAME= 'H_Res_NLS'>  Symbols</A> used in representing the NLS are explained below:</H3>
+An x (or X) implies any amino acid residue can be present at this position.<BR>
+     <BR> <TABLE BORDER='2' ><TR><TD COLSPAN='3' ALIGN='CENTER' ><strong> Example Motifs </strong></TD></TR>
+<TR><TD> Example</TD><TD> Read</TD><TD> Equivalent Motifs </TD></TR>
+<TR><TD> [KR]KRKK </TD><TD> "K or R" KRKK </TD><TD> KKRKK,RKRKK</TR>
+<TR><TD> K{5} </TD><TD> 5 times K </TD><TD> KKKKK </TD></TR>
+<TR><TD> [KR]{3,5} </TD><TD> between 3 and 5 times K or R </TD><TD> KKRR, RRKKR, RRR,KKK ...</TD></TR>
+<TR><TD> K{3,}? </TD><TD> 3 or more K's </TD><TD> KKK,KKKK,KKKKK ... </TD></TR></TABLE>

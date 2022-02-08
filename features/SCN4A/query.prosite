@@ -1,0 +1,119 @@
+<pre>
+<B>-------------------------------------------------------------</B>
+Pattern-ID: <B>ASN_GLYCOSYLATION</B> <A HREF="http://www.expasy.ch/cgi-bin/get-prosite-entry?PS00001">PS00001</A> <A HREF="http://www.expasy.ch/cgi-bin/get-prodoc-entry?PDOC00001">PDOC00001</A>
+Pattern-DE: N-glycosylation site
+Pattern:    N[^P][ST][^P]
+   214      NISA
+   288      NDTN
+   297      NDTW
+   303      NDTW
+   315      NDSW
+   321      NDTW
+   333      NDTF
+   362      NSSD
+   507      NGSL
+   702      NLTL
+   961      NSSV
+   1191     NTTT
+   1205     NKSE
+   1376     NQSQ
+   1786     NSSS
+
+Pattern-ID: <B>CAMP_PHOSPHO_SITE</B> <A HREF="http://www.expasy.ch/cgi-bin/get-prosite-entry?PS00004">PS00004</A> <A HREF="http://www.expasy.ch/cgi-bin/get-prodoc-entry?PDOC00004">PDOC00004</A>
+Pattern-DE: cAMP- and cGMP-dependent protein kinase phosphorylation site
+Pattern:    [RK]{2}.[ST]
+   248      KKLS
+   1508     KKES
+
+Pattern-ID: <B>PKC_PHOSPHO_SITE</B> <A HREF="http://www.expasy.ch/cgi-bin/get-prosite-entry?PS00005">PS00005</A> <A HREF="http://www.expasy.ch/cgi-bin/get-prodoc-entry?PDOC00005">PDOC00005</A>
+Pattern-DE: Protein kinase C phosphorylation site
+Pattern:    [ST].[RK]
+   88       SNK
+   220      TFR
+   246      SVK
+   378      TGR
+   415      TLR
+   670      SFR
+   725      SYK
+   850      SPK
+   950      SKK
+   1019     TLR
+   1127     SLR
+   1130     TLR
+   1195     SER
+   1242     TFK
+   1328     SKK
+   1563     SVK
+   1721     TLK
+   1746     SMK
+   1826     TVR
+
+Pattern-ID: <B>CK2_PHOSPHO_SITE</B> <A HREF="http://www.expasy.ch/cgi-bin/get-prosite-entry?PS00006">PS00006</A> <A HREF="http://www.expasy.ch/cgi-bin/get-prodoc-entry?PDOC00006">PDOC00006</A>
+Pattern-DE: Casein kinase II phosphorylation site
+Pattern:    [ST].{2}[DE]
+   56       SDLE
+   149      TMSD
+   387      TSYD
+   457      TLAE
+   513      SQGE
+   524      SSGD
+   653      SLVE
+   725      SYKE
+   765      TMWD
+   813      SDED
+   850      SPKD
+   857      SLGE
+   873      TAPE
+   905      SSLE
+   931      SDLE
+   937      TEEE
+   943      TFSE
+   966      STAD
+   1063     TILE
+   1141     SRFE
+   1193     TTSE
+   1207     SECE
+   1511     SGID
+   1646     TLQE
+   1700     TMEE
+   1761     SGDD
+   1791     SPEE
+   1811     SPSD
+
+Pattern-ID: <B>MYRISTYL</B> <A HREF="http://www.expasy.ch/cgi-bin/get-prosite-entry?PS00008">PS00008</A> <A HREF="http://www.expasy.ch/cgi-bin/get-prodoc-entry?PDOC00008">PDOC00008</A>
+Pattern-DE: N-myristoylation site
+Pattern:    G[^EDRKHPFYW].{2}[STAGCN][^P]
+   213      GNISAL
+   353      GSNDAL
+   508      GSLDTS
+   529      GISDAM
+   583      GITICI
+   619      GIFTAE
+   694      GNSVGA
+   774      GQAMCL
+   832      GIGFAK
+   842      GLLHGK
+   863      GAGEAG
+   1155     GAIPSI
+   1282     GSFFTL
+   1430     GLALSD
+   1770     GLLANT
+   1830     GVKESL
+
+Pattern-ID: <B>AMIDATION</B> <A HREF="http://www.expasy.ch/cgi-bin/get-prosite-entry?PS00009">PS00009</A> <A HREF="http://www.expasy.ch/cgi-bin/get-prodoc-entry?PDOC00009">PDOC00009</A>
+Pattern-DE: Amidation site
+Pattern:    .G[RK][RK]
+   1013     RGKK
+
+Pattern-ID: <B>ATP_GTP_A</B> <A HREF="http://www.expasy.ch/cgi-bin/get-prosite-entry?PS00017">PS00017</A> <A HREF="http://www.expasy.ch/cgi-bin/get-prodoc-entry?PDOC00017">PDOC00017</A>
+Pattern-DE: ATP/GTP-binding site motif A (P-loop)
+Pattern:    [AG].{4}GK[ST]
+   718      GMQLFGKS
+
+Pattern-ID: <B>TYR_PHOSPHO_SITE_2</B> <A HREF="http://www.expasy.ch/cgi-bin/get-prosite-entry?PS60007">PS60007</A> <A HREF="http://www.expasy.ch/cgi-bin/get-prodoc-entry?PDOC00007">PDOC00007</A>
+Pattern-DE: Tyrosine kinase phosphorylation site 2
+Pattern:    [RK].{3}[DE].{2}Y
+   1244     KGWMDIMY
+
+
+</pre>

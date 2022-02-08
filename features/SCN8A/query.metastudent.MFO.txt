@@ -1,0 +1,100 @@
+query	GO:0022803	0.62	passive transmembrane transporter activity
+query	GO:0022891	0.62	substrate-specific transmembrane transporter activity
+query	GO:0022892	0.62	substrate-specific transporter activity
+query	GO:0015075	0.62	ion transmembrane transporter activity
+query	GO:0015267	0.62	channel activity
+query	GO:0005215	0.62	transporter activity
+query	GO:0005216	0.62	ion channel activity
+query	GO:0022838	0.62	substrate-specific channel activity
+query	GO:0022857	0.62	transmembrane transporter activity
+query	GO:0005244	0.55	voltage-gated ion channel activity
+query	GO:0022832	0.55	voltage-gated channel activity
+query	GO:0022836	0.55	gated channel activity
+query	GO:0046873	0.40	metal ion transmembrane transporter activity
+query	GO:0022890	0.40	inorganic cation transmembrane transporter activity
+query	GO:0008324	0.40	cation transmembrane transporter activity
+query	GO:0022843	0.40	voltage-gated cation channel activity
+query	GO:0005248	0.39	voltage-gated sodium channel activity
+query	GO:0015077	0.36	monovalent inorganic cation transmembrane transporter activity
+query	GO:0015081	0.35	sodium ion transmembrane transporter activity
+query	GO:0005272	0.35	sodium channel activity
+query	GO:0005261	0.33	cation channel activity
+query	GO:1901363	0.29	heterocyclic compound binding
+query	GO:0000166	0.29	nucleotide binding
+query	GO:0005488	0.29	binding
+query	GO:1901265	0.29	nucleoside phosphate binding
+query	GO:0097159	0.29	organic cyclic compound binding
+query	GO:0036094	0.29	small molecule binding
+query	GO:0035639	0.26	purine ribonucleoside triphosphate binding
+query	GO:0017076	0.26	purine nucleotide binding
+query	GO:0097367	0.26	carbohydrate derivative binding
+query	GO:0032549	0.26	ribonucleoside binding
+query	GO:0005524	0.26	ATP binding
+query	GO:0032559	0.26	adenyl ribonucleotide binding
+query	GO:0032555	0.26	purine ribonucleotide binding
+query	GO:0032553	0.26	ribonucleotide binding
+query	GO:0043168	0.26	anion binding
+query	GO:0043167	0.26	ion binding
+query	GO:0030554	0.26	adenyl nucleotide binding
+query	GO:0001883	0.26	purine nucleoside binding
+query	GO:0001882	0.26	nucleoside binding
+query	GO:0032550	0.26	purine ribonucleoside binding
+query	GO:0005515	0.16	protein binding
+query	GO:0046872	0.15	metal ion binding
+query	GO:0043169	0.15	cation binding
+query	GO:0031402	0.14	sodium ion binding
+query	GO:0031420	0.14	alkali metal ion binding
+query	GO:0043522	0.12	leucine zipper domain binding
+query	GO:0019904	0.12	protein domain specific binding
+query	GO:0030275	0.12	LRR domain binding
+query	GO:0005249	0.11	voltage-gated potassium channel activity
+query	GO:0005262	0.10	calcium channel activity
+query	GO:0015085	0.10	calcium ion transmembrane transporter activity
+query	GO:0072509	0.10	divalent inorganic cation transmembrane transporter activity
+query	GO:0005245	0.08	voltage-gated calcium channel activity
+query	GO:0005267	0.07	potassium channel activity
+query	GO:0015079	0.07	potassium ion transmembrane transporter activity
+query	GO:0005251	0.06	delayed rectifier potassium channel activity
+query	GO:0005509	0.05	calcium ion binding
+query	GO:0003743	0.04	translation initiation factor activity
+query	GO:0008135	0.04	translation factor activity, nucleic acid binding
+query	GO:0060089	0.03	molecular transducer activity
+query	GO:0016740	0.03	transferase activity
+query	GO:0000155	0.03	phosphorelay sensor kinase activity
+query	GO:0003723	0.03	RNA binding
+query	GO:0016773	0.03	phosphotransferase activity, alcohol group as acceptor
+query	GO:0030171	0.03	voltage-gated proton channel activity
+query	GO:0003676	0.03	nucleic acid binding
+query	GO:0003677	0.03	DNA binding
+query	GO:0016772	0.03	transferase activity, transferring phosphorus-containing groups
+query	GO:0003779	0.03	actin binding
+query	GO:0015252	0.03	hydrogen ion channel activity
+query	GO:0005516	0.03	calmodulin binding
+query	GO:0016301	0.03	kinase activity
+query	GO:0003824	0.03	catalytic activity
+query	GO:0005102	0.03	receptor binding
+query	GO:0008092	0.03	cytoskeletal protein binding
+query	GO:0016775	0.03	phosphotransferase activity, nitrogenous group as acceptor
+query	GO:0005242	0.03	inward rectifier potassium channel activity
+query	GO:0043855	0.03	cyclic nucleotide-gated ion channel activity
+query	GO:0005221	0.03	intracellular cyclic nucleotide activated cation channel activity
+query	GO:0005220	0.03	inositol 1,4,5-trisphosphate-sensitive calcium-release channel activity
+query	GO:0008332	0.03	low voltage-gated calcium channel activity
+query	GO:0005222	0.03	intracellular cAMP activated cation channel activity
+query	GO:0005227	0.03	calcium activated cation channel activity
+query	GO:0016491	0.03	oxidoreductase activity
+query	GO:0015278	0.03	calcium-release channel activity
+query	GO:0015276	0.03	ligand-gated ion channel activity
+query	GO:0005218	0.03	intracellular ligand-gated calcium channel activity
+query	GO:0005219	0.03	ryanodine-sensitive calcium-release channel activity
+query	GO:0022834	0.03	ligand-gated channel activity
+query	GO:0022839	0.03	ion gated channel activity
+query	GO:0038023	0.03	signaling receptor activity
+query	GO:0004872	0.03	receptor activity
+query	GO:0004871	0.03	signal transducer activity
+query	GO:0005198	0.03	structural molecule activity
+query	GO:0004674	0.03	protein serine/threonine kinase activity
+query	GO:0004673	0.03	protein histidine kinase activity
+query	GO:0004672	0.03	protein kinase activity
+query	GO:0072345	0.03	NAADP-sensitive calcium-release channel activity
+query	GO:0005217	0.03	intracellular ligand-gated ion channel activity

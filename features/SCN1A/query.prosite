@@ -1,0 +1,134 @@
+<pre>
+<B>-------------------------------------------------------------</B>
+Pattern-ID: <B>ASN_GLYCOSYLATION</B> <A HREF="http://www.expasy.ch/cgi-bin/get-prosite-entry?PS00001">PS00001</A> <A HREF="http://www.expasy.ch/cgi-bin/get-prodoc-entry?PDOC00001">PDOC00001</A>
+Pattern-DE: N-glycosylation site
+Pattern:    N[^P][ST][^P]
+   211      NVSA
+   284      NASL
+   295      NITV
+   301      NGTL
+   306      NETV
+   338      NSSD
+   601      NESR
+   621      NLSQ
+   681      NGTT
+   892      NLTL
+   1064     NHTA
+   1080     NGTT
+   1146     NESS
+   1378     NTTT
+   1392     NHTD
+   1403     NETA
+   1788     NFSV
+
+Pattern-ID: <B>CAMP_PHOSPHO_SITE</B> <A HREF="http://www.expasy.ch/cgi-bin/get-prosite-entry?PS00004">PS00004</A> <A HREF="http://www.expasy.ch/cgi-bin/get-prodoc-entry?PDOC00004">PDOC00004</A>
+Pattern-DE: cAMP- and cGMP-dependent protein kinase phosphorylation site
+Pattern:    [RK]{2}.[ST]
+   245      KKLS
+   547      KRYS
+   567      RRNS
+   604      RRDS
+   617      RRNS
+   691      KRRS
+   1057     KKDS
+
+Pattern-ID: <B>PKC_PHOSPHO_SITE</B> <A HREF="http://www.expasy.ch/cgi-bin/get-prosite-entry?PS00005">PS00005</A> <A HREF="http://www.expasy.ch/cgi-bin/get-prodoc-entry?PDOC00005">PDOC00005</A>
+Pattern-DE: Protein kinase C phosphorylation site
+Pattern:    [ST].[RK]
+   217      TFR
+   243      SVK
+   391      TLR
+   490      SSK
+   493      SAK
+   528      SIR
+   558      SIR
+   565      SPR
+   576      SFR
+   603      SRR
+   625      TSR
+   628      SSR
+   708      SQR
+   860      SFR
+   915      SYK
+   1247     TIK
+   1314     SLR
+   1317     TLR
+   1405     TAR
+   1430     TFK
+   1516     SKK
+   1594     SLR
+   1751     SVK
+   1872     TKR
+   1909     TLK
+   1934     TVK
+   1970     TEK
+
+Pattern-ID: <B>CK2_PHOSPHO_SITE</B> <A HREF="http://www.expasy.ch/cgi-bin/get-prosite-entry?PS00006">PS00006</A> <A HREF="http://www.expasy.ch/cgi-bin/get-prodoc-entry?PDOC00006">PDOC00006</A>
+Pattern-DE: Casein kinase II phosphorylation site
+Pattern:    [ST].{2}[DE]
+   53       SDLE
+   286      SLEE
+   308      TVFE
+   363      TSFD
+   433      TLEE
+   465      TASE
+   482      SSSE
+   493      SAKE
+   510      SGGE
+   523      SESE
+   586      SEND
+   596      STFE
+   603      SRRD
+   643      STVD
+   683      TTTE
+   723      TVEE
+   843      SLVE
+   915      SYKD
+   955      TMWD
+   1003     TDDD
+   1090     SSVE
+   1122     SDFE
+   1134     SESD
+   1150     SSSE
+   1155     STVD
+   1250     TMLE
+   1328     SRFE
+   1380     TTGD
+   1801     SEDD
+   1968     SITE
+
+Pattern-ID: <B>MYRISTYL</B> <A HREF="http://www.expasy.ch/cgi-bin/get-prosite-entry?PS00008">PS00008</A> <A HREF="http://www.expasy.ch/cgi-bin/get-prodoc-entry?PDOC00008">PDOC00008</A>
+Pattern-DE: N-myristoylation site
+Pattern:    G[^EDRKHPFYW].{2}[STAGCN][^P]
+   210      GNVSAL
+   271      GNLRNK
+   302      GTLINE
+   540      GNRLTY
+   809      GIFTAE
+   884      GNSVGA
+   964      GQAMCL
+   1081     GTTSGI
+   1087     GTGSSV
+   1310     GAIKSL
+   1342     GAIPSI
+   1470     GSFFTL
+   1618     GMFLAE
+
+Pattern-ID: <B>ATP_GTP_A</B> <A HREF="http://www.expasy.ch/cgi-bin/get-prosite-entry?PS00017">PS00017</A> <A HREF="http://www.expasy.ch/cgi-bin/get-prodoc-entry?PDOC00017">PDOC00017</A>
+Pattern-DE: ATP/GTP-binding site motif A (P-loop)
+Pattern:    [AG].{4}GK[ST]
+   908      GMQLFGKS
+
+Pattern-ID: <B>RIBONUCLEASE_P</B> <A HREF="http://www.expasy.ch/cgi-bin/get-prosite-entry?PS00648">PS00648</A> <A HREF="http://www.expasy.ch/cgi-bin/get-prodoc-entry?PDOC00558">PDOC00558</A>
+Pattern-DE: Bacterial ribonuclease P protein component signature
+Pattern:    [LIVMFYSNAD].{2}A.{2}R[NH][KRQLYAT][LIVMFSA][KRA]R.[LIVMTA][KR]
+   1922     IQRAYRRHLLKRTVK
+
+Pattern-ID: <B>TYR_PHOSPHO_SITE_2</B> <A HREF="http://www.expasy.ch/cgi-bin/get-prosite-entry?PS60007">PS60007</A> <A HREF="http://www.expasy.ch/cgi-bin/get-prodoc-entry?PDOC00007">PDOC00007</A>
+Pattern-DE: Tyrosine kinase phosphorylation site 2
+Pattern:    [RK].{3}[DE].{2}Y
+   542      RLTYEKRY
+   1432     KGWMDIMY
+
+
+</pre>

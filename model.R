@@ -18,12 +18,49 @@ librarian::shelf(tidyverse,
                  furrr,
                  caret,
                  cowplot,
+                 assertthat,
+                 Matrix,
                  quiet = TRUE)
 
 set.seed(seed)
 
-# helper function
+# helper functions
 `%nin%` = Negate(`%in%`)
+
+normalize <- function(x, method){
+  
+  if(!(method %in% c("row","col","symm"))){
+    stop("invalid method argument")
+  }
+  
+  if(method=="symm"){
+    rs <- rowSums(x)^-.5
+    cs <- colSums(x)^-.5
+    tr <- x * rs
+    tr <- t(tr)
+    tr <- tr * cs
+    tr <- t(tr)
+    
+    if(isSymmetric(x)){
+      tr <- forceSymmetric(tr)
+      tr <- as(tr, "CsparseMatrix")
+    }
+  }
+  
+  if(method=="row"){
+    rs <- 1 / rowSums(x)
+    rs[rs == Inf] <- 0
+    tr <- x * rs
+  }
+  
+  if(method=="col"){
+    rs <- 1 / colSums(x)
+    rs[rs == Inf] <- 0
+    tr <- t(t(x) * rs)
+  }
+  
+  return(tr)
+}
 
 # read data
 data <- read_csv("data/dat_prep.csv")
@@ -41,12 +78,12 @@ if (class_weight == "uniform") {
 }
 
 if (class_weight == "inverse") {
-weights <- c("GOF" = length(data$y) / sum(data$y == "GOF"),
-             "LOF" = length(data$y) / sum(data$y == "LOF"))
+  weights <- c("GOF" = length(data$y) / sum(data$y == "GOF"),
+               "LOF" = length(data$y) / sum(data$y == "LOF"))
 }
 
 # load HPO similariy matrix
-hpo <- read.table("mat/hpomatrix.csv")
+load("mat/hpomatrix.RData")
 
 # load kernel matrices, maintain order, and set up loop
 if (kernel == "mtl") {Km <- readRDS("mat/kernelmatrices_mtl.rds")}
@@ -62,12 +99,18 @@ for (m in 1:length(Km)) {
   report[[m]] <- data.frame()
   M <- as.matrix(Km[[m]])
   
-  M <- as.matrix(hpo + M) # TODO redo. dirty hack for uniform kernel weight MTMKL.
+  ### TODO redo. dirty hack for uniform kernel weight MTMKL.
+  # TODO normalizing the matrices, which is needed for MKL, appears to deteriorate performance (for unknown reasons)
+  hpo <- as.matrix(normalize(hpo, "symm"))
+  M <- as.matrix(normalize(M, "symm"))
+  
+  M <- as.matrix(hpo + M) 
+  ###
   
   # set up nested cv
   cv <- nested_cv(M, outside = vfold_cv(v = k), 
                   inside = vfold_cv(v = k))
-
+  
   # set up cost wrapper functions
   svm_metric <- function(object, cost = 1) {
     y_test <- y[-object$in_id]

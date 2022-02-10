@@ -16,7 +16,7 @@ librarian::shelf(tidyverse,
                  jaccard)
 
 # params
-sim_method <- "jaccard" # choose similarity measure: jaccard, lin or resnik
+sim_method <- "resnik" # choose similarity measure: jaccard, lin or resnik
 psd_method <- "clip" # choose spectrum method to find nearest psd matrix: clip, shift or flip
 
 # get data
@@ -106,7 +106,7 @@ if (sim_method == "jaccard"){
   # get similarity matrix
   mat_pheno <- get_sim_grid(ontology = hpo, 
                             information_content = descendants_IC(hpo),
-                            term_sim_method = sim_method, # or resnik
+                            term_sim_method = sim_method,
                             term_sets = set_terms)
   
   # check if phenotypic similarity matrix, mat_pheno, is positive semi-definite
@@ -116,17 +116,27 @@ if (sim_method == "jaccard"){
     print("Phenotypic similarity matrix is not PSD, applying correction.")
     
     if (psd_method == "clip") {
-      mat_pheno <- nearPD(mat_pheno, base.matrix = TRUE)
+      mat_pheno <- nearPD(mat_pheno, 
+                          base.matrix = TRUE, 
+                          ensureSymmetry = TRUE,
+                          corr = TRUE) # this object also stores the minimum eigenvalue (for correction diagnostics)
       mat_pheno <- mat_pheno$mat
+      mat_pheno <- round(mat_pheno, 10) # this is necessary to avoid floating point errors with isSymmetric and is.positive.semi.definite
     }
     
-    if (psd_method == "shift") {mat_pheno <- spectrumShift(mat_pheno, coeff = 1.2)}
+    if (psd_method == "shift") {
+      mat_pheno <- spectrumShift(mat_pheno, coeff = 1.2)
+      mat_pheno <- round(mat_pheno, 10)
+    }
     
-    if (psd_method == "flip") {mat_pheno <- correctionKernelMatrix(mat_pheno, method = "flip", repair = TRUE, tol = 1e-08)
-    mat_pheno <- mat_pheno$mat
+    if (psd_method == "flip") {
+      mat_pheno <- correctionKernelMatrix(mat_pheno, method = "flip", repair = TRUE, tol = 1e-08)
+      mat_pheno <- mat_pheno$mat
+      mat_pheno <- round(mat_pheno, 10)
     }
   }
 }
 
 # export for use in kernel matrix precomputation and MTMKL model
-write.table(mat_pheno, "mat/hpomatrix.csv")
+hpo <- mat_pheno
+save(hpo, file = "mat/hpomatrix.RData")

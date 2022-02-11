@@ -1,0 +1,2 @@
+mean,sd,best_cost,best_matrix,kernel,weights
+0.7813333333333333,0.03602468289628347,4,4,mkl,uniform

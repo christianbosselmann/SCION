@@ -8,8 +8,8 @@ k <- 5 # k-fold nested cross validation
 cost_vec <- 2 ^ seq(-5, 5, by = 1) # C-SVM hyperparameter vector for grid search
 class_weight <- "uniform" # SVM weights for imbalanced classes: "uniform" for equal weight distribution, "inverse" for weights inversely proportional to class frequency
 kernel <- "mkl" # choice of kernel matrices: "mkl" for MTMKL-SVM, "mtl" for MTL-SVM, "dirac" for Dirac kernel SVM, "union" for union SVM
-mkl_method <- "semkl" # choice of MKL method for kernel weights, "semkl" for SEMKL or "simple" for simpleMKL
-mkl_cost <- 20 # penalty for MKL kernel prioritization 
+mkl_method <- "uniform" # choice of MKL method for kernel weights, "semkl" for SEMKL, "simple" for simpleMKL, "uniform" for no kernel weights
+mkl_cost <- 20 # penalty for MKL kernel prioritization (SEMKL, SimpleMKL)
 
 # load packages
 library("librarian")
@@ -80,11 +80,14 @@ for (m in 1:length(Km)) {
   ### MKL module
   if (kernel == "mkl") {
     
-    Kt <- as.matrix(round(scale_cosin(Kt), 10)) # task-level similarity matrix
+    # TODO quick hack. still not sure if normalization fn is good or fucks up somewhere
+    Kt <- as.matrix(round(Kt, 10)) # task-level similarity matrix
+    hpo <- as.matrix(round(hpo, 10)) # phenotype similarity matrix
+    M <- as.matrix(round(M, 10)) # instance-level similarity matrix, one for each sigma
     
-    hpo <- as.matrix(round(scale_cosin(hpo), 10)) # phenotype similarity matrix
-    
-    M <- as.matrix(round(scale_cosin(M), 10)) # instance-level similarity matrix, one for each sigma
+    # Kt <- as.matrix(round(scale_cosin(Kt), 10)) # task-level similarity matrix
+    # hpo <- as.matrix(round(scale_cosin(hpo), 10)) # phenotype similarity matrix
+    # M <- as.matrix(round(scale_cosin(M), 10)) # instance-level similarity matrix, one for each sigma
     
     M_mkl <- list(Kt, hpo, M)
     
@@ -100,8 +103,13 @@ for (m in 1:length(Km)) {
                                       penalty = mkl_cost)
     }
     
+    if (mkl_method == "uniform") {
+      mod_mkl <- NULL
+      mod_mkl$gamma <- c(1/3,1/3,1/3) # TODO quick hack, will fail with >3 kernel matrices
+    }
+    
     # finalize MKL matrix by taking the weighted mean
-    M <- Reduce(`+`,Map(`*`, mod_mkl$gamma, M_mkl))
+    M <- Reduce(`+`,Map(`*`, mod_mkl$gamma, M_mkl)) # TODO or is this the problem?
     
     # store weights
     mkl_weights[[m]] <- mod_mkl$gamma
@@ -193,7 +201,8 @@ print(report_params)
 if (kernel == "mkl") {
   # prepare best matrix for mkl
   M <- as.matrix(Km[[report_params$best_matrix]])
-  M <- as.matrix(round(scale_cosin(M), 10)) # instance-level similarity matrix, one for each sigma
+  M <- as.matrix(round(M, 10)) # TODO quick hack while we check the normalization fn
+  # M <- as.matrix(round(scale_cosin(M), 10)) # instance-level similarity matrix, one for each sigma
   M_mkl <- list(Kt, hpo, M)
   M <- Reduce(`+`,Map(`*`, mkl_weights[[report_params$best_matrix]], M_mkl))
 } else {

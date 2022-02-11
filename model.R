@@ -7,7 +7,9 @@ seed <- 42 # random seed
 k <- 5 # k-fold nested cross validation
 cost_vec <- 2 ^ seq(-5, 5, by = 1) # C-SVM hyperparameter vector for grid search
 class_weight <- "uniform" # SVM weights for imbalanced classes: "uniform" for equal weight distribution, "inverse" for weights inversely proportional to class frequency
-kernel <- "mtl" # choice of kernel matrices: "mtl" for MTL-SVM, "dirac" for Dirac kernel SVM, "union" for union SVM
+kernel <- "mkl" # choice of kernel matrices: "mkl" for MTMKL-SVM, "mtl" for MTL-SVM, "dirac" for Dirac kernel SVM, "union" for union SVM
+mkl_method <- "semkl" # choice of MKL method for kernel weights, "semkl" for SEMKL or "simple" for simpleMKL
+mkl_cost <- 20 # penalty for MKL kernel prioritization 
 
 # load packages
 library("librarian")
@@ -22,45 +24,11 @@ librarian::shelf(tidyverse,
                  Matrix,
                  quiet = TRUE)
 
+# get helper functions
+source("func.R")
+
+# set random seed
 set.seed(seed)
-
-# helper functions
-`%nin%` = Negate(`%in%`)
-
-normalize <- function(x, method){
-  
-  if(!(method %in% c("row","col","symm"))){
-    stop("invalid method argument")
-  }
-  
-  if(method=="symm"){
-    rs <- rowSums(x)^-.5
-    cs <- colSums(x)^-.5
-    tr <- x * rs
-    tr <- t(tr)
-    tr <- tr * cs
-    tr <- t(tr)
-    
-    if(isSymmetric(x)){
-      tr <- forceSymmetric(tr)
-      tr <- as(tr, "CsparseMatrix")
-    }
-  }
-  
-  if(method=="row"){
-    rs <- 1 / rowSums(x)
-    rs[rs == Inf] <- 0
-    tr <- x * rs
-  }
-  
-  if(method=="col"){
-    rs <- 1 / colSums(x)
-    rs[rs == Inf] <- 0
-    tr <- t(t(x) * rs)
-  }
-  
-  return(tr)
-}
 
 # read data
 data <- read_csv("data/dat_prep.csv")
@@ -70,6 +38,9 @@ data$gene <- NULL # drop task from features
 
 data$y <- as.factor(data$y)
 y <- data$y # get label vector
+y_mkl <- as.numeric(y) # another label vector for MKL
+y_mkl[y_mkl == 1] <- 1
+y_mkl[y_mkl == 2] <- -1
 
 # set up class weights
 if (class_weight == "uniform") {
@@ -85,12 +56,19 @@ if (class_weight == "inverse") {
 # load HPO similariy matrix
 load("mat/hpomatrix.RData")
 
-# load kernel matrices, maintain order, and set up loop
+# load kernel matrices, maintain order, and set up loop depending on method
+if (kernel == "mkl") {
+  Kt <- readRDS("mat/taskmatrix.rds")
+  Km <- readRDS("mat/kernelmatrices_instance.rds")
+}
+
 if (kernel == "mtl") {Km <- readRDS("mat/kernelmatrices_mtl.rds")}
 if (kernel == "dirac") {Km <- readRDS("mat/kernelmatrices_dirac.rds")}
 if (kernel == "union") {Km <- readRDS("mat/kernelmatrices_union.rds")}
 
-Km <- unlist(Km, recursive = FALSE)
+if (!(kernel == "mkl")) {Km <- unlist(Km, recursive = FALSE)}
+if (kernel == "mkl") {mkl_weights <- list()}
+
 report <- list()
 tuning_plot <- list()
 
@@ -99,12 +77,35 @@ for (m in 1:length(Km)) {
   report[[m]] <- data.frame()
   M <- as.matrix(Km[[m]])
   
-  ### TODO redo. dirty hack for uniform kernel weight MTMKL.
-  # TODO normalizing the matrices, which is needed for MKL, appears to deteriorate performance (for unknown reasons)
-  hpo <- as.matrix(normalize(hpo, "symm"))
-  M <- as.matrix(normalize(M, "symm"))
-  
-  M <- as.matrix(hpo + M) 
+  ### MKL module
+  if (kernel == "mkl") {
+    
+    Kt <- as.matrix(round(scale_cosin(Kt), 10)) # task-level similarity matrix
+    
+    hpo <- as.matrix(round(scale_cosin(hpo), 10)) # phenotype similarity matrix
+    
+    M <- as.matrix(round(scale_cosin(M), 10)) # instance-level similarity matrix, one for each sigma
+    
+    M_mkl <- list(Kt, hpo, M)
+    
+    if (mkl_method == "simple") {
+      mod_mkl <- SimpleMKL.classification(k = M_mkl, 
+                                          outcome = y_mkl,
+                                          penalty = mkl_cost)
+    }
+    
+    if (mkl_method == "semkl") {
+      mod_mkl <- SEMKL.classification(k = M_mkl, 
+                                      outcome = y_mkl,
+                                      penalty = mkl_cost)
+    }
+    
+    # finalize MKL matrix by taking the weighted mean
+    M <- Reduce(`+`,Map(`*`, mod_mkl$gamma, M_mkl))
+    
+    # store weights
+    mkl_weights[[m]] <- mod_mkl$gamma
+  }
   ###
   
   # set up nested cv
@@ -189,8 +190,17 @@ report_params <- report_params %>%
 print(report_params)
 
 # assess model with best combination
-M <- as.matrix(Km[[report_params$best_matrix]])
-M <- as.matrix(hpo + M) # TODO rework this dirty MTMKL hack
+if (kernel == "mkl") {
+  # prepare best matrix for mkl
+  M <- as.matrix(Km[[report_params$best_matrix]])
+  M <- as.matrix(round(scale_cosin(M), 10)) # instance-level similarity matrix, one for each sigma
+  M_mkl <- list(Kt, hpo, M)
+  M <- Reduce(`+`,Map(`*`, mkl_weights[[report_params$best_matrix]], M_mkl))
+} else {
+  # prepare best matrix for non-mkl
+  M <- as.matrix(Km[[report_params$best_matrix]])
+}
+
 C <- as.numeric(levels(report_params$best_cost))[report_params$best_cost] # careful: implicit coercion
 
 # initialize loop object

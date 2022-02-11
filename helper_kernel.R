@@ -6,7 +6,7 @@
 # @params alpha is assumed from the available list of similarity matrices
 # @return Kt task-level similarity matrix
 # @return Kf instance-level RBF kernel matrix
-# @return Km MTL kernel matrix
+# @return Km MTL kernel matrix (Kt*Kf)
 
 # packages
 library("librarian")
@@ -66,8 +66,11 @@ f <- rep(list(f), length(sigma))
 # iterate over the list and get the rbf kernel matrix for each value of sigma
 Kf <- lapply(1:length(f),
              function(x){
-               kernelMatrix(rbfdot(sigma = sigma[[x]]), x = f[[x]])
+               as.matrix(kernelMatrix(rbfdot(sigma = sigma[[x]]), x = f[[x]]))
              })
+
+# export
+saveRDS(Kf, "mat/kernelmatrices_instance.rds")
 
 ### Kt
 # preallocating Kt, the list of task similarity matrices
@@ -90,6 +93,9 @@ Kt <- lapply(seq_along(Kt),
                rownames(m) <- NULL
                Kt[[index]] <- m
              })
+
+# export (for MKL later)
+saveRDS(Kt[[1]], "mat/taskmatrix.rds")
 
 ### Km
 # preallocate an empty nested list for each alpha and sigma

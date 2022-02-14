@@ -16,7 +16,7 @@ librarian::shelf(tidyverse,
                  jaccard)
 
 # params
-sim_method <- "resnik" # choose similarity measure: jaccard, lin or resnik
+sim_method <- "jaccard" # choose similarity measure: jaccard, lin or resnik
 psd_method <- "clip" # choose spectrum method to find nearest psd matrix: clip, shift or flip
 
 # get data

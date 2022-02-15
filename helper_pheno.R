@@ -17,7 +17,7 @@ librarian::shelf(tidyverse,
 
 # params
 sim_method <- "jaccard" # choose similarity measure: jaccard, lin or resnik
-psd_method <- "clip" # choose spectrum method to find nearest psd matrix: clip, shift or flip
+psd_method <- "shift" # choose spectrum method to find nearest psd matrix: clip, shift or flip
 
 # get data
 raw_data <- read_csv("data/clean_tbl.csv") %>%
@@ -115,11 +115,12 @@ if (sim_method == "jaccard"){
   if (is.positive.semi.definite(mat_pheno) == FALSE) {
     print("Phenotypic similarity matrix is not PSD, applying correction.")
     
-    if (psd_method == "clip") {
+    if (psd_method == "clip") { # seems to perform worse than the other methods
       mat_pheno <- nearPD(mat_pheno, 
                           base.matrix = TRUE, 
+                          doSym = TRUE,
                           ensureSymmetry = TRUE,
-                          corr = TRUE) # this object also stores the minimum eigenvalue (for correction diagnostics)
+                          corr = FALSE) # this object also stores the minimum eigenvalue (for correction diagnostics)
       mat_pheno <- mat_pheno$mat
       mat_pheno <- round(mat_pheno, 10) # this is necessary to avoid floating point errors with isSymmetric and is.positive.semi.definite
     }

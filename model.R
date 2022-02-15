@@ -4,7 +4,7 @@
 
 # @params
 seed <- 42 # random seed
-k <- 5 # k-fold nested cross validation
+k <- 10 # k-fold nested cross validation
 cost_vec <- 2 ^ seq(-5, 5, by = 1) # C-SVM hyperparameter vector for grid search
 class_weight <- "uniform" # SVM weights for imbalanced classes: "uniform" for equal weight distribution, "inverse" for weights inversely proportional to class frequency
 kernel <- "mkl" # choice of kernel matrices: "mkl" for MTMKL-SVM, "mtl" for MTL-SVM, "dirac" for Dirac kernel SVM, "union" for union SVM
@@ -104,7 +104,7 @@ for (m in 1:length(Km)) {
     
     if (mkl_method == "uniform") {
       mod_mkl <- NULL
-      mod_mkl$gamma <- c(1/3,1/3,1/3)
+      mod_mkl$gamma <- rep(1/length(M_mkl), length(M_mkl))
     }
     
     # finalize MKL matrix by taking the weighted mean

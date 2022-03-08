@@ -133,7 +133,7 @@ Kd <- lapply(seq_along(Kd),
                
                colnames(m) <- NULL
                rownames(m) <- NULL
-               Kt[[index]] <- m
+               Kt[[index]] <- m # TODO check this. intended Kt instead of Kd?
              })
 
 Kd <- lapply(1:length(Kd), function(a)

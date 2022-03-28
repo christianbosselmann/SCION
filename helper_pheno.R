@@ -15,68 +15,66 @@ librarian::shelf(tidyverse,
                  CEGO,
                  jaccard)
 
-# params
-sim_method <- "jaccard" # choose similarity measure: jaccard, lin or resnik
-psd_method <- "shift" # choose spectrum method to find nearest psd matrix: clip, shift or flip
+# set seed
+set.seed(42)
 
-# get data
-raw_data <- read_csv("data/clean_tbl.csv") %>%
-  select(id, pheno)
+# get helper functions
+source("func.R")
 
-# inner join disease list (manual) to get OMIM IDs
-list_disease <- read_delim("pheno/disease_list.csv", delim = ";")
+#' @params sim_method choose similarity measure: jaccard, lin, or resnik
+#' @params psd_method choose spectrum method to find nearest psd matrix: clip, shift or flip
+#' @params pheno_sim if TRUE, sparse and noisy phenotypes are simulated for each similarity method
+#' @return phenotypic similarity matrix as R object
+sim_method <- "jaccard" 
+psd_method <- "shift"
+pheno_sim <- FALSE
 
-raw_data$omim <- str_replace_all(raw_data$pheno, setNames(list_disease$omim, list_disease$term))
-
-# remove # (for API call later)
-raw_data$omim <- str_replace_all(raw_data$omim, "#", "")
-
-# handle the case of multiple OMIM IDs per variant by separating across rows
-raw_data <- raw_data %>%
-  separate_rows(omim, sep = "[^[:alnum:].]+", convert = TRUE)
-
-# define API request
-base <- "https://hpo.jax.org/api/hpo/disease/"
-
-# loop through all OMIM IDs and get HPO terms from HPO API
-list_terms <- list()
-
-for (i in 1:nrow(raw_data)) {
-  disease <- paste("OMIM:", raw_data$omim[i], sep = "") # diseaseID
-  
-  # call
-  get_terms <- GET(paste(base, disease, sep = ""))
-  
-  # get content
-  content <- as.data.frame(
-    fromJSON(
-      content(get_terms, "text"),
-      flatten = TRUE)
-  )
-  
-  # extract HPO terms from disease association and store as list by rowindex
-  term_vector <- rbindlist(content$catTermsMap.terms)$ontologyId
-  list_terms[[i]] <- term_vector
-}
-
-# map HPO terms back from rowindex to variant id
-set_terms <- list() # set_terms is a list of HPO terms by variant ID
-
-for (i in raw_data$id) {
-  ind <- which(raw_data$id == i)
-  set_terms[[i]] <- as_vector(do.call(c, list(list_terms[ind])))
-}
-
-# remove null elements from list (which are introduced by indexing)
-set_terms <- set_terms[lengths(set_terms) != 0]
+# get set of hpo terms for each OMIM ID (helper_omim.R)
+load("pheno/set_terms.RData")
 
 # load ontology
-hpo <- get_ontology("pheno/hp.obo.txt", propagate_relationships = "is_a", extract_tags = "minimal")
+ont_hpo <- get_ontology("pheno/hp.obo.txt", 
+                        propagate_relationships = "is_a", 
+                        extract_tags = "minimal")
 
-# insert for Jaccard similarity coefficient
+# sparse/noisy phenotype simulation
+if (pheno_sim == TRUE) {
+term_noise <- 2 ^ seq(-2, 2, by = 1) # vector of noise to introduce to set terms
+term_len <- unlist(lapply(set_terms, length)) # vector of number of terms for each variant
+term_list <- setNames(vector('list', length(term_noise)), paste0('P', term_noise)) # named list to store results as list of lists
+term_bag <- ont_hpo$id # vector of all possible hpo terms
+
+# iterate through noise levels and pick appropriate method to remove or add terms
+for (i in 1:length(term_noise)) {
+  
+  # sparse phenotype
+  if (term_noise[[i]] < 1){
+    term_list[[i]] <- list()
+    for (j in 1:length(set_terms)){
+      term_list[[i]][[j]] <- sample(set_terms[[j]], term_len[[j]] * term_noise[[i]])
+    }
+  } 
+  
+  # standard phenotype
+  if (term_noise[[i]] == 1){
+    term_list[[i]] <- set_terms
+  }
+  
+  # noisy phenotype
+  if(term_noise[[i]] > 1) {
+    for (j in 1:length(set_terms)){
+      term_target <- term_len[[j]] * term_noise[[i]] - term_len[[j]]  # how many hpo terms should be added to this term set
+      term_tmp <- unname(sample(term_bag, term_target)) # grab the terms from term_bag
+      term_list[[i]][[j]] <- append(term_tmp, set_terms[[j]])
+    }
+  }
+}
+}
+
+# Jaccard similarity coefficient
 if (sim_method == "jaccard"){
   # propagate terms to parents
-  list_prop <- lapply(set_terms, propagate_relations, ontology = hpo, relations = "parents")
+  list_prop <- lapply(set_terms, propagate_relations, ontology = ont_hpo, relations = "parents")
   
   # reshape into a wide dataframe
   df_prop <- list_prop %>% 
@@ -104,8 +102,8 @@ if (sim_method == "jaccard"){
 } else {
   
   # get similarity matrix
-  mat_pheno <- get_sim_grid(ontology = hpo, 
-                            information_content = descendants_IC(hpo),
+  mat_pheno <- get_sim_grid(ontology = ont_hpo, 
+                            information_content = descendants_IC(ont_hpo),
                             term_sim_method = sim_method,
                             term_sets = set_terms)
   

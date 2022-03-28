@@ -8,7 +8,7 @@ k <- 10 # k-fold nested cross validation
 cost_vec <- 2 ^ seq(-5, 5, by = 1) # C-SVM hyperparameter vector for grid search
 class_weight <- "uniform" # SVM weights for imbalanced classes: "uniform" for equal weight distribution, "inverse" for weights inversely proportional to class frequency
 kernel <- "mkl" # choice of kernel matrices: "mkl" for MTMKL-SVM, "mtl" for MTL-SVM, "dirac" for Dirac kernel SVM, "union" for union SVM
-mkl_method <- "semkl" # choice of MKL method for kernel weights, "semkl" for SEMKL, "simple" for simpleMKL, "uniform" for no kernel weights
+mkl_method <- "uniform" # choice of MKL method for kernel weights, "semkl" for SEMKL, "simple" for simpleMKL, "uniform" for no kernel weights
 mkl_cost <- 1 # penalty for MKL kernel prioritization (SEMKL, SimpleMKL)
 
 # load packages
@@ -58,16 +58,19 @@ if (kernel == "mkl") {
   y_mkl[y_mkl == 2] <- -1
   
   load("mat/hpomatrix.RData")
+  hpo <- kernelNormalisation(hpo)
+  hpo <- kernelCentering(hpo)
   hpo <- round(hpo, 10)
-  hpo <- normalize.kernel(hpo, method = "sqrt")
   
   Kt <- readRDS("mat/taskmatrix.rds")
+  Kt <- kernelNormalisation(Kt)
+  Kt <- kernelCentering(Kt)
   Kt <- round(Kt, 10)
-  Kt <- normalize.kernel(Kt, method = "sqrt")
   
   Km <- readRDS("mat/kernelmatrices_instance.rds")
+  Km <- lapply(Km, kernelNormalisation)
+  Km <- lapply(Km, kernelCentering)
   Km <- lapply(Km, round, 10)
-  Km <- lapply(Km, normalize.kernel, method = "sqrt")
 }
 
 if (kernel == "mtl") {Km <- readRDS("mat/kernelmatrices_mtl.rds")}

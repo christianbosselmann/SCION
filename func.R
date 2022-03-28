@@ -5,6 +5,53 @@
 ### negate in
 `%nin%` = Negate(`%in%`)
 
+### normalize kernel matrix
+# cf. Kernel Methods for Pattern Analysis, Algorithm 5.1
+#' @param K kernel matrix to be normalized
+#' @return normalized kernel matrix
+kernelNormalisation <- function(K){
+  # min_eigenvalue <- min(eigen(K)$values)
+  # K <- sqrt(diag(K) + min_eigenvalue)
+  D <- diag(1/sqrt(diag(K)))
+  K <- D %*% K %*% D
+  return(K)
+}
+
+### center in feature space
+# cf. Kernel Methods for Pattern Analysis, Algorithm 5.3
+#' @param K kernel matrix to be centered
+#' @return kernel matrix centered in feature space
+kernelCentering <- function(K){
+  ell <- dim(K)[1]
+  D <- colSums(K)/ell # row vector storing the column averages of K
+  E <- sum(D)/ell # average of all the entries of K
+  J <- matrix(1, ell, 1) %*% D
+  Jt <- Conj(t(J)) # complex conjugate transpose of J
+  K <- K - J - Jt + E * matrix(1, ell, ell)
+}
+
+### check if matrix is symmetric and psd
+#' @param K kernel matrix to be checked
+#' @return prints matrix properties to console
+#' adapted from base and matrixcalc, just for debugging
+kernelCheck <- function(K, tol = 1e-08){
+  if(!isSymmetric(K)){stop("Argument is not a symmetric matrix.")}
+  if(isSymmetric(K)){print("Argument is a symmetric matrix.")}
+  
+  ev <- eigen(K)[[1]]
+  n <- nrow(K)
+  
+  for (i in 1:n) {
+    if (abs(ev[i]) < tol) {
+      ev[i] <- 0
+    }
+  }
+  if (any(ev < 0)) {
+    stop("Argument is not a psd matrix.")
+  }
+  print("Argument is a psd matrix.")
+}
+
 ### normalize kernel from GOSim pkg
 normalize.kernel = function(Ker, kerself1=NULL, kerself2=NULL, method="none"){
   if(method != "none"){
@@ -42,47 +89,47 @@ normalize.kernel = function(Ker, kerself1=NULL, kerself2=NULL, method="none"){
 }
 
 ### cosinus scaling of kernel matrices, from mixKernel pkg
-scale_cosin <- tmp_norm <- function(x) {
-  x.cosinus <- sweep(sweep(x, 2, sqrt(diag(x)), "/"), 1, sqrt(diag(x)), "/")
-  t(t(x.cosinus - colSums(x.cosinus) / nrow(x.cosinus)) - rowSums(x.cosinus) / 
-      nrow(x.cosinus)) + sum(x.cosinus) / nrow(x.cosinus)^2
-}
+# scale_cosin <- tmp_norm <- function(x) {
+#   x.cosinus <- sweep(sweep(x, 2, sqrt(diag(x)), "/"), 1, sqrt(diag(x)), "/")
+#   t(t(x.cosinus - colSums(x.cosinus) / nrow(x.cosinus)) - rowSums(x.cosinus) / 
+#       nrow(x.cosinus)) + sum(x.cosinus) / nrow(x.cosinus)^2
+# }
 
 ### normalizing kernel matrices, from gdistance pkg
-normalize <- function(x, method){
-  
-  if(!(method %in% c("row","col","symm"))){
-    stop("invalid method argument")
-  }
-  
-  if(method=="symm"){
-    rs <- rowSums(x)^-.5
-    cs <- colSums(x)^-.5
-    tr <- x * rs
-    tr <- t(tr)
-    tr <- tr * cs
-    tr <- t(tr)
-    
-    if(isSymmetric(x)){
-      tr <- forceSymmetric(tr)
-      tr <- as(tr, "CsparseMatrix")
-    }
-  }
-  
-  if(method=="row"){
-    rs <- 1 / rowSums(x)
-    rs[rs == Inf] <- 0
-    tr <- x * rs
-  }
-  
-  if(method=="col"){
-    rs <- 1 / colSums(x)
-    rs[rs == Inf] <- 0
-    tr <- t(t(x) * rs)
-  }
-  
-  return(tr)
-}
+# normalize <- function(x, method){
+#   
+#   if(!(method %in% c("row","col","symm"))){
+#     stop("invalid method argument")
+#   }
+#   
+#   if(method=="symm"){
+#     rs <- rowSums(x)^-.5
+#     cs <- colSums(x)^-.5
+#     tr <- x * rs
+#     tr <- t(tr)
+#     tr <- tr * cs
+#     tr <- t(tr)
+#     
+#     if(isSymmetric(x)){
+#       tr <- forceSymmetric(tr)
+#       tr <- as(tr, "CsparseMatrix")
+#     }
+#   }
+#   
+#   if(method=="row"){
+#     rs <- 1 / rowSums(x)
+#     rs[rs == Inf] <- 0
+#     tr <- x * rs
+#   }
+#   
+#   if(method=="col"){
+#     rs <- 1 / colSums(x)
+#     rs[rs == Inf] <- 0
+#     tr <- t(t(x) * rs)
+#   }
+#   
+#   return(tr)
+# }
 
 ### SimpleMKL, from RMKL pkg
 #' Simple MKL 

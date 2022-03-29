@@ -2,15 +2,6 @@
 # Functional variant prediction for voltage-gated sodium channels
 # model.R
 
-# @params
-seed <- 42 # random seed
-k <- 10 # k-fold nested cross validation
-cost_vec <- 2 ^ seq(-5, 5, by = 1) # C-SVM hyperparameter vector for grid search
-class_weight <- "uniform" # SVM weights for imbalanced classes: "uniform" for equal weight distribution, "inverse" for weights inversely proportional to class frequency
-kernel <- "mkl" # choice of kernel matrices: "mkl" for MTMKL-SVM, "mtl" for MTL-SVM, "dirac" for Dirac kernel SVM, "union" for union SVM
-mkl_method <- "uniform" # choice of MKL method for kernel weights, "semkl" for SEMKL, "simple" for simpleMKL, "uniform" for no kernel weights
-mkl_cost <- 1 # penalty for MKL kernel prioritization (SEMKL, SimpleMKL)
-
 # load packages
 library("librarian")
 librarian::shelf(tidyverse, 
@@ -24,6 +15,22 @@ librarian::shelf(tidyverse,
                  Matrix,
                  matrixcalc,
                  quiet = TRUE)
+
+#' @params seed random seed
+#' @params k inner and outer folds for nested cross validation
+#' @params cost_vec vector of cost values to tune over
+#' @params class_weight SVM weights for imbalanced classes: "uniform" for equal weight distribution, "inverse" for weights inversely proportional to class frequency
+#' @params kernel choice of kernel method: "mkl" for MTMKL-SVM, "mtl" for MTL-SVM, "dirac" for Dirac kernel SVM, "union" for union SVM
+#' @params mkl_method choice of MKL method for kernel weights, "semkl" for SEMKL, "simple" for simpleMKL, "uniform" for no kernel weights
+#' @params mkl_cost penalty for MKL kernel prioritization (only applies to SEMKL, SimpleMKL)
+#' @return saved timestamped objects of parameters, metrics and raw predictions
+# seed <- 42
+# k <- 10
+# cost_vec <- 2 ^ seq(-5, 5, by = 1)
+# class_weight <- "uniform"
+# kernel <- "mkl"
+# mkl_method <- "uniform"
+# mkl_cost <- 1
 
 # get helper functions
 source("func.R")
@@ -57,10 +64,12 @@ if (kernel == "mkl") {
   y_mkl[y_mkl == 1] <- 1
   y_mkl[y_mkl == 2] <- -1
   
+  if (pheno_sim == TRUE) { # if the phenotypes are simulated, skip this step and generate the hpo matrix during experiment setup
   load("mat/hpomatrix.RData")
   hpo <- kernelNormalisation(hpo)
   hpo <- kernelCentering(hpo)
   hpo <- round(hpo, 10)
+  }
   
   Kt <- readRDS("mat/taskmatrix.rds")
   Kt <- kernelNormalisation(Kt)
@@ -192,13 +201,19 @@ for (m in 1:length(Km)) {
   mat_precomp[[m]] <- M
 }
 
-# get best combinations of hyperparameters
+# get best combinations of hyperparameters and include params in report
 report_params <- do.call(rbind, report)
 report_params <- report_params %>%
   .[which.max(report_params$mean),] %>% # min/max metric here
   mutate(best_matrix = which.max(report_params$mean)) %>%
   mutate(kernel = kernel) %>%
   mutate(weights = class_weight)
+
+if (kernel == "mkl") {
+  report_params <- report_params %>%
+    mutate(mkl_cost = mkl_cost) %>%
+    mutate(mkl_method = mkl_method)
+}
 
 print(report_params)
 

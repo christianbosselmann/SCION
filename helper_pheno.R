@@ -25,10 +25,11 @@ source("func.R")
 #' @params psd_method choose spectrum method to find nearest psd matrix: clip, shift or flip
 #' @params pheno_sim if TRUE, sparse and noisy phenotypes are simulated for each similarity method
 #' @return phenotypic similarity matrix as R object
-sim_method <- "jaccard" 
-psd_method <- "shift"
-pheno_sim <- FALSE
+# sim_method <- "jaccard" 
+# psd_method <- "shift"
+# pheno_sim <- FALSE
 
+# source("helper_omim.R")
 # get set of hpo terms for each OMIM ID (helper_omim.R)
 load("pheno/set_terms.RData")
 

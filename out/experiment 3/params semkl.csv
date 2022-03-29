@@ -1,0 +1,2 @@
+mean,sd,best_cost,best_matrix,kernel,weights,mkl_cost,mkl_method
+0.8475817923186344,0.03958022606209003,4,5,mkl,uniform,1,semkl

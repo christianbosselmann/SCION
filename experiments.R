@@ -91,7 +91,6 @@ for (sim in loop_sim){
 }
 
 #' experiment 6: simulate sparse/noisy phenotypes and compare similarity measures
-#' TODO finish this. how to handle hpo list?
 seed <- 42
 k <- 10
 cost_vec <- 2 ^ seq(-5, 5, by = 1)
@@ -102,25 +101,15 @@ mkl_cost <- 1
 psd_method <- "shift"
 pheno_sim <- TRUE
 loop_sim <- c("jaccard", "lin", "resnik")
+loop_noise <- 2 ^ seq(-2, 2, by = 1) 
 
 for (sim in loop_sim){
-  #' @params sim similarity method
-  #' @return hpo is instead a named list of matrices, where each element in the list corresponds to a phenotype noise level
   sim_method <- sim
-  source("helper_pheno.R")
-  
-  load("mat/hpomatrix.RData")
-  hpo <- lapply(hpo, kernelNormalisation)
-  hpo <- lapply(hpo, kernelCentering)
-  hpo <- lapply(hpo, round, 10)
-  
-  for (psd in loop_psd){
-    psd_method <- psd
-    print(paste(sim, psd, sep = " ")) # print to console to keep order
-    
+  for (nse in loop_noise){
+    term_noise <- nse
+    print(paste(sim, nse, sep = ""))
+    source("helper_pheno.R")
     source("model.R")
   }
 }
-
-
 

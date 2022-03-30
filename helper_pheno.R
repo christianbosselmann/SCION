@@ -40,7 +40,7 @@ ont_hpo <- get_ontology("pheno/hp.obo.txt",
 
 # sparse/noisy phenotype simulation
 if (pheno_sim == TRUE) {
-term_noise <- 2 ^ seq(-2, 2, by = 1) # vector of noise to introduce to set terms
+# term_noise <- 2 ^ seq(-2, 2, by = 1) # vector of noise to introduce to set terms
 term_len <- unlist(lapply(set_terms, length)) # vector of number of terms for each variant
 term_list <- setNames(vector('list', length(term_noise)), paste0('P', term_noise)) # named list to store results as list of lists
 term_bag <- ont_hpo$id # vector of all possible hpo terms
@@ -52,7 +52,11 @@ for (i in 1:length(term_noise)) {
   if (term_noise[[i]] < 1){
     term_list[[i]] <- list()
     for (j in 1:length(set_terms)){
-      term_list[[i]][[j]] <- sample(set_terms[[j]], term_len[[j]] * term_noise[[i]])
+      term_list[[i]][[j]] <- sample(x = set_terms[[j]], 
+                                    size = plyr::round_any(term_len[[j]] * term_noise[[i]], 
+                                                           accuracy = 1,
+                                                           f = ceiling), # minimum of 1 term
+                                    replace = FALSE)
     }
   } 
   
@@ -70,6 +74,8 @@ for (i in 1:length(term_noise)) {
     }
   }
 }
+set_terms <- term_list[[1]] # store the list back in the original object
+# note: if term_noise is a vector, term_list is a named list; here we just want a simple list instead.
 }
 
 # Jaccard similarity coefficient
@@ -81,7 +87,7 @@ if (sim_method == "jaccard"){
   df_prop <- list_prop %>% 
     map_dfr(~ .x %>% as_tibble(), .id = "name")
   
-  df_prop <- reshape2::dcast(df_prop, as.numeric(name) ~ value)
+  df_prop <- reshape2::dcast(df_prop, as.numeric(name) ~ value, length)
   
   # remove id column, redundant to rowname
   df_prop <- df_prop[,-1]

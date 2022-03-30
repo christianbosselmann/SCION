@@ -64,12 +64,10 @@ if (kernel == "mkl") {
   y_mkl[y_mkl == 1] <- 1
   y_mkl[y_mkl == 2] <- -1
   
-  if (pheno_sim == TRUE) { # if the phenotypes are simulated, skip this step and generate the hpo matrix during experiment setup
   load("mat/hpomatrix.RData")
   hpo <- kernelNormalisation(hpo)
   hpo <- kernelCentering(hpo)
   hpo <- round(hpo, 10)
-  }
   
   Kt <- readRDS("mat/taskmatrix.rds")
   Kt <- kernelNormalisation(Kt)

@@ -14,6 +14,7 @@ librarian::shelf(tidyverse,
                  assertthat,
                  Matrix,
                  matrixcalc,
+                 klic,
                  quiet = TRUE)
 
 #' @params seed random seed
@@ -100,28 +101,32 @@ for (m in 1:length(Km)) {
   if (kernel == "mkl") {
     M_mkl <- list(Kt, hpo, M)
     
+    if (mkl_method == "group") {
+      M <- constructGroupMKL(M_mkl) # call unregularized group-level MKL
+    }
+    
     if (mkl_method == "simple") {
       mod_mkl <- SimpleMKL.classification(k = M_mkl, 
                                           outcome = y_mkl,
                                           penalty = mkl_cost)
+      M <- Reduce(`+`,Map(`*`, mod_mkl$gamma, M_mkl)) # take weighted mean
+      mkl_weights[[m]] <- mod_mkl$gamma # store weights
     }
     
     if (mkl_method == "semkl") {
       mod_mkl <- SEMKL.classification(k = M_mkl, 
                                       outcome = y_mkl,
                                       penalty = mkl_cost)
+      M <- Reduce(`+`,Map(`*`, mod_mkl$gamma, M_mkl)) # take weighted mean
+      mkl_weights[[m]] <- mod_mkl$gamma # store weights
     }
     
     if (mkl_method == "uniform") {
       mod_mkl <- NULL
       mod_mkl$gamma <- rep(1/length(M_mkl), length(M_mkl))
+      M <- Reduce(`+`,Map(`*`, mod_mkl$gamma, M_mkl)) # take weighted mean
+      mkl_weights[[m]] <- mod_mkl$gamma # store weights
     }
-    
-    # finalize MKL matrix by taking the weighted mean
-    M <- Reduce(`+`,Map(`*`, mod_mkl$gamma, M_mkl))
-    
-    # store weights
-    mkl_weights[[m]] <- mod_mkl$gamma
   }
   ###
   

@@ -52,85 +52,6 @@ kernelCheck <- function(K, tol = 1e-08){
   print("Argument is a psd matrix.")
 }
 
-### normalize kernel from GOSim pkg
-# normalize.kernel = function(Ker, kerself1=NULL, kerself2=NULL, method="none"){
-#   if(method != "none"){
-#     if(is.null(kerself1) || is.null(kerself2)){
-#       if(method == "sqrt"){ # result between -1 and 1
-#         Kd<-sqrt(diag(Ker) + 1e-10)
-#         Ker<-Ker/(Kd%*%t(Kd))			
-#       }
-#       else if(method == "Lin"){ # result: diagonal = 1		
-#         Kd = diag(Ker)
-#         Ker = 2*Ker / outer(Kd, Kd, "+")
-#       }
-#       else if(method == "Tanimoto"){ 
-#         Kd = diag(Ker)
-#         Ker = Ker / (outer(Kd, Kd, "+") - Ker)
-#       }			
-#       #			else if(method == "variance")
-#       #				Ker = Ker /(mean(diag(Ker)) - mean(Ker)) 
-#       else
-#         stop(paste("Unknown normalization method", method))
-#       diag(Ker) = 1
-#     }
-#     else{
-#       if(method == "sqrt")
-#         return(Ker / sqrt(kerself1 * kerself2))
-#       else if(method == "Lin")
-#         return(2*Ker / (kerself1 + kerself2))
-#       else if (method == "Tanimoto")
-#         return(Ker / (kerself1 + kerself2 - Ker))			
-#       else
-#         stop(paste("Unknown normalization method", method))
-#     }
-#   }
-#   Ker
-# }
-
-### cosinus scaling of kernel matrices, from mixKernel pkg
-# scale_cosin <- tmp_norm <- function(x) {
-#   x.cosinus <- sweep(sweep(x, 2, sqrt(diag(x)), "/"), 1, sqrt(diag(x)), "/")
-#   t(t(x.cosinus - colSums(x.cosinus) / nrow(x.cosinus)) - rowSums(x.cosinus) / 
-#       nrow(x.cosinus)) + sum(x.cosinus) / nrow(x.cosinus)^2
-# }
-
-### normalizing kernel matrices, from gdistance pkg
-# normalize <- function(x, method){
-#   
-#   if(!(method %in% c("row","col","symm"))){
-#     stop("invalid method argument")
-#   }
-#   
-#   if(method=="symm"){
-#     rs <- rowSums(x)^-.5
-#     cs <- colSums(x)^-.5
-#     tr <- x * rs
-#     tr <- t(tr)
-#     tr <- tr * cs
-#     tr <- t(tr)
-#     
-#     if(isSymmetric(x)){
-#       tr <- forceSymmetric(tr)
-#       tr <- as(tr, "CsparseMatrix")
-#     }
-#   }
-#   
-#   if(method=="row"){
-#     rs <- 1 / rowSums(x)
-#     rs[rs == Inf] <- 0
-#     tr <- x * rs
-#   }
-#   
-#   if(method=="col"){
-#     rs <- 1 / colSums(x)
-#     rs[rs == Inf] <- 0
-#     tr <- t(t(x) * rs)
-#   }
-#   
-#   return(tr)
-# }
-
 ### SimpleMKL, from RMKL pkg
 #' Simple MKL 
 #'
@@ -262,4 +183,56 @@ SEMKL.classification=function(k,outcome,penalty,tol=0.0001,max.iters=1000){
   gamma_all[[iters+1]]=gamma
   results=list("alpha"=alpha,"b"=b,"gamma"=temp,"iters"=iters,'gamma_all'=gamma_all)
   return(results)
+}
+
+### unregularized group-level weights
+constructGroupMKL <- function(x){
+  
+  # data features
+  names_tasks <- unique(t_vec)
+  n_tasks <- length(t_vec)
+  
+  # generate a named list of task indices
+  indices_tasks <- vector(mode = "list", length = length(names_tasks))
+  for (i in 1:length(names_tasks)) {
+    indices_tasks[[i]] <- which(t_vec == names_tasks[[i]])
+  }
+  names(indices_tasks) <- names_tasks
+  
+  # generate a list of list with the views for each task
+  m_tasks <- list()
+  for (i in 1:length(names_tasks)) {
+    m_tasks[[i]] <- list(hpo[indices_tasks[[i]], indices_tasks[[i]]],
+                         M[indices_tasks[[i]], indices_tasks[[i]]])
+  }
+  
+  # run wrapper MKL for each task
+  w_tasks <- list()
+  y_d <- vector()
+  for (i in 1:length(names_tasks)) {
+    y_d <- y_mkl[indices_tasks[[i]]]
+    
+    # small tasks with similar observations may lead to computationally singular systems
+    # if this occurs, return the uniformly weighted kernel matrix
+    tryCatch(
+      expr = {
+        w_tasks[[i]] <- SEMKL.classification(k = m_tasks[[i]], 
+                                             outcome = y_d,
+                                             penalty = mkl_cost)$gamma
+      },
+      error = function(x) {
+        w_tasks[[i]] <<- rep(1/length(m_tasks[[i]]), length(m_tasks[[i]]))
+      })
+  }
+  
+  # apply weights and store in the original list of matrices
+  for (i in 1:length(names_tasks)) {
+    m_tasks[[i]] <- Reduce(`+`,Map(`*`, w_tasks[[i]], m_tasks[[i]]))
+  }
+  
+  # merge into a diagonal block matrix
+  M <- bdiag(m_tasks)
+  M <- as.matrix(M)
+  
+  return(M)
 }

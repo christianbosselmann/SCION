@@ -7,7 +7,7 @@
 #' @params cost_vec vector of cost values to tune over
 #' @params class_weight SVM weights for imbalanced classes: "uniform" for equal weight distribution, "inverse" for weights inversely proportional to class frequency
 #' @params kernel choice of kernel method: "mkl" for MTMKL-SVM, "mtl" for MTL-SVM, "dirac" for Dirac kernel SVM, "union" for union SVM
-#' @params mkl_method choice of MKL method for kernel weights, "semkl" for SEMKL, "simple" for simpleMKL, "uniform" for no kernel weights
+#' @params mkl_method choice of MKL method for kernel weights, "semkl" for SEMKL, "simple" for simpleMKL, "uniform" for no kernel weights, "group" for unregularized task-level weights
 #' @params mkl_cost penalty for MKL kernel prioritization (only applies to SEMKL, SimpleMKL)
 #' @params sim_method choose similarity measure: jaccard, lin, or resnik
 #' @params psd_method choose spectrum method to find nearest psd matrix: clip, shift or flip
@@ -112,4 +112,15 @@ for (sim in loop_sim){
     source("model.R")
   }
 }
+
+#' experiment 7: unregularized group-level MKL
+#' TODO bugfixing. block diagonal matrix ok? reason for low performance?
+seed <- 42
+k <- 10
+cost_vec <- 2 ^ seq(-5, 5, by = 1)
+class_weight <- "uniform"
+kernel <- "mkl"
+mkl_method <- "group"
+mkl_cost <- 1
+source("model.R")
 

@@ -114,7 +114,8 @@ for (sim in loop_sim){
 }
 
 #' experiment 7: unregularized group-level MKL
-#' TODO bugfixing. block diagonal matrix ok? reason for low performance?
+#' this does not include multi-task learning yet
+#' TODO refactor, optimize
 seed <- 42
 k <- 10
 cost_vec <- 2 ^ seq(-5, 5, by = 1)

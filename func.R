@@ -186,8 +186,12 @@ SEMKL.classification=function(k,outcome,penalty,tol=0.0001,max.iters=1000){
 }
 
 ### unregularized group-level weights
+#' @param t_vec vector of task membership
+#' @param x list of Kernel matrices
+#' @param y_mkl MKL label vector
+#' @return M MKL matrix
 constructGroupMKL <- function(x){
-  
+
   # data features
   names_tasks <- unique(t_vec)
   n_tasks <- length(t_vec)
@@ -202,7 +206,7 @@ constructGroupMKL <- function(x){
   # generate a list of list with the views for each task
   m_tasks <- list()
   for (i in 1:length(names_tasks)) {
-    m_tasks[[i]] <- list(hpo[indices_tasks[[i]], indices_tasks[[i]]],
+    m_tasks[[i]] <- list(hpo[indices_tasks[[i]], indices_tasks[[i]]], 
                          M[indices_tasks[[i]], indices_tasks[[i]]])
   }
   
@@ -216,7 +220,7 @@ constructGroupMKL <- function(x){
     # if this occurs, return the uniformly weighted kernel matrix
     tryCatch(
       expr = {
-        w_tasks[[i]] <- SEMKL.classification(k = m_tasks[[i]], 
+        w_tasks[[i]] <- SEMKL.classification(k = m_tasks[[i]],
                                              outcome = y_d,
                                              penalty = mkl_cost)$gamma
       },
@@ -229,10 +233,17 @@ constructGroupMKL <- function(x){
   for (i in 1:length(names_tasks)) {
     m_tasks[[i]] <- Reduce(`+`,Map(`*`, w_tasks[[i]], m_tasks[[i]]))
   }
-  
+
   # merge into a diagonal block matrix
   M <- bdiag(m_tasks)
-  M <- as.matrix(M)
+  M <- as.data.frame(as.matrix(M))
   
+  # reorder matrix to match original indices
+  indices_tasks <- as.numeric(unlist(indices_tasks))
+  M <- cbind(M, indices_tasks)
+  M <- arrange(M, indices_tasks) %>%
+    select(-indices_tasks)
+  M <- as.matrix(M)
+
   return(M)
 }

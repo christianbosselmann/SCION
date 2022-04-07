@@ -43,7 +43,7 @@ set.seed(seed)
 data <- read_csv("data/dat_prep.csv")
 
 t_vec <- data$gene # get task vector
-data$gene <- NULL # drop task from features
+# data$gene <- NULL # drop task from features
 
 data$y <- as.factor(data$y)
 y <- data$y # get label vector
@@ -94,7 +94,6 @@ mat_precomp <- list()
 # iterate through the available kernel matrices
 for (m in 1:length(Km)) {
   report[[m]] <- data.frame()
-  
   M <- as.matrix(Km[[m]])
 
   ### MKL module

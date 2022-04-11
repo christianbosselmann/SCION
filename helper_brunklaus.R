@@ -43,7 +43,7 @@ preds <- list()
 
 for (i in 1:length(cv)){
   test <- cv[[i]]
-  train <- unlist(cv[-i])
+  train <- unlist(cv[-1], use.names = F)
   
   # store training subset of Brunklaus lookup table
   vlookup_train <- vlookup[train,]
@@ -61,10 +61,16 @@ for (i in 1:length(cv)){
   # GOF +ve, LOF -ve
   vlookup_train$y_hat <- vlookup_train$yGOF - vlookup_train$yLOF 
   
-  # translate into categorical label
-  vlookup_train$y_hat[vlookup_train$y_hat > 0] <- "GOF"
-  vlookup_train$y_hat[vlookup_train$y_hat < 0] <- "LOF"
-  vlookup_train$y_hat[vlookup_train$y_hat == 0] <- "Uncertain"
+  # # option 1 to translate into categorical label
+  # vlookup_train$y_hat[vlookup_train$y_hat > 0] <- "GOF"
+  # vlookup_train$y_hat[vlookup_train$y_hat < 0] <- "LOF"
+  # vlookup_train$y_hat[vlookup_train$y_hat == 0] <- "Uncertain"
+  
+  # option 2 to translate into categorical label
+  vlookup_train$y_hat[vlookup_train$yGOF >= 1] <- "GOF"
+  vlookup_train$y_hat[vlookup_train$yLOF >= 1] <- "LOF"
+  vlookup_train$y_hat[vlookup_train$yGOF >= 1 &
+                        vlookup_train$yLOF >= 1] <- "Uncertain"
   
   # optional: drop uncertain labels
   # vlookup_train <- vlookup_train %>%
@@ -78,17 +84,17 @@ for (i in 1:length(cv)){
   vlookup_test <- vlookup[test,]
   vlookup_test <- merge(vlookup_train, vlookup_test, by = "cid")
   
-  # optional: treat all uncertain predictions as incorrect
-  vlookup_test$y_hat[vlookup_test$y_hat == "Uncertain" & vlookup_test$y == "LOF"] <- "GOF"
-  vlookup_test$y_hat[vlookup_test$y_hat == "Uncertain" & vlookup_test$y == "GOF"] <- "LOF"
+  # # optional: treat all uncertain predictions as incorrect
+  # vlookup_test$y_hat[vlookup_test$y_hat == "Uncertain" & vlookup_test$y == "LOF"] <- "GOF"
+  # vlookup_test$y_hat[vlookup_test$y_hat == "Uncertain" & vlookup_test$y == "GOF"] <- "LOF"
   
   # encode factors
-  vlookup_test$y <- factor(vlookup_test$y, levels = c("GOF", "LOF"))
-  vlookup_test$y_hat <- factor(vlookup_test$y_hat, levels = c("GOF", "LOF"))
+  vlookup_test$y <- factor(vlookup_test$y, levels = c("GOF", "LOF", "Uncertain"))
+  vlookup_test$y_hat <- factor(vlookup_test$y_hat, levels = c("GOF", "LOF", "Uncertain"))
   
   # get metrics
   metrics[[i]] <- vlookup_test %>%
-    class_metrics(truth = y, estimate = y_hat, na.rm = FALSE)
+    class_metrics(truth = y, estimate = y_hat)
   
   preds[[i]] <- vlookup_test
 }

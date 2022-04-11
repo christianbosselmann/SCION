@@ -194,8 +194,7 @@ constructGroupMKL <- function(x){
 
   # data features
   names_tasks <- unique(t_vec)
-  n_tasks <- length(t_vec)
-  
+
   # generate a named list of task indices
   indices_tasks <- vector(mode = "list", length = length(names_tasks))
   for (i in 1:length(names_tasks)) {

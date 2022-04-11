@@ -115,7 +115,6 @@ for (sim in loop_sim){
 
 #' experiment 7: unregularized group-level MKL
 #' this does not include multi-task learning yet
-#' TODO refactor, optimize
 seed <- 42
 k <- 10
 cost_vec <- 2 ^ seq(-5, 5, by = 1)
@@ -124,4 +123,11 @@ kernel <- "mkl"
 mkl_method <- "group"
 mkl_cost <- 1
 source("model.R")
+
+#' experiment 8: baseline comparison to the Brunklaus decision rule
+#' cf. PMID 35037686
+#' TODO double-check
+seed <- 42
+k <- 2
+source("helper_brunklaus.R")
 

@@ -124,10 +124,9 @@ mkl_method <- "group"
 mkl_cost <- 1
 source("model.R")
 
-#' experiment 8: baseline comparison to the Brunklaus decision rule
+#' experiment 8: comparison to the Brunklaus decision rule
 #' cf. PMID 35037686
-#' TODO double-check
 seed <- 42
-k <- 2
+k <- 5
 source("helper_brunklaus.R")
 

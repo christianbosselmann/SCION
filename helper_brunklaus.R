@@ -39,6 +39,7 @@ cv <- caret::createFolds(dat_raw$y, k = k)
 vlookup_train <- data.frame() 
 class_metrics <- metric_set(accuracy, kap, mcc, f_meas)
 metrics <- list()
+preds <- list()
 
 for (i in 1:length(cv)){
   test <- cv[[i]]
@@ -70,12 +71,16 @@ for (i in 1:length(cv)){
   #   filter(!y_hat == "Uncertain")
   
   # optional: replace uncertain label with coin toss
-  coin <- c("GOF", "LOF")
-  vlookup_train$y_hat[vlookup_train$y_hat == "Uncertain"] <- sample(coin, 1)
+  # coin <- c("GOF", "LOF")
+  # vlookup_train$y_hat[vlookup_train$y_hat == "Uncertain"] <- sample(coin, 1)
   
   # use vlookup_train tbl to apply decision rule to test observations
   vlookup_test <- vlookup[test,]
   vlookup_test <- merge(vlookup_train, vlookup_test, by = "cid")
+  
+  # optional: treat all uncertain predictions as incorrect
+  vlookup_test$y_hat[vlookup_test$y_hat == "Uncertain" & vlookup_test$y == "LOF"] <- "GOF"
+  vlookup_test$y_hat[vlookup_test$y_hat == "Uncertain" & vlookup_test$y == "GOF"] <- "LOF"
   
   # encode factors
   vlookup_test$y <- factor(vlookup_test$y, levels = c("GOF", "LOF"))
@@ -84,11 +89,16 @@ for (i in 1:length(cv)){
   # get metrics
   metrics[[i]] <- vlookup_test %>%
     class_metrics(truth = y, estimate = y_hat, na.rm = FALSE)
+  
+  preds[[i]] <- vlookup_test
 }
 
 # create summary and export
-report <- rbindlist(metrics, idcol = "fold") %>%
+report_metrics <- rbindlist(metrics, idcol = "fold") %>%
   group_by(.metric) %>%
   summarise(mean = mean(.estimate, na.rm = TRUE), sd = sd(.estimate, na.rm = TRUE))
 
-write_csv(report, paste0('out/report_', Sys.time(), '.csv'))
+report_preds <- rbindlist(preds, idcol = "fold")
+
+write_csv(report_metrics, paste0('out/report_metrics_', Sys.time(), '.csv'))
+write_csv(report_preds, paste0('out/report_preds_', Sys.time(), '.csv'))

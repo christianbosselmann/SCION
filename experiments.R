@@ -127,6 +127,10 @@ source("model.R")
 #' experiment 8: comparison to the Brunklaus decision rule
 #' cf. PMID 35037686
 seed <- 42
-k <- 5
+k <- 10
 source("helper_brunklaus.R")
+
+#' experiment 9: comparison to the Heyne GBM
+#' cf. PMID 32801145 and github.com/heyhen/funNCion/
+source("helper_heyne.R")
 

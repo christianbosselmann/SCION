@@ -1,7 +1,7 @@
 # SCN
 # Functional variant prediction for voltage-gated sodium channels
-# helper script to produce a look-up table for the Brunklaus decision rule
-# brunklaus.R
+# helper script to provide a baseline comparison to the Brunklaus decision rule
+# helper_brunklaus.R
 
 # pkg
 library(librarian)
@@ -37,65 +37,40 @@ cv <- caret::createFolds(dat_raw$y, k = k)
 
 # initialize loop objects
 vlookup_train <- data.frame() 
-class_metrics <- metric_set(accuracy, kap, mcc, f_meas)
+vlookup_test <- data.frame() 
+class_metrics <- metric_set(accuracy, spec, sens, kap, mcc, f_meas)
 metrics <- list()
 preds <- list()
 
 for (i in 1:length(cv)){
   test <- cv[[i]]
-  train <- unlist(cv[-1], use.names = F)
+  train <- unlist(cv[-i], use.names = F)
   
-  # store training subset of Brunklaus lookup table
+  # create subsets
   vlookup_train <- vlookup[train,]
-  
-  # count cid per position
-  tmp_cid <- vlookup_train %>%
-    select(cid, y) 
-  
-  vlookup_train <- cbind(tmp_cid, model.matrix(~ y - 1, vlookup_train)) %>%
-    select(-y)
-  
-  vlookup_train <- aggregate(vlookup_train[2:3], by = vlookup_train[1], function(v) sum(v))
-  
-  # implicit encoding, then sum up to get a GOF/LOF score per index position
-  # GOF +ve, LOF -ve
-  vlookup_train$y_hat <- vlookup_train$yGOF - vlookup_train$yLOF 
-  
-  # # option 1 to translate into categorical label
-  # vlookup_train$y_hat[vlookup_train$y_hat > 0] <- "GOF"
-  # vlookup_train$y_hat[vlookup_train$y_hat < 0] <- "LOF"
-  # vlookup_train$y_hat[vlookup_train$y_hat == 0] <- "Uncertain"
-  
-  # option 2 to translate into categorical label
-  vlookup_train$y_hat[vlookup_train$yGOF >= 1] <- "GOF"
-  vlookup_train$y_hat[vlookup_train$yLOF >= 1] <- "LOF"
-  vlookup_train$y_hat[vlookup_train$yGOF >= 1 &
-                        vlookup_train$yLOF >= 1] <- "Uncertain"
-  
-  # optional: drop uncertain labels
-  # vlookup_train <- vlookup_train %>%
-  #   filter(!y_hat == "Uncertain")
-  
-  # optional: replace uncertain label with coin toss
-  # coin <- c("GOF", "LOF")
-  # vlookup_train$y_hat[vlookup_train$y_hat == "Uncertain"] <- sample(coin, 1)
-  
-  # use vlookup_train tbl to apply decision rule to test observations
   vlookup_test <- vlookup[test,]
-  vlookup_test <- merge(vlookup_train, vlookup_test, by = "cid")
   
-  # # optional: treat all uncertain predictions as incorrect
-  # vlookup_test$y_hat[vlookup_test$y_hat == "Uncertain" & vlookup_test$y == "LOF"] <- "GOF"
-  # vlookup_test$y_hat[vlookup_test$y_hat == "Uncertain" & vlookup_test$y == "GOF"] <- "LOF"
+  # join in Brunklaus' "mismatch pairs"
+  vlookup_test <- left_join(x = vlookup_test, 
+                            y = vlookup_train, 
+                            by = c("cid", "aa1", "aa2"))
+  
+  # clean up
+  vlookup_test <- vlookup_test %>%
+    select(id.x, aa1, gene.x, aa2, pos.x, cid, y.x, y.y) %>%
+    rename(id = id.x, gene = gene.x, pos = pos.x, y = y.x, y_hat = y.y)
+  
+  # all variants not captured by Brunklaus pairs are labeled uncertain
+  vlookup_test$y_hat[is.na(vlookup_test$y_hat)] <- "Uncertain"
   
   # encode factors
   vlookup_test$y <- factor(vlookup_test$y, levels = c("GOF", "LOF", "Uncertain"))
   vlookup_test$y_hat <- factor(vlookup_test$y_hat, levels = c("GOF", "LOF", "Uncertain"))
-  
+
   # get metrics
   metrics[[i]] <- vlookup_test %>%
     class_metrics(truth = y, estimate = y_hat)
-  
+
   preds[[i]] <- vlookup_test
 }
 

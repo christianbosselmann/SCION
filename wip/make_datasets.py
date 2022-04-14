@@ -22,13 +22,13 @@ import time
 import copy
 import argparse
 import helperFuncs as helper
-from sklearn.cross_validation import StratifiedShuffleSplit
+from sklearn.model_selection import StratifiedShuffleSplit
 
 CODE_PATH = os.path.dirname(os.getcwd())
 sys.path.append(CODE_PATH)
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--datafile', type=str, default='/Your/path/here/')
+parser.add_argument('--datafile', type=str, default='/Users/cbosselmann/Desktop/GitHub/SCN')
 parser.add_argument('--task_type', type=str, default='users', 
 					help="How to partition related tasks; can be 'users' so "
 						 "that predicting the outcome for each user is its own "
@@ -53,7 +53,7 @@ def getDatasetCoreNameAndPath(datafile):
 def getLabelTaskListFromDataset(datafile, subdivide_phys=True):
 	"""Partitions a .csv file into a task-dict-list pickle file by separating
 	related labels into the different tasks."""
-	df = pd.DataFrame.from_csv(datafile)
+	df = pd.read_csv(datafile)
 	wanted_labels = [x for x in df.columns.values if '_Label' in x and 'tomorrow_' in x and 'Evening' in x and 'Alertness' not in x and 'Energy' not in x]
 	wanted_feats = [x for x in df.columns.values if x != 'user_id' and x != 'timestamp' and x!= 'dataset' and x!='Cluster' and '_Label' not in x]
 
@@ -105,7 +105,7 @@ def getUserTaskListFromDataset(datafile, target_label, suppress_output=False,
 							   group_on='user_id', subdivide_phys=False):
 	"""Partitions a .csv file into a task-dict-list pickle file by separating
 	different individuals (users) into the different tasks."""
-	df = pd.DataFrame.from_csv(datafile)
+	df = pd.read_csv(datafile)
 	wanted_feats = [x for x in df.columns.values if x != 'user_id' and x != 'timestamp' and x!= 'dataset' and x!='classifier_friendly_ppt_id' and 'Cluster' not in x and '_Label' not in x]
 	
 	df = helper.normalizeAndFillDataDf(df, wanted_feats, [target_label], suppress_output=True)

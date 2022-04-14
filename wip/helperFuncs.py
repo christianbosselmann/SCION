@@ -395,12 +395,12 @@ def getMatrixData(data_df, wanted_feats, wanted_labels, dataset=None,single_outp
     else:
         set_df = data_df
 
-    X = set_df[wanted_feats].astype(float).as_matrix()
+    X = set_df[wanted_feats].astype(float).to_numpy()
 
     if single_output:
         y = set_df[wanted_labels[0]].tolist()
     else:
-        y = set_df[wanted_labels].as_matrix()
+        y = set_df[wanted_labels].to_numpy()
 
     return X,y
 
@@ -431,12 +431,12 @@ def getSvmPartitionDf(data_df, wanted_feats, wanted_labels, dataset='Train'):
 def getTensorFlowMatrixData(data_df, wanted_feats, wanted_labels, dataset='Train',single_output=False):
     set_df = data_df[data_df['dataset']==dataset]
 
-    X = set_df[wanted_feats].astype(float).as_matrix()
+    X = set_df[wanted_feats].astype(float).to_numpy()
 
     if single_output:
         y = set_df[wanted_labels[0]].tolist()
     else:
-        y = set_df[wanted_labels].as_matrix()
+        y = set_df[wanted_labels].to_numpy()
 
     X = convertMatrixToTensorFlowFriendlyFormat(X)
     y = convertMatrixToTensorFlowFriendlyFormat(y)
@@ -624,7 +624,7 @@ def get_test_predictions_for_df_with_task_column(model_predict_func, csv_path, t
         if tasks_are_ints:
             task = int(task)
         task_df = data_df[data_df[task_column]==task]
-        X = task_df[wanted_feats].as_matrix()
+        X = task_df[wanted_feats].values()
         preds = model_predict_func(X, i)
         data_df.loc[task_df.index.values,'test_pred_'+label_name] = preds
 
@@ -656,7 +656,7 @@ def get_test_predictions_for_df_with_no_task_column(model_predict_func, csv_path
         label_name = getFriendlyLabelName(wanted_label)
         label_df = normalizeAndFillDataDf(copy.deepcopy(data_df), wanted_feats, [wanted_label])
 
-        X = label_df[wanted_feats].as_matrix()
+        X = label_df[wanted_feats].to_numpy()
         preds = model_predict_func(X, i)
         data_df.loc[label_df.index.values,'test_pred_'+label_name] = preds
 

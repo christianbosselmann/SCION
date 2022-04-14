@@ -7,15 +7,17 @@
 # pkg
 library(librarian)
 librarian::shelf(tidyverse,
+                 tidymodels,
                  caret)
 
 # set seed
 set.seed(42)
 
-# get raw data for aa substitution and cid for comparison
-data <- read_csv("data/dat_prep.csv")
+# get data
+data <- read_csv("data/dat_prep.csv") 
+data <- data %>% select(-gene) # not a feature
 
-# 
+# set fit control
 fitControl <- caret::trainControl(
   method = "repeatedcv",
   number = 10,
@@ -27,14 +29,14 @@ inTraining <- createDataPartition(as.factor(data$y), p = .9, list = FALSE)
 training <- data[ inTraining,] 
 testing <- data[ -inTraining,] 
 
-# updated upsampling procedure from Heyne code
+# upsampling, as in Heyne
 training <- upSample(x = training[, -ncol(training)],
                      y = as.factor(training$y)) 
+
 training <- training %>% rename(y = Class)
 
 # note: no additional feature engineering as in original Heyne code,
 # due to the different data set
-
 model1 <- caret::train(y ~ ., data = training,
                        method = "gbm",
                        trControl = fitControl,
@@ -48,22 +50,11 @@ out <- data.frame(obs = as.factor(test_data),
                   pred = predict(model1, newdata = testing)
 )
 
-modelperformance <- function(out) {
-  res <- c(multiClassSummary(out, lev = c("GOF", "LOF")),
-           mcc(out, obs, pred)$.estimate, # updated from Heyne code due to outdated dependency
-           round(twoClassSummary(out, lev = c("GOF", "LOF")), digits = 2))
-  names(res)[15] <- "MCC"
-  return(res[c("Balanced_Accuracy", "Sens", "Spec","AUC","Precision","Recall","F1", "prAUC","Kappa", "MCC")])
-}
-
 # single 0.1 holdout as in original Heyne method, then create report
-report_metrics <- as.data.frame(modelperformance(out)) %>%
-  rename(value = 'modelperformance(out)')
-report_metrics$metric <- rownames(report_metrics) 
-rownames(report_metrics) <- NULL
-report_metrics <- report_metrics %>%
-  select(metric, everything()) 
+class_metrics <- metric_set(accuracy, kap, mcc, sens, spec, f_meas, roc_auc, pr_auc)
 
+report_metrics <- out %>%
+  class_metrics(truth = obs, GOF, estimate = pred) 
 
 # export output
 write_csv(report_metrics, paste0('out/report_metrics_', Sys.time(), '.csv'))

@@ -100,6 +100,11 @@ for (m in 1:length(Km)) {
   if (kernel == "mkl") {
     M_mkl <- list(Kt, hpo, M)
     
+    if (mkl_method == "block") {
+      M <- constructBlockMKL(M_mkl) # call blockwise group-level MKL
+      mkl_weights[[m]] <- wt
+    }
+    
     if (mkl_method == "group") {
       M <- constructGroupMKL(M_mkl) # call unregularized group-level MKL
     }

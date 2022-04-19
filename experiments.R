@@ -114,14 +114,23 @@ for (sim in loop_sim){
 }
 
 #' experiment 7: unregularized group-level MKL
-#' this does not include multi-task learning yet
-#' nota bene: somewhat unfair comparison, as this MKL approach is a single-task learning approach, while the previous uniform global MKL is by definition the simple MTMKL extension by Kandemir 2014
+#' this MKL approach is a single-task learning approach, while the uniform global MKL method is by definition the simple MTMKL extension by Kandemir 2014
+#' second step is a block-wise MTMKL, where weights are instead learned for all combinations of tasks, allowing some knowledge transfer
 seed <- 42
 k <- 10
 cost_vec <- 2 ^ seq(-5, 5, by = 1)
 class_weight <- "uniform"
 kernel <- "mkl"
 mkl_method <- "group"
+mkl_cost <- 1
+source("model.R")
+
+seed <- 42
+k <- 10
+cost_vec <- 2 ^ seq(-5, 5, by = 1)
+class_weight <- "uniform"
+kernel <- "mkl"
+mkl_method <- "block"
 mkl_cost <- 1
 source("model.R")
 
@@ -132,7 +141,6 @@ k <- 10
 source("helper_brunklaus.R")
 
 #' experiment 9: comparison to the Heyne GBM
+#' currently run with Heyne's single holdout validation
 #' cf. PMID 32801145 and github.com/heyhen/funNCion/
-#' TODO double-check this, AUROC is high. Upsampling information leak? CV?
 source("helper_heyne.R")
-

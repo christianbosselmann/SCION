@@ -191,10 +191,10 @@ SEMKL.classification=function(k,outcome,penalty,tol=0.0001,max.iters=1000){
 #' @param y_mkl MKL label vector
 #' @return M MKL matrix
 constructGroupMKL <- function(x){
-
+  
   # data features
   names_tasks <- unique(t_vec)
-
+  
   # generate a named list of task indices
   indices_tasks <- vector(mode = "list", length = length(names_tasks))
   for (i in 1:length(names_tasks)) {
@@ -232,7 +232,7 @@ constructGroupMKL <- function(x){
   for (i in 1:length(names_tasks)) {
     m_tasks[[i]] <- Reduce(`+`,Map(`*`, w_tasks[[i]], m_tasks[[i]]))
   }
-
+  
   # merge into a diagonal block matrix
   M <- bdiag(m_tasks)
   M <- as.data.frame(as.matrix(M))
@@ -243,6 +243,135 @@ constructGroupMKL <- function(x){
   M <- arrange(M, indices_tasks) %>%
     select(-indices_tasks)
   M <- as.matrix(M)
-
+  
   return(M)
 }
+
+### WIP: blockwise MTMKL
+#' @param t_vec vector of task membership
+#' @param x list of Kernel matrices
+#' @param y_mkl MKL label vector
+#' @return M MKL matrix
+constructBlockMKL <- function(x){
+  
+  # data features
+  names_tasks <- unique(t_vec)
+  
+  # generate a named list of task indices
+  indices_tasks <- vector(mode = "list", length = length(names_tasks))
+  for (i in 1:length(names_tasks)) {
+    indices_tasks[[i]] <- which(t_vec == names_tasks[[i]])
+  }
+  names(indices_tasks) <- names_tasks
+  
+  # construct a task-wise block diagonal matrix first
+  m_tasks <- list()
+  for (i in 1:length(names_tasks)) {
+    m_tasks[[i]] <- list(hpo[indices_tasks[[i]], indices_tasks[[i]]],
+                         M[indices_tasks[[i]], indices_tasks[[i]]])
+  }
+
+  # run wrapper MKL for each task
+  w_tasks <- list()
+  y_d <- vector()
+  for (i in 1:length(names_tasks)) {
+    y_d <- y_mkl[indices_tasks[[i]]]
+
+    # small tasks with similar observations may lead to computationally singular systems
+    # if this occurs, return the uniformly weighted kernel matrix
+    tryCatch(
+      expr = {
+        w_tasks[[i]] <- SEMKL.classification(k = m_tasks[[i]],
+                                             outcome = y_d,
+                                             penalty = mkl_cost)$gamma
+      },
+      error = function(x) {
+        w_tasks[[i]] <<- rep(1/length(m_tasks[[i]]), length(m_tasks[[i]]))
+      })
+  }
+
+  # apply weights and store in the original list of matrices
+  for (i in 1:length(names_tasks)) {
+    m_tasks[[i]] <- Reduce(`+`,Map(`*`, w_tasks[[i]], m_tasks[[i]]))
+  }
+  
+  # get new task indices
+  indices_tasks_new <- list()
+  for (i in 1:length(names_tasks)) {
+    l <- length(indices_tasks[[i]]) # length of index vector
+    k <- length(unlist(indices_tasks[(1:i)-1])) # length of all previous tasks index vectors
+    t <- c(k+(1:l)) # task block coordinates
+    indices_tasks_new[[i]] <- t
+  }
+  names(indices_tasks_new) <- names_tasks
+  
+  list_2tasks <- expand.grid(names_tasks, names_tasks,
+                             stringsAsFactors = FALSE) %>%
+    as.data.frame() %>%
+    split(., seq(nrow(.)), drop = TRUE)
+  
+  m_2tasks <- list() # list of combined task matrices
+  wt <- list() # list of taskwise weight vectors
+  for (i in 1:length(list_2tasks)) {
+    i1 <- indices_tasks[[list_2tasks[[i]][[1]]]] # indices of first task to grab from
+    i2 <- indices_tasks[[list_2tasks[[i]][[2]]]] # indices of second task to grab from
+    m <- list(hpo[c(i1,i2), c(i1,i2)], # view matrices for MKL
+              M[c(i1,i2), c(i1,i2)]) # be careful if M was stored previously - we want the original instance-level matrix of sequence/structure-based feature RBF kernel fn here
+    
+    w <- list()
+    y_d <- vector()
+    n <- matrix(nrow = length(c(i1, i2)), ncol = length(c(i1, i2)))
+    for (task in 1:length(names_tasks)) {
+      y_d <- y_mkl[c(i1,i2)]
+      
+      # small tasks with similar observations may lead to computationally singular systems
+      # if this occurs, return the uniformly weighted kernel matrix
+      tryCatch(
+        expr = {
+          w <- SEMKL.classification(k = m,
+                                    outcome = y_d,
+                                    penalty = mkl_cost)$gamma
+        },
+        error = function(x) {
+          w <<- rep(1/length(m), length(m))
+        })
+      
+      # store weights of task combinations
+      wt[[i]] <- w
+
+      # merge view matrices by weights
+      m_2tasks[[i]] <- Reduce(`+`,Map(`*`, w, m))
+    }
+  }
+  
+  # name stored weight vector
+  names(wt) <- lapply(lapply(list_2tasks, unlist), as.character)
+  wt <- as_tibble(wt)
+  rownames(wt) <- c("hpo", "structure")
+  wt <- t(wt)
+  assign("wt", wt, envir = .GlobalEnv)
+
+  # create block diagonal matrix
+  M <- as.matrix(bdiag(m_tasks))
+  
+  # populate block diagonal matrix with taskwise weighted MKL matrices
+  for (i in 1:length(list_2tasks)){
+    j1 <- indices_tasks_new[[list_2tasks[[i]][[1]]]] # indices of first task to store later
+    j2 <- indices_tasks_new[[list_2tasks[[i]][[2]]]] # indices of second task to store later
+    j <- c(j1,j2)
+    m <- m_2tasks[[i]]
+    M[j,j] <- m
+  }
+
+  # reorder matrix to match original indices
+  M <- as.data.frame(M)
+  indices_tasks <- as.numeric(unlist(indices_tasks))
+  M <- cbind(M, indices_tasks)
+  M <- arrange(M, indices_tasks) %>%
+    select(-indices_tasks)
+  M <- as.matrix(M)
+  
+  M <- M+Kt # get product kernel matrix with task similarity for MTMKL
+  
+  return(M)
+} 

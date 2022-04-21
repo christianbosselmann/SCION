@@ -270,13 +270,13 @@ constructBlockMKL <- function(x){
     m_tasks[[i]] <- list(hpo[indices_tasks[[i]], indices_tasks[[i]]],
                          M[indices_tasks[[i]], indices_tasks[[i]]])
   }
-
+  
   # run wrapper MKL for each task
   w_tasks <- list()
   y_d <- vector()
   for (i in 1:length(names_tasks)) {
     y_d <- y_mkl[indices_tasks[[i]]]
-
+    
     # small tasks with similar observations may lead to computationally singular systems
     # if this occurs, return the uniformly weighted kernel matrix
     tryCatch(
@@ -289,7 +289,7 @@ constructBlockMKL <- function(x){
         w_tasks[[i]] <<- rep(1/length(m_tasks[[i]]), length(m_tasks[[i]]))
       })
   }
-
+  
   # apply weights and store in the original list of matrices
   for (i in 1:length(names_tasks)) {
     m_tasks[[i]] <- Reduce(`+`,Map(`*`, w_tasks[[i]], m_tasks[[i]]))
@@ -320,7 +320,7 @@ constructBlockMKL <- function(x){
     
     w <- list()
     y_d <- vector()
-    n <- matrix(nrow = length(c(i1, i2)), ncol = length(c(i1, i2)))
+    
     for (task in 1:length(names_tasks)) {
       y_d <- y_mkl[c(i1,i2)]
       
@@ -338,7 +338,7 @@ constructBlockMKL <- function(x){
       
       # store weights of task combinations
       wt[[i]] <- w
-
+      
       # merge view matrices by weights
       m_2tasks[[i]] <- Reduce(`+`,Map(`*`, w, m))
     }
@@ -350,7 +350,7 @@ constructBlockMKL <- function(x){
   rownames(wt) <- c("hpo", "structure")
   wt <- t(wt)
   assign("wt", wt, envir = .GlobalEnv)
-
+  
   # create block diagonal matrix
   M <- as.matrix(bdiag(m_tasks))
   
@@ -359,10 +359,18 @@ constructBlockMKL <- function(x){
     j1 <- indices_tasks_new[[list_2tasks[[i]][[1]]]] # indices of first task to store later
     j2 <- indices_tasks_new[[list_2tasks[[i]][[2]]]] # indices of second task to store later
     j <- c(j1,j2)
-    m <- m_2tasks[[i]]
-    M[j,j] <- m
+    
+    l1 <- length(j1)
+    l2 <- length(j2)
+    
+    k1 <- 1:l2
+    k2 <- (1:l1)+l2
+    
+    m <- m_2tasks[[i]] 
+    
+    M[j1,j2] <- m[k1,k2] # TODO more bugfixing
   }
-
+  
   # reorder matrix to match original indices
   M <- as.data.frame(M)
   indices_tasks <- as.numeric(unlist(indices_tasks))

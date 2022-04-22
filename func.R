@@ -310,6 +310,12 @@ constructBlockMKL <- function(x){
     as.data.frame() %>%
     split(., seq(nrow(.)), drop = TRUE)
   
+  # tidy solution
+  # list_2tasks <- crossing(names_tasks, names_tasks, .name_repair = "unique") %>%
+  #   filter(!duplicated(paste0(pmax(names_tasks...1, names_tasks...2), pmin(names_tasks...1, names_tasks...2)))) %>%
+  #   as.data.frame() %>%
+  #   split(., seq(nrow(.)), drop = TRUE)
+  
   m_2tasks <- list() # list of combined task matrices
   wt <- list() # list of taskwise weight vectors
   for (i in 1:length(list_2tasks)) {
@@ -356,19 +362,15 @@ constructBlockMKL <- function(x){
   
   # populate block diagonal matrix with taskwise weighted MKL matrices
   for (i in 1:length(list_2tasks)){
+    if(list_2tasks[[i]][[1]] == list_2tasks[[i]][[2]]) next
     j1 <- indices_tasks_new[[list_2tasks[[i]][[1]]]] # indices of first task to store later
     j2 <- indices_tasks_new[[list_2tasks[[i]][[2]]]] # indices of second task to store later
-    j <- c(j1,j2)
-    
-    l1 <- length(j1)
-    l2 <- length(j2)
-    
-    k1 <- 1:l2
-    k2 <- (1:l1)+l2
-    
+    k1 <- length(j1)
+    k2 <- length(j2)
     m <- m_2tasks[[i]] 
-    
-    M[j1,j2] <- m[k1,k2] # TODO more bugfixing
+    l <- (1:nrow(m))[(k2+1):nrow(m)]
+    k <- 1:(min(l)-1)
+    M[j1,j2] <- m[k,l] # TODO more bugfixing; still doesn't work
   }
   
   # reorder matrix to match original indices
@@ -379,7 +381,18 @@ constructBlockMKL <- function(x){
     select(-indices_tasks)
   M <- as.matrix(M)
   
-  M <- M+Kt # get product kernel matrix with task similarity for MTMKL
+  M <- M*Kt # get product kernel matrix with task similarity for MTMKL
+  
+  # complete matrix: add to transpose, subtract diagonal
+  
+  
+  # M <- lower.triangle(M)
+  # M <- M + t(M) - diag(diag(M))
+  
+  M <- as.matrix(forceSymmetric(M))
+  M <- spectrumShift(M, coeff = 1.1)
+  
+  # TODO still more bugfixing
   
   return(M)
 } 

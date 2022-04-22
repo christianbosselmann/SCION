@@ -324,30 +324,25 @@ constructBlockMKL <- function(x){
     m <- list(hpo[c(i1,i2), c(i1,i2)], # view matrices for MKL
               M[c(i1,i2), c(i1,i2)]) # be careful if M was stored previously - we want the original instance-level matrix of sequence/structure-based feature RBF kernel fn here
     
-    w <- list()
-    y_d <- vector()
+    y_d <- y_mkl[c(i1,i2)]
     
-    for (task in 1:length(names_tasks)) {
-      y_d <- y_mkl[c(i1,i2)]
-      
-      # small tasks with similar observations may lead to computationally singular systems
-      # if this occurs, return the uniformly weighted kernel matrix
-      tryCatch(
-        expr = {
-          w <- SEMKL.classification(k = m,
-                                    outcome = y_d,
-                                    penalty = mkl_cost)$gamma
-        },
-        error = function(x) {
-          w <<- rep(1/length(m), length(m))
-        })
-      
-      # store weights of task combinations
-      wt[[i]] <- w
-      
-      # merge view matrices by weights
-      m_2tasks[[i]] <- Reduce(`+`,Map(`*`, w, m))
-    }
+    # small tasks with similar observations may lead to computationally singular systems
+    # if this occurs, return the uniformly weighted kernel matrix
+    tryCatch(
+      expr = {
+        w <- SEMKL.classification(k = m,
+                                  outcome = y_d,
+                                  penalty = mkl_cost)$gamma
+      },
+      error = function(x) {
+        w <<- rep(1/length(m), length(m))
+      })
+    
+    # store weights of task combinations
+    wt[[i]] <- w
+    
+    # merge view matrices by weights
+    m_2tasks[[i]] <- Reduce(`+`,Map(`*`, w, m))
   }
   
   # name stored weight vector
@@ -362,14 +357,17 @@ constructBlockMKL <- function(x){
   
   # populate block diagonal matrix with taskwise weighted MKL matrices
   for (i in 1:length(list_2tasks)){
-    if(list_2tasks[[i]][[1]] == list_2tasks[[i]][[2]]) next
+    # if(list_2tasks[[i]][[1]] == list_2tasks[[i]][[2]]) next
     j1 <- indices_tasks_new[[list_2tasks[[i]][[1]]]] # indices of first task to store later
     j2 <- indices_tasks_new[[list_2tasks[[i]][[2]]]] # indices of second task to store later
     k1 <- length(j1)
     k2 <- length(j2)
-    m <- m_2tasks[[i]] 
-    l <- (1:nrow(m))[(k2+1):nrow(m)]
-    k <- 1:(min(l)-1)
+    m <- m_2tasks[[i]]
+    k <- 1:k1
+    l <- (1:nrow(m))[(k1+1):nrow(m)]
+    # l <- (1:nrow(m))[(k2+1):nrow(m)] # should point to 1
+    # 157 rows, 38 cols
+    # k <- 1:k1
     M[j1,j2] <- m[k,l] # TODO more bugfixing; still doesn't work
   }
   
@@ -388,9 +386,9 @@ constructBlockMKL <- function(x){
   
   # M <- lower.triangle(M)
   # M <- M + t(M) - diag(diag(M))
-  
-  M <- as.matrix(forceSymmetric(M))
-  M <- spectrumShift(M, coeff = 1.1)
+  # 
+  # M <- as.matrix(forceSymmetric(M))
+  # M <- spectrumShift(M, coeff = 1.1)
   
   # TODO still more bugfixing
   

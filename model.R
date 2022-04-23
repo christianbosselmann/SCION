@@ -37,14 +37,11 @@ librarian::shelf(tidyverse,
 source("func.R")
 
 # set random seed
-set.seed(seed)
+addTaskCallback(function(...) {set.seed(seed);TRUE})
 
-# read data
+# data features
 data <- read_csv("data/dat_prep.csv")
-
 t_vec <- data$gene # get task vector
-# data$gene <- NULL # drop task from features
-
 data$y <- as.factor(data$y)
 y <- data$y # get label vector
 
@@ -53,7 +50,6 @@ if (class_weight == "uniform") {
   weights <- c("GOF" = 1,
                "LOF" = 1)
 }
-
 if (class_weight == "inverse") {
   weights <- c("GOF" = length(data$y) / sum(data$y == "GOF"),
                "LOF" = length(data$y) / sum(data$y == "LOF"))
@@ -66,19 +62,13 @@ if (kernel == "mkl") {
   y_mkl[y_mkl == 2] <- -1
   
   load("mat/hpomatrix.RData")
-  hpo <- kernelNormalisation(hpo)
-  hpo <- kernelCentering(hpo)
-  hpo <- round(hpo, 10)
+  hpo <- kernelPreparation(hpo)
   
   Kt <- readRDS("mat/taskmatrix.rds")
-  Kt <- kernelNormalisation(Kt)
-  Kt <- kernelCentering(Kt)
-  Kt <- round(Kt, 10)
+  Kt <- kernelPreparation(Kt)
   
   Km <- readRDS("mat/kernelmatrices_instance.rds")
-  Km <- lapply(Km, kernelNormalisation)
-  Km <- lapply(Km, kernelCentering)
-  Km <- lapply(Km, round, 10)
+  Km <- lapply(Km, kernelPreparation)
 }
 
 if (kernel == "mtl") {Km <- readRDS("mat/kernelmatrices_mtl.rds")}
@@ -96,19 +86,16 @@ for (m in 1:length(Km)) {
   report[[m]] <- data.frame()
   M <- as.matrix(Km[[m]])
 
-  ### MKL module
+  # MKL module
   if (kernel == "mkl") {
     M_mkl <- list(Kt, hpo, M)
-    
     if (mkl_method == "block") {
       M <- constructBlockMKL(M_mkl) # call blockwise group-level MKL
       mkl_weights[[m]] <- wt
     }
-    
     if (mkl_method == "group") {
       M <- constructGroupMKL(M_mkl) # call unregularized group-level MKL
     }
-    
     if (mkl_method == "simple") {
       mod_mkl <- SimpleMKL.classification(k = M_mkl, 
                                           outcome = y_mkl,
@@ -116,7 +103,6 @@ for (m in 1:length(Km)) {
       M <- Reduce(`+`,Map(`*`, mod_mkl$gamma, M_mkl)) # take weighted mean
       mkl_weights[[m]] <- mod_mkl$gamma # store weights
     }
-    
     if (mkl_method == "semkl") {
       mod_mkl <- SEMKL.classification(k = M_mkl, 
                                       outcome = y_mkl,
@@ -124,7 +110,6 @@ for (m in 1:length(Km)) {
       M <- Reduce(`+`,Map(`*`, mod_mkl$gamma, M_mkl)) # take weighted mean
       mkl_weights[[m]] <- mod_mkl$gamma # store weights
     }
-    
     if (mkl_method == "uniform") {
       mod_mkl <- NULL
       mod_mkl$gamma <- rep(1/length(M_mkl), length(M_mkl))
@@ -132,7 +117,6 @@ for (m in 1:length(Km)) {
       mkl_weights[[m]] <- mod_mkl$gamma # store weights
     }
   }
-  ###
   
   # set up nested cv
   cv <- nested_cv(M, outside = vfold_cv(v = k), 
@@ -225,7 +209,7 @@ if (kernel == "mkl") {
 print(report_params)
 
 # assess model with best combination
-M2 <- mat_precomp[[report_params$best_matrix]]
+M <- mat_precomp[[report_params$best_matrix]]
 C <- as.numeric(levels(report_params$best_cost))[report_params$best_cost] # careful: implicit coercion
 
 # initialize loop object
@@ -236,14 +220,14 @@ for (i in 1:length(cv$splits)) {
   train_indices <- cv$splits[[i]]$in_id 
   
   model <- e1071::svm(
-    x = M2[c(train_indices), c(train_indices)],
+    x = M[c(train_indices), c(train_indices)],
     y = y[c(train_indices)],
     cost = C,
     probability = TRUE,
     class.weights = weights
   )
   
-  test <- as.kernelMatrix(M2[-train_indices, train_indices])
+  test <- as.kernelMatrix(M[-train_indices, train_indices])
   
   # assess fold
   report_raw[[i]] <- data.table()
@@ -255,31 +239,8 @@ for (i in 1:length(cv$splits)) {
   report_raw[[i]] <- cbind(report_raw[[i]], prob)
   
   # store test indices to later get task-specific performance metrics
-  report_raw[[i]]$ind <- which(1:nrow(M2) %nin% train_indices) # very ugly hack to get test indices
+  report_raw[[i]]$ind <- which(1:nrow(M) %nin% train_indices) # very ugly hack to get test indices
 }
 
-# keep raw predictions and get metrics
-class_metrics <- metric_set(accuracy, kap, mcc, f_meas, roc_auc, pr_auc)
-
-report_predictions <- report_raw %>%
-  rbindlist(., idcol = "fold", use.names = TRUE) %>%
-  group_by(fold) %>%
-  class_metrics(truth = truth, GOF, estimate = pred) %>%
-  group_by(.metric) %>%
-  summarise(mean = mean(.estimate, na.rm = TRUE), sd = sd(.estimate, na.rm = TRUE))
-
-ind_list <- t_vec %>% # list of task indices for report
-  as_tibble() %>%
-  tibble::rowid_to_column("ind") %>%
-  rename(gene = value)
-
-report_final <- report_raw %>% 
-  rbindlist(., idcol = "fold", use.names = TRUE) %>%
-  inner_join(ind_list, by = "ind")
-
-print(report_predictions)
-
-# export model hyperparameters, raw predictions and model performance
-write_csv(report_params, paste0('out/report_params_', Sys.time(), '.csv'))
-write_csv(report_final, paste0('out/report_preds_', Sys.time(), '.csv'))
-write_csv(report_predictions, paste0('out/report_metrics_', Sys.time(), '.csv'))
+# generate reports
+generateReport(report_raw, print = TRUE, export = TRUE)

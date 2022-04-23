@@ -5,6 +5,38 @@
 ### negate in
 `%nin%` = Negate(`%in%`)
 
+### generating reports from predictions
+generateReport <- function(x, print, export){
+  class_metrics <- metric_set(accuracy, kap, mcc, f_meas, roc_auc, pr_auc)
+  
+  report_predictions <- report_raw %>%
+    rbindlist(., idcol = "fold", use.names = TRUE) %>%
+    group_by(fold) %>%
+    class_metrics(truth = truth, GOF, estimate = pred) %>%
+    group_by(.metric) %>%
+    summarise(mean = mean(.estimate, na.rm = TRUE), sd = sd(.estimate, na.rm = TRUE))
+  
+  ind_list <- t_vec %>% 
+    as_tibble() %>%
+    tibble::rowid_to_column("ind") %>%
+    rename(gene = value)
+  
+  report_final <- report_raw %>% 
+    rbindlist(., idcol = "fold", use.names = TRUE) %>%
+    inner_join(ind_list, by = "ind")
+  
+  if(print == TRUE){
+    print(report_predictions)
+  }
+  
+  if(export == TRUE){
+    write_csv(report_params, paste0('out/report_params_', Sys.time(), '.csv'))
+    write_csv(report_final, paste0('out/report_preds_', Sys.time(), '.csv'))
+    write_csv(report_predictions, paste0('out/report_metrics_', Sys.time(), '.csv'))
+  }
+  
+}
+
 ### normalize kernel matrix
 # cf. Kernel Methods for Pattern Analysis, Algorithm 5.1
 #' @param K kernel matrix to be normalized
@@ -50,6 +82,16 @@ kernelCheck <- function(K, tol = 1e-08){
     stop("Argument is not a psd matrix.")
   }
   print("Argument is a psd matrix.")
+}
+
+### standard kernel preprocessing
+#' @param K kernel matrix to be normalized and centered
+#' @return kernel matrix 
+kernelPreparation <- function(K){
+  K <- kernelNormalisation(K)
+  K <- kernelCentering(K)
+  K <- round(K, 10)
+  return(K)
 }
 
 ### SimpleMKL, from RMKL pkg

@@ -66,7 +66,8 @@ f <- rep(list(f), length(sigma))
 # iterate over the list and get the rbf kernel matrix for each value of sigma
 Kf <- lapply(1:length(f),
              function(x){
-               as.matrix(kernelMatrix(rbfdot(sigma = sigma[[x]]), x = f[[x]]))
+               as.matrix(kernlab::kernelMatrix(rbfdot(sigma = sigma[[x]]), 
+                                               x = as.matrix(f[[x]])))
              })
 
 # export
@@ -120,7 +121,7 @@ saveRDS(Km, "mat/kernelmatrices_mtl.rds")
 # is trained for each task
 Kd <- Kt
 
-Kd <- lapply(seq_along(Kd),
+Kd <- lapply(seq_along(Kd[1]),
              function(index){
                m <- Kd[[index]]
                colnames(m) <- t
@@ -133,13 +134,11 @@ Kd <- lapply(seq_along(Kd),
                
                colnames(m) <- NULL
                rownames(m) <- NULL
-               Kt[[index]] <- m # TODO check this. intended Kt instead of Kd?
+               Kd[[index]] <- m
              })
 
-Kd <- lapply(1:length(Kd), function(a)
-  lapply(1:length(Kf), function(s){
-    Kf[[s]] * Kd[[a]]
-  }))
+Kd <- lapply(1:length(Kf), function(s)
+  Kf[[s]] * Kd[[1]])
 
 saveRDS(Kd, "mat/kernelmatrices_dirac.rds")
 
@@ -147,11 +146,6 @@ saveRDS(Kd, "mat/kernelmatrices_dirac.rds")
 # uniform kernel, where each task is weighted the same
 # intuitively the same as the 'base' method from prefeKt, where one SVM
 # is trained for all tasks
-Ku <- lapply(1:a, matrix, data = 1, nrow = length(t), ncol = length(t))
-
-Ku <- lapply(1:length(Ku), function(a)
-  lapply(1:length(Kf), function(s){
-    Kf[[s]] * Ku[[a]]
-  }))
+Ku <- Kf
 
 saveRDS(Ku, "mat/kernelmatrices_union.rds")

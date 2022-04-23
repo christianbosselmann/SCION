@@ -69,15 +69,20 @@ if (kernel == "mkl") {
   
   Km <- readRDS("mat/kernelmatrices_instance.rds")
   Km <- lapply(Km, kernelPreparation)
+  
+  mkl_weights <- list()
 }
-
-if (kernel == "mtl") {Km <- readRDS("mat/kernelmatrices_mtl.rds")}
-if (kernel == "dirac") {Km <- readRDS("mat/kernelmatrices_dirac.rds")}
-if (kernel == "union") {Km <- readRDS("mat/kernelmatrices_union.rds")}
-
-if (!(kernel == "mkl")) {Km <- unlist(Km, recursive = FALSE)}
-if (kernel == "mkl") {mkl_weights <- list()}
-
+if (kernel == "mtl") {
+  Km <- readRDS("mat/kernelmatrices_mtl.rds")
+  Km <- unlist(Km, recursive = FALSE)
+  }
+if (kernel == "dirac") {
+  Km <- readRDS("mat/kernelmatrices_dirac.rds")
+  }
+if (kernel == "union") {
+  
+  Km <- readRDS("mat/kernelmatrices_union.rds")
+  }
 report <- list()
 mat_precomp <- list()
 

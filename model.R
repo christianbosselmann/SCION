@@ -41,9 +41,9 @@ addTaskCallback(function(...) {set.seed(seed);TRUE})
 
 # data features
 data <- read_csv("data/dat_prep.csv")
-t_vec <- data$gene # get task vector
+t_vec <- data$gene 
 data$y <- as.factor(data$y)
-y <- data$y # get label vector
+y <- data$y 
 
 # set up class weights
 if (class_weight == "uniform") {
@@ -75,14 +75,14 @@ if (kernel == "mkl") {
 if (kernel == "mtl") {
   Km <- readRDS("mat/kernelmatrices_mtl.rds")
   Km <- unlist(Km, recursive = FALSE)
-  }
+}
 if (kernel == "dirac") {
   Km <- readRDS("mat/kernelmatrices_dirac.rds")
-  }
+}
 if (kernel == "union") {
-  
   Km <- readRDS("mat/kernelmatrices_union.rds")
-  }
+}
+
 report <- list()
 mat_precomp <- list()
 
@@ -90,38 +90,7 @@ mat_precomp <- list()
 for (m in 1:length(Km)) {
   report[[m]] <- data.frame()
   M <- as.matrix(Km[[m]])
-
-  # MKL module
-  if (kernel == "mkl") {
-    M_mkl <- list(Kt, hpo, M)
-    if (mkl_method == "block") {
-      M <- constructBlockMKL(M_mkl) # call blockwise group-level MKL
-      mkl_weights[[m]] <- wt
-    }
-    if (mkl_method == "group") {
-      M <- constructGroupMKL(M_mkl) # call unregularized group-level MKL
-    }
-    if (mkl_method == "simple") {
-      mod_mkl <- SimpleMKL.classification(k = M_mkl, 
-                                          outcome = y_mkl,
-                                          penalty = mkl_cost)
-      M <- Reduce(`+`,Map(`*`, mod_mkl$gamma, M_mkl)) # take weighted mean
-      mkl_weights[[m]] <- mod_mkl$gamma # store weights
-    }
-    if (mkl_method == "semkl") {
-      mod_mkl <- SEMKL.classification(k = M_mkl, 
-                                      outcome = y_mkl,
-                                      penalty = mkl_cost)
-      M <- Reduce(`+`,Map(`*`, mod_mkl$gamma, M_mkl)) # take weighted mean
-      mkl_weights[[m]] <- mod_mkl$gamma # store weights
-    }
-    if (mkl_method == "uniform") {
-      mod_mkl <- NULL
-      mod_mkl$gamma <- rep(1/length(M_mkl), length(M_mkl))
-      M <- Reduce(`+`,Map(`*`, mod_mkl$gamma, M_mkl)) # take weighted mean
-      mkl_weights[[m]] <- mod_mkl$gamma # store weights
-    }
-  }
+  if (kernel == "mkl") {M_mkl <- list(Kt, hpo, M)}
   
   # set up nested cv
   cv <- nested_cv(M, outside = vfold_cv(v = k), 
@@ -129,19 +98,67 @@ for (m in 1:length(Km)) {
   
   # set up cost wrapper functions
   svm_metric <- function(object, cost = 1) {
-    y_test <- y[-object$in_id]
+    i <- object$in_id
+    
+    if (kernel == "mkl") {
+      M_mkl_train <- lapply(M_mkl, function(x) x[i,i])
+      if (mkl_method == "uniform") {
+        gamma <- rep(1/length(M_mkl), length(M_mkl))
+        M <- Reduce(`+`,Map(`*`, gamma, M_mkl))
+        assign("M", M, envir = .GlobalEnv)
+        mkl_weights[[m]] <<- gamma
+      }
+      if (mkl_method == "semkl") {
+        tryCatch(expr = {
+          gamma <- SEMKL.classification(k = M_mkl_train,
+                                            outcome = y_mkl[i],
+                                            penalty = mkl_cost)$gamma
+          M <- Reduce(`+`,Map(`*`, gamma, M_mkl))
+          assign("M", M, envir = .GlobalEnv)
+        },
+        error = function(x) {
+          gamma <- rep(1/length(M_mkl_train), length(M_mkl_train))
+          M <- Reduce(`+`,Map(`*`, gamma, M_mkl))
+          assign("M", M, envir = .GlobalEnv)
+        })
+      }
+      if (mkl_method == "simple") {
+        tryCatch(expr = {
+          gamma <- SimpleMKL.classification(k = M_mkl_train,
+                                            outcome = y_mkl[i],
+                                            penalty = mkl_cost)$gamma
+          M <- Reduce(`+`,Map(`*`, gamma, M_mkl))
+          assign("M", M, envir = .GlobalEnv)
+        },
+        error = function(x) {
+          gamma <- rep(1/length(M_mkl_train), length(M_mkl_train))
+          M <- Reduce(`+`,Map(`*`, gamma, M_mkl))
+          assign("M", M, envir = .GlobalEnv)
+        })
+      }
+      if (mkl_method == "block") {
+        M_train <- constructBlockMKL(M_mkl_train) # call blockwise group-level MKL
+        mkl_weights[[m]] <- wt
+      }
+      if (mkl_method == "group") {
+        M_train <- constructGroupMKL(M_mkl_train) # call unregularized group-level MKL
+      }
+    }
+    
+    M_train <- M[i,i]
+    y_train <- y[i]
+    M_test <- as.kernelMatrix(M[-i,i])
+    y_test <- y[-i]
     
     mod <- e1071::svm(
-      x = M[c(object$in_id), c(object$in_id)],
-      y = y[c(object$in_id)],
+      x = M_train,
+      y = y_train,
       cost = cost,
       probability = TRUE,
       class.weights = weights
     )
     
-    test <- as.kernelMatrix(M[-object$in_id, object$in_id])
-    
-    holdout_pred <- predict(mod, test) %>%
+    holdout_pred <- predict(mod, M_test) %>%
       as_tibble() %>%
       rename(y_hat = value) %>%
       cbind(y_test)

@@ -17,11 +17,11 @@
 
 #' experiment 1: standard model tuning and assessment
 seed <- 42
-k <- 10
+k <- 5
 cost_vec <- 2 ^ seq(-5, 5, by = 1)
 class_weight <- "uniform"
-kernel <- "dirac"
-mkl_method <- "uniform"
+kernel <- "mkl"
+mkl_method <- "simple"
 mkl_cost <- 1
 source("model.R")
 

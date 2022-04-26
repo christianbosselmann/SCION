@@ -15,6 +15,7 @@ librarian::shelf(tidyverse,
                  Matrix,
                  matrixcalc,
                  klic,
+                 progress,
                  quiet = TRUE)
 
 #' @params seed random seed
@@ -40,7 +41,7 @@ source("func.R")
 addTaskCallback(function(...) {set.seed(seed);TRUE})
 
 # data features
-data <- read_csv("data/dat_prep.csv")
+data <- read_csv("data/dat_prep.csv", col_types = cols())
 t_vec <- data$gene 
 data$y <- as.factor(data$y)
 y <- data$y 
@@ -83,13 +84,28 @@ if (kernel == "union") {
   Km <- readRDS("mat/kernelmatrices_union.rds")
 }
 
+# set up loop objects
 report <- list()
 mat_precomp <- list()
+mat_splits <- list()
+
+# progress bar
+step <- length(Km)
+
+pb <- progress_bar$new(
+  format = "(:spin) [:bar] :percent",
+  total = step, clear = FALSE, width = 60)
 
 # iterate through the available kernel matrices
 for (m in 1:length(Km)) {
+  
+  # tick progress bar
+  pb$tick()
+  
+  # set up loop objects
   report[[m]] <- data.frame()
   M <- as.matrix(Km[[m]])
+  
   if (kernel == "mkl") {M_mkl <- list(Kt, hpo, M)}
   
   # set up nested cv
@@ -111,8 +127,8 @@ for (m in 1:length(Km)) {
       if (mkl_method == "semkl") {
         tryCatch(expr = {
           gamma <- SEMKL.classification(k = M_mkl_train,
-                                            outcome = y_mkl[i],
-                                            penalty = mkl_cost)$gamma
+                                        outcome = y_mkl[i],
+                                        penalty = mkl_cost)$gamma
           M <- Reduce(`+`,Map(`*`, gamma, M_mkl))
           assign("M", M, envir = .GlobalEnv)
         },
@@ -136,12 +152,20 @@ for (m in 1:length(Km)) {
           assign("M", M, envir = .GlobalEnv)
         })
       }
-      if (mkl_method == "block") {
-        M_train <- constructBlockMKL(M_mkl_train) # call blockwise group-level MKL
-        mkl_weights[[m]] <- wt
+      if (mkl_method == "group") { 
+        gamma <- constructGroupMKL(matrices = M_mkl_train, 
+                                   label = y_mkl[i],
+                                   tasks = t_vec[i])$gamma
+        
+        M <- applyGroupMKL(matrices = M_mkl, 
+                           tasks = t_vec,
+                           gamma = gamma)
+        
+        assign("M", M, envir = .GlobalEnv)
       }
-      if (mkl_method == "group") {
-        M_train <- constructGroupMKL(M_mkl_train) # call unregularized group-level MKL
+      if (mkl_method == "block") { # TODO fix
+        M_train <- constructBlockMKL(M_mkl_train) 
+        mkl_weights[[m]] <- wt
       }
     }
     
@@ -158,7 +182,7 @@ for (m in 1:length(Km)) {
       class.weights = weights
     )
     
-    holdout_pred <- predict(mod, M_test) %>%
+    holdout_pred <- kernlab::predict(mod, M_test) %>%
       as_tibble() %>%
       rename(y_hat = value) %>%
       cbind(y_test)
@@ -187,7 +211,8 @@ for (m in 1:length(Km)) {
   # execute inner resampling loops in parallel via furrr
   plan(multisession)
   tuning_cv <- future_map(cv$inner_resamples, summarize_tune_cv, 
-                          .options = furrr_options(seed = seed)) 
+                          .options = furrr_options(seed = seed),
+                          .progress = FALSE) 
   
   # tuning
   pooled_inner <- tuning_cv %>% bind_rows
@@ -210,8 +235,9 @@ for (m in 1:length(Km)) {
                         sd = sd(cv$metric),
                         best_cost = cv$cost[which.max(cv$metric)]) # min/max metric here
   
-  # keep best matrix
+  # keep best matrix and resampling info
   mat_precomp[[m]] <- M
+  mat_splits[[m]] <- cv
 }
 
 # get best combinations of hyperparameters and include params in report
@@ -232,13 +258,13 @@ print(report_params)
 
 # assess model with best combination
 M <- mat_precomp[[report_params$best_matrix]]
+cv <- mat_splits[[report_params$best_matrix]]
 C <- as.numeric(levels(report_params$best_cost))[report_params$best_cost] # careful: implicit coercion
 
-# initialize loop object
+# initialize loop 
 report_raw <- list()
 
 for (i in 1:length(cv$splits)) {
-  # training
   train_indices <- cv$splits[[i]]$in_id 
   
   model <- e1071::svm(
@@ -265,4 +291,4 @@ for (i in 1:length(cv$splits)) {
 }
 
 # generate reports
-generateReport(report_raw, print = TRUE, export = TRUE)
+generateReport(report_raw, print = TRUE, export = FALSE)

@@ -227,35 +227,35 @@ SEMKL.classification=function(k,outcome,penalty,tol=0.0001,max.iters=1000){
   return(results)
 }
 
-### unregularized group-level weights
-#' @param t_vec vector of task membership
-#' @param x list of Kernel matrices
-#' @param y_mkl MKL label vector
-#' @return M MKL matrix
-constructGroupMKL <- function(x){
+### unregularized group-level weights (group MKL, or Dirac MKL)
+#' @param matrices list of Kernel matrices
+#' @param tasks vector of task membership
+#' @param label MKL label vector
+#' @return mod_mkl containg M (training kernel matrix) and gamma (weight vector)
+constructGroupMKL <- function(matrices, label, tasks){
+  mod_mkl <- list()
   
   # data features
-  names_tasks <- unique(t_vec)
+  names_tasks <- unique(tasks)
   
   # generate a named list of task indices
   indices_tasks <- vector(mode = "list", length = length(names_tasks))
   for (i in 1:length(names_tasks)) {
-    indices_tasks[[i]] <- which(t_vec == names_tasks[[i]])
+    indices_tasks[[i]] <- which(tasks == names_tasks[[i]])
   }
   names(indices_tasks) <- names_tasks
   
   # generate a list of list with the views for each task
   m_tasks <- list()
   for (i in 1:length(names_tasks)) {
-    m_tasks[[i]] <- list(hpo[indices_tasks[[i]], indices_tasks[[i]]], 
-                         M[indices_tasks[[i]], indices_tasks[[i]]])
+    m_tasks[[i]] <- lapply(matrices, function(x) x[indices_tasks[[i]], indices_tasks[[i]]])
   }
   
   # run wrapper MKL for each task
   w_tasks <- list()
   y_d <- vector()
   for (i in 1:length(names_tasks)) {
-    y_d <- y_mkl[indices_tasks[[i]]]
+    y_d <- label[indices_tasks[[i]]]
     
     # small tasks with similar observations may lead to computationally singular systems
     # if this occurs, return the uniformly weighted kernel matrix
@@ -280,6 +280,48 @@ constructGroupMKL <- function(x){
   M <- as.data.frame(as.matrix(M))
   
   # reorder matrix to match original indices
+  indices_tasks <- as.numeric(unlist(indices_tasks))
+  M <- cbind(M, indices_tasks)
+  M <- arrange(M, indices_tasks) %>%
+    select(-indices_tasks)
+  M <- as.matrix(M)
+  
+  # store objects for output
+  mod_mkl$M <- M
+  mod_mkl$gamma <- w_tasks
+  
+  return(mod_mkl)
+}
+
+#' @param matrices list of list of Kernel matrices, where each sublist is a view
+#' @param tasks vector of task membership
+#' @param gamma list of view weight vectors from constructGroupMKL function
+#' @return mod_mkl containg M (training kernel matrix) and gamma (weight vector)
+applyGroupMKL <- function(matrices, tasks, gamma) {
+  # data features
+  names_tasks <- unique(tasks)
+  
+  # generate a named list of task indices
+  indices_tasks <- vector(mode = "list", length = length(names_tasks))
+  for (i in 1:length(names_tasks)) {
+    indices_tasks[[i]] <- which(tasks == names_tasks[[i]])
+  }
+  names(indices_tasks) <- names_tasks
+  
+  # generate a list of list with the views for each task
+  m_tasks <- list()
+  for (i in 1:length(names_tasks)) {
+    m_tasks[[i]] <- lapply(matrices, function(x) x[indices_tasks[[i]], indices_tasks[[i]]])
+  }
+  
+  # apply weights
+  m_tasks <- lapply(seq_along(m_tasks), function (x) Reduce(`+`,Map(`*`, gamma[[x]], m_tasks[[x]])))
+  
+  # merge into a diagonal block matrix
+  M <- bdiag(m_tasks)
+  M <- as.data.frame(as.matrix(M))
+  
+  # reorder matrix to match original indices and return
   indices_tasks <- as.numeric(unlist(indices_tasks))
   M <- cbind(M, indices_tasks)
   M <- arrange(M, indices_tasks) %>%

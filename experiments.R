@@ -21,7 +21,7 @@ k <- 5
 cost_vec <- 2 ^ seq(-5, 5, by = 1)
 class_weight <- "uniform"
 kernel <- "mkl"
-mkl_method <- "group"
+mkl_method <- "semkl"
 mkl_cost <- 1
 source("model.R")
 
@@ -116,7 +116,6 @@ for (sim in loop_sim){
 #' experiment 7: unregularized group-level MKL
 #' this MKL approach is a single-task learning approach, while the uniform global MKL method is by definition the simple MTMKL extension by Kandemir 2014
 #' second step is a block-wise MTMKL, where weights are instead learned for all combinations of tasks, allowing some knowledge transfer
-#' TODO bugfixing
 seed <- 42
 k <- 10
 cost_vec <- 2 ^ seq(-5, 5, by = 1)

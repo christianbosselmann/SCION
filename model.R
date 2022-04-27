@@ -153,11 +153,11 @@ for (m in 1:length(Km)) {
         })
       }
       if (mkl_method == "group") { 
-        gamma <- constructGroupMKL(matrices = M_mkl_train, 
+        gamma <- constructGroupMKL(matrices = M_mkl_train[2:3], # Task-wise similarity doesn't include useful information for this method
                                    label = y_mkl[i],
                                    tasks = t_vec[i])$gamma
         
-        M <- applyGroupMKL(matrices = M_mkl, 
+        M <- applyGroupMKL(matrices = M_mkl[2:3], 
                            tasks = t_vec,
                            gamma = gamma)
         

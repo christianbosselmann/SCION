@@ -144,3 +144,16 @@ source("helper_brunklaus.R")
 #' currently run with Heyne's single holdout validation
 #' cf. PMID 32801145 and github.com/heyhen/funNCion/
 source("helper_heyne.R")
+
+#' experiment 10: Cao's Graph RMTL
+#' cf. DOI 10.1093/bioinformatics/bty831
+#' currently offers no advantage over standard MTL
+#' consider tuning, also fix parallelization (furrr via global env)
+seed <- 42
+k <- 5
+cost_vec <- 2 ^ seq(-5, 5, by = 1)
+class_weight <- "uniform"
+kernel <- "rmtl"
+mkl_method <- "semkl"
+mkl_cost <- 1
+source("model.R")

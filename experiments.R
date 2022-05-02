@@ -20,7 +20,7 @@ seed <- 42
 k <- 5
 cost_vec <- 2 ^ seq(-5, 5, by = 1)
 class_weight <- "uniform"
-kernel <- "mkl"
+kernel <- "rmtl"
 mkl_method <- "semkl"
 mkl_cost <- 1
 source("model.R")

@@ -233,6 +233,11 @@ SEMKL.classification=function(k,outcome,penalty,tol=0.0001,max.iters=1000){
 #' @param label MKL label vector
 #' @return mod_mkl containg M (training kernel matrix) and gamma (weight vector)
 constructGroupMKL <- function(matrices, label, tasks){
+  tasks <- t_vec
+  matrices <- M_mkl
+  gamma <- c(0.3, 0.3, 0.3)
+  label <- y_mkl
+  
   mod_mkl <- list()
   
   # data features
@@ -255,7 +260,7 @@ constructGroupMKL <- function(matrices, label, tasks){
   w_tasks <- list()
   y_d <- vector()
   for (i in 1:length(names_tasks)) {
-    y_d <- label[indices_tasks[[i]]]
+    y_d <- label[indices_tasks[[i]]] 
     
     # small tasks with similar observations may lead to computationally singular systems
     # if this occurs, return the uniformly weighted kernel matrix
@@ -298,6 +303,7 @@ constructGroupMKL <- function(matrices, label, tasks){
 #' @param gamma list of view weight vectors from constructGroupMKL function
 #' @return mod_mkl containg M (training kernel matrix) and gamma (weight vector)
 applyGroupMKL <- function(matrices, tasks, gamma) {
+  
   # data features
   names_tasks <- unique(tasks)
   

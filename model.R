@@ -36,6 +36,7 @@ librarian::shelf(tidyverse,
 
 # get helper functions
 source("func.R")
+source("func_RMTL.R")
 
 # set random seed
 addTaskCallback(function(...) {set.seed(seed);TRUE})
@@ -80,8 +81,9 @@ if (kernel == "mtl") {
 if (kernel == "dirac") {
   Km <- readRDS("mat/kernelmatrices_dirac.rds")
 }
-if (kernel == "union") {
+if (kernel == "union" || kernel == "rmtl") {
   Km <- readRDS("mat/kernelmatrices_union.rds")
+  G <- read_csv("mat/similaritymatrix_a1.csv", col_types = cols())
 }
 
 # set up loop objects
@@ -114,6 +116,7 @@ for (m in 1:length(Km)) {
   
   # set up cost wrapper functions
   svm_metric <- function(object, cost = 1) {
+    # object <- cv$splits[[5]] # comment out
     i <- object$in_id
     
     if (kernel == "mkl") {
@@ -169,6 +172,12 @@ for (m in 1:length(Km)) {
       }
     }
     
+    if (kernel == "rmtl") {
+      d <- constructRMTL(mat = M[i,i], y = y[i], t = t_vec[i], G = G)
+      M <- applyRMTL(mat = M, t = t_vec, d = d)
+      assign("M", M, envir = .GlobalEnv)
+    }
+    
     M_train <- M[i,i]
     y_train <- y[i]
     M_test <- as.kernelMatrix(M[-i,i])
@@ -208,11 +217,12 @@ for (m in 1:length(Km)) {
                 .groups = "drop")
   }
   
-  # execute inner resampling loops in parallel via furrr
+  # execute inner resampling loops, note multisession can cause problems with RMTL
+  # tuning_cv <- map(cv$inner_resamples, summarize_tune_cv) 
   plan(multisession)
-  tuning_cv <- future_map(cv$inner_resamples, summarize_tune_cv, 
+  tuning_cv <- future_map(cv$inner_resamples, summarize_tune_cv,
                           .options = furrr_options(seed = seed),
-                          .progress = FALSE) 
+                          .progress = FALSE)
   
   # tuning
   pooled_inner <- tuning_cv %>% bind_rows
@@ -291,4 +301,4 @@ for (i in 1:length(cv$splits)) {
 }
 
 # generate reports
-generateReport(report_raw, print = TRUE, export = FALSE)
+generateReport(report_raw, print = TRUE, export = TRUE)

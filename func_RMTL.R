@@ -32,7 +32,7 @@ constructRMTL <- function(mat, y, t, G) {
     cbind(y) %>%
     group_by(t) %>%
     group_split()
-  y <- lapply(y, function(x) x[,dim+2])
+  y <- lapply(y, function(x) x[,dim+2, drop = FALSE])
   y <- lapply(y, as.vector)
   
   # split kernel matrix into a task-wise list of matrix subsets
@@ -44,6 +44,13 @@ constructRMTL <- function(mat, y, t, G) {
   mat <- lapply(mat, function(x) x[,1:(dim-2), drop = FALSE])
   mat <- lapply(mat, as.matrix)
   
+  # note: previous bug was caused by incorrect row/column order - has to be the same as the order of task-wise lists of matrices and labels
+  G <- as.data.frame(G)
+  rownames(G) <- colnames(G)
+  manual_order <- c("SCN10A", "SCN11A", "SCN1A", "SCN2A", "SCN3A", "SCN4A", "SCN5A", "SCN8A", "SCN9A")
+  G <- G[, manual_order]
+  G <- G[manual_order, ]
+  
   # run RMTL
   d$X <- mat
   d$Y <- y
@@ -52,9 +59,9 @@ constructRMTL <- function(mat, y, t, G) {
   d$cvfit <- cvMTL(d$X, d$Y, 
                    type = "Classification", Regularization = "Graph", 
                    G = d$G, 
-                   Lam1_seq = 10^seq(1,-8, -1),  Lam2 = 0, 
-                   opts = list(init = 0, tol = 10^-6, maxIter = 1500), 
-                   nfolds = 2, stratify = FALSE, parallel = FALSE)
+                   Lam1_seq = 10^seq(2,-6, -1),  Lam2 = 2, 
+                   opts = list(init = 0, tol = 10^-3, maxIter = 1000), 
+                   nfolds = 2, stratify = FALSE, parallel = TRUE, ncores = 4)
   
   d$m <- MTL(d$X, d$Y, 
              type = "Classification", Regularization = "Graph", 
@@ -62,8 +69,9 @@ constructRMTL <- function(mat, y, t, G) {
              G = d$G)
   
   # task correlation matrix stored in d$m$W and named as input graph
-  d$T <- cor(d$m$W) %>%
-    as.data.frame()
+  d$T <- cor(d$m$W) 
+  d$T <- kernelCentering(d$T)
+  d$T <- as.data.frame(d$T)
   rownames(d$T) <- colnames(d$G)
   colnames(d$T) <- colnames(d$G)
   
@@ -178,8 +186,9 @@ MTL <- function(X, Y, type="Classification", Regularization="Graph",
       m <- do.call(method, args)
     }
   } else if(any(Regularization==c("Graph", "CMTL"))){
-    m <- do.call(method, args)
-  }
+    m <- do.call(LR_Graph, args) # TODO hack to make sure furrr finds LR_Graph fn
+    # m <- do.call(method, args)
+     }
   
   m$call <- match.call()
   m$Lam1 <- args$lam1
@@ -231,7 +240,7 @@ calcError <- function(m, newX=NULL, newY=NULL){
 
 # core function from RMTL package
 cvMTL <- function(X, Y, type="Classification", Regularization="Graph",
-                  Lam1_seq=10^seq(1,-4, -1), Lam2=0, G=NULL, k=2,
+                  Lam1_seq=10^seq(0,-6, -1), Lam2=0, G=G, k=2,
                   opts=list(init=0, tol=10^-3, maxIter=1000),
                   stratify=FALSE, nfolds=5, ncores=2, parallel=FALSE){
 
@@ -296,8 +305,8 @@ cvMTL <- function(X, Y, type="Classification", Regularization="Graph",
     }
     cvm = cvm/nfolds
   } else {
-    requireNamespace('doParallel')
-    requireNamespace('foreach')
+    requireNamespace('doParallel', quietly = TRUE)
+    requireNamespace('foreach', quietly = TRUE)
     doParallel::registerDoParallel(ncores)
     cvm <- foreach::foreach(i = 1:nfolds, .combine="cbind") %dopar%{
       cv_Xtr <- lapply(c(1:task_num),
@@ -355,14 +364,20 @@ getCVPartition <- function(Y, cv_fold, stratify){
     for (t in 1: task_num){
       task_sample_size <- length(Y[[t]]);
       
-      if (stratify){
+      if (stratify){ # own fix to avoid error for tasks with sample size 1
         ct <- which(Y[[t]][randIdx[[t]]]==-1);
         cs <- which(Y[[t]][randIdx[[t]]]==1);
         ct_idx <- seq(cv_idx, length(ct), cv_fold);
         cs_idx <- seq(cv_idx, length(cs), cv_fold);
-        te_idx <- c(ct[ct_idx], cs[cs_idx]);
-        tr_idx <- seq(1,task_sample_size)[
-          !is.element(1:task_sample_size, te_idx)];
+        if(task_sample_size == 1){
+          te_idx <- 1
+          tr_idx <- 1
+        } 
+        if(task_sample_size != 1){
+          te_idx <- c(ct[ct_idx], cs[cs_idx]);
+          tr_idx <- seq(1,task_sample_size)[
+            !is.element(1:task_sample_size, te_idx)];
+        }
         
       } else { # own fix to avoid error for tasks with sample size 1
         if(task_sample_size == 1){

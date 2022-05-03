@@ -36,7 +36,7 @@ librarian::shelf(tidyverse,
 
 # get helper functions
 source("func.R")
-source("func_RMTL.R")
+if (kernel == "rmtl") {source("func_RMTL.R")}
 
 # set random seed
 addTaskCallback(function(...) {set.seed(seed);TRUE})
@@ -171,7 +171,6 @@ for (m in 1:length(Km)) {
         mkl_weights[[m]] <- wt
       }
     }
-    
     if (kernel == "rmtl") {
       d <- constructRMTL(mat = M[i,i], y = y[i], t = t_vec[i], G = G)
       M <- applyRMTL(mat = M, t = t_vec, d = d)
@@ -217,8 +216,7 @@ for (m in 1:length(Km)) {
                 .groups = "drop")
   }
   
-  # execute inner resampling loops, note multisession can cause problems with RMTL
-  # tuning_cv <- map(cv$inner_resamples, summarize_tune_cv) 
+  # execute inner resampling loops
   plan(multisession)
   tuning_cv <- future_map(cv$inner_resamples, summarize_tune_cv,
                           .options = furrr_options(seed = seed),

@@ -148,7 +148,6 @@ source("helper_heyne.R")
 #' experiment 10: Cao's Graph RMTL
 #' cf. DOI 10.1093/bioinformatics/bty831
 #' currently offers no advantage over standard MTL
-#' consider tuning, also fix parallelization (furrr via global env)
 seed <- 42
 k <- 5
 cost_vec <- 2 ^ seq(-5, 5, by = 1)

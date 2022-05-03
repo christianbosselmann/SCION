@@ -16,6 +16,7 @@ librarian::shelf(tidyverse,
                  matrixcalc,
                  klic,
                  progress,
+                 igraph,
                  quiet = TRUE)
 
 #' @params seed random seed
@@ -83,7 +84,7 @@ if (kernel == "dirac") {
 }
 if (kernel == "union" || kernel == "rmtl") {
   Km <- readRDS("mat/kernelmatrices_union.rds")
-  G <- read_csv("mat/similaritymatrix_a1.csv", col_types = cols())
+  G <- read_csv("mat/distancematrix.csv", col_types = cols())
 }
 
 # set up loop objects

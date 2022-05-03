@@ -99,8 +99,7 @@ applyRMTL <- function(mat, t, d){
     m[rownames(m) == G[[i,2]], colnames(m) == G[[i,1]]] <- G[[i,3]]
   }
   
-  M <- mat * m
-  
+  M <- M*m
   return(M)
 }
 

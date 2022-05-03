@@ -6,14 +6,14 @@
 #' @params k inner and outer folds for nested cross validation
 #' @params cost_vec vector of cost values to tune over
 #' @params class_weight SVM weights for imbalanced classes: "uniform" for equal weight distribution, "inverse" for weights inversely proportional to class frequency
-#' @params kernel choice of kernel method: "mkl" for MTMKL-SVM, "mtl" for MTL-SVM, "dirac" for Dirac kernel SVM, "union" for union SVM
-#' @params mkl_method choice of MKL method for kernel weights, "semkl" for SEMKL, "simple" for simpleMKL, "uniform" for no kernel weights, "group" for unregularized task-level weights
+#' @params kernel choice of kernel method: "mkl" for MTMKL-SVM, "mtl" for MTL-SVM, "rmtl" for graph-regularized MTL-SVM, "dirac" for Dirac kernel SVM, "union" for union SVM
+#' @params mkl_method choice of MKL method for kernel weights, "semkl" for SEMKL, "simple" for simpleMKL, "uniform" for no kernel weights, "group" for unregularized task-level weights, "block" for task-wise localized unregularized (MT)MKL
 #' @params mkl_cost penalty for MKL kernel prioritization (only applies to SEMKL, SimpleMKL)
 #' @params sim_method choose similarity measure: jaccard, lin, or resnik
 #' @params psd_method choose spectrum method to find nearest psd matrix: clip, shift or flip
 #' @params pheno_sim if TRUE, sparse and noisy phenotypes are simulated for each similarity method
 #' @return phenotypic similarity matrix as R object
-#' @return saved timestamped objects of parameters, metrics and raw predictions
+#' @return exports timestamped csv of parameters, metrics and raw predictions
 
 #' experiment 1: standard model tuning and assessment
 seed <- 42

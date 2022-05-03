@@ -342,6 +342,9 @@ applyGroupMKL <- function(matrices, tasks, gamma) {
 #' @param x list of Kernel matrices
 #' @param y_mkl MKL label vector
 #' @return M MKL matrix
+#' cf. https://www.cmpe.boun.edu.tr/~ethem/files/papers/gonen_icml08.pdf
+#' cf. DOI 10.1186/1471-2105-11-S8-S5
+#' this method decomposes the problem into t*t MKL learning problems, where weights are learned for each combination of tasks which reduces to a quasi-conformal transformation (Amari & Wu, 1998)
 constructBlockMKL <- function(x){
   
   # data features
@@ -353,37 +356,6 @@ constructBlockMKL <- function(x){
     indices_tasks[[i]] <- which(t_vec == names_tasks[[i]])
   }
   names(indices_tasks) <- names_tasks
-  
-  # # list views of each task
-  # m_tasks <- list()
-  # for (i in 1:length(names_tasks)) {
-  #   m_tasks[[i]] <- list(hpo[indices_tasks[[i]], indices_tasks[[i]]],
-  #                        M[indices_tasks[[i]], indices_tasks[[i]]])
-  # }
-  
-  # run wrapper MKL for each task
-  # w_tasks <- list()
-  # y_d <- vector()
-  # for (i in 1:length(names_tasks)) {
-  #   y_d <- y_mkl[indices_tasks[[i]]]
-  #   
-  #   # small tasks with similar observations may lead to computationally singular systems
-  #   # if this occurs, return the uniformly weighted kernel matrix
-  #   tryCatch(
-  #     expr = {
-  #       w_tasks[[i]] <- SEMKL.classification(k = m_tasks[[i]],
-  #                                            outcome = y_d,
-  #                                            penalty = mkl_cost)$gamma
-  #     },
-  #     error = function(x) {
-  #       w_tasks[[i]] <<- rep(1/length(m_tasks[[i]]), length(m_tasks[[i]]))
-  #     })
-  # }
-  
-  # # apply weights and store in the original list of matrices
-  # for (i in 1:length(names_tasks)) {
-  #   m_tasks[[i]] <- Reduce(`+`,Map(`*`, w_tasks[[i]], m_tasks[[i]]))
-  # }
   
   # get new task indices
   indices_tasks_new <- list()

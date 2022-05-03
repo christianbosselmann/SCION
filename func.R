@@ -436,7 +436,7 @@ constructBlockMKL <- function(x){
   M <- M[order(indices_tasks),]
   M <- M[,order(indices_tasks)]
   
-  M <- M*Kt # get product kernel matrix with task similarity for MTMKL
+  M <- M*Kt # get product kernel matrix with task similarity matrix for MTMKL
   
   return(M)
 } 

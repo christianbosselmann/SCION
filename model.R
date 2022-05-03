@@ -110,6 +110,9 @@ for (m in 1:length(Km)) {
   M <- as.matrix(Km[[m]])
   
   if (kernel == "mkl") {M_mkl <- list(Kt, hpo, M)}
+  if (mkl_method == "block") {
+    M <- constructBlockMKL(M_mkl)
+  }
   
   # set up nested cv
   cv <- nested_cv(M, outside = vfold_cv(v = k), 
@@ -156,21 +159,20 @@ for (m in 1:length(Km)) {
           assign("M", M, envir = .GlobalEnv)
         })
       }
-      if (mkl_method == "group") { 
+      if (mkl_method == "group") {
         gamma <- constructGroupMKL(matrices = M_mkl_train[2:3], # Task-wise similarity doesn't include useful information for this method
                                    label = y_mkl[i],
                                    tasks = t_vec[i])$gamma
-        
-        M <- applyGroupMKL(matrices = M_mkl[2:3], 
+
+        M <- applyGroupMKL(matrices = M_mkl[2:3],
                            tasks = t_vec,
                            gamma = gamma)
-        
+
         assign("M", M, envir = .GlobalEnv)
       }
-      if (mkl_method == "block") { # TODO fix
-        M_train <- constructBlockMKL(M_mkl_train) 
-        mkl_weights[[m]] <- wt
-      }
+      # if (mkl_method == "block") {
+      #   M <- constructBlockMKL(M_mkl)
+      # }
     }
     if (kernel == "rmtl") {
       d <- constructRMTL(mat = M[i,i], y = y[i], t = t_vec[i], G = G)

@@ -38,6 +38,7 @@ librarian::shelf(tidyverse,
 # get helper functions
 source("func.R")
 if (kernel == "rmtl") {source("func_RMTL.R")}
+if (kernel == "mkl") {source("func_MKL.R")}
 
 # set random seed
 addTaskCallback(function(...) {set.seed(seed);TRUE})
@@ -110,9 +111,6 @@ for (m in 1:length(Km)) {
   M <- as.matrix(Km[[m]])
   
   if (kernel == "mkl") {M_mkl <- list(Kt, hpo, M)}
-  if (mkl_method == "block") { # TODO finish implementing within train/test split
-    M <- constructBlockMKL(M_mkl)
-  }
   
   # set up nested cv
   cv <- nested_cv(M, outside = vfold_cv(v = k), 
@@ -120,66 +118,76 @@ for (m in 1:length(Km)) {
   
   # set up cost wrapper functions
   svm_metric <- function(object, cost = 1) {
-    # object <- cv$splits[[5]] # comment out
+    # object <- cv$splits[[4]] # comment out
     i <- object$in_id
     
-    # if (kernel == "mkl") {
-    #   M_mkl_train <- lapply(M_mkl, function(x) x[i,i])
-    #   if (mkl_method == "uniform") {
-    #     gamma <- rep(1/length(M_mkl), length(M_mkl))
-    #     M <- Reduce(`+`,Map(`*`, gamma, M_mkl))
-    #     assign("M", M, envir = .GlobalEnv)
-    #     mkl_weights[[m]] <<- gamma
-    #   }
-    #   if (mkl_method == "semkl") {
-    #     tryCatch(expr = {
-    #       gamma <- SEMKL.classification(k = M_mkl_train,
-    #                                     outcome = y_mkl[i],
-    #                                     penalty = mkl_cost)$gamma
-    #       M <- Reduce(`+`,Map(`*`, gamma, M_mkl))
-    #       assign("M", M, envir = .GlobalEnv)
-    #     },
-    #     error = function(x) {
-    #       gamma <- rep(1/length(M_mkl_train), length(M_mkl_train))
-    #       M <- Reduce(`+`,Map(`*`, gamma, M_mkl))
-    #       assign("M", M, envir = .GlobalEnv)
-    #     })
-    #   }
-    #   if (mkl_method == "simple") {
-    #     tryCatch(expr = {
-    #       gamma <- SimpleMKL.classification(k = M_mkl_train,
-    #                                         outcome = y_mkl[i],
-    #                                         penalty = mkl_cost)$gamma
-    #       M <- Reduce(`+`,Map(`*`, gamma, M_mkl))
-    #       assign("M", M, envir = .GlobalEnv)
-    #     },
-    #     error = function(x) {
-    #       gamma <- rep(1/length(M_mkl_train), length(M_mkl_train))
-    #       M <- Reduce(`+`,Map(`*`, gamma, M_mkl))
-    #       assign("M", M, envir = .GlobalEnv)
-    #     })
-    #   }
-    #   if (mkl_method == "group") {
-    #     gamma <- constructGroupMKL(matrices = M_mkl_train[2:3], # Task-wise similarity doesn't include useful information for this method
-    #                                label = y_mkl[i],
-    #                                tasks = t_vec[i])$gamma
-    # 
-    #     M <- applyGroupMKL(matrices = M_mkl[2:3],
-    #                        tasks = t_vec,
-    #                        gamma = gamma)
-    # 
-    #     assign("M", M, envir = .GlobalEnv)
-    #   }
-      # if (mkl_method == "block") {
-      #   M <- constructBlockMKL(M_mkl)
-      # }
-    # }
     if (kernel == "rmtl") {
       d <- constructRMTL(mat = M[i,i], y = y[i], t = t_vec[i], G = G)
+      
       M <- applyRMTL(mat = M, t = t_vec, d = d)
+      
       assign("M", M, envir = .GlobalEnv)
     }
-    
+    if (kernel == "mkl") {
+      M_mkl_train <- lapply(M_mkl, function(x) x[i,i])
+      if (mkl_method == "uniform") {
+        gamma <- rep(1/length(M_mkl), length(M_mkl))
+        M <- Reduce(`+`,Map(`*`, gamma, M_mkl))
+        assign("M", M, envir = .GlobalEnv)
+        mkl_weights[[m]] <<- gamma
+      }
+      if (mkl_method == "semkl") {
+        tryCatch(expr = {
+          gamma <- SEMKL.classification(k = M_mkl_train,
+                                        outcome = y_mkl[i],
+                                        penalty = mkl_cost)$gamma
+          M <- Reduce(`+`,Map(`*`, gamma, M_mkl))
+          assign("M", M, envir = .GlobalEnv)
+        },
+        error = function(x) {
+          gamma <- rep(1/length(M_mkl_train), length(M_mkl_train))
+          M <- Reduce(`+`,Map(`*`, gamma, M_mkl))
+          assign("M", M, envir = .GlobalEnv)
+        })
+      }
+      if (mkl_method == "simple") {
+        tryCatch(expr = {
+          gamma <- SimpleMKL.classification(k = M_mkl_train,
+                                            outcome = y_mkl[i],
+                                            penalty = mkl_cost)$gamma
+          M <- Reduce(`+`,Map(`*`, gamma, M_mkl))
+          assign("M", M, envir = .GlobalEnv)
+        },
+        error = function(x) {
+          gamma <- rep(1/length(M_mkl_train), length(M_mkl_train))
+          M <- Reduce(`+`,Map(`*`, gamma, M_mkl))
+          assign("M", M, envir = .GlobalEnv)
+        })
+      }
+      if (mkl_method == "group") {
+        gamma <- constructGroupMKL(matrices = M_mkl_train[2:3], # Task-wise similarity doesn't include useful information for this method
+                                   label = y_mkl[i],
+                                   tasks = t_vec[i])$gamma
+        
+        M <- applyGroupMKL(matrices = M_mkl[2:3],
+                           tasks = t_vec,
+                           gamma = gamma)
+        
+        assign("M", M, envir = .GlobalEnv)
+      }
+      if (mkl_method == "block") {
+        gamma <- constructBlockMKL(matrices = M_mkl_train, 
+                                   label = y_mkl[i],
+                                   tasks = t_vec[i])$gamma
+        
+        M <- applyBlockMKL(matrices = M_mkl,
+                           tasks = t_vec,
+                           gamma = gamma)
+        
+        assign("M", M, envir = .GlobalEnv)
+      }
+    }
+
     M_train <- M[i,i]
     y_train <- y[i]
     M_test <- as.kernelMatrix(M[-i,i])

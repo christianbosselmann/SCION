@@ -18,12 +18,8 @@ constructRMTL <- function(mat, y, t, G) {
   
   dim <- dim(mat)[1]
   
-  # convert label into -1;1 if needed
-  if(!is.numeric(y)) {
-    y <- as.numeric(y) 
-    y[y == 1] <- 1
-    y[y == 2] <- -1
-  }
+  # make label numeric if needed
+  y <- makeLabelNumeric(y)
   
   # split label vector into a task-wise list of labels
   y <- mat %>%

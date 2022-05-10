@@ -17,6 +17,7 @@ librarian::shelf(tidyverse,
                  klic,
                  progress,
                  igraph,
+                 dendextend,
                  quiet = TRUE)
 
 #' @params seed random seed
@@ -75,6 +76,8 @@ if (kernel == "mkl") {
   Km <- lapply(Km, kernelPreparation)
   
   mkl_weights <- list()
+  
+  G <- read_csv("mat/distancematrix.csv", col_types = cols()) # graph for RMKL
 }
 if (kernel == "mtl") {
   Km <- readRDS("mat/kernelmatrices_mtl.rds")
@@ -176,13 +179,20 @@ for (m in 1:length(Km)) {
         assign("M", M, envir = .GlobalEnv)
       }
       if (mkl_method == "block") {
-        gamma <- constructBlockMKL(matrices = M_mkl_train, 
+        mod_mkl <- constructBlockMKL(matrices = M_mkl_train, 
                                    label = y_mkl[i],
-                                   tasks = t_vec[i])$gamma
+                                   tasks = t_vec[i],
+                                   hierarchical = TRUE,
+                                   graph = G)
+        
+        gamma <- mod_mkl$gamma
+        G <- mod_mkl$graph
         
         M <- applyBlockMKL(matrices = M_mkl,
                            tasks = t_vec,
-                           gamma = gamma)
+                           gamma = gamma,
+                           hierarchical = TRUE,
+                           graph = G)
         
         assign("M", M, envir = .GlobalEnv)
       }

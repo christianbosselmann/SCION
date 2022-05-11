@@ -95,6 +95,7 @@ if (kernel == "union" || kernel == "rmtl") {
 report <- list()
 mat_precomp <- list()
 mat_splits <- list()
+if (mkl_method == "block") {mat_mkl <- list()}
 
 # progress bar
 step <- length(Km)
@@ -121,7 +122,7 @@ for (m in 1:length(Km)) {
   
   # set up cost wrapper functions
   svm_metric <- function(object, cost = 1) {
-    # object <- cv$splits[[4]] # comment out
+    # object <- cv$splits[[4]] # debug, comment out
     i <- object$in_id
     
     if (kernel == "rmtl") {
@@ -185,14 +186,14 @@ for (m in 1:length(Km)) {
                                    hierarchical = TRUE,
                                    graph = G)
         
-        gamma <- mod_mkl$gamma
-        G <- mod_mkl$graph
+        assign("mkl", mod_mkl, envir = .GlobalEnv)
         
         M <- applyBlockMKL(matrices = M_mkl,
                            tasks = t_vec,
-                           gamma = gamma,
+                           gamma = mod_mkl$gamma,
                            hierarchical = TRUE,
-                           graph = G)
+                           graph = mod_mkl$graph,
+                           delta = mod_mkl$delta)
         
         assign("M", M, envir = .GlobalEnv)
       }
@@ -267,6 +268,7 @@ for (m in 1:length(Km)) {
   # keep best matrix and resampling info
   mat_precomp[[m]] <- M
   mat_splits[[m]] <- cv
+  if (mkl_method == "block") {mat_mkl[[m]] <- mkl}
 }
 
 # get best combinations of hyperparameters and include params in report

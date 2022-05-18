@@ -28,13 +28,14 @@ librarian::shelf(tidyverse,
 #' @params mkl_method choice of MKL method for kernel weights, "semkl" for SEMKL, "simple" for simpleMKL, "uniform" for no kernel weights
 #' @params mkl_cost penalty for MKL kernel prioritization (only applies to SEMKL, SimpleMKL)
 #' @return saved timestamped objects of parameters, metrics and raw predictions
-# seed <- 42
-# k <- 10
-# cost_vec <- 2 ^ seq(-5, 5, by = 1)
-# class_weight <- "uniform"
-# kernel <- "mkl"
-# mkl_method <- "uniform"
-# mkl_cost <- 1
+#' example
+#' seed <- 42
+#' k <- 10
+#' cost_vec <- 2 ^ seq(-5, 5, by = 1)
+#' class_weight <- "uniform"
+#' kernel <- "mkl"
+#' mkl_method <- "uniform"
+#' mkl_cost <- 1
 
 # get helper functions
 source("func.R")
@@ -98,11 +99,9 @@ mat_splits <- list()
 if (mkl_method == "block") {mat_mkl <- list()}
 
 # progress bar
-step <- length(Km)
-
 pb <- progress_bar$new(
   format = "(:spin) [:bar] :percent",
-  total = step, clear = FALSE, width = 60)
+  total = length(Km), clear = FALSE, width = 60)
 
 # iterate through the available kernel matrices
 for (m in 1:length(Km)) {
@@ -122,7 +121,6 @@ for (m in 1:length(Km)) {
   
   # set up cost wrapper functions
   svm_metric <- function(object, cost = 1) {
-    # object <- cv$splits[[4]] # debug, comment out
     i <- object$in_id
     
     if (kernel == "rmtl") {
@@ -217,7 +215,8 @@ for (m in 1:length(Km)) {
       rename(y_hat = value) %>%
       cbind(y_test)
     
-    accuracy(holdout_pred, truth = y_test, estimate = y_hat)$.estimate # set metric here
+    # set metric here
+    accuracy(holdout_pred, truth = y_test, estimate = y_hat)$.estimate 
   }
   
   # parameterize
@@ -244,9 +243,9 @@ for (m in 1:length(Km)) {
                           .options = furrr_options(seed = seed),
                           .progress = FALSE)
   
-  # tuning
+  # tuning, min/max metric here
   pooled_inner <- tuning_cv %>% bind_rows
-  best_cost <- function(dat) dat[which.max(dat$mean_metric),] # min/max metric here
+  best_cost <- function(dat) dat[which.max(dat$mean_metric),]
   
   # best parameter estimate from outer resampling
   cost_vals <- tuning_cv %>% 
@@ -271,7 +270,7 @@ for (m in 1:length(Km)) {
   if (mkl_method == "block") {mat_mkl[[m]] <- mkl}
 }
 
-# get best combinations of hyperparameters and include params in report
+# get combinations of hyperparameters and include in report
 report_params <- do.call(rbind, report)
 report_params <- report_params %>%
   .[which.max(report_params$mean),] %>% # min/max metric here
@@ -285,7 +284,7 @@ if (kernel == "mkl") {
     mutate(mkl_method = mkl_method)
 }
 
-print(report_params)
+# print(report_params)
 
 # assess model with best combination
 M <- mat_precomp[[report_params$best_matrix]]
@@ -318,7 +317,7 @@ for (i in 1:length(cv$splits)) {
   report_raw[[i]] <- cbind(report_raw[[i]], prob)
   
   # store test indices to later get task-specific performance metrics
-  report_raw[[i]]$ind <- which(1:nrow(M) %nin% train_indices) # very ugly hack to get test indices
+  report_raw[[i]]$ind <- which(1:nrow(M) %nin% train_indices)
 }
 
 # generate reports

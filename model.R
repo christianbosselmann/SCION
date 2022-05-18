@@ -322,4 +322,4 @@ for (i in 1:length(cv$splits)) {
 }
 
 # generate reports
-generateReport(report_raw, print = TRUE, export = F)
+generateReport(report_raw, print = TRUE, export = TRUE)

@@ -15,62 +15,35 @@
 #' @return phenotypic similarity matrix as R object
 #' @return exports timestamped csv of parameters, metrics and raw predictions
 
-#' experiment 1: standard model tuning and assessment
+#' experiment 1: compare different kernel methods
 seed <- 42
 k <- 5
 cost_vec <- 2 ^ seq(-5, 5, by = 1)
 class_weight <- "uniform"
-kernel <- "mkl"
-mkl_method <- "block"
-mkl_cost <- 1
-source("model.R")
-
-#' experiment 2: compare different kernel methods
-seed <- 42
-k <- 10
-cost_vec <- 2 ^ seq(-5, 5, by = 1)
-class_weight <- "uniform"
 mkl_method <- "uniform"
 mkl_cost <- 1
-iter <- c("mkl", "mtl", "union", "dirac")
+iter <- c("dirac", "union", "mtl", "mkl")
 for (i in iter) {
   kernel <- i
   source("model.R")
 }
 
-#' experiment 3: compare different mkl methods
+#' experiment 2: compare different mkl methods
 seed <- 42
-k <- 10
+k <- 5
 cost_vec <- 2 ^ seq(-5, 5, by = 1)
 class_weight <- "uniform"
 kernel <- "mkl"
 mkl_cost <- 1
-iter <- c("semkl", "simple", "uniform")
+iter <- c("uniform", "simple", "semkl", "group", "block")
 for (i in iter) {
   mkl_method <- i
   source("model.R")
 }
 
-#' experiment 4: compare different similarity measures
+#' experiment 3: compare different psd corrections across similarity measures
 seed <- 42
-k <- 10
-cost_vec <- 2 ^ seq(-5, 5, by = 1)
-class_weight <- "uniform"
-kernel <- "mkl"
-mkl_method <- "uniform"
-mkl_cost <- 1
-psd_method <- "shift"
-pheno_sim <- FALSE
-iter <- c("jaccard", "lin", "resnik")
-for (i in iter) {
-  sim_method <- i
-  source("helper_pheno.R")
-  source("model.R")
-}
-
-#' experiment 5: compare differet psd corrections across similarity measures
-seed <- 42
-k <- 10
+k <- 5
 cost_vec <- 2 ^ seq(-5, 5, by = 1)
 class_weight <- "uniform"
 kernel <- "mkl"
@@ -84,15 +57,15 @@ for (sim in loop_sim){
   sim_method <- sim
   for (psd in loop_psd){
     psd_method <- psd
-    print(paste(sim, psd, sep = " ")) # print to console to keep order
+    print(paste(sim, psd, sep = " "))
     source("helper_pheno.R")
     source("model.R")
   }
 }
 
-#' experiment 6: simulate sparse/noisy phenotypes and compare similarity measures
+#' experiment 4: simulate sparse/noisy phenotypes and compare similarity measures
 seed <- 42
-k <- 10
+k <- 5
 cost_vec <- 2 ^ seq(-5, 5, by = 1)
 class_weight <- "uniform"
 kernel <- "mkl"
@@ -113,46 +86,13 @@ for (sim in loop_sim){
   }
 }
 
-#' experiment 7: unregularized group-level MKL
-#' this MKL approach is a single-task learning approach, while the uniform global MKL method is by definition the simple MTMKL extension by Kandemir 2014
-#' second step is a block-wise MTMKL, where weights are instead learned for all combinations of tasks, allowing some knowledge transfer
-seed <- 42
-k <- 10
-cost_vec <- 2 ^ seq(-5, 5, by = 1)
-class_weight <- "uniform"
-kernel <- "mkl"
-mkl_method <- "group"
-mkl_cost <- 1
-source("model.R")
-
-seed <- 42
-k <- 10
-cost_vec <- 2 ^ seq(-5, 5, by = 1)
-class_weight <- "uniform"
-kernel <- "mkl"
-mkl_method <- "block"
-mkl_cost <- 1
-source("model.R")
-
-#' experiment 8: comparison to the Brunklaus decision rule
+#' experiment 5: comparison to the Brunklaus decision rule
 #' cf. PMID 35037686
 seed <- 42
-k <- 10
+k <- 5
 source("helper_brunklaus.R")
 
-#' experiment 9: comparison to the Heyne GBM
+#' experiment 6: comparison to the Heyne GBM
 #' currently run with Heyne's single holdout validation
 #' cf. PMID 32801145 and github.com/heyhen/funNCion/
 source("helper_heyne.R")
-
-#' experiment 10: Cao's Graph RMTL
-#' cf. DOI 10.1093/bioinformatics/bty831
-#' currently offers no advantage over standard MTL
-seed <- 42
-k <- 5
-cost_vec <- 2 ^ seq(-5, 5, by = 1)
-class_weight <- "uniform"
-kernel <- "rmtl"
-mkl_method <- "semkl"
-mkl_cost <- 1
-source("model.R")

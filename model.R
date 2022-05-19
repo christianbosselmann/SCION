@@ -284,7 +284,7 @@ if (kernel == "mkl") {
     mutate(mkl_method = mkl_method)
 }
 
-# print(report_params)
+print(report_params)
 
 # assess model with best combination
 M <- mat_precomp[[report_params$best_matrix]]

@@ -15,6 +15,16 @@
 #' @return phenotypic similarity matrix as R object
 #' @return exports timestamped csv of parameters, metrics and raw predictions
 
+#' experiment 0: example run
+seed <- 42
+k <- 5
+cost_vec <- 2 ^ seq(-5, 5, by = 1)
+class_weight <- "uniform"
+kernel <- "mkl"
+mkl_method <- "block"
+mkl_cost <- 1
+source("model.R")
+
 #' experiment 1: compare different kernel methods
 seed <- 42
 k <- 5

@@ -20,13 +20,13 @@ files <- lapply(paths, read_csv)
 names(files) <- basename(paths) %>%
   sub("([^.]+)\\.[[:alnum:]]+$", "\\1", .)
 
-# manual: control order
-files <- list(files$`preds dirac`, files$`preds union`, files$`preds mtl`, files$`preds mkl`)
-
 # manual: labels
 labels <- c("Dirac", "Union", "MTL", "MKL")
 load("t_vec.rda")
 gene_labels <- c("SCN1A", "SCN2A", "SCN3A", "SCN4A", "SCN5A", "SCN8A", "SCN9A", "SCN10A", "SCN11A")
+
+# manual: control order
+# files <- list(files$`preds dirac`, files$`preds union`, files$`preds mtl`, files$`preds mkl`)
 
 ### ROC curves
 roc <- list()
@@ -115,7 +115,8 @@ files %>%
   geom_bar(position = "dodge", stat = "identity") +
   theme_bw() +
   theme(legend.title = element_blank(),
-        axis.title.x = element_blank()) +
+        axis.title.x = element_blank(),
+        axis.text.x = element_text(face = "italic")) +
   labs(x = "Gene",
        y = "Accuracy") +
   scale_fill_brewer(palette = "Pastel1") +

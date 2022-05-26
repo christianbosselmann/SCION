@@ -137,14 +137,18 @@ fig %>%
 
 ### dendrogram of weights for hierarchical decomposition MTMKL
 # requires distance matrix G and list d from hierarchical MTMKL containing weights
-# first calculate refined pairwise task similarity γk,l (see Widmer et al. 2010)
+# also computes refined pairwise task similarity γk,l (see Widmer et al. 2010)
+
+# first note that distance matrix G from function dist.alignment contains square-roots of distances
+G <- G^2 
+
 df_2tasks <- setDT(CJ(names(G), names(G), unique = TRUE))
 # df_2tasks <- df_2tasks[!duplicated(t(apply(df_2tasks, 1, sort))),]
-
 mat <- matrix(data = NA, nrow = length(names(G)), ncol = length(names(G)))
 rownames(mat) <- names(G)
 colnames(mat) <- names(G)
 
+# d <- mat_mkl[[4]]
 for (i in 1:nrow(df_2tasks)){
   t <- as.character(df_2tasks[i,]) # get pairwise tasks
   tmp <- sapply(d$graph, function(x) t %in% x) # get indices of nodes containing task
@@ -154,12 +158,15 @@ for (i in 1:nrow(df_2tasks)){
 }
 
 # TODO fix refined taskwise similarity from hierarchical decomposition
-# image(cor(mat)) 
+# image(cor(mat))
+# image(cor(G))
 
 # graph <- as.dist(G, diag = TRUE)
 graph <- dist(as.matrix(G), diag = F)
-graph <- hclust(graph, method = "complete")
-# graph <- hclust(graph, method = "average") # TODO try this
+graph <- as.matrix(graph)
+colnames(graph) <- rownames(graph) <- names(G)
+graph <- as.dist(graph)
+graph <- hclust(graph, method = "average")
 graph <- as.dendrogram(graph) 
 
 lbl <- str_sort(names(G), numeric = TRUE) # more sensible label order
@@ -179,21 +186,26 @@ graph %>%
   # hang.dendrogram %>%
   plot()
 
-### better corrplot and distance matrix visualization
+### corrplot and distance matrix as network graph
 G <- as.matrix(G)
 rownames(G) <- colnames(G)
 G <- G[lbl,lbl] # fix order
-G2 <- as.matrix(dist(G))
-p <- corrplot(as.matrix(G2), 
-              method = "color", 
-              cl.lim=c(0,1),
-              col = colorRampPalette(c("blue", "white", "red"))(200),
-              type = "full", 
-              diag = FALSE)
+# G2 <- as.matrix(dist(G)) # probably not neccessary, as G is already a distance matrix
+
+library(corrplot)
+corrplot(as.matrix(G), 
+         method = "color", 
+         cl.lim=c(0,1),
+         col = colorRampPalette(c("blue", "white", "red"))(200),
+         type = "full", 
+         diag = FALSE)
 
 library(qgraph)
-qgraph(1-G2, 
-       labels = colnames(G2),
+qgraph(as.matrix(G), 
+       labels = colnames(G),
+       graph = "default",
        layout = "spring", 
        theme = "gray",
        vsize = 10)
+
+

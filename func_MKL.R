@@ -386,8 +386,13 @@ constructBlockMKL <- function(matrices, label, tasks,
     }
     
     # convert distance matrix to hierarchy, decompose and save node labels
-    graph <- as.dist(graph, diag = TRUE)
-    graph <- hclust(graph, method = "complete")
+    # TODO more elegant way of keeping node labels
+    # graph <- as.dist(as.matrix(G))
+    graph <- dist(as.matrix(G), diag = F)
+    graph <- as.matrix(graph)
+    colnames(graph) <- rownames(graph) <- names(G)
+    graph <- as.dist(graph)
+    graph <- hclust(graph, method = "average")
     graph <- as.dendrogram(graph) 
     graph <- partition_leaves(graph) 
     

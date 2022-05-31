@@ -6,7 +6,9 @@ librarian::shelf(tidyverse,
                  pROC,
                  yardstick,
                  gridExtra,
+                 ape,
                  data.table,
+                 dendextend,
                  quiet = TRUE)
 
 # read data: raw predictions from model script
@@ -179,7 +181,7 @@ wt <- d$gamma %>%
 
 graph %>%
   set("nodes_pch", 1) %>%
-  set("labels", names(G)) %>%
+  # set("labels", value = names(G)) %>%
   assign_values_to_nodes_nodePar(value = 3*unlist(wt), nodePar = "cex") %>%
   set("branches_lwd", 1+scale(d$delta[1:17])) %>%
   dendextend::rotate(lbl) %>%

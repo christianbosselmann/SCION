@@ -179,10 +179,10 @@ for (m in 1:length(Km)) {
       }
       if (mkl_method == "block") {
         mod_mkl <- constructBlockMKL(matrices = M_mkl_train, 
-                                   label = y_mkl[i],
-                                   tasks = t_vec[i],
-                                   hierarchical = TRUE,
-                                   graph = G)
+                                     label = y_mkl[i],
+                                     tasks = t_vec[i],
+                                     hierarchical = TRUE,
+                                     graph = G)
         
         assign("mkl", mod_mkl, envir = .GlobalEnv)
         
@@ -196,7 +196,7 @@ for (m in 1:length(Km)) {
         assign("M", M, envir = .GlobalEnv)
       }
     }
-
+    
     M_train <- M[i,i]
     y_train <- y[i]
     M_test <- as.kernelMatrix(M[-i,i])
@@ -315,6 +315,11 @@ for (i in 1:length(cv$splits)) {
   # also get class probabilities
   prob <- attr(predict(model, test, probability = TRUE), "probabilities")
   report_raw[[i]] <- cbind(report_raw[[i]], prob)
+  
+  # ...and distance from hyperplane for histogram of projections
+  dist <- attr(predict(model, test, decision.value = TRUE), "decision.values") 
+  colnames(dist) <- "dist"
+  report_raw[[i]] <- cbind(report_raw[[i]], dist)
   
   # store test indices to later get task-specific performance metrics
   report_raw[[i]]$ind <- which(1:nrow(M) %nin% train_indices)

@@ -106,3 +106,34 @@ kernelPreparation <- function(K){
   K <- round(K, 10)
   return(K)
 }
+
+#' Extract step item
+#' Returns extracted step item from prepped recipe.
+#' attr. Giovanni Colitti
+#' @param recipe Prepped recipe object.
+#' @param step Step from prepped recipe.
+#' @param item Item from prepped recipe.
+#' @param enframe Should the step item be enframed?
+#' @export
+extract_step_item <- function(recipe, step, item, enframe = TRUE) {
+  d <- recipe$steps[[which(purrr::map_chr(recipe$steps, ~ class(.)[1]) == step)]][[item]]
+  if (enframe) {
+    tibble::enframe(d) %>% tidyr::spread(key = 1, value = 2)
+  } else {
+    d
+  }
+}
+
+#' Unnormalize variable
+#' Unnormalizes variable using standard deviation and mean from a recipe object. See \code{?recipes}.
+#' attr. Giovanni Colitti
+#' @param x Numeric vector to normalize.
+#' @param rec Recipe object.
+#' @param var Variable name in the recipe object.
+#' @export
+unNormalize <- function(x, rec, var) {
+  var_sd <- extract_step_item(rec, "step_normalize", "sds") %>% dplyr::pull(var)
+  var_mean <- extract_step_item(rec, "step_normalize", "means") %>% dplyr::pull(var)
+  
+  (x * var_sd) + var_mean
+}

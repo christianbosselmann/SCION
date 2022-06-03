@@ -112,7 +112,3 @@ egg::ggarrange(plots = plots)
 # n <- length(plots)
 # nCol <- floor(sqrt(n))
 # do.call("grid.arrange", c(plots, ncol = nCol))
-
-
-
-

@@ -181,10 +181,11 @@ wt <- d$gamma %>%
 
 graph %>%
   set("nodes_pch", 1) %>%
+  set("nodes_cex", 3*wt) %>%
   # set("labels", value = names(G)) %>%
-  assign_values_to_nodes_nodePar(value = 3*unlist(wt), nodePar = "cex") %>%
-  set("branches_lwd", 1+scale(d$delta[1:17])) %>%
-  dendextend::rotate(lbl) %>%
+  # assign_values_to_nodes_nodePar(value = 3*unlist(wt), nodePar = "cex") %>%
+  # set("branches_lwd", 1+scale(d$delta[1:17])) %>%
+  # dendextend::rotate(lbl) %>%
   # hang.dendrogram %>%
   plot()
 

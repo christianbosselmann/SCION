@@ -394,6 +394,7 @@ constructBlockMKL <- function(matrices, label, tasks,
     graph <- as.dist(graph)
     graph <- hclust(graph, method = "average")
     graph <- as.dendrogram(graph) 
+    tree <- graph # store for later
     graph <- partition_leaves(graph) 
     
     m_decomp <- list()
@@ -463,8 +464,8 @@ constructBlockMKL <- function(matrices, label, tasks,
   if(hierarchical == TRUE){
     d$graph <- graph # list of subtrees with labels of leaves for each node
     d$delta <- delta # weight vector for composite kernel matrix
+    d$tree <- tree # stored dendrgram object
   } 
-  
   return(d)
 } 
 

@@ -7,6 +7,7 @@ librarian::shelf(tidyverse,
                  shiny,
                  shinyalert,
                  shinythemes,
+                 shinybusy,
                  openxlsx,
                  ontologyIndex)
 
@@ -19,23 +20,40 @@ ont_hpo <- get_ontology("hp.obo.txt",
                         extract_tags = "minimal")
 list_hpo <- lapply(1:length(ont_hpo$id), function(x) paste(ont_hpo$id[[x]], ont_hpo$name[[x]], sep = " "))
 
-
 # app
 shinyApp(
   
-  fluidPage(theme = shinytheme("flatly"),
+  fluidPage(
+    
+    shinyjs::useShinyjs(),
+    tags$link(rel = "stylesheet", type = "text/css", href = "custom-div.css"),
+    
+    theme = shinytheme("flatly"),
     
     useShinyalert(), 
     
+    shinybusy::add_busy_spinner(spin = "fading-circle", color = "#2c3e50", position = "bottom-right"),
+    
+    tags$head(tags$link(rel="shortcut icon", href="logo.png")),
+    
     titlePanel(
-      
-      tagList(
-        span(h2("SCION"),
-             span(actionButton("help", "", icon = icon("question")), 
-                  style = "position:absolute;right:2em;top:1em"),
-             h4("Predicting the functional effects of Nav variants"),
-        )
+      windowTitle = "SCION",
+      title = fluidRow(
+        column(2, align="center", div(style = "height:0px;"), img(height = 116, width = 100, src = "logo.png")),
+        column(9, align="center", div(style = "height:20px;"), "SCION", br(), h4("Predicting the functional effects of Nav variants")),
+        column(1, align="center", div(style = "height:20px;"), actionButton("help", "", icon = icon("question")))
+        
       )
+      
+      #   tagList(
+      #     span(div(img(src="logo.png")),
+      #          style = "position:absolute;left:2em;top:1em"),
+      #     span(h2("SCION"),
+      #          span(actionButton("help", "", icon = icon("question")),
+      #               style = "position:absolute;right:2em;top:1em"),
+      #          h4("Predicting the functional effects of Nav variants"),
+      #     )
+      #   )
     ),
     
     hr(),
@@ -60,12 +78,14 @@ shinyApp(
         selectInput(inputId = "aa2",
                     label = "Variant amino acid:",
                     choices = vec_aa),
-                    
+        
         selectizeInput(inputId = "hpo",
-                    label = "Phenotypic features:",
-                    choices = NULL,
-                    multiple = TRUE,
-                    options = list(placeholder = "Search by HPO ID or name")),
+                       label = "Phenotypic features:",
+                       choices = NULL,
+                       multiple = TRUE,
+                       options = list(placeholder = "Search by HPO ID or name")),
+        
+        checkboxInput(inputId = "flag_exp", label = "Experimental version", value = FALSE),
         
         actionButton(inputId = "click", label = "Predict"),
         
@@ -79,6 +99,7 @@ shinyApp(
         h3(textOutput("prediction")),
         h5(textOutput("GOF")),
         h5(textOutput("LOF"))
+        
         # dataTableOutput("table")
         # plotOutput("plot"),
         # plotOutput("plot2")
@@ -95,17 +116,21 @@ shinyApp(
     # check if user wants to start prediction
     observeEvent(input$click, {
       
+      # prepare objects to pass to model script
       df_in <- data.frame(gene = input$gene, 
                           aa1 = input$aa1, 
                           pos = input$pos, 
                           aa2 = input$aa2,
                           stringsAsFactors = FALSE)
       
-      df_hpo <- list(input$hpo)
+      flag_exp <- input$flag_exp
       
+      df_hpo <- input$hpo
+      
+      # run model
       source("master.R", local = TRUE)
-      # source("viz.R", local = TRUE)
       
+      # prepare output objects
       output$flag_mkl <- renderText({
         if(flag_mkl == TRUE){
           "Phenotypic information provided. Predicting with multi-task multi-kernel learning."
@@ -113,7 +138,7 @@ shinyApp(
           "No phenotypic information provided. Predicting with multi-task learning."
         }
       })
-
+      
       output$prediction <- renderText({
         paste(verb_out, " ", sep="\n")
       })
@@ -125,12 +150,6 @@ shinyApp(
       output$LOF <- renderText({
         paste("Probability of loss-of-function:", round(out$LOF, 3), sep=" ")
       })
-      
-      # output$table <- renderDataTable(out)
-      
-      # output$plot <- renderPlot(p)
-      
-      # output$plot2 <- renderPlot(p2)
       
       # output$newline <- renderUI({
       #   HTML(paste(" ", " ", sep="<br/>"))

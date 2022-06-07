@@ -23,6 +23,9 @@ librarian::shelf(tidyverse,
                  jaccard,
                  quiet = TRUE)
 
+# set seed
+set.seed(42)
+
 # get helper fn
 source("func.R")
 
@@ -121,9 +124,9 @@ test_terms <- str_split(df_hpo, " ", 2) %>%
   unlist()
 
 # load ontology
-ont_hpo <- get_ontology("hp.obo.txt", 
-                        propagate_relationships = "is_a", 
-                        extract_tags = "minimal")
+# ont_hpo <- get_ontology("hp.obo.txt", 
+#                         propagate_relationships = "is_a", 
+#                         extract_tags = "minimal")
 
 # assert that we extracted valid HPO terms before proceeding
 if(all(test_terms %in% ont_hpo$id) == FALSE){
@@ -170,6 +173,10 @@ if(flag_mkl == TRUE) {
   Km <- kernelPreparation(mat_pheno) # instance-level phenotype
   Kt <- kernelPreparation(Kt) # instance-level task similarity
   Km <- Kb+Km+Kt
+  
+  if(flag_exp == TRUE){
+    print("this is where the fun begins!")
+  }
 }
 
 # set up train and test indices

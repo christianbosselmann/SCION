@@ -40,20 +40,10 @@ shinyApp(
       windowTitle = "SCION",
       title = fluidRow(
         column(2, align="center", div(style = "height:0px;"), img(height = 116, width = 100, src = "logo.png")),
-        column(9, align="center", div(style = "height:20px;"), "SCION", br(), h4("Predicting the functional effects of Nav variants")),
+        column(9, align="center", div(style = "height:20px;"), "SCION", br(), h4(HTML("<u>S</u>odium <u>C</u>hannel functional variant predict<u>ion</u>"))),
         column(1, align="center", div(style = "height:20px;"), actionButton("help", "", icon = icon("question")))
         
       )
-      
-      #   tagList(
-      #     span(div(img(src="logo.png")),
-      #          style = "position:absolute;left:2em;top:1em"),
-      #     span(h2("SCION"),
-      #          span(actionButton("help", "", icon = icon("question")),
-      #               style = "position:absolute;right:2em;top:1em"),
-      #          h4("Predicting the functional effects of Nav variants"),
-      #     )
-      #   )
     ),
     
     hr(),
@@ -63,6 +53,7 @@ shinyApp(
       
       sidebarPanel(
         
+        # inputs
         selectInput(inputId = "gene",
                     label = "Gene:",
                     choices = vec_genes),
@@ -85,25 +76,40 @@ shinyApp(
                        multiple = TRUE,
                        options = list(placeholder = "Search by HPO ID or name")),
         
-        checkboxInput(inputId = "flag_exp", label = "Experimental version", value = FALSE),
+        checkboxInput(inputId = "flag_exp", label = "Experimental settings", value = FALSE),
         
-        actionButton(inputId = "click", label = "Predict"),
+        column(12, # to center buttons
+        actionButton(inputId = "click", label = "Predict", icon("paper-plane", lib = "font-awesome")),
         
+        div(style="margin-bottom:10px"),
+        
+        actionButton(inputId = "reset", label = "Reset", icon("trash", lib = "font-awesome"),
+                     style="color: #fff; background-color: #f39c12; border-color: #f39c12"),
+       
+         align = "center",
+        style = "margin-bottom: 10px;",
+        style = "margin-top: -5px;"
+        ),
+        
+        # disclaimer
         helpText("For research use only. Not for use in diagnostic procedures.")
         
       ),
       
       mainPanel(
         
+        # outputs
+        shinyjs::hidden(
+          div(id = "results",
         h5(textOutput("flag_mkl")),
+        
+        hr(),
+        
         h3(textOutput("prediction")),
         h5(textOutput("GOF")),
         h5(textOutput("LOF"))
-        
-        # dataTableOutput("table")
-        # plotOutput("plot"),
-        # plotOutput("plot2")
-        
+          )
+        )
       )
     )
   ),
@@ -112,6 +118,20 @@ shinyApp(
     
     # server-side selectize
     updateSelectizeInput(session, "hpo", choices = list_hpo, server = TRUE)
+    
+    # reset button, refers to div results on UI side
+    observeEvent(input$reset, {
+      shinyjs::reset("gene")
+      shinyjs::reset("aa1")
+      shinyjs::reset("pos")
+      shinyjs::reset("aa2")
+      shinyjs::reset("hpo")
+      shinyjs::hide("results")
+    })
+    
+    observeEvent(input$click, {
+      shinyjs::show("results")
+    })
     
     # check if user wants to start prediction
     observeEvent(input$click, {
@@ -150,11 +170,6 @@ shinyApp(
       output$LOF <- renderText({
         paste("Probability of loss-of-function:", round(out$LOF, 3), sep=" ")
       })
-      
-      # output$newline <- renderUI({
-      #   HTML(paste(" ", " ", sep="<br/>"))
-      # })
-      
     })
     
     # check if user looks up the FAQ

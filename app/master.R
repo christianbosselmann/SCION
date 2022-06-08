@@ -123,13 +123,8 @@ test_terms <- str_split(df_hpo, " ", 2) %>%
   lapply(., function(x) x[1]) %>%
   unlist()
 
-# load ontology
-# ont_hpo <- get_ontology("hp.obo.txt", 
-#                         propagate_relationships = "is_a", 
-#                         extract_tags = "minimal")
-
-# assert that we extracted valid HPO terms before proceeding
-if(all(test_terms %in% ont_hpo$id) == FALSE){
+# assert that we extracted valid non-null HPO terms before proceeding
+if(all(test_terms %in% ont_hpo$id) == FALSE | is.null(test_terms) == TRUE){
   flag_mkl <- FALSE # proceed with MTL
 }else{
   flag_mkl <- TRUE # proceed with MTMKL

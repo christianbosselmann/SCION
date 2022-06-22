@@ -8,6 +8,7 @@ librarian::shelf(tidyverse,
                  shinyalert,
                  shinythemes,
                  shinybusy,
+                 shinyWidgets,
                  openxlsx,
                  ontologyIndex)
 
@@ -25,17 +26,25 @@ shinyApp(
   
   fluidPage(
     
+    # Shinyjs for reactive server-side lists
     shinyjs::useShinyjs(),
-    tags$link(rel = "stylesheet", type = "text/css", href = "custom-div.css"),
     
+    # load custom css file and app logo
+    tags$head(
+      tags$link(rel = "stylesheet", type = "text/css", href = "custom_div.css"),
+      tags$link(rel = "shortcut icon", href = "logo.png")
+      ),
+    
+    # bootstrap theme
     theme = shinytheme("flatly"),
     
+    # for FAQ
     useShinyalert(), 
     
+    # for loading symbol
     shinybusy::add_busy_spinner(spin = "fading-circle", color = "#2c3e50", position = "bottom-right"),
     
-    tags$head(tags$link(rel="shortcut icon", href="logo.png")),
-    
+    # title
     titlePanel(
       windowTitle = "SCION",
       title = fluidRow(
@@ -53,10 +62,10 @@ shinyApp(
       
       sidebarPanel(
         
-        # inputs
-        selectInput(inputId = "gene",
-                    label = "Gene:",
-                    choices = vec_genes),
+        tags$div(class = "gene_class",
+                 selectInput(inputId = "gene",
+                             label = "Channel:",
+                             choices = vec_genes)),
         
         selectInput(inputId = "aa1",
                     label = "Reference amino acid:",
@@ -79,16 +88,16 @@ shinyApp(
         checkboxInput(inputId = "flag_exp", label = "Experimental settings", value = FALSE), # currently does not do anything
         
         column(12, # to center buttons
-        actionButton(inputId = "click", label = "Predict", icon("paper-plane", lib = "font-awesome")),
-        
-        div(style="margin-bottom:10px"),
-        
-        actionButton(inputId = "reset", label = "Reset", icon("trash", lib = "font-awesome"),
-                     style="color: #fff; background-color: #f39c12; border-color: #f39c12"),
-       
-         align = "center",
-        style = "margin-bottom: 10px;",
-        style = "margin-top: -5px;"
+               actionButton(inputId = "click", label = "Predict", icon("paper-plane", lib = "font-awesome")),
+               
+               div(style="margin-bottom:10px"),
+               
+               actionButton(inputId = "reset", label = "Reset", icon("trash", lib = "font-awesome"),
+                            style="color: #fff; background-color: #f39c12; border-color: #f39c12"),
+               
+               align = "center",
+               style = "margin-bottom: 10px;",
+               style = "margin-top: -5px;"
         ),
         
         # disclaimer
@@ -101,13 +110,13 @@ shinyApp(
         # outputs
         shinyjs::hidden(
           div(id = "results",
-        h5(textOutput("flag_mkl")),
-        
-        hr(),
-        
-        h3(textOutput("prediction")),
-        h5(textOutput("GOF")),
-        h5(textOutput("LOF"))
+              h5(textOutput("flag_mkl")),
+              
+              hr(),
+              
+              h3(textOutput("prediction")),
+              h5(textOutput("GOF")),
+              h5(textOutput("LOF"))
           )
         )
       )
@@ -177,13 +186,13 @@ shinyApp(
       shinyalert(title = "FAQ", 
                  text = "
                  <b> 1. What is this? </b> </br> 
-                 This is prefeKt, a multi-task learning support vector machine model built to classify the functional effects of non-synonymous missense mutations in voltage-gated potassium channels, based on a dataset of >950 patch and voltage clamp experiments. For further details, please refer to the manuscript. </br></br>
+                 This is SCION, a multi-task multi-kernel learning support vector machine (MTMKL-SVM) built to classify the functional effects of non-synonymous missense variants in voltage-gated sodium channels, trained on data by Brunklaus et al. (DOI 10.1093/brain/awac006). </br></br>
                  
                  <b> 2. How do I interpret the results? </b> </br> 
-                 This app displays the predicted class in plain text output. For advanced users, a class probability distribution plot (Platt scaling) and decision values as confidence measure (point distance to hyperplane) are provided. </br></br>
+                 The predicted class is displayed as plain text output. Class probabilities are computed via Platt scaling. </br></br>
                  
-                 <b> 3. Class prediction and probabilities don't match. Why? </b> </br> 
-                 This is a known thereotical issue with the multi-class extension of Platt scaling and its implementation in LIBSVM. Please refer to the package documentation for further details. </br></br>
+                 <b> 3. Do I have to enter phenotypic information? </b> </br> 
+                 No. If no phenotypic information is provided by the user, a multi-task single-kernel learning SVM is used for prediction instead (cf. DOI 10.1101/2021.12.02.470894). </br></br>
                  
                  <b> For suggestions and feedback, please get in touch: </b> </br> 
                  christian.bosselmann@med.uni-tuebingen / @cmbosselmann </br></br>

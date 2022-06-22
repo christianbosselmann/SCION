@@ -6,6 +6,6 @@
   margin: -100px 0 0 -150px;
 }
 
-#gene_div .selectize-dropdown-content > .option {
+.gene_class .selectize-input, .selectize-dropdown {
    font-style: italic;
 }

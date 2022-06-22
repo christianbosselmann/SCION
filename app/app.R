@@ -76,7 +76,7 @@ shinyApp(
                        multiple = TRUE,
                        options = list(placeholder = "Search by HPO ID or name")),
         
-        checkboxInput(inputId = "flag_exp", label = "Experimental settings", value = FALSE),
+        checkboxInput(inputId = "flag_exp", label = "Experimental settings", value = FALSE), # currently does not do anything
         
         column(12, # to center buttons
         actionButton(inputId = "click", label = "Predict", icon("paper-plane", lib = "font-awesome")),

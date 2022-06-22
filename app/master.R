@@ -50,12 +50,21 @@ aa_feats <- read_tsv("aa_feats.tsv")
 load("str_feats.rda")
 cid_raw <- read_csv("cid.csv")
 
-# get test data, collect data features, then merge in features
-# df_in <- openxlsx::read.xlsx("input.xlsx") # DEBUG
+# collect data features of test observations
 n_test <- nrow(df_in)
 n_train <- nrow(train)
 n_all <- n_test + n_train
 
+# fix aa label of test observations
+df_in$aa1 <- str_split(df_in$aa1, " ", 2) %>%
+  lapply(., function(x) x[1]) %>%
+  unlist()
+
+df_in$aa2 <- str_split(df_in$aa2, " ", 2) %>%
+  lapply(., function(x) x[1]) %>%
+  unlist()
+
+# merge in features
 test <- df_in %>%
   merge(aa_feats, by = c("aa1", "aa2")) %>%
   merge(str_feats, by = c("gene", "pos"))

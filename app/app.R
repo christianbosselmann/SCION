@@ -13,7 +13,7 @@ librarian::shelf(tidyverse,
 
 # set up menu choices
 vec_genes <- c("SCN1A", "SCN2A", "SCN3A", "SCN4A", "SCN5A", "SCN8A", "SCN9A", "SCN10A", "SCN11A")
-vec_aa <- c("A", "R", "N", "D", "C", "E", "Q", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V")
+vec_aa <- c("A - Ala", "R - Arg", "N - Asn", "D - Asp", "C - Cys", "E - Glu", "Q - Gln", "G - Gly", "H - His", "I - Ile", "L - Leu", "K - Lys", "M - Met", "F - Phe", "P - Pro", "S - Ser", "T - Thr", "W - Trp", "Y - Tyr", "V - Val")
 
 ont_hpo <- get_ontology("hp.obo.txt", 
                         propagate_relationships = "is_a", 

@@ -1,55 +1,6 @@
 #' SCN
 #' Functional variant prediction for voltage-gated sodium channels
 
-# packages
-library("librarian")
-librarian::shelf(tidyverse,
-                 tidymodels,
-                 data.table,
-                 openxlsx,
-                 yardstick,
-                 caret,
-                 bestNormalize,
-                 kernlab,
-                 e1071,
-                 data.table,
-                 magic,
-                 matrixcalc,
-                 Matrix,
-                 ontologyIndex,
-                 ontologySimilarity,
-                 klic,
-                 CEGO,
-                 jaccard,
-                 quiet = TRUE)
-
-# set seed
-set.seed(42)
-
-# get helper fn
-source("func.R")
-
-# get preprocessed training data set
-train <- read_csv("training_data.csv") # aka "data_prep.csv"
-y <- as.factor(train$y)
-
-# get similarity matrix
-sim_matrices <- read_csv("similaritymatrix.csv")
-rownames(sim_matrices) <- colnames(sim_matrices)
-
-sim_match <- sim_matrices %>%
-  rownames_to_column() %>%
-  pivot_longer(cols = -c(1)) %>%
-  rename(k = rowname, l = name)
-
-# get pre-processing recipe
-load("recipe.rds")
-
-# get feature lookup tables
-aa_feats <- read_tsv("aa_feats.tsv")
-load("str_feats.rda")
-cid_raw <- read_csv("cid.csv")
-
 # collect data features of test observations
 n_test <- nrow(df_in)
 n_train <- nrow(train)
@@ -127,13 +78,21 @@ for (i in 1:n_all) {
 # calculate MTL kernel Km
 Km <- as.matrix(Kb) * as.matrix(Kt)
 
-# load phenotypic data from user interface
+# load phenotypic data from user interface, split of verbose labels, keep IDs
 test_terms <- str_split(df_hpo, " ", 2) %>%
   lapply(., function(x) x[1]) %>%
   unlist()
 
-# assert that we extracted valid non-null HPO terms before proceeding
-if(all(test_terms %in% ont_hpo$id) == FALSE | is.null(test_terms) == TRUE){
+# non-HPO terms (i.e. ORPHA, OMIM) are split off and mapped onto HPO via the phenotypes.csv lookup table
+test_terms_hpo <- test_terms[grepl("^HP", test_terms)]
+test_terms_nonhpo <- test_terms[!grepl("^HP", test_terms)]
+test_terms_nonhpo <- ont_omim[ont_omim$`#DatabaseID` %in% test_terms_nonhpo,]$HPO_ID
+
+test_terms <- c(test_terms_nonhpo, test_terms_hpo) %>%
+  unique()
+  
+# assert that we extracted valid non-null non-empty HPO terms before proceeding
+if(all(test_terms %in% ont_hpo$id) == FALSE | is.null(test_terms) == TRUE | identical(test_terms, character(0)) == TRUE){
   flag_mkl <- FALSE # proceed with MTL
 }else{
   flag_mkl <- TRUE # proceed with MTMKL
@@ -204,7 +163,6 @@ prediction <- predict(model, test) %>%
 
 # print output
 out <- cbind(df_in, prediction)
-# write.xlsx(out, "output.xlsx") # DEBUG
 
 # verbose output for app
 verb_name <- paste(df_in$gene, paste("p.", paste(df_in$aa1, df_in$pos, df_in$aa2, sep = ""), sep = ""), sep = " ")

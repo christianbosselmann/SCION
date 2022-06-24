@@ -2,15 +2,58 @@
 #' Functional variant prediction for voltage-gated sodium channels
 
 # packages
-library("librarian")
-librarian::shelf(tidyverse,
-                 shiny,
-                 shinyalert,
-                 shinythemes,
-                 shinybusy,
-                 shinyWidgets,
-                 openxlsx,
-                 ontologyIndex)
+library(tidyverse)
+library(tidymodels)
+library(shiny)
+library(shinyalert)
+library(shinythemes)
+library(shinybusy)
+library(shinyWidgets)
+library(ontologyIndex)
+library(ontologySimilarity)
+library(data.table)
+library(yardstick)
+library(caret)
+library(bestNormalize)
+library(kernlab)
+library(e1071)
+library(magic)
+library(matrixcalc)
+library(Matrix)
+library(klic)
+library(CEGO)
+library(jaccard)
+
+library(BiocManager)
+options(repos = BiocManager::repositories())
+library(qvalue)
+
+# get helper fn
+source("func.R")
+
+# set seed
+set.seed(42)
+
+# get preprocessed training data set
+train <- read_csv("training_data.csv") 
+y <- as.factor(train$y)
+
+# get similarity matrix
+sim_matrices <- read_csv("similaritymatrix.csv")
+rownames(sim_matrices) <- colnames(sim_matrices)
+
+sim_match <- sim_matrices %>%
+  rownames_to_column() %>%
+  pivot_longer(cols = -c(1)) %>%
+  rename(k = rowname, l = name)
+
+# get pre-processing recipe
+load("recipe.rds")
+
+# get feature lookup tables
+aa_feats <- read_tsv("aa_feats.tsv")
+load("str_feats.rda")
+cid_raw <- read_csv("cid.csv")
 
 # set up menu choices
 vec_genes <- c("SCN1A", "SCN2A", "SCN3A", "SCN4A", "SCN5A", "SCN8A", "SCN9A", "SCN10A", "SCN11A")
@@ -20,6 +63,15 @@ ont_hpo <- get_ontology("hp.obo.txt",
                         propagate_relationships = "is_a", 
                         extract_tags = "minimal")
 list_hpo <- lapply(1:length(ont_hpo$id), function(x) paste(ont_hpo$id[[x]], ont_hpo$name[[x]], sep = " "))
+
+ont_omim <- read_csv("phenotype.csv")
+list_omim <- ont_omim %>%
+  mutate(V1 = paste(`#DatabaseID`, DiseaseName, sep = " ")) %>%
+  select(V1) %>%
+  distinct() %>%
+  unlist(.$V1) %>%
+  as.list(.$V1) %>%
+  unname()
 
 # app
 shinyApp(
@@ -33,7 +85,7 @@ shinyApp(
     tags$head(
       tags$link(rel = "stylesheet", type = "text/css", href = "custom_div.css"),
       tags$link(rel = "shortcut icon", href = "logo.png")
-      ),
+    ),
     
     # bootstrap theme
     theme = shinytheme("flatly"),
@@ -62,8 +114,8 @@ shinyApp(
       
       sidebarPanel(
         
-        tags$div(class = "gene_class",
-                 selectInput(inputId = "gene",
+        tags$div(id = "gene",
+                 selectizeInput(inputId = "gene",
                              label = "Channel:",
                              choices = vec_genes)),
         
@@ -126,7 +178,7 @@ shinyApp(
   function(input, output, session){
     
     # server-side selectize
-    updateSelectizeInput(session, "hpo", choices = list_hpo, server = TRUE)
+    updateSelectizeInput(session, "hpo", choices = c(list_hpo, list_omim), server = TRUE)
     
     # reset button, refers to div results on UI side
     observeEvent(input$reset, {
@@ -184,8 +236,8 @@ shinyApp(
     # check if user looks up the FAQ
     observeEvent(input$help, {
       shinyalert(title = "FAQ", 
-                 text = "
-                 <b> 1. What is this? </b> </br> 
+                 text = div(style = "overflow: auto; max-height: 50vh;", HTML(
+                   "<b> 1. What is this? </b> </br> 
                  This is SCION, a multi-task multi-kernel learning support vector machine (MTMKL-SVM) built to classify the functional effects of non-synonymous missense variants in voltage-gated sodium channels, trained on data by Brunklaus et al. (DOI 10.1093/brain/awac006). </br></br>
                  
                  <b> 2. How do I interpret the results? </b> </br> 
@@ -195,12 +247,12 @@ shinyApp(
                  No. If no phenotypic information is provided by the user, a multi-task single-kernel learning SVM is used for prediction instead (cf. DOI 10.1101/2021.12.02.470894). </br></br>
                  
                  <b> For suggestions and feedback, please get in touch: </b> </br> 
-                 christian.bosselmann@med.uni-tuebingen / @cmbosselmann </br></br>
-                 ", 
+                 christian.bosselmann@med.uni-tuebingen / @cmbosselmann </br></br>"
+                 )), 
                  type = "info",
                  html = TRUE,
+                 closeOnEsc = TRUE,
                  closeOnClickOutside = TRUE)
     })
-    
   }
 )

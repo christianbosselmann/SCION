@@ -23,6 +23,7 @@ library(Matrix)
 library(klic)
 library(CEGO)
 library(jaccard)
+library(NGLVieweR)
 
 library(BiocManager)
 options(repos = BiocManager::repositories())
@@ -73,6 +74,10 @@ list_omim <- ont_omim %>%
   as.list(.$V1) %>%
   unname()
 
+# set up table of gene names and their PDB IDs for protein viewer
+tbl_pdb <- tibble(gene = c("SCN1A", "SCN2A", "SCN3A", "SCN4A", "SCN5A", "SCN8A", "SCN9A", "SCN10A", "SCN11A"),
+                  pdb = c("7DTD", "6J8E", "7W7F", "6AGF", "6LQA", "", "7W9P", "", ""))
+
 # app
 shinyApp(
   
@@ -116,8 +121,8 @@ shinyApp(
         
         tags$div(id = "gene",
                  selectizeInput(inputId = "gene",
-                             label = "Channel:",
-                             choices = vec_genes)),
+                                label = "Channel:",
+                                choices = vec_genes)),
         
         selectInput(inputId = "aa1",
                     label = "Reference amino acid:",
@@ -168,7 +173,11 @@ shinyApp(
               
               h3(textOutput("prediction")),
               h5(textOutput("GOF")),
-              h5(textOutput("LOF"))
+              h5(textOutput("LOF")),
+              
+              hr(),
+              
+              NGLVieweROutput("structure")
           )
         )
       )
@@ -230,6 +239,49 @@ shinyApp(
       
       output$LOF <- renderText({
         paste("Probability of loss-of-function:", round(out$LOF, 3), sep=" ")
+      })
+      
+      output$structure <- renderNGLVieweR({
+        # TODO alignment issues due to inhom. PDB structures and unknown EM structs for SCN9-11A, use AlphaFold PDB files instead
+        pdb_id <- tbl_pdb[tbl_pdb$gene == input$gene,]$pdb
+        res_id <- as.character(input$pos)
+        
+        NGLVieweR(pdb_id) %>%
+          stageParameters(backgroundColor = "white", 
+                          rotateSpeed = 1,
+                          zoomSpeed = 1) %>%
+          addRepresentation("cartoon", param = list(
+            colorScheme = "uniform",
+            colorValue = "gray")) %>%
+          addRepresentation("ball+stick", param = list(
+            colorScheme = "element",
+            colorValue = "red",
+            sele = res_id)) %>%
+          addRepresentation("label",
+                            param = list(
+                              sele = res_id,
+                              labelType = "format",
+                              labelFormat = "[%(resname)s]%(resno)s",
+                              labelGrouping = "residue",
+                              color = "white",
+                              fontFamiliy = "sans-serif",
+                              xOffset = 1,
+                              yOffset = 0,
+                              zOffset = 0,
+                              fixedSize = TRUE,
+                              radiusType = 1,
+                              radiusSize = 2, 
+                              showBackground = TRUE,
+                              backgroundColor = "black")) %>%
+          setQuality("high") %>%
+          setFocus(0) %>%
+          setSpin(FALSE) %>%
+          zoomMove(
+            center = res_id,
+            zoom = res_id,
+            duration = 3000,
+            z_offSet = -20
+          )
       })
     })
     

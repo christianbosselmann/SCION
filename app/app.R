@@ -74,10 +74,6 @@ list_omim <- ont_omim %>%
   as.list(.$V1) %>%
   unname()
 
-# set up table of gene names and their PDB IDs for protein viewer
-tbl_pdb <- tibble(gene = c("SCN1A", "SCN2A", "SCN3A", "SCN4A", "SCN5A", "SCN8A", "SCN9A", "SCN10A", "SCN11A"),
-                  pdb = c("7DTD", "6J8E", "7W7F", "6AGF", "6LQA", "", "7W9P", "", ""))
-
 # app
 shinyApp(
   
@@ -242,17 +238,16 @@ shinyApp(
       })
       
       output$structure <- renderNGLVieweR({
-        # TODO alignment issues due to inhom. PDB structures and unknown EM structs for SCN9-11A, use AlphaFold PDB files instead
-        pdb_id <- tbl_pdb[tbl_pdb$gene == input$gene,]$pdb
+        pdb_id <- paste("pdb/", input$gene, ".pdb", sep = "") # generate file path
         res_id <- as.character(input$pos)
         
-        NGLVieweR(pdb_id) %>%
+        NGLVieweR(data = pdb_id) %>%
+          addRepresentation("cartoon", param = list(
+            colorScheme = "residueindex",
+            colorValue = "gray")) %>%
           stageParameters(backgroundColor = "white", 
                           rotateSpeed = 1,
                           zoomSpeed = 1) %>%
-          addRepresentation("cartoon", param = list(
-            colorScheme = "uniform",
-            colorValue = "gray")) %>%
           addRepresentation("ball+stick", param = list(
             colorScheme = "element",
             colorValue = "red",
@@ -280,7 +275,7 @@ shinyApp(
             center = res_id,
             zoom = res_id,
             duration = 3000,
-            z_offSet = -20
+            z_offSet = -50
           )
       })
     })

@@ -35,6 +35,10 @@ test <- merge(test, cid_align)
 test <- test %>%
   merge(cid_feats, by = c("cid"))
 
+# initialize flag, then check if the variant is at a position with known analogous variants
+flag_known <- "0"
+if(test$cid %in% tbl_scn$cid == TRUE){flag_known <- "1"}
+
 # drop unneccessary features
 test <- test %>% 
   select(-one_of("pos", 
@@ -46,6 +50,10 @@ test <- hablar::retype(test)
 
 # apply prep recipe
 test <- bake(dat_rec, test)
+
+# check if the test variant is present in the training dataset
+flag_known_tbl <- suppressMessages(semi_join(train, test))
+if(nrow(flag_known_tbl) > 0){flag_known <- "2"}
 
 # generate instance-level kernel matrix for sequence/structure features (base/union)
 t_train <- train$gene %>%

@@ -29,12 +29,12 @@ raw_tbl <- rbindlist(raw_ext, use.names = FALSE)
 # clean up
 raw_tbl$X1 <- gsub("[^0-9+]", "", raw_tbl$X1) 
 
-raw_tbl <- raw_tbl %>%
-  filter(grepl("\\d", X1))
+raw_tbl <- raw_tbl %>% # only select rows with variant ids
+  filter(grepl("\\d", X))
 
 raw_tbl <- raw_tbl %>%
   select(., -5) %>% # drop ref
-  rename(id = X1, gene = SCN5A, sub = G9V, y = STW, pheno = LQT3)
+  rename(id = X, gene = X.1, sub = X.2, y = Overall, pheno = Primary)
 
 # filter only GOF and LOF, then fix label
 raw_tbl <- raw_tbl %>%

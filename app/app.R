@@ -56,6 +56,12 @@ aa_feats <- read_tsv("aa_feats.tsv")
 load("str_feats.rda")
 cid_raw <- read_csv("cid.csv")
 
+# get variant lookup table for SCN viewer crossreference
+tbl_scn <- read_csv("scnviewer_lookup.csv")
+
+# get variant domain lookup table for NGLVieweR visualization
+tbl_ngl <- read_csv("nglviewer_lookup.csv")
+
 # set up menu choices
 vec_genes <- c("SCN1A", "SCN2A", "SCN3A", "SCN4A", "SCN5A", "SCN8A", "SCN9A", "SCN10A", "SCN11A")
 vec_aa <- c("A - Ala", "R - Arg", "N - Asn", "D - Asp", "C - Cys", "E - Glu", "Q - Gln", "G - Gly", "H - His", "I - Ile", "L - Leu", "K - Lys", "M - Met", "F - Phe", "P - Pro", "S - Ser", "T - Thr", "W - Trp", "Y - Tyr", "V - Val")
@@ -160,20 +166,30 @@ shinyApp(
       
       mainPanel(
         
-        # outputs
+        # check if this or analogous variants are known
         shinyjs::hidden(
-          div(id = "results",
-              h5(textOutput("flag_mkl")),
-              
-              hr(),
-              
-              h3(textOutput("prediction")),
-              h5(textOutput("GOF")),
-              h5(textOutput("LOF")),
-              
-              hr(),
-              
-              NGLVieweROutput("structure")
+          div(id = "known",
+              h5(uiOutput("flag_known")))
+        ),
+        
+        # outputs
+        conditionalPanel(
+          condition = "output.show",
+          shinyjs::hidden(
+            div(id = "results",
+                
+                h5(textOutput("flag_mkl")),
+                
+                hr(),
+                
+                h3(textOutput("prediction")),
+                h5(textOutput("GOF")),
+                h5(textOutput("LOF")),
+                
+                hr(),
+                
+                NGLVieweROutput("structure")
+            )
           )
         )
       )
@@ -192,10 +208,12 @@ shinyApp(
       shinyjs::reset("pos")
       shinyjs::reset("aa2")
       shinyjs::reset("hpo")
+      shinyjs::hide("known")
       shinyjs::hide("results")
     })
     
     observeEvent(input$click, {
+      shinyjs::show("known")
       shinyjs::show("results")
     })
     
@@ -217,6 +235,17 @@ shinyApp(
       source("master.R", local = TRUE)
       
       # prepare output objects
+      output$flag_known <- renderUI({
+        if(flag_known == "0"){ # no match for training data or SCN viewer
+          return(NULL)
+        }else if(flag_known == "1"){ # match for SCN viewer 
+          url <- a("SCN viewer.", href="https://scn-viewer.broadinstitute.org", target = "_blank")
+          tagList("There are known analogous variants at this position. For more information, visit the", url, hr())
+        }else if(flag_known == "2"){ # match for training data
+          tagList(paste(verb_name, "is present in the training data and known to be:", flag_known_tbl$y, sep = " "), hr())
+        }
+      })
+      
       output$flag_mkl <- renderText({
         if(flag_mkl == TRUE){
           "Phenotypic information provided. Predicting with multi-task multi-kernel learning."
@@ -224,6 +253,12 @@ shinyApp(
           "No phenotypic information provided. Predicting with multi-task learning."
         }
       })
+      
+      output$show <- reactive({
+        flag_known != "2" # hide predictions if the variant is already known
+      })
+      
+      outputOptions(output, 'show', suspendWhenHidden = FALSE)
       
       output$prediction <- renderText({
         paste(verb_out, " ", sep="\n")
@@ -238,16 +273,16 @@ shinyApp(
       })
       
       output$structure <- renderNGLVieweR({
-        pdb_id <- paste("pdb/", input$gene, ".pdb", sep = "") # generate file path
-        res_id <- as.character(input$pos)
+        pdb_id <- shiny::isolate(paste("pdb/", input$gene, ".pdb", sep = "")) # generate file path
+        res_id <- shiny::isolate(as.character(input$pos))
         
         NGLVieweR(data = pdb_id) %>%
-          addRepresentation("cartoon", param = list(
-            colorScheme = "residueindex",
-            colorValue = "gray")) %>%
           stageParameters(backgroundColor = "white", 
                           rotateSpeed = 1,
                           zoomSpeed = 1) %>%
+          addRepresentation("cartoon", param = list(
+            colorScheme = "residueindex",
+            colorValue = "gray")) %>%
           addRepresentation("ball+stick", param = list(
             colorScheme = "element",
             colorValue = "red",
@@ -278,6 +313,16 @@ shinyApp(
             z_offSet = -50
           )
       })
+    })
+    
+    # reset output if user wants to reset, or starts a new prediction
+    observeEvent(input$reset, {
+      output$flag_known <- renderUI({NULL})
+      output$flag_mkl <- renderText({NULL})
+      output$prediction <- renderText({NULL})
+      output$GOF <- renderText({NULL})
+      output$LOF <- renderText({NULL})
+      output$structure <- renderNGLVieweR({NULL})
     })
     
     # check if user looks up the FAQ

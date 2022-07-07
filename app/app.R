@@ -198,6 +198,16 @@ shinyApp(
   
   function(input, output, session){
     
+    # clear output if user starts a new prediction or resets manually
+    observeEvent(c(input$click, input$reset), {
+      output$flag_known <- renderUI({NULL})
+      output$flag_mkl <- renderText({NULL})
+      output$prediction <- renderText({NULL})
+      output$GOF <- renderText({NULL})
+      output$LOF <- renderText({NULL})
+      output$structure <- renderNGLVieweR({NULL})
+    })
+    
     # server-side selectize
     updateSelectizeInput(session, "hpo", choices = c(list_hpo, list_omim), server = TRUE)
     
@@ -313,16 +323,6 @@ shinyApp(
             z_offSet = -50
           )
       })
-    })
-    
-    # reset output if user wants to reset, or starts a new prediction
-    observeEvent(input$reset, {
-      output$flag_known <- renderUI({NULL})
-      output$flag_mkl <- renderText({NULL})
-      output$prediction <- renderText({NULL})
-      output$GOF <- renderText({NULL})
-      output$LOF <- renderText({NULL})
-      output$structure <- renderNGLVieweR({NULL})
     })
     
     # check if user looks up the FAQ

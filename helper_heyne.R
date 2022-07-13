@@ -11,11 +11,11 @@ librarian::shelf(tidyverse,
                  caret)
 
 # set seed
-set.seed(42)
+set.seed(seed)
 
 # get data
 data <- read_csv("data/dat_prep.csv") 
-data <- data %>% select(-gene) # not a feature
+data <- data %>% select(-gene) # task, not a feature
 
 # set fit control
 fitControl <- caret::trainControl(

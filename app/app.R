@@ -126,17 +126,21 @@ shinyApp(
                                 label = "Channel:",
                                 choices = vec_genes)),
         
-        selectInput(inputId = "aa1",
+        pickerInput(inputId = "aa1",
                     label = "Reference amino acid:",
-                    choices = vec_aa),
+                    selected = vec_aa[[1]],
+                    choices = vec_aa,
+                    options = list(`live-search` = TRUE)),
         
         numericInput(inputId = "pos",
                      label = "Protein sequence position:",
                      value = ""),
         
-        selectInput(inputId = "aa2",
+        pickerInput(inputId = "aa2",
                     label = "Variant amino acid:",
-                    choices = vec_aa),
+                    selected = vec_aa[[2]],
+                    choices = vec_aa,
+                    options = list(`live-search` = TRUE)),
         
         selectizeInput(inputId = "hpo",
                        label = "Phenotypic features:",
@@ -210,6 +214,21 @@ shinyApp(
     
     # server-side selectize
     updateSelectizeInput(session, "hpo", choices = c(list_hpo, list_omim), server = TRUE)
+    
+    # update inputs to assert non-synonymous variant
+    # observe({
+    #   if(!is.null(input$aa2))
+    #     updateSelectInput(session, "aa1", 
+    #                       choices = vec_aa[!(vec_aa %in% input$aa2)], 
+    #                       selected = isolate(input$aa1) )
+    # })
+    
+    observe({
+      if(!is.null(input$aa1))
+        updateSelectInput(session, "aa2", 
+                          choices = vec_aa[!(vec_aa %in% input$aa1)], 
+                          selected = isolate(input$aa2) )
+    })
     
     # reset button, refers to div results on UI side
     observeEvent(input$reset, {

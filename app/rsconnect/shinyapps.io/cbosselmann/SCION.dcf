@@ -5,9 +5,9 @@ account: cbosselmann
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 6531256
-bundleId: 6074968
+bundleId: 6115122
 url: https://cbosselmann.shinyapps.io/SCION/
-when: 1657118321.89398
-lastSyncTime: 1657118321.894
+when: 1658313315.87123
+lastSyncTime: 1658313315.87124
 asMultiple: FALSE
 asStatic: FALSE

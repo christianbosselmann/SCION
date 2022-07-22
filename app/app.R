@@ -69,6 +69,7 @@ vec_aa <- c("A - Ala", "R - Arg", "N - Asn", "D - Asp", "C - Cys", "E - Glu", "Q
 ont_hpo <- get_ontology("hp.obo.txt", 
                         propagate_relationships = "is_a", 
                         extract_tags = "minimal")
+
 list_hpo <- lapply(1:length(ont_hpo$id), function(x) paste(ont_hpo$id[[x]], ont_hpo$name[[x]], sep = " "))
 
 ont_omim <- read_csv("phenotype.csv")
@@ -148,7 +149,9 @@ shinyApp(
                        multiple = TRUE,
                        options = list(placeholder = "Search by HPO ID or name")),
         
-        checkboxInput(inputId = "flag_exp", label = "Experimental settings", value = FALSE), # currently does not do anything
+        # checkboxInput(inputId = "flag_exp", label = "Experimental settings", value = FALSE), # currently does not do anything
+        
+        br(),
         
         column(12, # to center buttons
                actionButton(inputId = "click", label = "Predict", icon("paper-plane", lib = "font-awesome")),
@@ -216,13 +219,6 @@ shinyApp(
     updateSelectizeInput(session, "hpo", choices = c(list_hpo, list_omim), server = TRUE)
     
     # update inputs to assert non-synonymous variant
-    # observe({
-    #   if(!is.null(input$aa2))
-    #     updateSelectInput(session, "aa1", 
-    #                       choices = vec_aa[!(vec_aa %in% input$aa2)], 
-    #                       selected = isolate(input$aa1) )
-    # })
-    
     observe({
       if(!is.null(input$aa1))
         updateSelectInput(session, "aa2", 

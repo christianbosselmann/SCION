@@ -206,7 +206,7 @@ shinyApp(
   function(input, output, session){
     
     # clear output if user starts a new prediction or resets manually
-    observeEvent(c(input$click, input$reset), {
+    observeEvent(c(input$reset), {
       output$flag_known <- renderUI({NULL})
       output$flag_mkl <- renderText({NULL})
       output$prediction <- renderText({NULL})
@@ -252,7 +252,7 @@ shinyApp(
                           aa2 = input$aa2,
                           stringsAsFactors = FALSE)
       
-      flag_exp <- input$flag_exp
+      # flag_exp <- input$flag_exp
       
       df_hpo <- input$hpo
       

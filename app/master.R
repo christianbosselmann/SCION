@@ -145,9 +145,9 @@ if(flag_mkl == TRUE) {
   Kt <- kernelPreparation(Kt) # instance-level task similarity
   Km <- Kb+Km+Kt
   
-  if(flag_exp == TRUE){
-    print("this is where the fun begins!")
-  }
+  # if(flag_exp == TRUE){
+  #   print("this is where the fun begins!")
+  # }
 }
 
 # set up train and test indices

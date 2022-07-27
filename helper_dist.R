@@ -23,7 +23,7 @@ data_dist <- read_csv("out/dist/report_preds_2022-06-02 10:01:27.csv") %>%
 data_all <- read_csv("data/dat_prep.csv")
 
 # plot histogram
-data_dist %>%
+plot_hist <- data_dist %>%
   ggplot(aes(x = dist, color = pred, fill = pred)) +
   geom_histogram(position = "identity", binwidth = 0.1, boundary = 0,
                  alpha = 0.3,
@@ -72,17 +72,18 @@ result <- cbind(colnames(data_all), pvalue) %>%
   filter(pvalue_adj < 0.05, !pvalue_adj == 0) %>%
   print()
 
+result <- result[c(1,3),] # manual filter due to redundant, i.e. correlated features
+
 # for loop to iterate through all features
 load("recipe.rds")
 
 pretty_names <- c("Position on family alignment",
-                  "Relative accessible surface area",
-                  "Accessible surface area", 
-                  "Relative sequence position"
+                  # "Relative accessible surface area",
+                  "Accessible surface area" 
+                  # "Relative sequence position"
                   )
 
 plots <- list()
-
 for (i in 1:length(result$V1)) {
   ft <- result$V1[[i]]
   
@@ -101,14 +102,25 @@ for (i in 1:length(result$V1)) {
     scale_fill_manual(name = "Confidence", values = c("#0571b0", "#ca0020")) +
     labs(x = pretty_names[[i]], # can also just be ft if the names don't need to be pretty
          y = "Number of variants") +
+    theme(panel.grid.minor = element_blank()) +
     scale_y_continuous(expand = c(0, 0), limits = c(0, NA)) +
-    scale_x_continuous(expand = c(0, 0), limits = c(0, NA)) 
+    scale_x_continuous(expand = c(0, 0), limits = c(0, NA))
   
   # need just one legend for the panel
   if(i != 2){plots[[i]] <- plots[[i]] + theme(legend.position = "none")}
 }
 
-egg::ggarrange(plots = plots)
+# # arrange neatly
+# plot_ft <- egg::ggarrange(plots = plots)
+
+# composit figure
+bottom_row <- ggarrange(plots[[1]], plots[[2]], NULL, ncol = 3, labels = c("b", "c", ""), widths = c(4/10, 5/10, 1/10), font.label = list(size = 14, color = "black", face = "plain", family = NULL))
+top_row <- ggarrange(plot_hist, NULL, ncol = 2, labels = c("a", ""), widths = c(9.2/10, 0.8/10), font.label = list(size = 14, color = "black", face = "plain", family = NULL))
+
+pdf("fig/Figure 3.pdf", height = 8, width = 12, onefile = FALSE)
+ggarrange(top_row, bottom_row, ncol = 1, heights = c(2/3, 1/3))
+dev.off()
+
 # n <- length(plots)
 # nCol <- floor(sqrt(n))
 # do.call("grid.arrange", c(plots, ncol = nCol))

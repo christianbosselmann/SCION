@@ -1,0 +1,10 @@
+﻿method;corr;accuracy;sd
+Jaccard;clip;0.843;0.029
+Jaccard;flip;0.843;0.029
+Jaccard;shift;0.843;0.029
+Lin;clip;0.832;0.042
+Lin;flip;0.832;0.042
+Lin;shift;0.832;0.042
+Resnik;clip;0.832;0.043
+Resnik;flip;0.832;0.043
+Resnik;shift;0.832;0.043

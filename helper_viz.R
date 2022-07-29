@@ -228,6 +228,53 @@ egg::ggarrange(noise_corr, noise_dot,
                label.args = list(gp = grid::gpar(fontface = "plain", cex = 1.3))) # get.gpar()
 dev.off()
 
+### visualize kernel matrices, expects objects from model script (Kb, Kt, Km, etc)
+library(librarian)
+librarian::shelf(tidyverse, 
+                 ggcorrplot,
+                 ggpubr,
+                 cowplot)
+
+# list kernel matrices of interest
+# Kb: structural similarity
+# Kt: task similarity
+# Km: MTL kernel matrix
+# Kp: phenotypic similarity
+# Kmkl: MTMKL kernel matrix
+mats <- list(Kb, Kt, Km, Kp, Kmkl)
+
+# visualize
+p <- list()
+for(i in 1:length(mats)){
+  mat <- mats[[i]]
+  rownames(mat) <- NULL
+  colnames(mat) <- NULL
+  mat <- round(cor(mat), 3)
+  p[[i]] <- ggcorrplot(mat, 
+                       hc.order = TRUE,
+                       hc.method = "average",
+                       outline.color = NA,
+                       legend.title = "  r",
+                       colors = c("#6D9EC1", "white", "#E46726"))
+  
+  p[[i]] <- p[[i]] +
+    theme_void() +
+    theme(legend.position = "none") + # we will add the legend as a separate plot
+    theme(plot.margin = margin(-0, -0, -0, -0, "cm")) # crop
+}
+
+l <- cowplot::get_legend(p[[i]] + theme(legend.position = "right"))
+p[[i+1]] <- l
+
+# arrange
+pdf("fig/Figure 4.pdf", height = 4, width = 8, onefile = FALSE)
+ggpubr::ggarrange(plotlist = p,
+                  nrow = 2, ncol = 3, 
+                  labels = c("a", "b", "c", "d", "e", ""),
+                  font.label = list(face = "plain")
+)
+dev.off()
+
 ### dendrogram of weights for hierarchical decomposition MTMKL
 # requires distance matrix G and list d from hierarchical MTMKL containing weights
 # also computes refined pairwise task similarity γk,l (see Widmer et al. 2010)

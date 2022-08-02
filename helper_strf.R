@@ -124,38 +124,22 @@ for(i in 1:length(tmp_names)){
   # features/structure/perviewer
   # method: download gene family .txt file and rename accordingly
   # fix column shift error manually with excel
-  # use if statements to pick the per table for the correct gene family
   # documentation: DOI 10.1101/gr.252601.119
-  if(tmp_name %in% c("GABRA6", "GABRA4", "GABRA1", "GABRA2",	"GABRA3",	"GABRA5",	"GABRG2",	"GABRG1",	"GABRG3",	"GABRE")){
-    str_all[[i]] <- 
-      readr::read_delim("features/per1.txt",
-                        delim = "\t", 
-                        skip = 0, 
-                        col_names = TRUE) %>%
-      filter(!grepl('-', !!as.symbol(tmp_name))) %>%
-      select(Parazscore) %>%
-      rename(str_paraz = Parazscore) %>%
-      slice(1:tmp_seqlength) %>% # defensive coding to avoid some isoform weirdness
-      add_column(str_all[[i]])
-  }
-  
-  if(tmp_name %in% c("GABRB3",	"GABRB2",	"GABRB1",	"GABRQ",	"GABRP", "GABRD")){
-    str_all[[i]] <- 
-      readr::read_delim("features/per2.txt",
-                        delim = "\t", 
-                        skip = 0, 
-                        col_names = TRUE) %>%
-      filter(!grepl('-', !!as.symbol(tmp_name))) %>%
-      select(Parazscore) %>%
-      rename(str_paraz = Parazscore) %>%
-      add_column(str_all[[i]])
-  }
+  str_all[[i]] <- 
+    readr::read_delim("features/per1.txt",
+                      delim = "\t", 
+                      skip = 0, 
+                      col_names = TRUE) %>%
+    filter(!grepl('-', !!as.symbol(tmp_name))) %>%
+    select(Parazscore) %>%
+    rename(str_paraz = Parazscore) %>%
+    slice(1:tmp_seqlength) %>% # defensive coding to avoid some isoform weirdness
+    add_column(str_all[[i]])
   
   # features/id/ecdf
   # method: absolute relative position of mutation, divided by total transcript length
   str_all[[i]]$pos <- seq_len(nrow(str_all[[i]]))
   str_all[[i]]$ecdf <- ecdf(str_all[[i]]$pos)(str_all[[i]]$pos)
-  
 }
 
 # sanity check

@@ -18,7 +18,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
   
-<p align="justify">Variants in genes encoding voltage-gated ion channels are associated with a wide spectrum of neurological diseases. Missense variants lead to amino acid substitutions, which in turn affect mutant channel biophysical function, leading to an overall gain- or loss-of-function at subunit and channel level. This has implications for diagnosis, treatment and prognosis. Currently, the standard method of evaluation is electrophysiology. Here, we introduce a machine learning model trained on variants with known functional effects and phenotypes [[1]](#1). The model builds on our previous MTL-SVM framework [[2]](#2) and extends it towards phenotypic similarity learning in a localized (MT)MKL model. Further information is available in the manuscript (PREPRINT PENDING) and AIMe Registry Report (PENDING).</p>
+<p align="justify">Variants in genes encoding voltage-gated ion channels are associated with a wide spectrum of neurological diseases. Missense variants lead to amino acid substitutions, which in turn affect mutant channel biophysical function, leading to an overall gain- or loss-of-function at subunit and channel level. This has implications for diagnosis, treatment and prognosis. Currently, the standard method of evaluation is electrophysiology. Here, we introduce a machine learning model trained on variants with known functional effects and phenotypes [1]. The model builds on our previous MTL-SVM framework [2] and extends it towards phenotypic similarity learning in a localized (MT)MKL model. Further information is available in the manuscript (PREPRINT PENDING) and AIMe Registry Report (PENDING).</p>
   
 <!-- USAGE EXAMPLES -->
 ## Usage and Limitations
@@ -30,7 +30,7 @@
 
 Any contributions are **greatly appreciated**. If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue. Feel free to reach out with any suggestions:
 
-Christian Bosselmann
+Christian Bosselmann<br />
 Department of Neurology and Epileptology, Hertie Institute for Clinical Brain Research, University Hospital Tuebingen<br />
 Methods in Medical Informatics, Department of Computer Science, University of Tuebingen<br />
 Hoppe-Seyler-Str. 3<br />

@@ -29,7 +29,7 @@ fitControl <- caret::trainControl(
   classProbs = TRUE
 )
 
-# k-fold cv
+# k-fold cv on same splits (seed)
 out <- list()
 for (i in 1:length(cv)){
   ind_test <- cv[[i]]
@@ -37,13 +37,7 @@ for (i in 1:length(cv)){
   
   testing <- data[ind_test,] 
   training <- data[ind_train,] 
-  
-  # # upsampling, as in Heyne
-  # training <- upSample(x = training[, -ncol(training)],
-  #                      y = as.factor(training$y)) 
-  # 
-  # training <- training %>% rename(y = Class)
-  
+
   # note: no additional feature engineering as in original Heyne code,
   # due to the different data set
   model <- caret::train(y ~ ., data = training,
@@ -61,7 +55,7 @@ for (i in 1:length(cv)){
 }
 out <- rbindlist(out)
 
-# single 0.1 holdout as in original Heyne method, then create report
+# create report
 class_metrics <- metric_set(accuracy, kap, mcc, sens, spec, f_meas, roc_auc, pr_auc)
 
 report_metrics <- out %>%

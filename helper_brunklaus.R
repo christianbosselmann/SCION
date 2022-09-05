@@ -7,7 +7,8 @@
 library(librarian)
 librarian::shelf(tidyverse,
                  readxl, 
-                 caret)
+                 caret,
+                 data.table)
 
 # set seed
 set.seed(seed)

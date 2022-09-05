@@ -330,34 +330,11 @@ constructBlockMKL <- function(matrices, label, tasks,
     colnames(wt) <- c("hpo", "M")
     wt$t1 <- unlist(lapply(lapply(list_2tasks, function (x) x[1,]), function (x) paste(x[,1])))
     wt$t2 <- unlist(lapply(lapply(list_2tasks, function (x) x[1,]), function (x) paste(x[,2])))
-    # assign("wt", wt, envir = .GlobalEnv)
-    
-    # TODO fix: "x replacement has 81 rows, data has 71"
-    # # parallel version of the above for loop, speedup 22s to 6.8s
-    # p <- list()
-    # p <- mclapply(list_2tasks, parallelBlockMKL, 
-    #               ind = indices_tasks, mat = matrices, y = y, mkl_cost = 1,
-    #               mc.cores = detectCores())
-    # 
-    # # extract and name stored weight vector
-    # wt <- lapply(p, function(x) rbind(x[1]$w)) %>%
-    #   do.call(rbind,.) %>%
-    #   as.data.frame()
-    # colnames(wt) <- c("hpo", "M")
-    # wt$t1 <- NA
-    # wt$t1 <- unlist(lapply(lapply(list_2tasks, function (x) x[1,]), function (x) paste(x[,1])))
-    # wt$t2 <- NA
-    # wt$t2 <- unlist(lapply(lapply(list_2tasks, function (x) x[1,]), function (x) paste(x[,2])))
-    # assign("wt", wt, envir = .GlobalEnv)
-    # 
-    # # extract and store list of task combinations per matrix
-    # m_2tasks <- lapply(p, function(x) x[2]$m2)
     
     # preallocate matrix
     M <- matrix(data = 0, nrow = dim, ncol = dim)
     
     # populate matrix with taskwise weighted MKL matrices
-    # [row,col]
     for (i in 1:length(list_2tasks)){
       j1 <- indices_tasks_new[[list_2tasks[[i]][[1]]]] # indices of first task to store later
       j2 <- indices_tasks_new[[list_2tasks[[i]][[2]]]] # indices of second task to store later
@@ -386,8 +363,6 @@ constructBlockMKL <- function(matrices, label, tasks,
     }
     
     # convert distance matrix to hierarchy, decompose and save node labels
-    # TODO more elegant way of keeping node labels
-    # graph <- as.dist(as.matrix(G))
     graph <- dist(as.matrix(G), diag = F)
     graph <- as.matrix(graph)
     colnames(graph) <- rownames(graph) <- names(G)
@@ -442,21 +417,8 @@ constructBlockMKL <- function(matrices, label, tasks,
                                   penalty = mkl_cost)$gamma
     
     M <- Reduce(`+`,Map(`*`, delta, M_list))
-    
-    # M <- matrix(data = 0, nrow = dim, ncol = dim)
-    # for (i in 1:length(graph)){
-    #   jnd <- indices_tasks[graph[[i]]] %>% unlist(use.names = FALSE) 
-    #   M[jnd, jnd] <- M[jnd, jnd] + m_decomp[[i]]
-    # }
   }
-  
-  # symmetric matrix reorder 
-  # M <- M[order(unlist(indices_tasks, use.names = FALSE)),]
-  # M <- M[,order(unlist(indices_tasks, use.names = FALSE))]
-  
-  # get product kernel matrix with task similarity matrix for MTMKL
-  # M <- M * Kt
-  
+
   # store output
   d <- list()
   d$M <- M # training kernel matrix
@@ -589,48 +551,6 @@ applyBlockMKL <- function(matrices, tasks, gamma,
     
     # apply delta weight vector to compute composite kernel matrix
     M <- Reduce(`+`,Map(`*`, delta, M_list))
-    
-    # # compute product kernel matrix from node subset kernel matrices
-    # M <- matrix(data = 0, nrow = dim, ncol = dim)
-    # for (i in 1:length(graph)){
-    #   jnd <- indices_tasks[graph[[i]]] %>% unlist(use.names = FALSE) 
-    #   M[jnd, jnd] <- M[jnd, jnd] + m_decomp[[i]]
-    # }
   }
-  
-  # symmetric matrix reorder 
-  # M <- M[order(unlist(indices_tasks, use.names = FALSE)),]
-  # M <- M[,order(unlist(indices_tasks, use.names = FALSE))]
-  
-  # get product kernel matrix with task similarity matrix for MTMKL
-  # M <- M * Kt
-  
   return(M)
 }
-
-# # helper function to parallelize block-wise weight learning for constructBlockMKL
-# parallelBlockMKL <- function(x = list_2tasks, ind = indices_tasks, mat = matrices, y = y, mkl_cost = 1){
-#   p <- list()
-#   
-#   i1 <- ind[[x[[1]]]]
-#   i2 <- ind[[x[[2]]]]
-#   
-#   m <- lapply(mat, function(i) i[c(i1,i2), c(i1,i2)])
-#   y <- y[c(i1,i2)]
-#   
-#   # small tasks with similar observations may lead to computationally singular systems
-#   # if this occurs, return the uniformly weighted kernel matrix
-#   tryCatch(expr = {
-#     p$w <- SEMKL.classification(k = m,
-#                                 outcome = y,
-#                                 penalty = mkl_cost)$gamma
-#   },
-#   error = function(x) {
-#     p$w <<- rep(1/length(m), length(m))
-#   })
-#   
-#   # merge view matrices by weights
-#   p$m2 <- Reduce(`+`,Map(`*`, p$w, m))
-#   
-#   return(p)
-# }

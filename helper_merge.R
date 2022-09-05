@@ -45,7 +45,7 @@ dat_raw <- dat_raw %>%
 
 # split, pivot and merge canonical alignment id (cid) and annotation features
 cid_align <- cid_raw[,1:10] # split into domain annotation and actual alignment
-cid_feats <- cid_raw[,10:15] # sorry, this is currently a magic number
+cid_feats <- cid_raw[,10:15] # currently a magic number
 
 cid_align <- cid_align %>%
   pivot_longer(!cid, names_to = "gene", values_to = "pos") %>%

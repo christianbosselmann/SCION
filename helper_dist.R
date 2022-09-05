@@ -110,9 +110,6 @@ for (i in 1:length(result$V1)) {
   if(i != 2){plots[[i]] <- plots[[i]] + theme(legend.position = "none")}
 }
 
-# # arrange neatly
-# plot_ft <- egg::ggarrange(plots = plots)
-
 # composit figure
 bottom_row <- ggarrange(plots[[1]], plots[[2]], NULL, ncol = 3, labels = c("b", "c", ""), widths = c(4/10, 5/10, 1/10), font.label = list(size = 14, color = "black", face = "plain", family = NULL))
 top_row <- ggarrange(plot_hist, NULL, ncol = 2, labels = c("a", ""), widths = c(9.2/10, 0.8/10), font.label = list(size = 14, color = "black", face = "plain", family = NULL))
@@ -120,7 +117,3 @@ top_row <- ggarrange(plot_hist, NULL, ncol = 2, labels = c("a", ""), widths = c(
 pdf("fig/Figure 3.pdf", height = 8, width = 12, onefile = FALSE)
 ggarrange(top_row, bottom_row, ncol = 1, heights = c(2/3, 1/3))
 dev.off()
-
-# n <- length(plots)
-# nCol <- floor(sqrt(n))
-# do.call("grid.arrange", c(plots, ncol = nCol))

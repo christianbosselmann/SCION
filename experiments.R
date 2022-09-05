@@ -103,7 +103,6 @@ k <- 5
 source("helper_brunklaus.R")
 
 #' experiment 6: comparison to the Heyne GBM
-#' currently run with Heyne's single holdout validation
 #' cf. PMID 32801145 and github.com/heyhen/funNCion/
 seed <- 42
 k <- 5

@@ -121,17 +121,6 @@ n <- length(prc)
 nCol <- floor(sqrt(n))
 prc <- do.call("grid.arrange", c(prc, ncol = nCol))
 
-### task-wise box plot
-# names(files) <- labels
-# files %>%
-#   rbindlist(idcol = "model") %>%
-#   group_by(gene, fold, model) %>%
-#   accuracy(factor(truth, levels = c("GOF", "LOF")), factor(pred, levels = c("GOF", "LOF"))) %>%
-#   ggplot(aes(x = gene, y = .estimate)) +
-#   geom_boxplot(aes(fill = factor(model, levels = c("Dirac", "Union", "MTL", "MKL")))) +
-#   theme_bw() +
-#   theme(legend.title=element_blank())
-
 ### task-wise bar chart 
 names(files) <- labels
 task_bar <- files %>%
@@ -173,18 +162,6 @@ fig <- read_delim("out/experiment 4/fig.csv", ";",
                                    X6 = col_skip(), X7 = col_skip(), 
                                    X8 = col_skip(), X9 = col_skip(), 
                                    X10 = col_skip(), X11 = col_skip()))
-
-# fig %>% 
-#   ggplot(aes(x = log(noise), y = accuracy, 
-#              fill = method, group = method)) + 
-#   geom_line(aes(linetype = method, color = method)) +
-#   geom_point(aes(shape = method, color = method)) +
-#   geom_errorbar(aes(ymin = accuracy-sd, ymax = accuracy+sd, color = method), width=.1) +
-#   theme_bw() +
-#   scale_color_brewer(palette = "Dark2") +
-#   coord_fixed(ratio = 8, xlim = c(-1.5, 1.5), ylim = c(0.69, 0.91), expand = FALSE, clip = "on") +
-#   labs(x = "Log (Noise)",
-#        y = "Accuracy")
 
 noise_dot <- fig %>% ggplot(aes(x = factor(noise, levels = c(0.25, 0.5, 1, 2, 4)), 
                                 y = accuracy,
@@ -283,7 +260,6 @@ dev.off()
 G <- G^2 
 
 df_2tasks <- setDT(CJ(names(G), names(G), unique = TRUE))
-# df_2tasks <- df_2tasks[!duplicated(t(apply(df_2tasks, 1, sort))),]
 mat <- matrix(data = NA, nrow = length(names(G)), ncol = length(names(G)))
 rownames(mat) <- names(G)
 colnames(mat) <- names(G)
@@ -296,10 +272,6 @@ for (i in 1:nrow(df_2tasks)){
   wt <- sum(d$delta[ind]) # sum weight of task set
   mat[t[1], t[2]] <- wt
 }
-
-# TODO fix refined taskwise similarity from hierarchical decomposition
-# image(cor(mat))
-# image(cor(G))
 
 # graph <- as.dist(G, diag = TRUE)
 graph <- dist(as.matrix(G), diag = F)
@@ -326,25 +298,3 @@ graph %>%
   # dendextend::rotate(lbl) %>%
   # hang.dendrogram %>%
   plot()
-
-### corrplot and distance matrix as network graph
-# G <- as.matrix(G)
-# rownames(G) <- colnames(G)
-# G <- G[lbl,lbl] # fix order
-# # G2 <- as.matrix(dist(G)) # probably not neccessary, as G is already a distance matrix
-# 
-# library(corrplot)
-# corrplot(as.matrix(G), 
-#          method = "color", 
-#          cl.lim=c(0,1),
-#          col = colorRampPalette(c("blue", "white", "red"))(200),
-#          type = "full", 
-#          diag = FALSE)
-# 
-# library(qgraph)
-# qgraph(as.matrix(G), 
-#        labels = colnames(G),
-#        graph = "default",
-#        layout = "spring", 
-#        theme = "gray",
-#        vsize = 10)

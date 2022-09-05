@@ -1,6 +1,6 @@
 # SCN
 # Functional variant prediction for voltage-gated sodium channels
-# RMTL helper functions based on github.com/transbioZI/RMTL
+# RMTL helper functions based on github.com/transbioZI/RMTL, GPLv3
 
 #' @params mat training kernel matrix
 #' @params y label vector of training kernel matrix, binary classification (-1;1)

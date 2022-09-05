@@ -1,12 +1,12 @@
-# SCN
-# Functional variant prediction for voltage-gated sodium channels
-# helper_kernel.R
-# this script generates MTL kernel matrices (Km) for later use in MTL-SVM.
-# @params sigma for RBF kernel matrix
-# @params alpha is assumed from the available list of similarity matrices
-# @return Kt task-level similarity matrix
-# @return Kf instance-level RBF kernel matrix
-# @return Km MTL kernel matrix (Kt*Kf)
+#' SCN
+#' Functional variant prediction for voltage-gated sodium channels
+#' helper_kernel.R
+#' this script generates MTL kernel matrices (Km) for later use in MTL-SVM.
+#' @params sigma for RBF kernel matrix
+#' @params alpha is assumed from the available list of similarity matrices
+#' @return Kt task-level similarity matrix
+#' @return Kf instance-level RBF kernel matrix
+#' @return Km MTL kernel matrix (Kt*Kf)
 
 # packages
 library("librarian")

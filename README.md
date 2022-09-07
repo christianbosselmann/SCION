@@ -18,7 +18,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
   
-<p align="justify">Variants in genes encoding voltage-gated ion channels are associated with a wide spectrum of neurological diseases. Missense variants lead to amino acid substitutions, which in turn affect mutant channel biophysical function, leading to an overall gain- or loss-of-function at subunit and channel level. This has implications for diagnosis, treatment and prognosis. Currently, the standard method of evaluation is electrophysiology. Here, we introduce a machine learning model trained on variants with known functional effects and phenotypes [1]. The model builds on our previous MTL-SVM framework [2] and extends it towards phenotypic similarity learning in a localized (MT)MKL model. Further information is available in the manuscript (PREPRINT PENDING) and AIMe Registry Report (PENDING).</p>
+<p align="justify">Variants in genes encoding voltage-gated ion channels are associated with a wide spectrum of neurological diseases. Missense variants lead to amino acid substitutions, which in turn affect mutant channel biophysical function, leading to an overall gain- or loss-of-function at subunit and channel level. This has implications for diagnosis, treatment and prognosis. Currently, the standard method of evaluation is electrophysiology. Here, we introduce a machine learning model trained on variants with known functional effects and phenotypes [1]. The model builds on our previous MTL-SVM framework [2] and extends it towards phenotypic similarity learning in a localized (MT)MKL model. Further information is available in the manuscript (PREPRINT PENDING) and AIMe Registry Report (aime.report/xmSKHj).</p>
   
 <!-- USAGE EXAMPLES -->
 ## Usage and Limitations

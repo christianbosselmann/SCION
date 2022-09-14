@@ -131,7 +131,8 @@ shinyApp(
                     label = "Reference amino acid:",
                     selected = vec_aa[[1]],
                     choices = vec_aa,
-                    options = list(`live-search` = TRUE)),
+                    options = list(`live-search` = TRUE,
+                                   `live-search-style` = "startsWith")),
         
         numericInput(inputId = "pos",
                      label = "Protein sequence position:",
@@ -141,7 +142,8 @@ shinyApp(
                     label = "Variant amino acid:",
                     selected = vec_aa[[2]],
                     choices = vec_aa,
-                    options = list(`live-search` = TRUE)),
+                    options = list(`live-search` = TRUE,
+                                   `live-search-style` = "startsWith")),
         
         selectizeInput(inputId = "hpo",
                        label = "Phenotypic features:",

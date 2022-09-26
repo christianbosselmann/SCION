@@ -12,6 +12,8 @@
     <br />
     <a href="https://cbosselmann.shinyapps.io/SCION/"><strong>Access SCION »</strong></a>
     <br />
+    <a href="https://zenodo.org/badge/latestdoi/456948821"><img src="https://zenodo.org/badge/456948821.svg" alt="DOI"></a>
+    <br />
   </p>
 </div>
 

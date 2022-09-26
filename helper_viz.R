@@ -89,7 +89,8 @@ roc_stacked <- ggplot() +
   theme(panel.grid.minor = element_blank()) +
   labs(title = "",
        x = "False Positive Rate",
-       y = "True Positive Rate") 
+       y = "True Positive Rate") +
+  ggtitle("ROC, by model")
 
 # PRC curves
 prc <- list()
@@ -123,6 +124,10 @@ prc <- do.call("grid.arrange", c(prc, ncol = nCol))
 
 ### task-wise bar chart 
 names(files) <- labels
+
+n_var <- count(files[[1]], gene)
+n_var <- n_var[match(gene_labels, n_var$gene),]
+  
 task_bar <- files %>%
   rbindlist(idcol = "model") %>%
   group_by(gene, fold, model) %>%
@@ -142,14 +147,25 @@ task_bar <- files %>%
   labs(fill = "Method",
        x = "Channel",
        y = "Accuracy") +
+  scale_x_discrete(name = "Channel", 
+                     breaks = gene_labels, 
+                     labels = paste(gene_labels, "\n", "n = ", n_var$n, sep ="")) +
   scale_fill_brewer(palette = "Pastel1") +
-  coord_fixed(ratio = 5, ylim = c(0,1), expand = FALSE, clip = "on")
+  coord_fixed(ratio = 5, ylim = c(0,1), expand = FALSE, clip = "on") +
+  ggtitle("Accuracy, by task")
 
 # combine stacked roc curves and bars
-pdf("fig/Figure 1.pdf", height = 4, width = 12, onefile = FALSE)
-egg::ggarrange(roc_stacked, task_bar, 
+# pdf("fig/Figure 1.pdf", height = 4, width = 12, onefile = FALSE)
+# egg::ggarrange(roc_stacked, task_bar, 
+#                nrow = 1, ncol = 2, 
+#                widths = c(1/3, 2/3),
+#                labels = c("a", "b"),
+#                label.args = list(gp = grid::gpar(fontface = "plain", cex = 1.3))) # get.gpar()
+# dev.off()
+pdf("fig/Figure 1new.pdf", height = 4, width = 12, onefile = FALSE)
+egg::ggarrange(task_bar, roc_stacked,
                nrow = 1, ncol = 2, 
-               widths = c(1/3, 2/3),
+               widths = c(2/3, 1/3),
                labels = c("a", "b"),
                label.args = list(gp = grid::gpar(fontface = "plain", cex = 1.3))) # get.gpar()
 dev.off()

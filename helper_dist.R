@@ -81,7 +81,7 @@ pretty_names <- c("Position on family alignment",
                   # "Relative accessible surface area",
                   "Accessible surface area" 
                   # "Relative sequence position"
-                  )
+)
 
 plots <- list()
 for (i in 1:length(result$V1)) {
@@ -117,3 +117,16 @@ top_row <- ggarrange(plot_hist, NULL, ncol = 2, labels = c("a", ""), widths = c(
 pdf("fig/Figure 3.pdf", height = 8, width = 12, onefile = FALSE)
 ggarrange(top_row, bottom_row, ncol = 1, heights = c(2/3, 1/3))
 dev.off()
+
+# we may also want to get classification accuracy for confidence subgroups
+pred_mkl <- read_csv("out/experiment 2/preds hierarchical MTMKL MKL.csv") %>%
+  arrange(ind)
+
+ind <- which(data_all$is_hard == "High")
+acc_high <- accuracy_vec(truth = as.factor(data_all[ind,]$y), 
+                         estimate = as.factor(pred_mkl[ind,]$pred))
+
+ind <- which(data_all$is_hard == "Low")
+acc_low <- accuracy_vec(truth = as.factor(data_all[ind,]$y), 
+                        estimate = as.factor(pred_mkl[ind,]$pred))
+

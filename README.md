@@ -45,9 +45,9 @@ Twitter: @cmbosselmann<br />
 ## System requirements
 
 R 4.2.1
-Tested on macOS Monterey 12.6 (21G115)
-All R dependencies included
-No non-standard hardware required
+Tested on macOS Monterey 12.6 (21G115)<br />
+All R dependencies included<br />
+No non-standard hardware required<br />
 
 <!-- INSTALL -->
 ## Installation guide

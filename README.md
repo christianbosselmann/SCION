@@ -41,6 +41,19 @@ Email: christian.bosselmann@med.uni-tuebingen.de<br />
 Tel: 0049 70701290<br />
 Twitter: @cmbosselmann<br />
 
+<!-- SYS REQ -->
+## System requirements
+
+R 4.2.1
+Tested on macOS Monterey 12.6 (21G115)
+All R dependencies included
+No non-standard hardware required
+
+<!-- INSTALL -->
+## Installation guide
+
+Download and unzip repository. Open experiments.R for a demo script that reproduces the manuscript results. Install time depends on download speed. Expected run time depends on hardware and model parameters. For some model parameters, model run time may exceed 12 hrs.
+
 <!-- LICENSE -->
 ## License
 
